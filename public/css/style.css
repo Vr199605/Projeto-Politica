@@ -73,6 +73,22 @@
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Live Badge Glow Effect */
+.live-glow {
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.45);
+}
+
+/* Interactive Favorite Button */
+.btn-fav {
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+.btn-fav:hover {
+  transform: scale(1.15);
+}
+.btn-fav.active {
+  color: #e11d48 !important;
+}
+
 /* Toast Notification Styles */
 .toast-msg {
   animation: slideInRight 0.3s ease-out forwards;

@@ -531,6 +531,230 @@ app.post('/api/monetization/advertiser-request', (req, res) => {
   }
 });
 
+// 6. AUTENTICAÇÃO E CADASTRO DE USUÁRIO
+app.post('/api/auth/register', (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).json({ success: false, error: 'Nome, e-mail e senha são obrigatórios.' });
+    }
+
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const normEmail = email.trim().toLowerCase();
+    const existing = db.users.find(u => u.email && u.email.toLowerCase() === normEmail);
+    if (existing) {
+      return res.status(400).json({ success: false, error: 'Este e-mail já está cadastrado.' });
+    }
+
+    const newUser = {
+      id: `usr-${Date.now()}`,
+      name: name.trim(),
+      email: normEmail,
+      password: password,
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}&backgroundColor=2563eb&textColor=ffffff`,
+      favoritePoliticians: [],
+      favoriteBlogs: [],
+      createdAt: new Date().toISOString()
+    };
+
+    db.users.push(newUser);
+    writeDb(db);
+
+    const { password: _, ...userWithoutPass } = newUser;
+    res.status(201).json({ success: true, user: userWithoutPass });
+  } catch (err) {
+    console.error('Erro no cadastro:', err);
+    res.status(500).json({ success: false, error: 'Erro ao cadastrar usuário.' });
+  }
+});
+
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ success: false, error: 'E-mail e senha são obrigatórios.' });
+    }
+
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const normEmail = email.trim().toLowerCase();
+    const user = db.users.find(u => u.email && u.email.toLowerCase() === normEmail && u.password === password);
+    if (!user) {
+      return res.status(401).json({ success: false, error: 'E-mail ou senha incorretos.' });
+    }
+
+    const { password: _, ...userWithoutPass } = user;
+    res.json({ success: true, user: userWithoutPass });
+  } catch (err) {
+    console.error('Erro no login:', err);
+    res.status(500).json({ success: false, error: 'Erro ao realizar login.' });
+  }
+});
+
+// 7. GERENCIAMENTO DE FAVORITOS (POLÍTICOS E BLOGS)
+app.get('/api/users/:userId/favorites', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const user = db.users.find(u => u.id === userId);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Usuário não encontrado.' });
+    }
+
+    const favPoliticianIds = new Set(user.favoritePoliticians || []);
+    const favBlogIds = new Set(user.favoriteBlogs || []);
+
+    const favoritePoliticians = (db.politicians || []).filter(p => favPoliticianIds.has(p.id));
+    const favoriteBlogs = (db.blogs || []).filter(b => favBlogIds.has(b.id) || favBlogIds.has(b.domain));
+
+    res.json({
+      success: true,
+      favoritePoliticians,
+      favoriteBlogs,
+      rawPoliticianIds: Array.from(favPoliticianIds),
+      rawBlogIds: Array.from(favBlogIds)
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao carregar favoritos.' });
+  }
+});
+
+app.post('/api/users/favorites/politician', (req, res) => {
+  try {
+    const { userId, politicianId } = req.body;
+    if (!userId || !politicianId) {
+      return res.status(400).json({ success: false, error: 'userId e politicianId são obrigatórios.' });
+    }
+
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const user = db.users.find(u => u.id === userId);
+    if (!user) return res.status(404).json({ success: false, error: 'Usuário não encontrado.' });
+
+    if (!user.favoritePoliticians) user.favoritePoliticians = [];
+
+    let isFavorited = false;
+    const idx = user.favoritePoliticians.indexOf(politicianId);
+    if (idx > -1) {
+      user.favoritePoliticians.splice(idx, 1);
+      isFavorited = false;
+    } else {
+      user.favoritePoliticians.push(politicianId);
+      isFavorited = true;
+    }
+
+    writeDb(db);
+    res.json({ success: true, isFavorited, favorites: user.favoritePoliticians });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao atualizar político favorito.' });
+  }
+});
+
+app.post('/api/users/favorites/blog', (req, res) => {
+  try {
+    const { userId, blogId } = req.body;
+    if (!userId || !blogId) {
+      return res.status(400).json({ success: false, error: 'userId e blogId são obrigatórios.' });
+    }
+
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const user = db.users.find(u => u.id === userId);
+    if (!user) return res.status(404).json({ success: false, error: 'Usuário não encontrado.' });
+
+    if (!user.favoriteBlogs) user.favoriteBlogs = [];
+
+    let isFavorited = false;
+    const idx = user.favoriteBlogs.indexOf(blogId);
+    if (idx > -1) {
+      user.favoriteBlogs.splice(idx, 1);
+      isFavorited = false;
+    } else {
+      user.favoriteBlogs.push(blogId);
+      isFavorited = true;
+    }
+
+    writeDb(db);
+    res.json({ success: true, isFavorited, favorites: user.favoriteBlogs });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao atualizar blog favorito.' });
+  }
+});
+
+// 8. RADAR SOCIAL: STATUS DOS POLÍTICOS EM TEMPO REAL
+app.get('/api/politicians/social-status', (req, res) => {
+  try {
+    const db = readDb();
+    const list = (db.politicians || []).map(p => ({
+      id: p.id,
+      name: p.name,
+      popularName: p.popularName,
+      party: p.party,
+      office: p.office,
+      avatar: p.avatar,
+      socialStatus: p.socialStatus || {
+        isLive: false,
+        status: 'online',
+        statusLabel: 'ATIVO',
+        lastActivity: 'Hoje',
+        recentPost: 'Agenda pública parlamentar.',
+        followersTotal: '100K+'
+      }
+    }));
+
+    list.sort((a, b) => {
+      const aLive = a.socialStatus?.isLive ? 1 : 0;
+      const bLive = b.socialStatus?.isLive ? 1 : 0;
+      if (aLive !== bLive) return bLive - aLive;
+      return 0;
+    });
+
+    const liveCount = list.filter(p => p.socialStatus?.isLive).length;
+    const onlineCount = list.filter(p => p.socialStatus?.status === 'online').length;
+
+    res.json({
+      success: true,
+      totalLive: liveCount,
+      totalOnline: onlineCount,
+      politicians: list
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao buscar status social.' });
+  }
+});
+
+app.post('/api/politicians/:id/social-status', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isLive, livePlatform, liveTitle, liveUrl } = req.body;
+    const db = readDb();
+
+    const pol = db.politicians.find(p => p.id === id);
+    if (!pol) return res.status(404).json({ success: false, error: 'Político não encontrado.' });
+
+    if (!pol.socialStatus) pol.socialStatus = {};
+    if (typeof isLive === 'boolean') pol.socialStatus.isLive = isLive;
+    if (livePlatform) pol.socialStatus.livePlatform = livePlatform;
+    if (liveTitle) pol.socialStatus.liveTitle = liveTitle;
+    if (liveUrl) pol.socialStatus.liveUrl = liveUrl;
+    pol.socialStatus.status = pol.socialStatus.isLive ? 'live' : 'online';
+    pol.socialStatus.statusLabel = pol.socialStatus.isLive ? `AO VIVO NO ${pol.socialStatus.livePlatform || 'YOUTUBE'}` : 'ONLINE';
+    pol.socialStatus.lastActivity = 'Atualizado agora';
+
+    writeDb(db);
+    res.json({ success: true, politician: pol });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao atualizar status social.' });
+  }
+});
+
 // Rota fallback para SPA
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

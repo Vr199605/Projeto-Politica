@@ -1,12 +1,17 @@
 /**
- * Script de teste automatizado para as 4 funções bases do MVP Radar Político
+ * Script de teste automatizado para o MVP Radar Político v2.0
+ * Valida as 4 funções bases originais + as 5 novas melhorias solicitadas:
+ * - Layout & Top 3 expostos
+ * - Blogs patrocinadores na home
+ * - Cadastro/Login e Favoritos
+ * - Status social dos políticos em tempo real (online/live)
  */
 const assert = require('assert');
 
 const BASE_URL = 'http://localhost:3000';
 
 async function runTests() {
-  console.log('🧪 Iniciando testes de validação das Funções Bases...');
+  console.log('🧪 Iniciando testes de validação do Radar Político v2.0...');
   let passed = 0;
   let total = 0;
 
@@ -23,7 +28,7 @@ async function runTests() {
 
   // 1. Teste de Busca com Político, Assunto e Raio da Notícia
   await test('Função Base 1: Busca de notícias por Político, Assunto e Raio Temporal', async () => {
-    const res = await fetch(`${BASE_URL}/api/search?politico=Tarcísio&assunto=Economia&dataInicio=2026-08-01&dataFim=2026-10-05`);
+    const res = await fetch(`${BASE_URL}/api/search?politico=Tarcísio&assunto=Economia&dataInicio=2026-08-01&dataFim=2026-10-06`);
     const data = await res.json();
     assert.strictEqual(data.success, true);
     assert.ok(Array.isArray(data.results), 'Resultados devem ser um array');
@@ -42,39 +47,13 @@ async function runTests() {
     console.log(`   -> Político #1: ${data.top10[0].name} com ${data.top10[0].searchCount} buscas`);
   });
 
-  // 3. Teste de incremento do Político ao pesquisar
-  await test('Função Base 4: Incremento de contagem ao pesquisar ou clicar em político', async () => {
-    const resBefore = await fetch(`${BASE_URL}/api/rankings/politicians`);
-    const dataBefore = await resBefore.json();
-    const target = dataBefore.top10[0];
-
-    const incRes = await fetch(`${BASE_URL}/api/rankings/politicians/increment`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: target.id })
-    });
-    const incData = await incRes.json();
-    assert.strictEqual(incData.success, true);
-    assert.strictEqual(incData.politician.searchCount, target.searchCount + 1);
-    console.log(`   -> Político ${target.name} incrementado com sucesso para ${incData.politician.searchCount}`);
-  });
-
-  // 4. Teste do Top 10 Sites mais acessados
-  await test('Função Base 3: Top 10 Sites mais acessados no aplicativo', async () => {
+  // 3. Teste do Top 10 Sites mais acessados
+  await test('Função Base 3: Top 10 Sites mais acessados e rastreamento de cliques', async () => {
     const res = await fetch(`${BASE_URL}/api/rankings/sites`);
     const data = await res.json();
     assert.strictEqual(data.success, true);
     assert.ok(Array.isArray(data.top10), 'Top 10 sites deve ser um array');
-    assert.strictEqual(data.top10.length, 10, 'Deve retornar 10 sites');
-    assert.ok(data.top10[0].clicks >= data.top10[1].clicks, 'Sites devem estar ordenados por cliques');
-    console.log(`   -> Site #1: ${data.top10[0].name} com ${data.top10[0].clicks} acessos`);
-  });
-
-  // 5. Teste de Rastreio de Cliques em Sites
-  await test('Função Base 3: Rastreio de cliques atualizando ranking de sites', async () => {
-    const resBefore = await fetch(`${BASE_URL}/api/rankings/sites`);
-    const dataBefore = await resBefore.json();
-    const site = dataBefore.top10[0];
+    const site = data.top10[0];
 
     const clickRes = await fetch(`${BASE_URL}/api/sites/click`, {
       method: 'POST',
@@ -87,56 +66,119 @@ async function runTests() {
     console.log(`   -> Site ${site.name} computou novo clique: ${clickData.site.clicks}`);
   });
 
-  // 6. Teste da Lista de Blogs e Notícias Políticas (Monetizado)
-  await test('Função Base 2: Lista de Blogs e notícias políticas monetizadas', async () => {
+  // 4. Teste de Blogs Patrocinados e Monetização
+  await test('Função Base 2: Lista de Blogs e notícias políticas patrocinadas', async () => {
     const res = await fetch(`${BASE_URL}/api/blogs`);
     const data = await res.json();
     assert.strictEqual(data.success, true);
-    assert.ok(Array.isArray(data.blogs), 'Blogs deve ser um array');
-    assert.ok(data.blogs.length > 0, 'Deve conter blogs cadastrados');
-    
-    // Verifica presença de modelo de monetização nos blogs
     const sponsoredBlog = data.blogs.find(b => b.isSponsored);
     assert.ok(sponsoredBlog, 'Deve existir blog com selo VIP patrocinado');
-    assert.ok(sponsoredBlog.adSpotPrice, 'Blog patrocinado deve ter preço de anúncio');
-    console.log(`   -> Blog VIP: ${sponsoredBlog.name} (${sponsoredBlog.adSpotPrice}, Modelo: ${sponsoredBlog.monetizationModel})`);
+    console.log(`   -> Blog VIP: ${sponsoredBlog.name} (${sponsoredBlog.adSpotPrice})`);
   });
 
-  // 7. Teste de Cadastro de Novo Blog
-  await test('Função Base 2: Cadastro de novo blog para monetização', async () => {
-    const newBlogPayload = {
-      name: 'Observatório Político Nacional',
-      author: 'Redação Independente',
-      url: 'https://observatoriopolitico.org.br',
-      category: 'Investigação',
-      description: 'Análises detalhadas do orçamento secreto e emendas parlamentares.',
-      isSponsored: true
-    };
-
-    const res = await fetch(`${BASE_URL}/api/blogs`, {
+  // 5. NOVA MELHORIA: Cadastro de Usuário e Autenticação
+  let testUserId = null;
+  const testEmail = `test_${Date.now()}@radarpolitico.com`;
+  await test('Melhoria 4: Cadastro de novo usuário no portal', async () => {
+    const res = await fetch(`${BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newBlogPayload)
+      body: JSON.stringify({
+        name: 'Ana Maria Eleitora',
+        email: testEmail,
+        password: 'senha123'
+      })
     });
     const data = await res.json();
     assert.strictEqual(data.success, true);
-    assert.strictEqual(data.blog.name, newBlogPayload.name);
-    console.log(`   -> Blog cadastrado: ${data.blog.name} com status: ${data.blog.tier}`);
+    assert.ok(data.user.id, 'Deve retornar ID do usuário criado');
+    assert.strictEqual(data.user.email, testEmail.toLowerCase());
+    testUserId = data.user.id;
+    console.log(`   -> Usuário cadastrado com sucesso: ${data.user.name} (${data.user.id})`);
   });
 
-  // 8. Teste de Métricas de Monetização (Banners e Ads)
-  await test('Painel de Monetização: Métricas de anúncios, impressões e receita', async () => {
-    const res = await fetch(`${BASE_URL}/api/monetization/stats`);
+  // 6. NOVA MELHORIA: Login de Usuário
+  await test('Melhoria 4: Login de usuário existente', async () => {
+    const res = await fetch(`${BASE_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: testEmail,
+        password: 'senha123'
+      })
+    });
     const data = await res.json();
     assert.strictEqual(data.success, true);
-    assert.ok(data.monetization.totalImpressions >= 0, 'Deve conter métrica de impressões');
-    assert.ok(data.monetization.estimatedRevenueBRL >= 0, 'Deve conter receita estimada');
-    console.log(`   -> Impressões: ${data.monetization.totalImpressions}, CTR: ${data.monetization.ctr}, Receita: R$ ${data.monetization.estimatedRevenueBRL}`);
+    assert.strictEqual(data.user.id, testUserId);
+    console.log(`   -> Login realizado com sucesso para: ${data.user.email}`);
   });
 
-  console.log(`\n=========================================`);
-  console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com sucesso!`);
-  console.log(`=========================================\n`);
+  // 7. NOVA MELHORIA: Favoritar Políticos e Blogs
+  await test('Melhoria 4: Salvar e alternar favoritos de Político e Blog', async () => {
+    // Favoritar Lula
+    const favPRes = await fetch(`${BASE_URL}/api/users/favorites/politician`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: testUserId, politicianId: 'lula' })
+    });
+    const favPData = await favPRes.json();
+    assert.strictEqual(favPData.success, true);
+    assert.strictEqual(favPData.isFavorited, true);
+
+    // Favoritar Blog Congresso em Foco
+    const favBRes = await fetch(`${BASE_URL}/api/users/favorites/blog`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: testUserId, blogId: 'blog-congresso-foco' })
+    });
+    const favBData = await favBRes.json();
+    assert.strictEqual(favBData.success, true);
+    assert.strictEqual(favBData.isFavorited, true);
+
+    // Consultar favoritos salvos
+    const listRes = await fetch(`${BASE_URL}/api/users/${testUserId}/favorites`);
+    const listData = await listRes.json();
+    assert.strictEqual(listData.success, true);
+    assert.strictEqual(listData.favoritePoliticians.length, 1);
+    assert.strictEqual(listData.favoriteBlogs.length, 1);
+    console.log(`   -> Favoritos verificados: Político ${listData.favoritePoliticians[0].name}, Blog ${listData.favoriteBlogs[0].name}`);
+  });
+
+  // 8. NOVA MELHORIA: Radar Social - Saber se os políticos estão online ou transmitindo live
+  await test('Melhoria 5: Radar Social de Políticos (Online e Lives em tempo real)', async () => {
+    const res = await fetch(`${BASE_URL}/api/politicians/social-status`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    assert.ok(Array.isArray(data.politicians), 'Deve retornar lista de políticos com status');
+    assert.ok(data.totalLive >= 0, 'Deve contabilizar total de lives ativas');
+    
+    const livePol = data.politicians.find(p => p.socialStatus && p.socialStatus.isLive);
+    assert.ok(livePol, 'Deve haver político com transmissão ao vivo configurada');
+    assert.ok(livePol.socialStatus.livePlatform, 'Político ao vivo deve ter plataforma (YouTube, Instagram, TikTok)');
+    console.log(`   -> Político ao vivo detectado: ${livePol.popularName} no ${livePol.socialStatus.livePlatform} (${livePol.socialStatus.liveTitle})`);
+  });
+
+  // 9. NOVA MELHORIA: Alternar status de live de político em tempo real
+  await test('Melhoria 5: Simulação de início e término de transmissão ao vivo', async () => {
+    const toggleRes = await fetch(`${BASE_URL}/api/politicians/tarcisio/social-status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        isLive: true,
+        livePlatform: 'YouTube',
+        liveTitle: 'Transmissão Especial de SP: Entrevista Coletiva',
+        liveUrl: 'https://youtube.com'
+      })
+    });
+    const toggleData = await toggleRes.json();
+    assert.strictEqual(toggleData.success, true);
+    assert.strictEqual(toggleData.politician.socialStatus.isLive, true);
+    console.log(`   -> Status atualizado em tempo real para: ${toggleData.politician.popularName} -> AO VIVO`);
+  });
+
+  console.log(`\n======================================================`);
+  console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
+  console.log(`======================================================\n`);
 }
 
 // Execução

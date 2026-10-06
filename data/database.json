@@ -10,7 +10,24 @@
       "searchCount": 4823,
       "trend": "+18%",
       "trendDirection": "up",
-      "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial."
+      "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
+      "socialStatus": {
+        "isLive": true,
+        "livePlatform": "YouTube",
+        "liveTitle": "Pronunciamento Oficial: Pacote Econômico e Relações Internacionais",
+        "liveUrl": "https://www.youtube.com/@lulaoficial",
+        "status": "live",
+        "statusLabel": "AO VIVO NO YOUTUBE",
+        "lastActivity": "Transmitindo agora",
+        "recentPost": "Novo marco de investimentos sustentáveis sancionado em Brasília.",
+        "followersTotal": "31.4M",
+        "profiles": {
+          "twitter": "https://x.com/LulaOficial",
+          "instagram": "https://instagram.com/lulaoficial",
+          "youtube": "https://youtube.com/@lulaoficial",
+          "tiktok": "https://tiktok.com/@lulaoficial"
+        }
+      }
     },
     {
       "id": "bolsonaro",
@@ -22,7 +39,24 @@
       "searchCount": 4210,
       "trend": "+12%",
       "trendDirection": "up",
-      "bio": "38º Presidente do Brasil, líder da oposição conservadora."
+      "bio": "38º Presidente do Brasil, líder da oposição conservadora.",
+      "socialStatus": {
+        "isLive": true,
+        "livePlatform": "Instagram",
+        "liveTitle": "Transmissão Direta: Bastidores da Semana e Encontro com Lideranças",
+        "liveUrl": "https://www.instagram.com/jairmessiasbolsonaro/",
+        "status": "live",
+        "statusLabel": "AO VIVO NO INSTAGRAM",
+        "lastActivity": "Transmitindo agora",
+        "recentPost": "Conversa com apoiadores sobre as diretrizes das eleições.",
+        "followersTotal": "28.9M",
+        "profiles": {
+          "twitter": "https://x.com/jairbolsonaro",
+          "instagram": "https://instagram.com/jairmessiasbolsonaro",
+          "youtube": "https://youtube.com/@bolsonarojr",
+          "tiktok": "https://tiktok.com/@jairbolsonaro"
+        }
+      }
     },
     {
       "id": "tarcisio",
@@ -31,10 +65,26 @@
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
-      "searchCount": 3542,
+      "searchCount": 3543,
       "trend": "+25%",
       "trendDirection": "up",
-      "bio": "Governador de São Paulo e ex-ministro da Infraestrutura."
+      "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
+      "socialStatus": {
+        "isLive": true,
+        "status": "live",
+        "statusLabel": "AO VIVO NO YouTube",
+        "lastActivity": "Atualizado agora",
+        "recentPost": "Vistoria técnica nas obras do Rodoanel Norte e novos leilões rodoviários.",
+        "followersTotal": "4.2M",
+        "profiles": {
+          "twitter": "https://x.com/tarcisiogdf",
+          "instagram": "https://instagram.com/tarcisiogdf",
+          "youtube": "https://youtube.com/@tarcisiogdf"
+        },
+        "livePlatform": "YouTube",
+        "liveTitle": "Transmissão Especial de SP: Entrevista Coletiva",
+        "liveUrl": "https://youtube.com"
+      }
     },
     {
       "id": "haddad",
@@ -46,7 +96,19 @@
       "searchCount": 2980,
       "trend": "+15%",
       "trendDirection": "up",
-      "bio": "Ministro da Fazenda e articulador da Reforma Tributária."
+      "bio": "Ministro da Fazenda e articulador da Reforma Tributária.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "PUBLICOU NO INSTAGRAM",
+        "lastActivity": "Há 28 min",
+        "recentPost": "Apresentação dos dados de arrecadação e regulamentação da Reforma Tributária.",
+        "followersTotal": "3.8M",
+        "profiles": {
+          "twitter": "https://x.com/Haddad_Fernando",
+          "instagram": "https://instagram.com/fernandohaddadoficial"
+        }
+      }
     },
     {
       "id": "lira",
@@ -58,7 +120,19 @@
       "searchCount": 2640,
       "trend": "+8%",
       "trendDirection": "up",
-      "bio": "Presidente da Câmara dos Deputados e liderança do Centrão."
+      "bio": "Presidente da Câmara dos Deputados e liderança do Centrão.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO X (TWITTER)",
+        "lastActivity": "Há 45 min",
+        "recentPost": "Reunião do Colégio de Líderes para pautar votações de urgência no plenário.",
+        "followersTotal": "890K",
+        "profiles": {
+          "twitter": "https://x.com/ArthurLira_",
+          "instagram": "https://instagram.com/oficialarthurlira"
+        }
+      }
     },
     {
       "id": "pacheco",
@@ -70,7 +144,19 @@
       "searchCount": 2310,
       "trend": "+5%",
       "trendDirection": "up",
-      "bio": "Presidente do Senado Federal e do Congresso Nacional."
+      "bio": "Presidente do Senado Federal e do Congresso Nacional.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO INSTAGRAM",
+        "lastActivity": "Há 1h",
+        "recentPost": "Sessão solene do Congresso Nacional e balanço de projetos aprovados.",
+        "followersTotal": "760K",
+        "profiles": {
+          "twitter": "https://x.com/rodrigopacheco",
+          "instagram": "https://instagram.com/rodrigopacheco"
+        }
+      }
     },
     {
       "id": "tebet",
@@ -82,7 +168,19 @@
       "searchCount": 1940,
       "trend": "+9%",
       "trendDirection": "up",
-      "bio": "Ministra do Planejamento e ex-senadora por Mato Grosso do Sul."
+      "bio": "Ministra do Planejamento e ex-senadora por Mato Grosso do Sul.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "recent",
+        "statusLabel": "RECENTE NO LINKEDIN / X",
+        "lastActivity": "Há 2h",
+        "recentPost": "Relatório de monitoramento dos gastos públicos e eficiência orçamentária.",
+        "followersTotal": "2.1M",
+        "profiles": {
+          "twitter": "https://x.com/simonetebetms",
+          "instagram": "https://instagram.com/simonetebet"
+        }
+      }
     },
     {
       "id": "nikolas",
@@ -94,7 +192,24 @@
       "searchCount": 1820,
       "trend": "+22%",
       "trendDirection": "up",
-      "bio": "Deputado federal mais votado do Brasil nas eleições de 2022."
+      "bio": "Deputado federal mais votado do Brasil nas eleições de 2022.",
+      "socialStatus": {
+        "isLive": true,
+        "livePlatform": "TikTok",
+        "liveTitle": "Bastidores ao Vivo: Votações da Comissão e Pronunciamentos",
+        "liveUrl": "https://www.tiktok.com/@nikolasferreiradm",
+        "status": "live",
+        "statusLabel": "AO VIVO NO TIKTOK",
+        "lastActivity": "Transmitindo agora",
+        "recentPost": "Live direto do plenário com comentários sobre os destaques da semana.",
+        "followersTotal": "11.2M",
+        "profiles": {
+          "twitter": "https://x.com/nikolas_dm",
+          "instagram": "https://instagram.com/nikolasferreiradm",
+          "tiktok": "https://tiktok.com/@nikolasferreiradm",
+          "youtube": "https://youtube.com/@nikolasferreira"
+        }
+      }
     },
     {
       "id": "boulos",
@@ -106,7 +221,20 @@
       "searchCount": 1690,
       "trend": "+11%",
       "trendDirection": "up",
-      "bio": "Deputado Federal e líder de movimentos sociais urbanos."
+      "bio": "Deputado Federal e líder de movimentos sociais urbanos.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO INSTAGRAM",
+        "lastActivity": "Há 35 min",
+        "recentPost": "Debate com movimentos sociais sobre moradia digna e serviços públicos.",
+        "followersTotal": "5.4M",
+        "profiles": {
+          "twitter": "https://x.com/GuilhermeBoulos",
+          "instagram": "https://instagram.com/guilhermeboulos.oficial",
+          "youtube": "https://youtube.com/@guilhermeboulos"
+        }
+      }
     },
     {
       "id": "ciro",
@@ -118,7 +246,20 @@
       "searchCount": 1530,
       "trend": "-3%",
       "trendDirection": "down",
-      "bio": "Advogado, professor e ex-candidato à Presidência da República."
+      "bio": "Advogado, professor e ex-candidato à Presidência da República.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "recent",
+        "statusLabel": "RECENTE NO YOUTUBE",
+        "lastActivity": "Há 3h",
+        "recentPost": "Nova aula/análise sobre a taxa de juros e o endividamento das famílias.",
+        "followersTotal": "3.5M",
+        "profiles": {
+          "twitter": "https://x.com/cirogomes",
+          "instagram": "https://instagram.com/cirogomes",
+          "youtube": "https://youtube.com/@cirogomesoficial"
+        }
+      }
     },
     {
       "id": "marina",
@@ -130,7 +271,19 @@
       "searchCount": 1390,
       "trend": "+14%",
       "trendDirection": "up",
-      "bio": "Ambientalista, historiadora e Ministra do Meio Ambiente."
+      "bio": "Ambientalista, historiadora e Ministra do Meio Ambiente.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO X (TWITTER)",
+        "lastActivity": "Há 50 min",
+        "recentPost": "Balanço das ações de combate aos incêndios e preservação dos biomas.",
+        "followersTotal": "2.9M",
+        "profiles": {
+          "twitter": "https://x.com/MarinaSilva",
+          "instagram": "https://instagram.com/marinasilvaoficial"
+        }
+      }
     },
     {
       "id": "moro",
@@ -142,7 +295,19 @@
       "searchCount": 1280,
       "trend": "+4%",
       "trendDirection": "up",
-      "bio": "Senador pelo Paraná e ex-juiz federal da Operação Lava Jato."
+      "bio": "Senador pelo Paraná e ex-juiz federal da Operação Lava Jato.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO X (TWITTER)",
+        "lastActivity": "Há 1h",
+        "recentPost": "Pronunciamento na Comissão de Constituição e Justiça do Senado.",
+        "followersTotal": "4.1M",
+        "profiles": {
+          "twitter": "https://x.com/SF_Moro",
+          "instagram": "https://instagram.com/sergiomorooficial"
+        }
+      }
     },
     {
       "id": "leite",
@@ -154,7 +319,19 @@
       "searchCount": 1150,
       "trend": "+7%",
       "trendDirection": "up",
-      "bio": "Governador reeleito do Estado do Rio Grande do Sul."
+      "bio": "Governador reeleito do Estado do Rio Grande do Sul.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO RECENTEMENTE",
+        "lastActivity": "Há 2h",
+        "recentPost": "Atividades parlamentares e agenda pública.",
+        "followersTotal": "500K+",
+        "profiles": {
+          "twitter": "https://x.com/leite",
+          "instagram": "https://instagram.com/leite"
+        }
+      }
     },
     {
       "id": "caiado",
@@ -166,7 +343,19 @@
       "searchCount": 980,
       "trend": "+16%",
       "trendDirection": "up",
-      "bio": "Médico, produtor rural e Governador reeleito de Goiás."
+      "bio": "Médico, produtor rural e Governador reeleito de Goiás.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO RECENTEMENTE",
+        "lastActivity": "Há 2h",
+        "recentPost": "Atividades parlamentares e agenda pública.",
+        "followersTotal": "500K+",
+        "profiles": {
+          "twitter": "https://x.com/caiado",
+          "instagram": "https://instagram.com/caiado"
+        }
+      }
     }
   ],
   "sites": [
@@ -176,7 +365,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5423,
+      "clicks": 5424,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -699,5 +888,37 @@
       }
     ],
     "partnerRequests": []
-  }
+  },
+  "users": [
+    {
+      "id": "usr-demo",
+      "name": "Cidadão Conectado",
+      "email": "demo@radarpolitico.com",
+      "password": "123",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=160&q=80",
+      "favoritePoliticians": [
+        "lula",
+        "tarcisio"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco",
+        "g1-politica"
+      ],
+      "createdAt": "2026-10-06T12:00:00.000Z"
+    },
+    {
+      "id": "usr-1791312236450",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791312236445@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-06T18:43:56.450Z"
+    }
+  ]
 }

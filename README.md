@@ -1,101 +1,85 @@
-# 🛰️ Radar Político - MVP
+# 🛰️ Radar Político v2.0 - MVP
 
-Sistema inteligente de monitoramento, busca de notícias políticas, rankings de engajamento público e ecossistema de monetização de blogs e mídia jornalística.
-
----
-
-## 📋 Funções Bases Implementadas
-
-### 1. 🔍 Motor de Busca com Raio Temporal
-- **Filtro por "Nome do Político"**: Busca inteligente com sugestões em tempo real (Lula, Bolsonaro, Tarcísio de Freitas, Fernando Haddad, Arthur Lira, Rodrigo Pacheco, Simone Tebet, Nikolas Ferreira, etc.).
-- **Filtro por "Assunto / Tema"**: Economia, Reforma Tributária, STF, Eleições, Meio Ambiente, Orçamento, Saúde.
-- **Filtro por "Raio da Notícia"**: Seleção de Data de Início e Data de Término, com atalhos de raio temporal rápido (*Hoje / 24h*, *Últimos 7 dias*, *Últimos 30 dias*, *Tudo*).
-- **Agregação Híbrida em Tempo Real**: Conecta-se dinamicamente ao feed de notícias do Google News Brasil para matérias jornalísticas de última hora (G1, Folha de S.Paulo, Estadão, Metrópoles, Poder360, CNN Brasil, CartaCapital, etc.) e integra com a base curada local.
-
-### 2. 📰 Lista de Blogs e Notícias Políticas (Monetizado)
-- Catálogo especializado de colunistas de bastidores, blogs independentes e portais de análise.
-- **Selo VIP Patrocinado**: Destaque para veículos parceiros e criadores monetizados.
-- **Mídia Kit & Modelos de Monetização**: Exibição de modelos comerciais adotados (CPM, Banners, Publieditoriais, Assinatura de Relatórios, Valor de anúncio por semana).
-- **Formulário Interativo de Cadastro**: Donos de blogs e colunistas podem cadastrar seus portais e solicitar adesão ao plano de monetização.
-
-### 3. 🌐 Top 10 dos Sites Mais Acessados no Aplicativo
-- Ranking atualizado em tempo real com os portais de notícias e blogs mais lidos através do aplicativo.
-- **Rastreamento de Cliques (Outbound Tracker)**: Cada vez que um usuário clica para ler uma notícia na íntegra, a rota `/api/sites/click` computa o acesso e atualiza a posição do veículo no Top 10.
-- Barras de progresso proporcionais ao tráfego do líder, medalhas para o Top 3 e botão de teste de interação.
-
-### 4. 👥 Top 10 dos Políticos Mais Buscados no Aplicativo
-- Pódio visual (#1 Ouro, #2 Prata, #3 Bronze) e classificação geral (posições 4 a 10).
-- Contador auditado de pesquisas por político com taxa de crescimento e cargo institucional.
-- **Atualização Automática**: Qualquer pesquisa executada com o nome de um político no motor de busca incrementa automaticamente o ranking.
-- Ação rápida em 1 clique: *"Ver Notícias deste Político"* preenche o filtro e executa a busca instantaneamente.
-
-### 5. 💰 Camada de Monetização & Publicidade
-- Banner Leaderboard no topo da aplicação.
-- Card patrocinado nativo (*Native Ad*) inserido estrategicamente no feed de resultados de notícias.
-- Painel de métricas com Impressões, Cliques, Taxa de Cliques (CTR) e Estimativa de Receita em Reais (R$).
-- Modal comercial para captação de anunciantes corporativos, assessorias e institutos de pesquisa.
+Sistema inteligente de monitoramento, busca de notícias políticas, rankings de engajamento público, acompanhamento de redes sociais ao vivo e ecossistema de monetização de mídia jornalística.
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 🚀 Novas Melhorias Implementadas (v2.0)
 
-### Pré-requisitos
-- Node.js instalado (v18+)
+1. **✨ Apresentação e Layout Executivo Refinado**:
+   - Design moderno, clean e responsivo (desktop, tablet e mobile).
+   - Tipografia moderna com *Plus Jakarta Sans* e *Inter*.
+   - Efeitos visuais refinados: medalhas para o pódio (#1, #2, #3), alertas pulsantes para lives ativas e cards com microinterações suaves.
 
-### Instalação e Inicialização
+2. **🏆 Top 3 Políticos e Portais Expostos na Página Inicial**:
+   - Diretamente na Home ao lado do motor de busca:
+     - **Top 3 Políticos Mais Buscados**: Cards com foto, cargo, partido, volume de pesquisas, botão de busca rápida e botão de favoritar (❤️).
+     - **Top 3 Portais Mais Acessados**: Cards com posições 1, 2 e 3, ícone, volume de cliques e botão de acesso direto.
+
+3. **⭐ Blogs e Fontes Patrocinadoras na Página Inicial**:
+   - Vitrine destacada na Home para veículos parceiros e criadores monetizados (*Congresso em Foco Insider*, *Coluna Guilherme Amado*, *Anuário da Justiça & STF*, etc.).
+   - Selo `⭐ Parceiro VIP`, resumo editorial, audiência e botão de visita e favoritar.
+
+4. **👤 Cadastro / Login e Sistema de Favoritos**:
+   - Modal com abas para **Entrar** ou **Criar Nova Conta**.
+   - Usuário de demonstração pré-configurado (`demo@radarpolitico.com` / Senha: `123`).
+   - Botão interativo de **Coração ❤️** em qualquer político para favoritar.
+   - Botão interativo de **Estrela ⭐** em qualquer blog/portal para salvar.
+   - Modal/Gaveta **"Meus Favoritos"** com contador em tempo real no cabeçalho.
+
+5. **📡 Radar Social: Políticos Online e Transmissões Ao Vivo**:
+   - Acompanhamento em tempo real de quem está **transmitindo lives ao vivo** (YouTube, Instagram, TikTok, X).
+   - Indicador pulsante `🔴 AO VIVO AGORA` com o título da transmissão e link direto para assistir.
+   - Indicador `🟢 ATIVO NAS REDES` com o último post relevante do político.
+   - Aba exclusiva *"Políticos Online"* com filtros rápidos e simulação interativa.
+
+---
+
+## 📋 Funções Bases Originais Mantidas
+
+- **Motor de Busca com Raio Temporal**: Busca por *Nome do Político*, *Assunto* e *Data Início / Data Fim*.
+- **Agregação Híbrida em Tempo Real**: Conexão com Google News RSS Brasil + base interna curada.
+- **Top 10 Completo de Políticos Mais Buscados**.
+- **Top 10 Completo de Portais Mais Acessados** com rastreamento de cliques em links externos.
+- **Painel de Monetização**: Banners CPM, Native Ads no feed, simulador de receita e formulário para anunciantes.
+
+---
+
+## 🏃 Como Executar
+
 ```bash
-# 1. Navegue até o diretório do projeto
+# 1. Navegue até a pasta do projeto
 cd C:\Users\user\.gemini\antigravity\scratch\radar-politico
 
-# 2. Instale as dependências (já instaladas no ambiente)
-npm install
-
-# 3. Inicie o servidor
+# 2. Inicie o servidor
 npm start
 ```
 
-Acesse no seu navegador:
+Acesse no navegador:
 👉 **`http://localhost:3000`**
 
 ---
 
-## 🧪 Como Rodar os Testes Automatizados
+## 🧪 Suíte de Testes Automatizados
 
-O projeto conta com uma suíte de testes ponta a ponta validando todas as 4 funções bases:
+Para rodar todos os testes de validação:
 
 ```bash
 npm test
-# ou:
-node test/test-api.js
 ```
+```text
+🧪 Iniciando testes de validação do Radar Político v2.0...
+✅ [PASS] Função Base 1: Busca de notícias por Político, Assunto e Raio Temporal
+✅ [PASS] Função Base 4: Top 10 Políticos mais buscados no aplicativo
+✅ [PASS] Função Base 3: Top 10 Sites mais acessados e rastreamento de cliques
+✅ [PASS] Função Base 2: Lista de Blogs e notícias políticas patrocinadas
+✅ [PASS] Melhoria 4: Cadastro de novo usuário no portal
+✅ [PASS] Melhoria 4: Login de usuário existente
+✅ [PASS] Melhoria 4: Salvar e alternar favoritos de Político e Blog
+✅ [PASS] Melhoria 5: Radar Social de Políticos (Online e Lives em tempo real)
+✅ [PASS] Melhoria 5: Simulação de início e término de transmissão ao vivo
 
-Os testes verificam:
-1. Busca com filtro combinado (Político + Assunto + Raio Temporal).
-2. Ordenação e consistência do Top 10 Políticos.
-3. Incremento em tempo real do político ao pesquisar.
-4. Ordenação e consistência do Top 10 Sites Mais Acessados.
-5. Rastreamento e persistência de cliques em links externos.
-6. Listagem de blogs monetizados com selos VIP e preços de anúncio.
-7. Cadastro de novos blogs com persistência em JSON.
-8. Métricas do painel de monetização (Impressões, CTR e Receita).
-
----
-
-## 📂 Estrutura de Arquivos
-
-```
-radar-politico/
-├── data/
-│   └── database.json        # Base persistente com políticos, sites, blogs, matérias e métricas
-├── public/
-│   ├── css/
-│   │   └── style.css        # Animações, estilos de pódio, medalhas e efeitos customizados
-│   ├── js/
-│   │   └── app.js           # Lógica do frontend: busca, rankings, tracking e modais
-│   └── index.html           # Interface responsiva moderna com Tailwind CSS e FontAwesome
-├── test/
-│   └── test-api.js          # Suíte de validação automatizada das 4 funções bases
-├── package.json             # Dependências e scripts de execução
-├── server.js                # Servidor Express, endpoints REST e integração com Google News RSS
-└── README.md                # Documentação do MVP
+======================================================
+🎯 RESULTADO FINAL: 9/9 testes aprovados com 100% de sucesso!
+======================================================
 ```
