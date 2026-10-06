@@ -6,8 +6,8 @@
       "popularName": "Lula",
       "party": "PT",
       "office": "Presidente da República",
-      "avatar": "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=160&q=80",
-      "searchCount": 4823,
+      "avatar": "/assets/politicians/lula.jpg",
+      "searchCount": 4825,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -27,7 +27,8 @@
           "youtube": "https://youtube.com/@lulaoficial",
           "tiktok": "https://tiktok.com/@lulaoficial"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28ombros%29_denoise.jpg/330px-Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28ombros%29_denoise.jpg"
     },
     {
       "id": "bolsonaro",
@@ -35,7 +36,7 @@
       "popularName": "Jair Bolsonaro",
       "party": "PL",
       "office": "Ex-Presidente da República",
-      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/bolsonaro.jpg",
       "searchCount": 4210,
       "trend": "+12%",
       "trendDirection": "up",
@@ -56,7 +57,8 @@
           "youtube": "https://youtube.com/@bolsonarojr",
           "tiktok": "https://tiktok.com/@jairbolsonaro"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Jair_Bolsonaro_2019_Portrait_%283x4_cropped_center%29.jpg/330px-Jair_Bolsonaro_2019_Portrait_%283x4_cropped_center%29.jpg"
     },
     {
       "id": "tarcisio",
@@ -64,8 +66,8 @@
       "popularName": "Tarcísio de Freitas",
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
-      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
-      "searchCount": 3543,
+      "avatar": "/assets/politicians/tarcisio.jpg",
+      "searchCount": 3545,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -84,7 +86,8 @@
         "livePlatform": "YouTube",
         "liveTitle": "Transmissão Especial de SP: Entrevista Coletiva",
         "liveUrl": "https://youtube.com"
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg/330px-Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg"
     },
     {
       "id": "haddad",
@@ -92,7 +95,7 @@
       "popularName": "Fernando Haddad",
       "party": "PT",
       "office": "Ministro da Fazenda",
-      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/haddad.jpg",
       "searchCount": 2980,
       "trend": "+15%",
       "trendDirection": "up",
@@ -108,7 +111,8 @@
           "twitter": "https://x.com/Haddad_Fernando",
           "instagram": "https://instagram.com/fernandohaddadoficial"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Fernando_Haddad_posse_min._da_Fazenda.jpg/330px-Fernando_Haddad_posse_min._da_Fazenda.jpg"
     },
     {
       "id": "lira",
@@ -116,7 +120,7 @@
       "popularName": "Arthur Lira",
       "party": "PP",
       "office": "Presidente da Câmara dos Deputados",
-      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/lira.jpg",
       "searchCount": 2640,
       "trend": "+8%",
       "trendDirection": "up",
@@ -132,7 +136,8 @@
           "twitter": "https://x.com/ArthurLira_",
           "instagram": "https://instagram.com/oficialarthurlira"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Lula_e_Lira_2022_%28cropped2%29.jpg/330px-Lula_e_Lira_2022_%28cropped2%29.jpg"
     },
     {
       "id": "pacheco",
@@ -140,7 +145,7 @@
       "popularName": "Rodrigo Pacheco",
       "party": "PSD",
       "office": "Presidente do Senado Federal",
-      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/pacheco.jpg",
       "searchCount": 2310,
       "trend": "+5%",
       "trendDirection": "up",
@@ -156,7 +161,8 @@
           "twitter": "https://x.com/rodrigopacheco",
           "instagram": "https://instagram.com/rodrigopacheco"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg/330px-Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg"
     },
     {
       "id": "tebet",
@@ -164,7 +170,7 @@
       "popularName": "Simone Tebet",
       "party": "MDB",
       "office": "Ministra do Planejamento e Orçamento",
-      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/tebet.jpg",
       "searchCount": 1940,
       "trend": "+9%",
       "trendDirection": "up",
@@ -180,7 +186,8 @@
           "twitter": "https://x.com/simonetebetms",
           "instagram": "https://instagram.com/simonetebet"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg/330px-2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg"
     },
     {
       "id": "nikolas",
@@ -188,7 +195,7 @@
       "popularName": "Nikolas Ferreira",
       "party": "PL",
       "office": "Deputado Federal por Minas Gerais",
-      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/nikolas.jpg",
       "searchCount": 1820,
       "trend": "+22%",
       "trendDirection": "up",
@@ -209,7 +216,8 @@
           "tiktok": "https://tiktok.com/@nikolasferreiradm",
           "youtube": "https://youtube.com/@nikolasferreira"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Nikolas_Ferreira_in_2023_%28cropped%29.jpg/330px-Nikolas_Ferreira_in_2023_%28cropped%29.jpg"
     },
     {
       "id": "boulos",
@@ -217,7 +225,7 @@
       "popularName": "Guilherme Boulos",
       "party": "PSOL",
       "office": "Deputado Federal por São Paulo",
-      "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/boulos.jpg",
       "searchCount": 1690,
       "trend": "+11%",
       "trendDirection": "up",
@@ -234,7 +242,8 @@
           "instagram": "https://instagram.com/guilhermeboulos.oficial",
           "youtube": "https://youtube.com/@guilhermeboulos"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg/330px-Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg"
     },
     {
       "id": "ciro",
@@ -242,7 +251,7 @@
       "popularName": "Ciro Gomes",
       "party": "PDT",
       "office": "Ex-Ministro e Ex-Governador do Ceará",
-      "avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/ciro.png",
       "searchCount": 1530,
       "trend": "-3%",
       "trendDirection": "down",
@@ -259,7 +268,8 @@
           "instagram": "https://instagram.com/cirogomes",
           "youtube": "https://youtube.com/@cirogomesoficial"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Presidente_Ciro_Gomes.png/330px-Presidente_Ciro_Gomes.png"
     },
     {
       "id": "marina",
@@ -267,7 +277,7 @@
       "popularName": "Marina Silva",
       "party": "REDE",
       "office": "Ministra do Meio Ambiente e Mudança do Clima",
-      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/marina.jpg",
       "searchCount": 1390,
       "trend": "+14%",
       "trendDirection": "up",
@@ -283,7 +293,8 @@
           "twitter": "https://x.com/MarinaSilva",
           "instagram": "https://instagram.com/marinasilvaoficial"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Marina_Silva_crop.jpg/330px-Marina_Silva_crop.jpg"
     },
     {
       "id": "moro",
@@ -291,7 +302,7 @@
       "popularName": "Sergio Moro",
       "party": "União Brasil",
       "office": "Senador pelo Paraná",
-      "avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/moro.jpg",
       "searchCount": 1280,
       "trend": "+4%",
       "trendDirection": "up",
@@ -307,7 +318,8 @@
           "twitter": "https://x.com/SF_Moro",
           "instagram": "https://instagram.com/sergiomorooficial"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg/330px-Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg"
     },
     {
       "id": "leite",
@@ -315,7 +327,7 @@
       "popularName": "Eduardo Leite",
       "party": "PSDB",
       "office": "Governador do Rio Grande do Sul",
-      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/leite.jpg",
       "searchCount": 1150,
       "trend": "+7%",
       "trendDirection": "up",
@@ -331,7 +343,8 @@
           "twitter": "https://x.com/leite",
           "instagram": "https://instagram.com/leite"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg/330px-09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg"
     },
     {
       "id": "caiado",
@@ -339,7 +352,7 @@
       "popularName": "Ronaldo Caiado",
       "party": "União Brasil",
       "office": "Governador de Goiás",
-      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=160&q=80",
+      "avatar": "/assets/politicians/caiado.jpg",
       "searchCount": 980,
       "trend": "+16%",
       "trendDirection": "up",
@@ -355,7 +368,8 @@
           "twitter": "https://x.com/caiado",
           "instagram": "https://instagram.com/caiado"
         }
-      }
+      },
+      "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg/330px-Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg"
     }
   ],
   "sites": [
@@ -365,11 +379,12 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5424,
+      "clicks": 5426,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "🌐"
+      "logo": "🌐",
+      "logoSvg": "/assets/logos/g1.svg"
     },
     {
       "id": "folha-poder",
@@ -381,7 +396,8 @@
       "badge": "Mais Compartilhado",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "📰"
+      "logo": "📰",
+      "logoSvg": "/assets/logos/folha.svg"
     },
     {
       "id": "congresso-em-foco",
@@ -393,7 +409,8 @@
       "badge": "Parceiro Ouro VIP",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "🏛️"
+      "logo": "🏛️",
+      "logoSvg": "/assets/logos/congresso.svg"
     },
     {
       "id": "poder360",
@@ -405,7 +422,8 @@
       "badge": "Crescimento Rápido",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "📊"
+      "logo": "📊",
+      "logoSvg": "/assets/logos/poder360.svg"
     },
     {
       "id": "metropoles-politica",
@@ -417,7 +435,8 @@
       "badge": "Top Furos",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "⚡"
+      "logo": "⚡",
+      "logoSvg": "/assets/logos/metropoles.svg"
     },
     {
       "id": "o-antagonista",
@@ -429,7 +448,8 @@
       "badge": "Destaque Opinião",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "🎯"
+      "logo": "🎯",
+      "logoSvg": "/assets/logos/antagonista.svg"
     },
     {
       "id": "estadao-politica",
@@ -441,7 +461,8 @@
       "badge": "Tradicional",
       "verified": true,
       "isMonetizedPartner": false,
-      "logo": "🗞️"
+      "logo": "🗞️",
+      "logoSvg": "/assets/logos/estadao.svg"
     },
     {
       "id": "cnn-brasil-politica",
@@ -453,7 +474,8 @@
       "badge": "Vídeo & Análise",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "📺"
+      "logo": "📺",
+      "logoSvg": "/assets/logos/cnn.svg"
     },
     {
       "id": "carta-capital",
@@ -465,7 +487,8 @@
       "badge": "Crítica & Debate",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "🖋️"
+      "logo": "🖋️",
+      "logoSvg": "/assets/logos/cartacapital.svg"
     },
     {
       "id": "jovem-pan-politica",
@@ -477,7 +500,8 @@
       "badge": "Debate Dinâmico",
       "verified": true,
       "isMonetizedPartner": false,
-      "logo": "🎙️"
+      "logo": "🎙️",
+      "logoSvg": "/assets/logos/jovempan.svg"
     },
     {
       "id": "gazeta-do-povo",
@@ -489,7 +513,8 @@
       "badge": "Opinião",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "🦅"
+      "logo": "🦅",
+      "logoSvg": "/assets/logos/gazetadopovo.svg"
     },
     {
       "id": "conjur",
@@ -501,7 +526,8 @@
       "badge": "Direito & STF",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "⚖️"
+      "logo": "⚖️",
+      "logoSvg": "/assets/logos/conjur.svg"
     },
     {
       "id": "nexo-jornal",
@@ -513,7 +539,8 @@
       "badge": "Explicativo",
       "verified": true,
       "isMonetizedPartner": false,
-      "logo": "💡"
+      "logo": "💡",
+      "logoSvg": "/assets/logos/g1.svg"
     },
     {
       "id": "brasil-247",
@@ -525,7 +552,8 @@
       "badge": "Comunidade Ativa",
       "verified": true,
       "isMonetizedPartner": true,
-      "logo": "📢"
+      "logo": "📢",
+      "logoSvg": "/assets/logos/brasil247.svg"
     },
     {
       "id": "agencia-publica",
@@ -537,7 +565,8 @@
       "badge": "Investigação Independente",
       "verified": true,
       "isMonetizedPartner": false,
-      "logo": "🔍"
+      "logo": "🔍",
+      "logoSvg": "/assets/logos/g1.svg"
     },
     {
       "id": "observatorio-politico-nacional",
@@ -549,7 +578,8 @@
       "badge": "Novo Portal",
       "verified": false,
       "isMonetizedPartner": false,
-      "logo": "📰"
+      "logo": "📰",
+      "logoSvg": "/assets/logos/g1.svg"
     },
     {
       "id": "coluna-guilherme-amado",
@@ -561,7 +591,8 @@
       "badge": "Novo Portal",
       "verified": false,
       "isMonetizedPartner": false,
-      "logo": "📰"
+      "logo": "📰",
+      "logoSvg": "/assets/logos/g1.svg"
     }
   ],
   "blogs": [
@@ -580,7 +611,8 @@
       "adSpotPrice": "R$ 290,00 / semana",
       "clicks": 1,
       "rating": 5,
-      "badgeText": "⭐ Parceiro Patrocinado"
+      "badgeText": "⭐ Parceiro Patrocinado",
+      "logoSvg": "/assets/logos/congresso.svg"
     },
     {
       "id": "blog-1791222098704",
@@ -597,7 +629,8 @@
       "adSpotPrice": "R$ 290,00 / semana",
       "clicks": 1,
       "rating": 5,
-      "badgeText": "⭐ Parceiro Patrocinado"
+      "badgeText": "⭐ Parceiro Patrocinado",
+      "logoSvg": "/assets/logos/congresso.svg"
     },
     {
       "id": "blog-congresso-foco",
@@ -614,7 +647,8 @@
       "adSpotPrice": "R$ 650,00 / semana",
       "clicks": 4150,
       "rating": 4.9,
-      "badgeText": "⭐ Parceiro Destaque VIP"
+      "badgeText": "⭐ Parceiro Destaque VIP",
+      "logoSvg": "/assets/logos/congresso.svg"
     },
     {
       "id": "blog-guilherme-amado",
@@ -631,7 +665,8 @@
       "adSpotPrice": "R$ 800,00 / semana",
       "clicks": 3450,
       "rating": 4.8,
-      "badgeText": "🔥 Alta Audiência"
+      "badgeText": "🔥 Alta Audiência",
+      "logoSvg": "/assets/logos/metropoles.svg"
     },
     {
       "id": "blog-conjur-bastidores",
@@ -648,7 +683,8 @@
       "adSpotPrice": "R$ 490,00 / semana",
       "clicks": 1670,
       "rating": 4.9,
-      "badgeText": "⚖️ Especialista Jurídico"
+      "badgeText": "⚖️ Especialista Jurídico",
+      "logoSvg": "/assets/logos/congresso.svg"
     },
     {
       "id": "blog-o-antagonista-feed",
@@ -665,7 +701,8 @@
       "adSpotPrice": "R$ 380,00 / semana",
       "clicks": 3120,
       "rating": 4.6,
-      "badgeText": "⚡ Notícias Rápidas"
+      "badgeText": "⚡ Notícias Rápidas",
+      "logoSvg": "/assets/logos/antagonista.svg"
     },
     {
       "id": "blog-radar-economico",
@@ -682,7 +719,8 @@
       "adSpotPrice": "R$ 550,00 / semana",
       "clicks": 2300,
       "rating": 4.7,
-      "badgeText": "📈 Finanças & Política"
+      "badgeText": "📈 Finanças & Política",
+      "logoSvg": "/assets/logos/poder360.svg"
     },
     {
       "id": "blog-observatorio-eleicoes",
@@ -699,7 +737,8 @@
       "adSpotPrice": "R$ 250,00 / semana",
       "clicks": 1420,
       "rating": 4.8,
-      "badgeText": "📊 Análise de Dados"
+      "badgeText": "📊 Análise de Dados",
+      "logoSvg": "/assets/logos/congresso.svg"
     }
   ],
   "articles": [
@@ -714,7 +753,9 @@
       "politicianId": "haddad",
       "subject": "Reforma Tributária",
       "publishedDate": "2026-09-28T14:30:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/g1.svg",
+      "imageUrl": "/assets/politicians/haddad.jpg"
     },
     {
       "id": "art-2",
@@ -727,7 +768,9 @@
       "politicianId": "lula",
       "subject": "Meio Ambiente",
       "publishedDate": "2026-09-25T11:15:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/folha.svg",
+      "imageUrl": "/assets/politicians/lula.jpg"
     },
     {
       "id": "art-3",
@@ -740,7 +783,9 @@
       "politicianId": "tarcisio",
       "subject": "Economia",
       "publishedDate": "2026-09-22T09:40:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/metropoles.svg",
+      "imageUrl": "/assets/politicians/tarcisio.jpg"
     },
     {
       "id": "art-4",
@@ -753,7 +798,9 @@
       "politicianId": "pacheco",
       "subject": "STF",
       "publishedDate": "2026-09-18T16:20:00Z",
-      "isSponsored": true
+      "isSponsored": true,
+      "sourceLogo": "/assets/logos/congresso.svg",
+      "imageUrl": "/assets/politicians/pacheco.jpg"
     },
     {
       "id": "art-5",
@@ -766,7 +813,9 @@
       "politicianId": "lira",
       "subject": "Orçamento",
       "publishedDate": "2026-09-15T18:00:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/poder360.svg",
+      "imageUrl": "/assets/politicians/lira.jpg"
     },
     {
       "id": "art-6",
@@ -779,7 +828,9 @@
       "politicianId": "bolsonaro",
       "subject": "Eleições",
       "publishedDate": "2026-09-10T13:45:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/antagonista.svg",
+      "imageUrl": "/assets/politicians/bolsonaro.jpg"
     },
     {
       "id": "art-7",
@@ -792,7 +843,9 @@
       "politicianId": "tebet",
       "subject": "Economia",
       "publishedDate": "2026-09-05T10:10:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/cnn.svg",
+      "imageUrl": "/assets/politicians/tebet.jpg"
     },
     {
       "id": "art-8",
@@ -805,7 +858,9 @@
       "politicianId": "marina",
       "subject": "Meio Ambiente",
       "publishedDate": "2026-08-29T15:50:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/cartacapital.svg",
+      "imageUrl": "/assets/politicians/marina.jpg"
     },
     {
       "id": "art-9",
@@ -818,7 +873,9 @@
       "politicianId": "nikolas",
       "subject": "Saúde",
       "publishedDate": "2026-08-20T17:30:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/gazetadopovo.svg",
+      "imageUrl": "/assets/politicians/nikolas.jpg"
     },
     {
       "id": "art-10",
@@ -831,7 +888,9 @@
       "politicianId": "boulos",
       "subject": "Eleições",
       "publishedDate": "2026-08-15T12:00:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/brasil247.svg",
+      "imageUrl": "/assets/politicians/boulos.jpg"
     },
     {
       "id": "art-11",
@@ -844,7 +903,9 @@
       "politicianId": "ciro",
       "subject": "Economia",
       "publishedDate": "2026-08-01T14:10:00Z",
-      "isSponsored": false
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/poder360.svg",
+      "imageUrl": "/assets/politicians/ciro.png"
     },
     {
       "id": "art-12",
@@ -858,7 +919,9 @@
       "subject": "STF",
       "publishedDate": "2026-10-01T08:00:00Z",
       "isSponsored": true,
-      "sponsorName": "Análise Estratégica Brasília"
+      "sponsorName": "Análise Estratégica Brasília",
+      "sourceLogo": "/assets/logos/congresso.svg",
+      "imageUrl": "/assets/politicians/lula.jpg"
     }
   ],
   "monetization": {
@@ -919,6 +982,34 @@
         "blog-congresso-foco"
       ],
       "createdAt": "2026-10-06T18:43:56.450Z"
+    },
+    {
+      "id": "usr-1791313108510",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791313108504@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-06T18:58:28.510Z"
+    },
+    {
+      "id": "usr-1791313173218",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791313173214@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-06T18:59:33.218Z"
     }
   ]
 }

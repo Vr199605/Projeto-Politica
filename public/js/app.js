@@ -438,8 +438,8 @@ function renderHomeTop3() {
             <span class="w-7 h-7 rounded-lg ${badges[idx]} text-xs flex items-center justify-center shrink-0">
               #${idx + 1}
             </span>
-            <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-lg shrink-0">
-              ${site.logo || '🌐'}
+            <div class="h-9 px-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 shadow-xs">
+              <img src="${site.logoSvg || getLogoForSource(site.name)}" alt="${escapeHtml(site.name)}" class="h-5 max-w-[85px] object-contain">
             </div>
             <div>
               <div class="flex items-center gap-1.5">
@@ -853,6 +853,24 @@ async function executeSearch() {
   }
 }
 
+function getLogoForSource(sourceName) {
+  const norm = (sourceName || '').toLowerCase();
+  if (norm.includes('g1')) return '/assets/logos/g1.svg';
+  if (norm.includes('folha')) return '/assets/logos/folha.svg';
+  if (norm.includes('metrópoles') || norm.includes('metropoles')) return '/assets/logos/metropoles.svg';
+  if (norm.includes('poder360') || norm.includes('poder 360')) return '/assets/logos/poder360.svg';
+  if (norm.includes('congresso')) return '/assets/logos/congresso.svg';
+  if (norm.includes('cnn')) return '/assets/logos/cnn.svg';
+  if (norm.includes('antagonista')) return '/assets/logos/antagonista.svg';
+  if (norm.includes('estadão') || norm.includes('estadao')) return '/assets/logos/estadao.svg';
+  if (norm.includes('carta')) return '/assets/logos/cartacapital.svg';
+  if (norm.includes('jovem')) return '/assets/logos/jovempan.svg';
+  if (norm.includes('gazeta')) return '/assets/logos/gazetadopovo.svg';
+  if (norm.includes('conjur')) return '/assets/logos/conjur.svg';
+  if (norm.includes('brasil 247') || norm.includes('brasil247')) return '/assets/logos/brasil247.svg';
+  return '/assets/logos/g1.svg';
+}
+
 function renderNewsResults() {
   const container = document.getElementById('news-results-grid');
   const emptyState = document.getElementById('news-empty-state');
@@ -876,72 +894,118 @@ function renderNewsResults() {
   container.innerHTML = sortedArticles.map((article) => {
     const dateFormatted = formatDateBR(article.publishedDate);
     const timeAgo = formatTimeAgo(article.publishedDate);
-    const sourceClass = getSourceBadgeClass(article.source);
     const isFavSite = state.favoriteBlogIds.has(article.siteId);
+    const sourceLogo = article.sourceLogo || getLogoForSource(article.source);
+    
+    // Imagem real da matéria (político oficial ou tema institucional)
+    let imageUrl = article.imageUrl;
+    if (!imageUrl) {
+      if (article.politicianId) {
+        imageUrl = `/assets/politicians/${article.politicianId}.jpg`;
+      } else {
+        imageUrl = 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=600&q=80';
+      }
+    }
+
+    const shortSource = (article.source || 'Portal').split(' - ')[0];
 
     return `
-      <article class="news-card bg-white rounded-3xl border border-slate-200/90 p-5 flex flex-col justify-between shadow-xs relative overflow-hidden">
-        <div>
-          <!-- Fonte & Data -->
-          <div class="flex items-center justify-between gap-2 mb-3">
-            <span class="${sourceClass} text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5">
-              <i class="fa-regular fa-newspaper text-[10px]"></i> ${escapeHtml(article.source || 'Portal')}
-            </span>
-            <span class="text-[11px] text-slate-500 font-medium flex items-center gap-1" title="${dateFormatted}">
-              <i class="fa-regular fa-clock text-[10px]"></i> ${timeAgo}
-            </span>
+      <article class="news-card bg-white rounded-3xl border border-slate-200/90 flex flex-col justify-between shadow-xs hover:shadow-md transition relative overflow-hidden group">
+        
+        <!-- FOTO EM ALTO DESTAQUE DA MATÉRIA / ANÚNCIO COM A LOGO DA ORIGEM -->
+        <div class="relative h-48 w-full overflow-hidden bg-slate-900">
+          <img 
+            src="${imageUrl}" 
+            alt="${escapeHtml(article.title)}" 
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out" 
+            onerror="this.src='https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=600'"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+
+          <!-- LOGO OFICIAL DA ORIGEM EM DESTAQUE (Ex: LOGO DO G1) -->
+          <div class="absolute top-3 left-3 flex items-center gap-1.5 bg-slate-950/90 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-white/20 shadow-lg">
+            <img src="${sourceLogo}" alt="${escapeHtml(article.source)}" class="h-5 max-w-[110px] object-contain">
           </div>
 
-          <!-- Título -->
-          <h3 class="text-sm font-bold text-slate-900 leading-snug line-clamp-2 hover:text-blue-600 transition">
-            <a href="javascript:void(0)" onclick="trackSiteClick('${article.siteId || ''}', '${escapeHtml(article.source)}', '${article.url}')">
-              ${escapeHtml(article.title)}
-            </a>
-          </h3>
+          <!-- DATA / TEMPO FLUTUANTE -->
+          <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1 shadow-sm">
+            <i class="fa-regular fa-clock text-[9px]"></i> ${timeAgo}
+          </div>
 
-          <!-- Trecho -->
-          <p class="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed">
-            ${escapeHtml(article.snippet)}
-          </p>
+          <!-- NOME DA ORIGEM E SELO VERIFICADO -->
+          <div class="absolute bottom-2.5 left-3 text-white text-xs font-bold drop-shadow-sm flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>${escapeHtml(article.source)}</span>
+            <i class="fa-solid fa-circle-check text-blue-400 text-[10px]" title="Veículo Verificado"></i>
+          </div>
         </div>
 
-        <!-- Tags e Ação -->
-        <div class="pt-4 mt-3 border-t border-slate-100 flex flex-col gap-2.5">
-          <div class="flex flex-wrap items-center gap-1.5">
-            ${article.politician ? `
-              <button onclick="quickSearchPolitico('${escapeHtml(article.politician)}')" class="inline-flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-2 py-0.5 rounded-full transition">
-                <i class="fa-solid fa-user-tie text-[9px]"></i> ${escapeHtml(article.politician)}
+        <!-- CONTEÚDO EDITORIAL -->
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <!-- Cabeçalho com Logo e Botão de Favoritar Portal -->
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-2">
+                <img src="${sourceLogo}" alt="${escapeHtml(article.source)}" class="h-4 max-w-[85px] object-contain">
+                <span class="text-[11px] font-extrabold text-slate-700">Fonte Oficial</span>
+              </div>
+              <button onclick="toggleFavoriteBlog('${article.siteId || ''}', event)" class="p-1 text-xs ${isFavSite ? 'text-amber-500' : 'text-slate-300 hover:text-amber-500'} transition" title="Favoritar portal">
+                <i class="${isFavSite ? 'fa-solid' : 'fa-regular'} fa-star"></i>
               </button>
-            ` : ''}
-            ${article.subject ? `
-              <span class="inline-flex items-center gap-1 text-[10px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">
-                <i class="fa-solid fa-tag text-[9px]"></i> ${escapeHtml(article.subject)}
-              </span>
-            ` : ''}
-            ${article.isLive ? `
-              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                <i class="fa-solid fa-bolt text-[9px]"></i> Ao Vivo
-              </span>
-            ` : ''}
+            </div>
+
+            <!-- Título -->
+            <h3 class="text-sm font-extrabold text-slate-900 leading-snug line-clamp-2 hover:text-blue-600 transition">
+              <a href="javascript:void(0)" onclick="trackSiteClick('${article.siteId || ''}', '${escapeHtml(article.source)}', '${article.url}')">
+                ${escapeHtml(article.title)}
+              </a>
+            </h3>
+
+            <!-- Trecho -->
+            <p class="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed font-normal">
+              ${escapeHtml(article.snippet)}
+            </p>
           </div>
 
-          <div class="flex items-center justify-between gap-2">
-            <button 
-              onclick="trackSiteClick('${article.siteId || ''}', '${escapeHtml(article.source)}', '${article.url}')" 
-              class="w-full text-xs font-bold text-white bg-slate-900 hover:bg-blue-600 py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-xs"
-            >
-              <span>Ler Matéria Completa</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-            </button>
-            
-            <button 
-              onclick="copyNewsLink('${escapeHtml(article.title)}', '${article.url}')" 
-              class="p-2.5 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition shrink-0" 
-              title="Copiar / Compartilhar"
-            >
-              <i class="fa-regular fa-share-from-square text-xs"></i>
-            </button>
+          <!-- Tags e Botão de Ação -->
+          <div class="pt-4 mt-4 border-t border-slate-100 flex flex-col gap-2.5">
+            <div class="flex flex-wrap items-center gap-1.5">
+              ${article.politician ? `
+                <button onclick="quickSearchPolitico('${escapeHtml(article.politician)}')" class="inline-flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-2 py-0.5 rounded-full transition">
+                  <i class="fa-solid fa-user-tie text-[9px]"></i> ${escapeHtml(article.politician)}
+                </button>
+              ` : ''}
+              ${article.subject ? `
+                <span class="inline-flex items-center gap-1 text-[10px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">
+                  <i class="fa-solid fa-tag text-[9px]"></i> ${escapeHtml(article.subject)}
+                </span>
+              ` : ''}
+              ${article.isLive ? `
+                <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <i class="fa-solid fa-bolt text-[9px]"></i> Ao Vivo
+                </span>
+              ` : ''}
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <button 
+                onclick="trackSiteClick('${article.siteId || ''}', '${escapeHtml(article.source)}', '${article.url}')" 
+                class="w-full text-xs font-extrabold text-white bg-slate-900 hover:bg-blue-600 py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 shadow-xs"
+              >
+                <span>Ler Matéria no ${escapeHtml(shortSource)}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </button>
+              
+              <button 
+                onclick="copyNewsLink('${escapeHtml(article.title)}', '${article.url}')" 
+                class="p-2.5 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition shrink-0" 
+                title="Copiar link"
+              >
+                <i class="fa-regular fa-share-from-square text-xs"></i>
+              </button>
+            </div>
           </div>
+
         </div>
 
       </article>
@@ -1254,8 +1318,8 @@ function renderSitesRanking() {
               <span class="w-8 h-8 rounded-xl ${rankBadgeClass} text-xs flex items-center justify-center">
                 #${site.rank}
               </span>
-              <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center text-xl shrink-0 border border-slate-200">
-                ${site.logo || '🌐'}
+              <div class="h-10 px-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 shadow-xs">
+                <img src="${site.logoSvg || getLogoForSource(site.name)}" alt="${escapeHtml(site.name)}" class="h-5 max-w-[95px] object-contain">
               </div>
               <div>
                 <div class="flex items-center gap-1.5">

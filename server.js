@@ -72,6 +72,42 @@ function cleanTitle(title) {
   return title.trim();
 }
 
+function getLogoForSource(sourceName) {
+  const norm = normalizeStr(sourceName);
+  if (norm.includes('g1')) return '/assets/logos/g1.svg';
+  if (norm.includes('folha')) return '/assets/logos/folha.svg';
+  if (norm.includes('metropoles')) return '/assets/logos/metropoles.svg';
+  if (norm.includes('poder360')) return '/assets/logos/poder360.svg';
+  if (norm.includes('congresso')) return '/assets/logos/congresso.svg';
+  if (norm.includes('cnn')) return '/assets/logos/cnn.svg';
+  if (norm.includes('antagonista')) return '/assets/logos/antagonista.svg';
+  if (norm.includes('estadao')) return '/assets/logos/estadao.svg';
+  if (norm.includes('carta')) return '/assets/logos/cartacapital.svg';
+  if (norm.includes('jovem')) return '/assets/logos/jovempan.svg';
+  if (norm.includes('gazeta')) return '/assets/logos/gazetadopovo.svg';
+  if (norm.includes('conjur')) return '/assets/logos/conjur.svg';
+  if (norm.includes('brasil 247') || norm.includes('brasil247')) return '/assets/logos/brasil247.svg';
+  return '/assets/logos/g1.svg';
+}
+
+function getImageForArticle(db, title, politicianTerm) {
+  const fullText = normalizeStr(title + ' ' + (politicianTerm || ''));
+  const pol = (db.politicians || []).find(p => 
+    fullText.includes(normalizeStr(p.popularName)) || 
+    fullText.includes(normalizeStr(p.name))
+  );
+  if (pol && pol.avatar) {
+    return pol.avatar;
+  }
+  const defaultImages = [
+    'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80'
+  ];
+  return defaultImages[Math.floor(Math.random() * defaultImages.length)];
+}
+
 // Helper: encontrar ou registrar site no banco
 function findOrCreateSite(db, sourceName, fallbackUrl) {
   const normSource = normalizeStr(sourceName);
@@ -195,12 +231,16 @@ app.get('/api/search', async (req, res) => {
 
           // Identificar site no banco para possibilitar rastreio
           const site = findOrCreateSite(db, itemSource, item.link);
+          const sourceLogo = getLogoForSource(itemSource);
+          const imageUrl = getImageForArticle(db, rawTitle, politico);
 
           return {
             id: `live-${idx}-${Date.now()}`,
             title: rawTitle,
             snippet: item.contentSnippet || item.content || 'Acesse a matéria completa para ler os detalhes da cobertura jornalística.',
             source: itemSource,
+            sourceLogo: sourceLogo,
+            imageUrl: imageUrl,
             siteId: site.id,
             url: item.link,
             politician: politico.trim() || 'Política Geral',

@@ -176,6 +176,46 @@ async function runTests() {
     console.log(`   -> Status atualizado em tempo real para: ${toggleData.politician.popularName} -> AO VIVO`);
   });
 
+  // 10. NOVA VALIDAÇÃO: Fotos Reais e Oficiais dos Candidatos e Políticos
+  await test('Fotos Reais dos Candidatos: Validação de imagens oficiais salvas localmente', async () => {
+    const fs = require('fs');
+    const path = require('path');
+    const res = await fetch(`${BASE_URL}/api/rankings/politicians`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    
+    // Verificar se os políticos possuem avatares oficiais locais
+    const lula = data.top10.find(p => p.id === 'lula');
+    assert.ok(lula, 'Lula deve estar no ranking');
+    assert.ok(lula.avatar.startsWith('/assets/politicians/'), 'Avatar deve apontar para foto oficial local');
+    
+    // Verificar existência do arquivo físico no disco
+    const lulaPath = path.join(__dirname, '..', 'public', lula.avatar.replace(/^\//, ''));
+    assert.ok(fs.existsSync(lulaPath), `Arquivo físico da foto real deve existir: ${lulaPath}`);
+    const stats = fs.statSync(lulaPath);
+    assert.ok(stats.size > 5000, 'Arquivo da foto real deve conter imagem válida');
+    console.log(`   -> Foto real verificada: ${lula.name} (${lula.avatar}, tamanho: ${stats.size} bytes)`);
+  });
+
+  // 11. NOVA VALIDAÇÃO: Logos Oficiais de Origem (ex: G1) e Foto da Notícia
+  await test('Apresentação dos Resultados: Foto em destaque e Logo Oficial da Origem (ex: G1)', async () => {
+    const fs = require('fs');
+    const path = require('path');
+    const res = await fetch(`${BASE_URL}/api/search?politico=Lula&assunto=Economia`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    assert.ok(data.results.length > 0, 'Deve retornar notícias');
+    
+    const sample = data.results[0];
+    assert.ok(sample.sourceLogo, 'Matéria deve conter sourceLogo');
+    assert.ok(sample.imageUrl, 'Matéria deve conter imageUrl em destaque');
+    
+    // Verificar se o logo oficial existe no disco (ex: g1.svg, folha.svg)
+    const logoPath = path.join(__dirname, '..', 'public', sample.sourceLogo.replace(/^\//, ''));
+    assert.ok(fs.existsSync(logoPath), `Logo oficial vetorial deve existir: ${logoPath}`);
+    console.log(`   -> Origem enfatizada: ${sample.source} com Logo Oficial: ${sample.sourceLogo} e Foto: ${sample.imageUrl.substring(0, 45)}...`);
+  });
+
   console.log(`\n======================================================`);
   console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
   console.log(`======================================================\n`);
