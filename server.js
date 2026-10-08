@@ -9,9 +9,16 @@ const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(__dirname, 'data', 'database.json');
 
 const rssParser = new Parser({
-  timeout: 6000,
+  timeout: 8000,
   headers: {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+  },
+  customFields: {
+    item: [
+      ['media:content', 'mediaContent'],
+      ['enclosure', 'enclosure'],
+      ['content:encoded', 'contentEncoded']
+    ]
   }
 });
 
@@ -28,7 +35,7 @@ function readDb() {
     return JSON.parse(raw);
   } catch (err) {
     console.error('Erro ao ler banco de dados:', err);
-    return { politicians: [], sites: [], blogs: [], articles: [], monetization: {} };
+    return { politicians: [], sites: [], blogs: [], articles: [], monetization: {}, verifiedBroadcasts: [] };
   }
 }
 
@@ -40,6 +47,24 @@ function writeDb(data) {
     console.error('Erro ao salvar banco de dados:', err);
     return false;
   }
+}
+
+// Helper: extrair imagem real e autêntica de capas jornalísticas do item RSS
+function extractEditorialImage(item) {
+  if (!item) return null;
+  if (item.mediaContent && item.mediaContent['$'] && item.mediaContent['$'].url) {
+    return item.mediaContent['$'].url;
+  }
+  if (item.mediaContent && item.mediaContent.url) {
+    return item.mediaContent.url;
+  }
+  if (item.enclosure && item.enclosure.url) {
+    return item.enclosure.url;
+  }
+  const rawHtml = (item.content || item.contentEncoded || item.description || '');
+  const m = rawHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (m && m[1]) return m[1];
+  return null;
 }
 
 // Helper: normaliza strings para busca sem acentos
@@ -92,13 +117,12 @@ function getLogoForSource(sourceName) {
   return '/assets/logos/g1.svg';
 }
 
-function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) {
+function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto, editorialImage = null) {
   const normTitle = normalizeStr(title || '');
   const normSnippet = normalizeStr(snippet || '');
   const normTerm = normalizeStr(queryPolitico || '');
 
   // 1. Procurar políticos conhecidos no TÍTULO da matéria
-  // Ordenar por tamanho do nome decrescente para priorizar nomes compostos primeiro
   const allPoliticians = [...(db.politicians || [])].sort((a, b) => (b.popularName.length) - (a.popularName.length));
   
   const foundInTitle = [];
@@ -113,7 +137,6 @@ function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) 
   let matchedPolitician = null;
   if (foundInTitle.length > 0) {
     if (normTerm) {
-      // Se o usuário buscou por um político que está na matéria, priorizar o buscado
       matchedPolitician = foundInTitle.find(p => 
         normalizeStr(p.popularName).includes(normTerm) || normTerm.includes(normalizeStr(p.popularName))
       ) || foundInTitle[0];
@@ -122,7 +145,7 @@ function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) 
     }
   }
 
-  // 2. Se não encontrou no título, procurar no SNIPPET (resumo da notícia)
+  // 2. Se não encontrou no título, procurar no SNIPPET
   if (!matchedPolitician) {
     const foundInSnippet = [];
     for (const pol of allPoliticians) {
@@ -187,16 +210,21 @@ function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) 
     institutionalImage = '/assets/themes/eleicoes.jpg';
   }
 
-  // Decisão da Imagem de Capa Real:
-  // Se há um político citado como protagonista da notícia, a foto dele é a capa verdadeira!
-  let finalImageUrl = '/assets/themes/brasilia.jpg';
+  // PRIORIDADE MÁXIMA DA IMAGEM:
+  // Se a matéria veio com a foto real da reportagem (G1, Metrópoles, Gazeta do Povo), ela é sagrada e verídica!
+  let finalImageUrl = editorialImage || '/assets/themes/brasilia.jpg';
   let finalPoliticianName = queryPolitico ? queryPolitico.trim() : 'Cenário Político';
 
-  if (matchedPolitician && matchedPolitician.avatar) {
-    finalImageUrl = matchedPolitician.avatar;
+  if (!editorialImage) {
+    if (institutionalImage) {
+      finalImageUrl = institutionalImage;
+    } else if (matchedPolitician && matchedPolitician.avatar) {
+      finalImageUrl = matchedPolitician.avatar;
+    }
+  }
+
+  if (matchedPolitician) {
     finalPoliticianName = matchedPolitician.popularName;
-  } else if (institutionalImage) {
-    finalImageUrl = institutionalImage;
   }
 
   return {
@@ -204,6 +232,80 @@ function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) 
     politician: finalPoliticianName,
     subject: detectedSubject
   };
+}
+
+// Cache em memória para os feeds editoriais oficiais
+let liveFeedCache = {
+  articles: [],
+  lastFetch: 0
+};
+
+async function getAggregatedEditorialArticles(db) {
+  const now = Date.now();
+  if (liveFeedCache.articles.length > 0 && (now - liveFeedCache.lastFetch) < 90000) {
+    return liveFeedCache.articles;
+  }
+
+  const primaryFeeds = [
+    { url: 'https://g1.globo.com/rss/g1/politica/', defaultSource: 'G1 Política' },
+    { url: 'https://www.metropoles.com/brasil/politica-brasil/feed', defaultSource: 'Metrópoles' },
+    { url: 'https://www.gazetadopovo.com.br/feed/rss/politica.xml', defaultSource: 'Gazeta do Povo' }
+  ];
+
+  const aggregated = [];
+  const promises = primaryFeeds.map(async f => {
+    try {
+      const feed = await rssParser.parseURL(f.url);
+      if (feed && feed.items) {
+        return feed.items.map((item, idx) => {
+          let itemSource = f.defaultSource;
+          if (item.title && item.title.includes(' - ')) {
+            itemSource = extractSourceFromTitle(item.title);
+          }
+          const rawTitle = cleanTitle(item.title);
+          const rawDesc = item.content || item.contentEncoded || item.description || item.contentSnippet || '';
+          const cleanedSnippet = (item.contentSnippet || rawDesc.replace(/<[^>]+>/g, ' ').slice(0, 240) + '...').trim();
+          const pubDate = item.pubDate ? new Date(item.pubDate).toISOString() : new Date().toISOString();
+          const editorialImage = extractEditorialImage(item);
+          const sourceLogo = getLogoForSource(itemSource);
+          const site = findOrCreateSite(db, itemSource, item.link);
+          const resolved = resolveArticleDetails(db, rawTitle, cleanedSnippet, '', '', editorialImage);
+
+          return {
+            id: `editorial-${idx}-${normalizeStr(rawTitle).slice(0, 20)}`,
+            title: rawTitle,
+            snippet: cleanedSnippet,
+            source: itemSource,
+            sourceLogo: sourceLogo,
+            imageUrl: editorialImage || resolved.imageUrl,
+            siteId: site.id,
+            url: item.link,
+            politician: resolved.politician,
+            subject: resolved.subject,
+            publishedDate: pubDate,
+            isSponsored: false,
+            isLive: false
+          };
+        });
+      }
+    } catch (e) {
+      console.warn(`Aviso: Feed ${f.url} indisponível:`, e.message);
+      return [];
+    }
+  });
+
+  const settled = await Promise.allSettled(promises);
+  settled.forEach(s => {
+    if (s.status === 'fulfilled' && Array.isArray(s.value)) {
+      aggregated.push(...s.value);
+    }
+  });
+
+  if (aggregated.length > 0) {
+    liveFeedCache.articles = aggregated;
+    liveFeedCache.lastFetch = now;
+  }
+  return liveFeedCache.articles;
 }
 
 // Helper: encontrar ou registrar site no banco
@@ -251,7 +353,6 @@ app.get('/api/search', async (req, res) => {
       if (pol) {
         pol.searchCount = (pol.searchCount || 0) + 1;
       } else {
-        // Registra novo político se não existir
         const newId = normPolitico.replace(/[^a-z0-9]/g, '-');
         pol = {
           id: newId || `pol-${Date.now()}`,
@@ -259,7 +360,7 @@ app.get('/api/search', async (req, res) => {
           popularName: politico.trim(),
           party: 'Independente',
           office: 'Figura Pública / Político',
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80',
+          avatar: '/assets/themes/brasilia.jpg',
           searchCount: 1,
           trend: '+100%',
           trendDirection: 'up',
@@ -299,7 +400,6 @@ app.get('/api/search', async (req, res) => {
       results = results.filter(a => new Date(a.publishedDate).getTime() >= start);
     }
     if (dataFim) {
-      // Ajusta dataFim para o final do dia
       const end = new Date(dataFim + 'T23:59:59.999Z').getTime();
       results = results.filter(a => new Date(a.publishedDate).getTime() <= end);
     }
@@ -310,60 +410,99 @@ app.get('/api/search', async (req, res) => {
       results = results.filter(a => normalizeStr(a.source).includes(sNorm));
     }
 
-    // Busca ao vivo via Google News RSS (Brasil)
+    // Ingestão de feeds editoriais oficiais (G1 Política, Metrópoles, Gazeta do Povo)
     let liveResults = [];
-    const queryParts = [];
-    if (politico && politico.trim()) queryParts.push(`"${politico.trim()}"`);
-    if (assunto && assunto.trim()) queryParts.push(assunto.trim());
-    if (queryParts.length === 0) queryParts.push('política brasil');
+    const editorialArticles = await getAggregatedEditorialArticles(db);
 
-    const feedUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(queryParts.join(' '))}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
+    let filteredEditorial = [...editorialArticles];
+    if (politico && politico.trim()) {
+      const pNorm = normalizeStr(politico);
+      filteredEditorial = filteredEditorial.filter(a => 
+        normalizeStr(a.politician).includes(pNorm) || 
+        normalizeStr(a.title).includes(pNorm) || 
+        normalizeStr(a.snippet).includes(pNorm)
+      );
+    }
+    if (assunto && assunto.trim()) {
+      const aNorm = normalizeStr(assunto);
+      filteredEditorial = filteredEditorial.filter(a => 
+        normalizeStr(a.subject).includes(aNorm) || 
+        normalizeStr(a.title).includes(aNorm) || 
+        normalizeStr(a.snippet).includes(aNorm)
+      );
+    }
+    if (dataInicio) {
+      const start = new Date(dataInicio).getTime();
+      filteredEditorial = filteredEditorial.filter(a => new Date(a.publishedDate).getTime() >= start);
+    }
+    if (dataFim) {
+      const end = new Date(dataFim + 'T23:59:59.999Z').getTime();
+      filteredEditorial = filteredEditorial.filter(a => new Date(a.publishedDate).getTime() <= end);
+    }
+    if (source && source.trim()) {
+      const sNorm = normalizeStr(source);
+      filteredEditorial = filteredEditorial.filter(a => normalizeStr(a.source).includes(sNorm));
+    }
 
-    try {
-      const feed = await rssParser.parseURL(feedUrl);
-      if (feed && feed.items && feed.items.length > 0) {
-        liveResults = feed.items.slice(0, 25).map((item, idx) => {
-          const itemSource = extractSourceFromTitle(item.title);
-          const rawTitle = cleanTitle(item.title);
-          const pubDate = item.pubDate ? new Date(item.pubDate).toISOString() : new Date().toISOString();
+    liveResults.push(...filteredEditorial);
 
-          // Identificar site no banco para possibilitar rastreio
-          const site = findOrCreateSite(db, itemSource, item.link);
-          const sourceLogo = getLogoForSource(itemSource);
-          const rawSnippet = item.contentSnippet || item.content || 'Acesse a matéria completa para ler os detalhes da cobertura jornalística.';
+    // Complemento via Google News RSS se necessário
+    const needsComplement = (politico || assunto) && liveResults.length < 8;
+    if (needsComplement || (!politico && !assunto && liveResults.length < 12)) {
+      const queryParts = [];
+      if (politico && politico.trim()) queryParts.push(`"${politico.trim()}"`);
+      if (assunto && assunto.trim()) queryParts.push(assunto.trim());
+      if (queryParts.length === 0) queryParts.push('política brasil');
 
-          // Resolução ultra-precisa e verídica da Imagem de Capa Real, Político e Tema
-          const resolved = resolveArticleDetails(db, rawTitle, rawSnippet, politico, assunto);
+      const feedUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(queryParts.join(' '))}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
 
-          return {
-            id: `live-${idx}-${Date.now()}`,
-            title: rawTitle,
-            snippet: rawSnippet,
-            source: itemSource,
-            sourceLogo: sourceLogo,
-            imageUrl: resolved.imageUrl,
-            siteId: site.id,
-            url: item.link,
-            politician: resolved.politician,
-            subject: resolved.subject,
-            publishedDate: pubDate,
-            isSponsored: false,
-            isLive: true
-          };
-        });
+      try {
+        const feed = await rssParser.parseURL(feedUrl);
+        if (feed && feed.items && feed.items.length > 0) {
+          const googleItems = feed.items.slice(0, 20).map((item, idx) => {
+            const itemSource = extractSourceFromTitle(item.title);
+            const rawTitle = cleanTitle(item.title);
+            const pubDate = item.pubDate ? new Date(item.pubDate).toISOString() : new Date().toISOString();
 
-        // Filtrar notícias ao vivo pelo raio da data se especificado
-        if (dataInicio) {
-          const start = new Date(dataInicio).getTime();
-          liveResults = liveResults.filter(a => new Date(a.publishedDate).getTime() >= start);
+            const site = findOrCreateSite(db, itemSource, item.link);
+            const sourceLogo = getLogoForSource(itemSource);
+            const rawSnippet = item.contentSnippet || item.content || 'Acesse a matéria completa para ler os detalhes da cobertura jornalística.';
+
+            const normT = normalizeStr(rawTitle);
+            const matchingEd = editorialArticles.find(e => 
+              normalizeStr(e.title).includes(normT.slice(0, 25)) || 
+              normT.includes(normalizeStr(e.title).slice(0, 25))
+            );
+            const editorialPhoto = matchingEd ? matchingEd.imageUrl : extractEditorialImage(item);
+            const resolved = resolveArticleDetails(db, rawTitle, rawSnippet, politico, assunto, editorialPhoto);
+
+            return {
+              id: `live-${idx}-${Date.now()}`,
+              title: rawTitle,
+              snippet: rawSnippet,
+              source: itemSource,
+              sourceLogo: sourceLogo,
+              imageUrl: resolved.imageUrl,
+              siteId: site.id,
+              url: item.link,
+              politician: resolved.politician,
+              subject: resolved.subject,
+              publishedDate: pubDate,
+              isSponsored: false,
+              isLive: true
+            };
+          });
+
+          for (const gItem of googleItems) {
+            if (dataInicio && new Date(gItem.publishedDate).getTime() < new Date(dataInicio).getTime()) continue;
+            if (dataFim && new Date(gItem.publishedDate).getTime() > new Date(dataFim + 'T23:59:59.999Z').getTime()) continue;
+            if (source && !normalizeStr(gItem.source).includes(normalizeStr(source))) continue;
+            liveResults.push(gItem);
+          }
         }
-        if (dataFim) {
-          const end = new Date(dataFim + 'T23:59:59.999Z').getTime();
-          liveResults = liveResults.filter(a => new Date(a.publishedDate).getTime() <= end);
-        }
+      } catch (rssError) {
+        console.warn('Aviso: Consulta ao feed RSS externo indisponível:', rssError.message);
       }
-    } catch (rssError) {
-      console.warn('Aviso: Consulta ao feed RSS externo indisponível ou limitada. Usando banco interno:', rssError.message);
     }
 
     // Combina matérias locais + ao vivo, removendo títulos duplicados
@@ -913,42 +1052,33 @@ app.post('/api/users/favorites/blog', (req, res) => {
   }
 });
 
-// 8. RADAR SOCIAL: STATUS DOS POLÍTICOS EM TEMPO REAL
+// 8. RADAR SOCIAL: TRANSMISSÕES AO VIVO VERIFICADAS EM TEMPO REAL
 app.get('/api/politicians/social-status', (req, res) => {
   try {
     const db = readDb();
-    const list = (db.politicians || []).map(p => ({
-      id: p.id,
-      name: p.name,
-      popularName: p.popularName,
-      party: p.party,
-      office: p.office,
-      avatar: p.avatar,
-      socialStatus: p.socialStatus || {
-        isLive: false,
-        status: 'online',
-        statusLabel: 'ATIVO',
-        lastActivity: 'Hoje',
-        recentPost: 'Agenda pública parlamentar.',
-        followersTotal: '100K+'
-      }
-    }));
+    const verifiedStreams = db.verifiedBroadcasts || [];
 
-    list.sort((a, b) => {
-      const aLive = a.socialStatus?.isLive ? 1 : 0;
-      const bLive = b.socialStatus?.isLive ? 1 : 0;
-      if (aLive !== bLive) return bLive - aLive;
-      return 0;
-    });
+    // Filtra exclusivamente políticos que estejam EFETIVAMENTE transmitindo ao vivo
+    // "se não tiver não aparecer, não precisa aparecer politicos offline"
+    const livePoliticians = (db.politicians || [])
+      .filter(p => p.socialStatus && p.socialStatus.isLive)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        popularName: p.popularName,
+        party: p.party,
+        office: p.office,
+        avatar: p.avatar,
+        socialStatus: p.socialStatus
+      }));
 
-    const liveCount = list.filter(p => p.socialStatus?.isLive).length;
-    const onlineCount = list.filter(p => p.socialStatus?.status === 'online').length;
+    const totalLive = verifiedStreams.length + livePoliticians.length;
 
     res.json({
       success: true,
-      totalLive: liveCount,
-      totalOnline: onlineCount,
-      politicians: list
+      totalLive,
+      verifiedStreams,
+      politicians: livePoliticians
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Erro ao buscar status social.' });

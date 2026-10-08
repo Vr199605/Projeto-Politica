@@ -7,19 +7,16 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4828,
+      "searchCount": 4830,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
       "socialStatus": {
-        "isLive": true,
-        "livePlatform": "YouTube",
-        "liveTitle": "Pronunciamento Oficial: Pacote Econômico e Relações Internacionais",
-        "liveUrl": "https://www.youtube.com/@lulaoficial",
-        "status": "live",
-        "statusLabel": "AO VIVO NO YOUTUBE",
-        "lastActivity": "Transmitindo agora",
-        "recentPost": "Novo marco de investimentos sustentáveis sancionado em Brasília.",
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO INSTAGRAM / YOUTUBE",
+        "lastActivity": "Há 1h",
+        "recentPost": "Pronunciamento sobre relações internacionais e novos acordos bilaterais.",
         "followersTotal": "31.4M",
         "profiles": {
           "twitter": "https://x.com/LulaOficial",
@@ -42,14 +39,11 @@
       "trendDirection": "up",
       "bio": "38º Presidente do Brasil, líder da oposição conservadora.",
       "socialStatus": {
-        "isLive": true,
-        "livePlatform": "Instagram",
-        "liveTitle": "Transmissão Direta: Bastidores da Semana e Encontro com Lideranças",
-        "liveUrl": "https://www.instagram.com/jairmessiasbolsonaro/",
-        "status": "live",
-        "statusLabel": "AO VIVO NO INSTAGRAM",
-        "lastActivity": "Transmitindo agora",
-        "recentPost": "Conversa com apoiadores sobre as diretrizes das eleições.",
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO INSTAGRAM",
+        "lastActivity": "Há 2h",
+        "recentPost": "Conversa com apoiadores sobre as diretrizes eleitorais e agenda partidária.",
         "followersTotal": "28.9M",
         "profiles": {
           "twitter": "https://x.com/jairbolsonaro",
@@ -67,14 +61,14 @@
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3553,
+      "searchCount": 3554,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
       "socialStatus": {
-        "isLive": true,
-        "status": "live",
-        "statusLabel": "AO VIVO NO YouTube",
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE",
         "lastActivity": "Atualizado agora",
         "recentPost": "Vistoria técnica nas obras do Rodoanel Norte e novos leilões rodoviários.",
         "followersTotal": "4.2M",
@@ -85,7 +79,7 @@
         },
         "livePlatform": "YouTube",
         "liveTitle": "Transmissão Especial de SP: Entrevista Coletiva",
-        "liveUrl": "https://youtube.com"
+        "liveUrl": "https://youtube.com/@tarcisiogdf/live"
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg/330px-Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg"
     },
@@ -201,14 +195,11 @@
       "trendDirection": "up",
       "bio": "Deputado federal mais votado do Brasil nas eleições de 2022.",
       "socialStatus": {
-        "isLive": true,
-        "livePlatform": "TikTok",
-        "liveTitle": "Bastidores ao Vivo: Votações da Comissão e Pronunciamentos",
-        "liveUrl": "https://www.tiktok.com/@nikolasferreiradm",
-        "status": "live",
-        "statusLabel": "AO VIVO NO TIKTOK",
-        "lastActivity": "Transmitindo agora",
-        "recentPost": "Live direto do plenário com comentários sobre os destaques da semana.",
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ATIVO NO TIKTOK / INSTAGRAM",
+        "lastActivity": "Há 40 min",
+        "recentPost": "Pronunciamento na comissão temática e destaques parlamentares.",
         "followersTotal": "11.2M",
         "profiles": {
           "twitter": "https://x.com/nikolas_dm",
@@ -583,7 +574,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5429,
+      "clicks": 5430,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -971,7 +962,7 @@
       "publishedDate": "2026-09-28T14:30:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/g1.svg",
-      "imageUrl": "/assets/politicians/haddad.jpg"
+      "imageUrl": "/assets/themes/fazenda.jpg"
     },
     {
       "id": "art-2",
@@ -986,7 +977,7 @@
       "publishedDate": "2026-09-25T11:15:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/folha.svg",
-      "imageUrl": "/assets/politicians/lula.jpg"
+      "imageUrl": "/assets/themes/planalto.jpg"
     },
     {
       "id": "art-3",
@@ -1001,7 +992,7 @@
       "publishedDate": "2026-09-22T09:40:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/metropoles.svg",
-      "imageUrl": "/assets/politicians/tarcisio.jpg"
+      "imageUrl": "/assets/themes/brasilia.jpg"
     },
     {
       "id": "art-4",
@@ -1031,7 +1022,7 @@
       "publishedDate": "2026-09-15T18:00:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/poder360.svg",
-      "imageUrl": "/assets/politicians/lira.jpg"
+      "imageUrl": "/assets/themes/camara.jpg"
     },
     {
       "id": "art-6",
@@ -1046,7 +1037,7 @@
       "publishedDate": "2026-09-10T13:45:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/antagonista.svg",
-      "imageUrl": "/assets/politicians/bolsonaro.jpg"
+      "imageUrl": "/assets/themes/eleicoes.jpg"
     },
     {
       "id": "art-7",
@@ -1061,7 +1052,7 @@
       "publishedDate": "2026-09-05T10:10:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/cnn.svg",
-      "imageUrl": "/assets/politicians/tebet.jpg"
+      "imageUrl": "/assets/themes/fazenda.jpg"
     },
     {
       "id": "art-8",
@@ -1076,7 +1067,7 @@
       "publishedDate": "2026-08-29T15:50:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/cartacapital.svg",
-      "imageUrl": "/assets/politicians/marina.jpg"
+      "imageUrl": "/assets/themes/planalto.jpg"
     },
     {
       "id": "art-9",
@@ -1091,7 +1082,7 @@
       "publishedDate": "2026-08-20T17:30:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/gazetadopovo.svg",
-      "imageUrl": "/assets/politicians/nikolas.jpg"
+      "imageUrl": "/assets/themes/camara.jpg"
     },
     {
       "id": "art-10",
@@ -1106,7 +1097,7 @@
       "publishedDate": "2026-08-15T12:00:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/brasil247.svg",
-      "imageUrl": "/assets/politicians/boulos.jpg"
+      "imageUrl": "/assets/themes/camara.jpg"
     },
     {
       "id": "art-11",
@@ -1121,7 +1112,7 @@
       "publishedDate": "2026-08-01T14:10:00Z",
       "isSponsored": false,
       "sourceLogo": "/assets/logos/poder360.svg",
-      "imageUrl": "/assets/politicians/ciro.png"
+      "imageUrl": "/assets/themes/fazenda.jpg"
     },
     {
       "id": "art-12",
@@ -1359,11 +1350,25 @@
         "blog-congresso-foco"
       ],
       "createdAt": "2026-10-08T16:59:44.472Z"
+    },
+    {
+      "id": "usr-1791493023248",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791493023241@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-08T20:57:03.248Z"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 8350,
+    "currentTotal": 9100,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1410,6 +1415,15 @@
         "message": "Apoio à transparência em tempo real."
       },
       {
+        "id": "don-1791493024464",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-08",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
         "id": "don-4",
         "name": "Dra. Beatriz Albuquerque",
         "amount": 600,
@@ -1440,15 +1454,69 @@
         "date": "2026-10-03",
         "badge": "Apoiador Bronze",
         "message": "Uso todo dia para minhas pesquisas."
-      },
-      {
-        "id": "don-8",
-        "name": "Prof. Eduardo Meirelles",
-        "amount": 350,
-        "date": "2026-10-02",
-        "badge": "Apoiador Bronze",
-        "message": "Material de estudo excelente para alunos."
       }
     ]
-  }
+  },
+  "verifiedBroadcasts": [
+    {
+      "id": "tv-senado",
+      "channel": "TV Senado Oficial",
+      "institution": "Senado Federal",
+      "role": "Poder Legislativo",
+      "platform": "YouTube",
+      "platformLogo": "/assets/logos/youtube-live.svg",
+      "liveUrl": "https://www.youtube.com/@senadofederal/live",
+      "description": "Transmissão oficial ao vivo das sessões deliberativas de votação e comissões permanentes do Senado Federal.",
+      "badge": "Canal Oficial 24h",
+      "isLive": true
+    },
+    {
+      "id": "tv-camara",
+      "channel": "TV Câmara dos Deputados",
+      "institution": "Câmara dos Deputados",
+      "role": "Poder Legislativo",
+      "platform": "YouTube",
+      "platformLogo": "/assets/logos/youtube-live.svg",
+      "liveUrl": "https://www.youtube.com/@camaradosdeputadosoficial/live",
+      "description": "Votações ao vivo de PECs, projetos de lei e sessões plenárias no Plenário Ulysses Guimarães.",
+      "badge": "Canal Oficial 24h",
+      "isLive": true
+    },
+    {
+      "id": "stf-oficial",
+      "channel": "STF Oficial (TV Justiça)",
+      "institution": "Supremo Tribunal Federal",
+      "role": "Poder Judiciário",
+      "platform": "YouTube",
+      "platformLogo": "/assets/logos/youtube-live.svg",
+      "liveUrl": "https://www.youtube.com/@STF_oficial/live",
+      "description": "Julgamentos em tempo real direto da Suprema Corte em Brasília.",
+      "badge": "STF Oficial",
+      "isLive": true
+    },
+    {
+      "id": "canal-gov",
+      "channel": "Canal Gov / Palácio do Planalto",
+      "institution": "Presidência da República",
+      "role": "Poder Executivo",
+      "platform": "YouTube",
+      "platformLogo": "/assets/logos/youtube-live.svg",
+      "liveUrl": "https://www.youtube.com/@canalgov/live",
+      "description": "Atos do Presidente da República, cerimônias de sanção e coletivas ministeriais ao vivo.",
+      "badge": "Palácio do Planalto",
+      "isLive": true
+    },
+    {
+      "id": "tv-brasil",
+      "channel": "TV Brasil Ao Vivo",
+      "institution": "Empresa Brasil de Comunicação (EBC)",
+      "role": "Jornalismo Político",
+      "platform": "YouTube",
+      "platformLogo": "/assets/logos/youtube-live.svg",
+      "liveUrl": "https://www.youtube.com/@tvbrasil/live",
+      "description": "Cobertura jornalística política 24 horas e programas de debate nacional ao vivo.",
+      "badge": "EBC 24 Horas",
+      "isLive": true
+    }
+  ]
 }

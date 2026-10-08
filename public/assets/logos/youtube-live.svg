@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <rect width="160" height="40" rx="6" fill="#0f172a"/>
+  <!-- YouTube Icon -->
+  <path d="M42 20c0-2.8-.2-5.5-.6-7.3-.4-1.7-1.7-3-3.4-3.4C36.2 8.8 28 8.8 28 8.8s-8.2 0-10 .5c-1.7.4-3 1.7-3.4 3.4-.4 1.8-.6 4.5-.6 7.3s.2 5.5.6 7.3c.4 1.7 1.7 3 3.4 3.4 1.8.5 10 .5 10 .5s8.2 0 10-.5c1.7-.4 3-1.7 3.4-3.4.4-1.8.6-4.5.6-7.3z" fill="#ff0000"/>
+  <polygon points="25,15 33,20 25,25" fill="#ffffff"/>
+  <!-- Text LIVE -->
+  <circle cx="58" cy="20" r="4" fill="#ef4444"/>
+  <text x="68" y="24" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="13" letter-spacing="1">AO VIVO</text>
+</svg>

@@ -144,18 +144,18 @@ async function runTests() {
     console.log(`   -> Favoritos verificados: Político ${listData.favoritePoliticians[0].name}, Blog ${listData.favoriteBlogs[0].name}`);
   });
 
-  // 8. NOVA MELHORIA: Radar Social - Saber se os políticos estão online ou transmitindo live
-  await test('Melhoria 5: Radar Social de Políticos (Online e Lives em tempo real)', async () => {
+  // 8. NOVA MELHORIA: Radar Social - Saber se os canais oficiais e políticos estão transmitindo live
+  await test('Melhoria 5: Radar Social de Transmissões Verificadas e Lives Oficiais', async () => {
     const res = await fetch(`${BASE_URL}/api/politicians/social-status`);
     const data = await res.json();
     assert.strictEqual(data.success, true);
-    assert.ok(Array.isArray(data.politicians), 'Deve retornar lista de políticos com status');
-    assert.ok(data.totalLive >= 0, 'Deve contabilizar total de lives ativas');
-    
-    const livePol = data.politicians.find(p => p.socialStatus && p.socialStatus.isLive);
-    assert.ok(livePol, 'Deve haver político com transmissão ao vivo configurada');
-    assert.ok(livePol.socialStatus.livePlatform, 'Político ao vivo deve ter plataforma (YouTube, Instagram, TikTok)');
-    console.log(`   -> Político ao vivo detectado: ${livePol.popularName} no ${livePol.socialStatus.livePlatform} (${livePol.socialStatus.liveTitle})`);
+    assert.ok(data.totalLive >= 0, 'Deve contabilizar total de transmissões ativas');
+    assert.ok(Array.isArray(data.verifiedStreams), 'Deve retornar lista de canais verificados');
+    assert.ok(data.verifiedStreams.length >= 3, 'Deve haver transmissões oficiais (TV Senado, TV Câmara, STF, etc.)');
+    const tvSenado = data.verifiedStreams.find(s => s.id === 'tv-senado');
+    assert.ok(tvSenado, 'TV Senado deve estar entre os canais oficiais');
+    assert.ok(tvSenado.liveUrl.includes('youtube.com'), 'Canal deve conter link direto para live');
+    console.log(`   -> Transmissões oficiais verificadas ativas: ${data.verifiedStreams.length} canais (Ex: ${tvSenado.channel})`);
   });
 
   // 9. NOVA MELHORIA: Alternar status de live de político em tempo real
@@ -167,13 +167,20 @@ async function runTests() {
         isLive: true,
         livePlatform: 'YouTube',
         liveTitle: 'Transmissão Especial de SP: Entrevista Coletiva',
-        liveUrl: 'https://youtube.com'
+        liveUrl: 'https://youtube.com/@tarcisiogdf/live'
       })
     });
     const toggleData = await toggleRes.json();
     assert.strictEqual(toggleData.success, true);
     assert.strictEqual(toggleData.politician.socialStatus.isLive, true);
-    console.log(`   -> Status atualizado em tempo real para: ${toggleData.politician.popularName} -> AO VIVO`);
+
+    // Reverter para manter banco verídico
+    await fetch(`${BASE_URL}/api/politicians/tarcisio/social-status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ isLive: false })
+    });
+    console.log(`   -> Status atualizado em tempo real para: ${toggleData.politician.popularName} -> AO VIVO e revertido`);
   });
 
   // 10. NOVA VALIDAÇÃO: Fotos Reais e Oficiais dos Candidatos e Políticos

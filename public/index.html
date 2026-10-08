@@ -116,54 +116,108 @@
   <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 lg:px-6 py-4 space-y-4">
 
     <!-- ======================================================== -->
-    <!-- LINHA 2: TOP 5 POLITICOS MAIS BUSCADOS                  -->
+    <!-- LINHA 2: TOP 5 POLITICOS MAIS BUSCADOS (RETRÁTIL COM DISCLAIMER NO HOVER) -->
     <!-- ======================================================== -->
-    <section class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3 sm:p-4">
-      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
-        <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black">
+    <section 
+      id="top5-politicians-section" 
+      class="bg-white rounded-2xl border border-slate-200/90 shadow-xs transition-all duration-300 overflow-hidden"
+      onmouseenter="expandTop5Section()"
+      onmouseleave="retractTop5Section()"
+    >
+      <!-- BARRA DE SUMÁRIO / CABEÇALHO COMPACTO (Sempre Visível) -->
+      <div 
+        id="top5-header-summary"
+        onclick="toggleTop5SectionManual()"
+        class="px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-50/70 hover:bg-slate-50 transition border-b border-transparent"
+        title="Passe o mouse ou clique para abrir a auditoria e ver os Top 5 políticos"
+      >
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black shadow-xs">
             🏆
           </span>
-          <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
-            TOP 5 POLÍTICOS MAIS BUSCADOS
+          <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+            <span>TOP 5 POLÍTICOS MAIS BUSCADOS</span>
+            <span class="text-[9px] bg-amber-100 text-amber-900 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wider hidden sm:inline">Auditado</span>
           </h2>
-          <span class="text-[10px] text-slate-500 font-medium hidden sm:inline">• Atualizado em tempo real</span>
+
+          <!-- Mini-resumo compacto quando retrátil -->
+          <div id="top5-compact-pills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <!-- Renderizado dinamicamente via app.js (#1 Lula, #2 Bolsonaro, etc.) -->
+          </div>
         </div>
-        <button onclick="openAllPoliticiansModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-          <span>Ver Ranking Geral (Top 10)</span>
-          <i class="fa-solid fa-chevron-right text-[9px]"></i>
-        </button>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <span id="top5-hover-hint" class="text-[11px] font-bold text-slate-500 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-blue-600"></i>
+            <span class="hidden md:inline">Passe o mouse para abrir auditoria</span>
+            <i id="top5-chevron-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+          </span>
+          <button onclick="event.stopPropagation(); openAllPoliticiansModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 ml-1 hidden sm:inline">
+            Top 10 ↗
+          </button>
+        </div>
       </div>
 
-      <!-- Grid com os Top 5 Políticos -->
-      <div id="top5-politicians-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
-        <!-- Renderizado dinamicamente com fotos reais e badges de Live -->
+      <!-- ÁREA RETRÁTIL EXPANSÍVEL (DISCLAIMER + CARDS DOS CANDIDATOS) -->
+      <div 
+        id="top5-expandable-content" 
+        class="max-h-0 opacity-0 overflow-hidden transition-all duration-400 ease-in-out px-3 sm:px-4 pb-0"
+      >
+        <!-- DISCLAIMER AUDITADO NO TOPO -->
+        <div class="pt-3 pb-2.5">
+          <div class="bg-linear-to-r from-amber-50 via-orange-50 to-amber-50 border border-amber-200/90 rounded-xl p-3 flex items-start gap-3 shadow-xs">
+            <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-700 flex items-center justify-center shrink-0 mt-0.5 font-black text-sm">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="text-xs space-y-0.5">
+              <div class="flex items-center gap-2">
+                <h4 class="font-black text-slate-900 uppercase tracking-wide text-[11px]">
+                  DISCLAIMER & AUDITORIA DE RELEVÂNCIA POLÍTICA
+                </h4>
+                <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.2 rounded">100% Orgânico</span>
+              </div>
+              <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+                Este ranking reflete exclusivamente o volume consolidado de buscas e consultas em tempo real realizadas pelos usuários do portal, cruzado com menções na imprensa oficial e indexação diária. O Radar Político não comercializa posições nem aceita interferência editorial neste ranking.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid com os Top 5 Políticos com fotos reais -->
+        <div id="top5-politicians-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 pb-3.5">
+          <!-- Renderizado dinamicamente via app.js -->
+        </div>
       </div>
     </section>
 
     <!-- ======================================================== -->
-    <!-- LINHA 3: TOP 5 SITES DE NOTICIAS MAIS ACESSADOS         -->
+    <!-- LINHA 3: TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS (FILETINHO DE AÇÕES) -->
     <!-- ======================================================== -->
-    <section class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3 sm:p-4">
-      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
-        <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-slate-900 text-white flex items-center justify-center text-xs font-black">
-            🌐
+    <section class="bg-white rounded-xl border border-slate-200/90 shadow-xs px-3 py-2">
+      <div class="flex items-center justify-between gap-3 overflow-hidden">
+        <!-- Título do Filetinho -->
+        <div class="flex items-center gap-1.5 shrink-0 pr-3 border-r border-slate-200">
+          <span class="w-5 h-5 rounded bg-slate-900 text-white flex items-center justify-center text-[10px] font-black">
+            <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i>
           </span>
-          <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
-            TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS
+          <h2 class="text-[11px] font-black text-slate-900 uppercase tracking-wider hidden sm:inline">
+            TOP SITES
           </h2>
-          <span class="text-[10px] text-slate-500 font-medium hidden sm:inline">• Fontes jornalísticas oficiais com logos</span>
+          <span class="text-[9px] bg-slate-100 text-slate-700 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wide">
+            LÍDERES
+          </span>
         </div>
-        <button onclick="openAllSitesModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-          <span>Ver Ranking Geral (Top 10)</span>
+
+        <!-- Filetinho Horizontal: Somente o Nome e o Link (Sem números de acesso) -->
+        <div id="top5-sites-ticker" class="flex-1 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+          <!-- Renderizado dinamicamente com logos e links diretos -->
+        </div>
+
+        <!-- Botão para Ranking Completo -->
+        <button onclick="openAllSitesModal()" class="shrink-0 text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 pl-2 border-l border-slate-200">
+          <span class="hidden md:inline">Ranking</span>
           <i class="fa-solid fa-chevron-right text-[9px]"></i>
         </button>
-      </div>
-
-      <!-- Grid com os Top 5 Sites com Logos SVG -->
-      <div id="top5-sites-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
-        <!-- Renderizado dinamicamente via app.js -->
       </div>
     </section>
 
@@ -368,48 +422,44 @@
         </div>
 
         <!-- ==================================================== -->
-        <!-- VIEW 2: POLÍTICO ONLINE & LIVES                      -->
+        <!-- VIEW 2: TRANSMISSÕES OFICIAIS & POLÍTICA AO VIVO     -->
         <!-- ==================================================== -->
         <div id="view-online" class="hidden space-y-4">
           
           <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div class="inline-flex items-center gap-1.5 text-xs font-black text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200 mb-1.5">
-                <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> RADAR DE TRANSMISSÕES EM TEMPO REAL
+                <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> SINAIS AO VIVO 100% VERIFICADOS EM TEMPO REAL
               </div>
-              <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Políticos Ao Vivo nas Plataformas</h2>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Transmissões Oficiais & Políticos Ao Vivo</h2>
               <p class="text-xs text-slate-600 mt-0.5">
-                Monitorando canais oficiais do YouTube, Instagram, TikTok e X dos políticos brasileiros.
+                Acompanhe o sinal ao vivo das sessões do Congresso Nacional, STF e Planalto. Sem perfis offline e sem transmissões fictícias.
               </p>
             </div>
 
             <div class="flex items-center gap-2 self-start sm:self-center">
               <div class="bg-rose-50 border border-rose-200 px-3.5 py-1.5 rounded-xl text-center">
-                <span class="block text-[9px] uppercase font-bold text-rose-700">Lives Detectadas</span>
-                <span id="social-live-count-stat" class="text-lg font-black text-rose-800">0</span>
+                <span class="block text-[9px] uppercase font-bold text-rose-700">Canais Ativos</span>
+                <span id="social-live-count-stat" class="text-lg font-black text-rose-800">5</span>
               </div>
-              <button onclick="loadSocialStatus(true)" class="p-2.5 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-700 transition" title="Atualizar agora">
+              <button onclick="loadSocialStatus(true)" class="p-2.5 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-700 transition" title="Atualizar transmissões agora">
                 <i class="fa-solid fa-rotate-right text-xs"></i>
               </button>
             </div>
           </div>
 
-          <!-- Filtros de Status -->
-          <div class="flex items-center justify-between bg-white px-3.5 py-2 rounded-xl border border-slate-200/90 text-xs font-bold">
-            <div class="flex items-center gap-1.5">
-              <span>Filtrar:</span>
-              <button onclick="filterSocialList('all')" id="social-filter-all" class="social-tab-btn active px-2.5 py-1 rounded-lg bg-slate-900 text-white">Todos</button>
-              <button onclick="filterSocialList('live')" id="social-filter-live" class="social-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
-                <span class="text-rose-500 font-black">🔴</span> Ao Vivo
-              </button>
-              <button onclick="filterSocialList('online')" id="social-filter-online" class="social-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
-                <span class="text-emerald-500 font-black">🟢</span> Ativos Hoje
-              </button>
+          <!-- Banner de Verificação e Acesso Direto -->
+          <div class="bg-slate-900 text-white p-3 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs font-bold gap-2 border border-slate-800 shadow-xs">
+            <div class="flex items-center gap-2">
+              <span class="text-rose-500 text-sm">🔴</span>
+              <span>Clique na logo da transmissão para assistir diretamente ao vivo no canal oficial.</span>
             </div>
-            <span class="text-[11px] text-slate-500 hidden sm:inline">Clique no link para assistir à transmissão</span>
+            <span class="text-[10px] text-emerald-400 font-extrabold shrink-0 flex items-center gap-1 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-700/50">
+              <i class="fa-solid fa-circle-check"></i> Transmissões Verídicas
+            </span>
           </div>
 
-          <!-- Grid dos Políticos em Live e Online -->
+          <!-- Grid das Transmissões Ao Vivo Verificadas -->
           <div id="social-status-detailed-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
             <!-- Renderizado dinamicamente via app.js -->
           </div>

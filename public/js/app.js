@@ -342,48 +342,125 @@ async function loadPoliticiansRanking() {
   }
 }
 
+// ========================================================
+// 3. LINHA 2: TOP 5 POLÍTICOS MAIS BUSCADOS (RETRÁTIL COM AUDITORIA)
+// ========================================================
+let isTop5ManuallyOpened = false;
+
+function expandTop5Section() {
+  const content = document.getElementById('top5-expandable-content');
+  const chevron = document.getElementById('top5-chevron-icon');
+  const hint = document.getElementById('top5-hover-hint');
+  if (!content) return;
+  content.style.maxHeight = '700px';
+  content.classList.remove('opacity-0');
+  content.classList.add('opacity-100');
+  if (chevron) chevron.style.transform = 'rotate(180deg)';
+  if (hint) {
+    const span = hint.querySelector('span');
+    if (span) span.textContent = 'Auditoria aberta';
+  }
+}
+
+function retractTop5Section() {
+  if (isTop5ManuallyOpened) return;
+  const content = document.getElementById('top5-expandable-content');
+  const chevron = document.getElementById('top5-chevron-icon');
+  const hint = document.getElementById('top5-hover-hint');
+  if (!content) return;
+  content.style.maxHeight = '0px';
+  content.classList.remove('opacity-100');
+  content.classList.add('opacity-0');
+  if (chevron) chevron.style.transform = 'rotate(0deg)';
+  if (hint) {
+    const span = hint.querySelector('span');
+    if (span) span.textContent = 'Passe o mouse para abrir auditoria';
+  }
+}
+
+function toggleTop5SectionManual() {
+  isTop5ManuallyOpened = !isTop5ManuallyOpened;
+  if (isTop5ManuallyOpened) {
+    expandTop5Section();
+  } else {
+    const content = document.getElementById('top5-expandable-content');
+    const chevron = document.getElementById('top5-chevron-icon');
+    const hint = document.getElementById('top5-hover-hint');
+    if (!content) return;
+    content.style.maxHeight = '0px';
+    content.classList.remove('opacity-100');
+    content.classList.add('opacity-0');
+    if (chevron) chevron.style.transform = 'rotate(0deg)';
+    if (hint) {
+      const span = hint.querySelector('span');
+      if (span) span.textContent = 'Passe o mouse para abrir auditoria';
+    }
+  }
+}
+
+async function loadPoliticiansRanking() {
+  try {
+    const res = await fetch('/api/rankings/politicians');
+    const data = await res.json();
+    if (data.success) {
+      state.politicians = data.top10 || [];
+      renderTop5Politicians();
+    }
+  } catch (err) {
+    console.error('Erro ao buscar ranking de políticos:', err);
+  }
+}
+
 function renderTop5Politicians() {
   const container = document.getElementById('top5-politicians-container');
+  const compactContainer = document.getElementById('top5-compact-pills');
   if (!container) return;
 
   const top5 = state.politicians.slice(0, 5);
 
+  // 1. Renderiza mini-pills para a barra compacta retrátil
+  if (compactContainer) {
+    compactContainer.innerHTML = top5.map((pol, idx) => `
+      <span 
+        onclick="event.stopPropagation(); quickSearchPolitico('${pol.popularName || pol.name}')"
+        class="inline-flex items-center gap-1.5 bg-white hover:bg-amber-100/80 border border-slate-200 hover:border-amber-400 rounded-full py-0.5 px-2 text-[10px] font-bold text-slate-800 transition cursor-pointer shrink-0 shadow-2xs"
+        title="Clique para filtrar notícias de ${pol.popularName}"
+      >
+        <span class="text-amber-600 font-black">#${idx + 1}</span>
+        <img src="${pol.avatar || '/assets/themes/brasilia.jpg'}" alt="${pol.popularName}" class="w-3.5 h-3.5 rounded-full object-cover">
+        <span>${pol.popularName}</span>
+      </span>
+    `).join('');
+  }
+
+  // 2. Renderiza os cards completos na área expandida (com fotos reais oficiais e sem fake live)
   container.innerHTML = top5.map((pol, index) => {
-    const isLive = pol.socialStatus?.isLive;
     const rankNum = index + 1;
-    const rankBadgeClass = rankNum === 1 ? 'bg-amber-500 text-slate-950 font-black' :
+    const rankBadgeClass = rankNum === 1 ? 'bg-amber-500 text-slate-950 font-black shadow-2xs' :
                            rankNum === 2 ? 'bg-slate-300 text-slate-900 font-bold' :
                            rankNum === 3 ? 'bg-amber-700 text-white font-bold' :
                            'bg-slate-100 text-slate-700 font-bold';
 
-    const liveBadge = isLive ? `
-      <span class="inline-flex items-center gap-1 bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full animate-pulse shadow-xs">
-        <span class="w-1.5 h-1.5 rounded-full bg-white"></span> AO VIVO
-      </span>
-    ` : `
-      <span class="text-[9px] text-emerald-700 font-bold flex items-center gap-0.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ONLINE
-      </span>
-    `;
-
     return `
       <div 
         onclick="quickSearchPolitico('${pol.popularName || pol.name}')"
-        class="bg-slate-50 hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 rounded-xl p-2.5 transition cursor-pointer group flex flex-col justify-between"
+        class="bg-slate-50 hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 rounded-xl p-2.5 transition cursor-pointer group flex flex-col justify-between shadow-2xs"
         title="Clique para pesquisar matérias de ${pol.popularName}"
       >
         <div class="flex items-start justify-between gap-1.5 mb-2">
           <span class="w-5 h-5 rounded-md text-[11px] flex items-center justify-center ${rankBadgeClass}">
             #${rankNum}
           </span>
-          ${liveBadge}
+          <span class="text-[9px] bg-slate-200/90 text-slate-700 font-extrabold px-1.5 py-0.2 rounded">
+            ${pol.trend || '+15%'}
+          </span>
         </div>
 
         <div class="flex items-center gap-2 mb-1.5">
           <img 
-            src="${pol.avatar || '/assets/politicians/lula.jpg'}" 
+            src="${pol.avatar || '/assets/themes/brasilia.jpg'}" 
             alt="${pol.name}"
-            class="w-10 h-10 rounded-full object-cover border-2 ${isLive ? 'border-rose-500 ring-2 ring-rose-200' : 'border-white shadow-xs'}"
+            class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-xs"
             onerror="this.src='/assets/themes/brasilia.jpg'"
           >
           <div class="truncate">
@@ -406,7 +483,7 @@ function renderTop5Politicians() {
 }
 
 // ========================================================
-// 4. LINHA 3: TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS
+// 4. LINHA 3: TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS (FILETINHO DE AÇÕES)
 // ========================================================
 async function loadSitesRanking() {
   try {
@@ -433,77 +510,48 @@ function getOfficialLogoForSite(siteName) {
   if (norm.includes('estadao')) return '/assets/logos/estadao.svg';
   if (norm.includes('uol')) return '/assets/logos/uol.svg';
   if (norm.includes('agencia brasil') || norm.includes('ebc')) return '/assets/logos/agenciabrasil.svg';
+  if (norm.includes('gazeta')) return '/assets/logos/gazetadopovo.svg';
+  if (norm.includes('jovem')) return '/assets/logos/jovempan.svg';
+  if (norm.includes('carta')) return '/assets/logos/cartacapital.svg';
+  if (norm.includes('conjur')) return '/assets/logos/conjur.svg';
+  if (norm.includes('brasil 247') || norm.includes('brasil247')) return '/assets/logos/brasil247.svg';
   return '/assets/logos/g1.svg';
 }
 
 function renderTop5Sites() {
-  const container = document.getElementById('top5-sites-container');
-  if (!container) return;
+  const ticker = document.getElementById('top5-sites-ticker');
+  if (!ticker) return;
 
   const top5 = state.sites.slice(0, 5);
 
-  container.innerHTML = top5.map((site, index) => {
-    const rankNum = index + 1;
-    const rankBadgeClass = rankNum === 1 ? 'bg-slate-900 text-white font-black' :
-                           rankNum === 2 ? 'bg-slate-700 text-white font-bold' :
-                           rankNum === 3 ? 'bg-slate-600 text-white font-bold' :
-                           'bg-slate-200 text-slate-800 font-bold';
-
+  // "somente o nome e ter apenas o link, não ter os números de acesso, tipo um filetinho mostrando as ações."
+  ticker.innerHTML = top5.map((site) => {
     const logoSvg = getOfficialLogoForSite(site.name);
 
     return `
-      <div 
-        onclick="filterBySourceAndTrack('${site.name}', '${site.url}', '${site.id}')"
-        class="bg-slate-50 hover:bg-slate-100/90 border border-slate-200 hover:border-slate-300 rounded-xl p-2.5 transition cursor-pointer group flex flex-col justify-between"
-        title="Clique para filtrar notícias de ${site.name}"
+      <a 
+        href="${site.url}" 
+        target="_blank"
+        onclick="trackSiteClickOnly('${site.id}')"
+        class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-xs font-bold text-slate-800 hover:text-blue-700 transition shrink-0 group shadow-2xs"
+        title="Acessar ${site.name} diretamente"
       >
-        <div class="flex items-center justify-between mb-2">
-          <span class="w-5 h-5 rounded-md text-[11px] flex items-center justify-center ${rankBadgeClass}">
-            #${rankNum}
-          </span>
-          <span class="text-[9px] bg-blue-50 text-blue-700 font-extrabold px-1.5 py-0.2 rounded border border-blue-200 flex items-center gap-1">
-            <i class="fa-solid fa-circle-check text-[8px]"></i> Verificado
-          </span>
-        </div>
-
-        <div class="flex items-center gap-2 mb-2">
-          <div class="w-10 h-7 bg-white rounded-md border border-slate-200 p-1 flex items-center justify-center shrink-0">
-            <img src="${logoSvg}" alt="${site.name}" class="max-h-full max-w-full object-contain">
-          </div>
-          <div class="truncate">
-            <h4 class="text-xs font-black text-slate-900 leading-tight truncate">
-              ${site.name}
-            </h4>
-            <span class="text-[10px] text-slate-500 font-medium truncate block">
-              ${site.domain || 'Jornalismo'}
-            </span>
-          </div>
-        </div>
-
-        <div class="pt-1.5 border-t border-slate-200/60 flex items-center justify-between text-[10px] text-slate-500 font-semibold">
-          <span>${Number(site.clicks || 0).toLocaleString('pt-BR')} acessos</span>
-          <span class="text-slate-700 font-bold group-hover:text-blue-600">Acessar ↗</span>
-        </div>
-      </div>
+        <span class="w-4 h-4 rounded bg-white border border-slate-200 p-0.5 flex items-center justify-center shrink-0">
+          <img src="${logoSvg}" alt="${site.name}" class="max-w-full max-h-full object-contain">
+        </span>
+        <span class="whitespace-nowrap">${site.name}</span>
+        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400 group-hover:text-blue-600 transition"></i>
+      </a>
     `;
-  }).join('');
+  }).join(' <span class="text-slate-300 select-none">•</span> ');
 }
 
-function filterBySourceAndTrack(siteName, targetUrl, siteId) {
-  // Preenche a busca pelo veículo e executa imediatamente
-  const inputAssunto = document.getElementById('input-assunto');
-  if (inputAssunto) {
-    inputAssunto.value = siteName;
-  }
-  state.activeFilters.source = siteName;
-  runDefaultSearch(false);
-
-  // Computa clique em segundo plano
+function trackSiteClickOnly(siteId) {
   fetch('/api/sites/click', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ siteId, siteName, targetUrl })
-  }).then(() => loadSitesRanking()).catch(() => {});
+    body: JSON.stringify({ siteId })
+  }).catch(() => {});
 }
 
 // ========================================================
@@ -810,21 +858,24 @@ function sortNewsResults() {
   renderNewsGrid();
 }
 
-// ========================================================
-// 7. ABA 2: RADAR SOCIAL (POLÍTICOS ONLINE & LIVES)
+/// ========================================================
+// 7. ABA 2: RADAR SOCIAL (TRANSMISSÕES AO VIVO VERIFICADAS EM TEMPO REAL)
 // ========================================================
 async function loadSocialStatus(force = false) {
   try {
     const res = await fetch('/api/politicians/social-status');
     const data = await res.json();
     if (data.success) {
-      state.socialPoliticians = data.politicians || [];
+      state.verifiedStreams = data.verifiedStreams || [];
+      state.socialPoliticians = data.politicians || []; // Apenas políticos em Live real!
 
-      // Atualiza badges globais
+      const totalLive = (state.verifiedStreams.length || 0) + (state.socialPoliticians.length || 0);
+
+      // Atualiza badges globais com a contagem verdadeira
       const liveStat = document.getElementById('social-live-count-stat');
       const badgeLive = document.getElementById('badge-live-total-pill');
-      if (liveStat) liveStat.textContent = data.totalLive || '0';
-      if (badgeLive) badgeLive.textContent = `${data.totalLive || 0} AO VIVO`;
+      if (liveStat) liveStat.textContent = totalLive;
+      if (badgeLive) badgeLive.textContent = `${totalLive} AO VIVO`;
 
       renderSocialGrid();
     }
@@ -833,137 +884,106 @@ async function loadSocialStatus(force = false) {
   }
 }
 
-function filterSocialList(filter) {
-  state.currentSocialFilter = filter;
-  ['all', 'live', 'online'].forEach(f => {
-    const btn = document.getElementById(`social-filter-${f}`);
-    if (btn) {
-      if (f === filter) {
-        btn.className = 'social-tab-btn active px-2.5 py-1 rounded-lg bg-slate-900 text-white';
-      } else {
-        btn.className = 'social-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200';
-      }
-    }
-  });
-  renderSocialGrid();
-}
-
 function renderSocialGrid() {
   const container = document.getElementById('social-status-detailed-grid');
   if (!container) return;
 
-  let list = [...state.socialPoliticians];
-  if (state.currentSocialFilter === 'live') {
-    list = list.filter(p => p.socialStatus?.isLive);
-  } else if (state.currentSocialFilter === 'online') {
-    list = list.filter(p => !p.socialStatus?.isLive);
-  }
+  const verifiedStreams = state.verifiedStreams || [];
+  const livePoliticians = state.socialPoliticians || [];
 
-  container.innerHTML = list.map(pol => {
-    const isLive = pol.socialStatus?.isLive;
-    const platform = pol.socialStatus?.livePlatform || 'YouTube';
-    const platformIcon = platform.toLowerCase().includes('insta') ? 'fa-brands fa-instagram text-rose-500' :
-                         platform.toLowerCase().includes('tik') ? 'fa-brands fa-tiktok text-slate-900' :
-                         platform.toLowerCase().includes('x') ? 'fa-brands fa-x-twitter text-slate-900' :
-                         'fa-brands fa-youtube text-red-600';
+  const cards = [];
 
-    return `
-      <div class="bg-white rounded-2xl border ${isLive ? 'border-rose-400 ring-2 ring-rose-100' : 'border-slate-200/90'} p-3.5 shadow-xs space-y-3 flex flex-col justify-between">
-        
+  // 1. Canais Institucionais Oficiais Verificados (TV Senado, TV Câmara, STF, Canal Gov, TV Brasil)
+  verifiedStreams.forEach(stream => {
+    cards.push(`
+      <div class="bg-white rounded-2xl border border-rose-300 ring-2 ring-rose-100/70 p-4 shadow-xs flex flex-col justify-between space-y-3">
         <div class="space-y-2">
           <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <img 
-                src="${pol.avatar || '/assets/politicians/lula.jpg'}" 
-                alt="${pol.name}"
-                class="w-12 h-12 rounded-full object-cover border-2 ${isLive ? 'border-rose-600' : 'border-slate-200'}"
-                onerror="this.src='/assets/themes/brasilia.jpg'"
-              >
-              <div>
-                <h4 class="text-xs font-black text-slate-900">${pol.popularName}</h4>
-                <span class="text-[10px] text-slate-500 font-bold block">${pol.party} • ${pol.office}</span>
-              </div>
-            </div>
-
-            <div>
-              ${isLive ? `
-                <span class="inline-flex items-center gap-1 bg-rose-600 text-white font-black text-[9px] px-2 py-0.5 rounded-full animate-pulse shadow-sm">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white"></span> AO VIVO
-                </span>
-              ` : `
-                <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 font-extrabold text-[9px] px-2 py-0.5 rounded-full">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ONLINE
-                </span>
-              `}
-            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> TRANSMISSÃO OFICIAL AO VIVO
+            </span>
+            <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${stream.badge || '24h Oficial'}</span>
           </div>
 
-          <!-- Detalhe da Live ou Post Recente -->
-          ${isLive ? `
-            <div class="bg-rose-50 border border-rose-200/80 rounded-xl p-2.5 text-xs space-y-1">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-rose-900 flex items-center gap-1 text-[11px]">
-                  <i class="${platformIcon}"></i> Transmitindo no ${platform}
-                </span>
-                <span class="text-[10px] text-rose-700 font-bold">Ao Vivo</span>
-              </div>
-              <p class="text-[11px] text-slate-800 font-bold leading-tight">
-                "${pol.socialStatus?.liveTitle || 'Pronunciamento oficial e agenda em tempo real.'}"
-              </p>
-              <a 
-                href="${pol.socialStatus?.liveUrl || 'https://youtube.com'}" 
-                target="_blank"
-                class="mt-1 block text-center py-1 bg-rose-600 hover:bg-rose-700 text-white font-black text-[10px] rounded-lg transition"
-              >
-                Assistir Transmissão Ao Vivo ↗
-              </a>
-            </div>
-          ` : `
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs">
-              <span class="text-[10px] font-bold text-slate-500 block">Atividade Recente:</span>
-              <p class="text-[11px] text-slate-700 mt-0.5 leading-snug">
-                ${pol.socialStatus?.recentPost || 'Agenda pública e comunicados parlamentares.'}
-              </p>
-            </div>
-          `}
+          <div>
+            <h3 class="text-sm font-black text-slate-900 leading-snug">${stream.title}</h3>
+            <p class="text-[11px] text-slate-600 mt-1 leading-snug">${stream.description}</p>
+          </div>
         </div>
 
-        <!-- Botão de Teste / Simulação de Live em Tempo Real -->
-        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-          <span class="text-[10px] text-slate-400 font-medium">Seguidores: ${pol.socialStatus?.followersTotal || '1M+'}</span>
-          <button 
-            onclick="toggleLiveSimulation('${pol.id}', ${!isLive})" 
-            class="text-[10px] font-bold px-2 py-0.5 rounded ${isLive ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100'} transition"
-          >
-            ${isLive ? 'Finalizar Live' : 'Iniciar Live (Teste)'}
-          </button>
+        <!-- Em politicos online colocar somente a logo da transmissão online, a pessoa clicando vai direto pra lá -->
+        <a 
+          href="${stream.liveUrl}" 
+          target="_blank" 
+          class="group/link block bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-red-500 rounded-xl p-2.5 transition shadow-sm"
+          title="Assistir agora no canal oficial do ${stream.channel}"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <img src="${stream.platformLogo || '/assets/logos/youtube-live.svg'}" alt="YouTube Live" class="h-6 object-contain">
+              <span class="text-xs font-black text-white group-hover/link:text-red-400 transition">Assistir Ao Vivo ↗</span>
+            </div>
+            <span class="text-[10px] text-red-400 font-extrabold flex items-center gap-1">
+              <i class="fa-solid fa-play text-[9px] animate-pulse"></i> SINAL ABERTO
+            </span>
+          </div>
+        </a>
+      </div>
+    `);
+  });
+
+  // 2. Políticos que estejam EFETIVAMENTE transmitindo ao vivo (se houver algum)
+  livePoliticians.forEach(pol => {
+    cards.push(`
+      <div class="bg-white rounded-2xl border border-rose-400 ring-2 ring-rose-200 p-4 shadow-xs flex flex-col justify-between space-y-3">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10px] font-black uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> POLÍTICO AO VIVO
+            </span>
+            <span class="text-[10px] font-bold text-slate-500">${pol.party} • ${pol.office ? pol.office.split(' ')[0] : 'Líder'}</span>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <img src="${pol.avatar || '/assets/themes/brasilia.jpg'}" alt="${pol.popularName}" class="w-11 h-11 rounded-full object-cover border-2 border-rose-600 ring-2 ring-rose-200">
+            <div>
+              <h3 class="text-sm font-black text-slate-900">${pol.popularName}</h3>
+              <p class="text-[11px] text-slate-600 font-bold leading-tight">"${pol.socialStatus?.liveTitle || 'Transmissão em tempo real'}"</p>
+            </div>
+          </div>
         </div>
 
+        <a 
+          href="${pol.socialStatus?.liveUrl || 'https://youtube.com'}" 
+          target="_blank" 
+          class="group/link block bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-red-500 rounded-xl p-2.5 transition shadow-sm"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <img src="/assets/logos/youtube-live.svg" alt="Live" class="h-6 object-contain">
+              <span class="text-xs font-black text-white group-hover/link:text-red-400 transition">Assistir no Canal ↗</span>
+            </div>
+            <span class="text-[10px] text-red-400 font-extrabold flex items-center gap-1">
+              <i class="fa-solid fa-play text-[9px] animate-pulse"></i> TRANSMITINDO
+            </span>
+          </div>
+        </a>
+      </div>
+    `);
+  });
+
+  if (cards.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-10 text-center bg-white rounded-2xl border border-slate-200 p-6">
+        <span class="text-2xl">📡</span>
+        <h4 class="text-sm font-black text-slate-800 mt-2">Nenhuma transmissão ao vivo ativa no momento</h4>
+        <p class="text-xs text-slate-500 mt-1">Conforme novas transmissões forem iniciadas nos canais oficiais, elas surgirão instantaneamente aqui.</p>
       </div>
     `;
-  }).join('');
-}
-
-async function toggleLiveSimulation(polId, newLiveStatus) {
-  try {
-    const res = await fetch(`/api/politicians/${polId}/social-status`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        isLive: newLiveStatus,
-        livePlatform: 'YouTube',
-        liveTitle: newLiveStatus ? 'Transmissão Coletiva: Entrevista Exclusiva ao Vivo' : ''
-      })
-    });
-    const data = await res.json();
-    if (data.success) {
-      showToast(`Status de ${data.politician.popularName} atualizado em tempo real!`, 'success');
-      loadSocialStatus(true);
-      loadPoliticiansRanking();
-    }
-  } catch (err) {
-    showToast('Erro ao atualizar status de transmissão.', 'error');
+    return;
   }
+
+  container.innerHTML = cards.join('');
 }
 
 // ========================================================
