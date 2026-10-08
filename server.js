@@ -92,37 +92,118 @@ function getLogoForSource(sourceName) {
   return '/assets/logos/g1.svg';
 }
 
-function getImageForArticle(db, title, politicianTerm) {
-  const fullText = normalizeStr(title + ' ' + (politicianTerm || ''));
+function resolveArticleDetails(db, title, snippet, queryPolitico, queryAssunto) {
+  const normTitle = normalizeStr(title || '');
+  const normSnippet = normalizeStr(snippet || '');
+  const normTerm = normalizeStr(queryPolitico || '');
+
+  // 1. Procurar políticos conhecidos no TÍTULO da matéria
+  // Ordenar por tamanho do nome decrescente para priorizar nomes compostos primeiro
+  const allPoliticians = [...(db.politicians || [])].sort((a, b) => (b.popularName.length) - (a.popularName.length));
   
-  // 1. Verificar se menciona diretamente algum político cadastrado
-  const pol = (db.politicians || []).find(p => 
-    fullText.includes(normalizeStr(p.popularName)) || 
-    fullText.includes(normalizeStr(p.name))
-  );
-  if (pol && pol.avatar) {
-    return pol.avatar;
+  const foundInTitle = [];
+  for (const pol of allPoliticians) {
+    const normPop = normalizeStr(pol.popularName);
+    const normFull = normalizeStr(pol.name);
+    if (normTitle.includes(normPop) || (normFull && normTitle.includes(normFull))) {
+      foundInTitle.push(pol);
+    }
   }
 
-  // 2. Mapeamento preciso para fotos institucionais oficiais brasileiras reais
-  if (fullText.includes('stf') || fullText.includes('supremo') || fullText.includes('moraes') || fullText.includes('barroso') || fullText.includes('tribunal') || fullText.includes('judiciario') || fullText.includes('justica')) {
-    return '/assets/themes/stf.jpg';
-  }
-  if (fullText.includes('congresso') || fullText.includes('senado') || fullText.includes('camara') || fullText.includes('deputado') || fullText.includes('parlamento') || fullText.includes('plenario') || fullText.includes('lira') || fullText.includes('pacheco')) {
-    return '/assets/themes/congresso.jpg';
-  }
-  if (fullText.includes('planalto') || fullText.includes('governo') || fullText.includes('presidencia') || fullText.includes('ministerio') || fullText.includes('decreto') || fullText.includes('palacio')) {
-    return '/assets/themes/planalto.jpg';
-  }
-  if (fullText.includes('economia') || fullText.includes('fazenda') || fullText.includes('tributaria') || fullText.includes('inflacao') || fullText.includes('dolar') || fullText.includes('imposto') || fullText.includes('juros') || fullText.includes('banco central')) {
-    return '/assets/themes/fazenda.jpg';
-  }
-  if (fullText.includes('eleicao') || fullText.includes('eleicoes') || fullText.includes('urna') || fullText.includes('tse') || fullText.includes('voto') || fullText.includes('pesquisa') || fullText.includes('partido')) {
-    return '/assets/themes/eleicoes.jpg';
+  let matchedPolitician = null;
+  if (foundInTitle.length > 0) {
+    if (normTerm) {
+      // Se o usuário buscou por um político que está na matéria, priorizar o buscado
+      matchedPolitician = foundInTitle.find(p => 
+        normalizeStr(p.popularName).includes(normTerm) || normTerm.includes(normalizeStr(p.popularName))
+      ) || foundInTitle[0];
+    } else {
+      matchedPolitician = foundInTitle[0];
+    }
   }
 
-  // 3. Imagem institucional padrão de alta autoridade: Brasília / Três Poderes
-  return '/assets/themes/brasilia.jpg';
+  // 2. Se não encontrou no título, procurar no SNIPPET (resumo da notícia)
+  if (!matchedPolitician) {
+    const foundInSnippet = [];
+    for (const pol of allPoliticians) {
+      const normPop = normalizeStr(pol.popularName);
+      const normFull = normalizeStr(pol.name);
+      if (normSnippet.includes(normPop) || (normFull && normSnippet.includes(normFull))) {
+        foundInSnippet.push(pol);
+      }
+    }
+    if (foundInSnippet.length > 0) {
+      if (normTerm) {
+        matchedPolitician = foundInSnippet.find(p => 
+          normalizeStr(p.popularName).includes(normTerm) || normTerm.includes(normalizeStr(p.popularName))
+        ) || foundInSnippet[0];
+      } else {
+        matchedPolitician = foundInSnippet[0];
+      }
+    }
+  }
+
+  // 3. Se ainda não casou na notícia mas o usuário pesquisou diretamente por um político cadastrado
+  if (!matchedPolitician && normTerm) {
+    const queriedPol = allPoliticians.find(p => 
+      normalizeStr(p.popularName).includes(normTerm) || normTerm.includes(normalizeStr(p.popularName))
+    );
+    if (queriedPol) {
+      matchedPolitician = queriedPol;
+    }
+  }
+
+  // 4. Detecção precisa de Tema / Assunto Institucional
+  const fullContent = normTitle + ' ' + normSnippet;
+  let detectedSubject = queryAssunto ? queryAssunto.trim() : 'Política Nacional';
+  let institutionalImage = null;
+
+  if (fullContent.includes('policia federal') || fullContent.includes('operacao da pf') || fullContent.includes('mandado de busca') || fullContent.includes('agentes federais') || fullContent.includes('inquerito da pf')) {
+    detectedSubject = 'Polícia Federal & Segurança';
+    institutionalImage = '/assets/themes/policia-federal.jpg';
+  } else if (fullContent.includes('banco central') || fullContent.includes('copom') || fullContent.includes('taxa selic') || fullContent.includes('campos neto') || fullContent.includes('galipolo') || fullContent.includes('politica monetaria')) {
+    detectedSubject = 'Banco Central & Juros';
+    institutionalImage = '/assets/themes/banco-central.jpg';
+  } else if (fullContent.includes('petrobras') || fullContent.includes('combustivel') || fullContent.includes('gasolina') || fullContent.includes('diesel') || fullContent.includes('petroleo') || fullContent.includes('bacia de santos')) {
+    detectedSubject = 'Petrobras & Energia';
+    institutionalImage = '/assets/themes/petrobras.jpg';
+  } else if (fullContent.includes('stf') || fullContent.includes('supremo tribunal') || fullContent.includes('suprema corte') || fullContent.includes('judiciario') || fullContent.includes('cnj') || fullContent.includes('pgr') || fullContent.includes('primeira turma') || fullContent.includes('segunda turma')) {
+    detectedSubject = 'STF & Judiciário';
+    institutionalImage = '/assets/themes/stf.jpg';
+  } else if (fullContent.includes('senado') || fullContent.includes('senadores') || fullContent.includes('congresso nacional') || fullContent.includes('parlamento')) {
+    detectedSubject = 'Congresso & Senado';
+    institutionalImage = '/assets/themes/congresso.jpg';
+  } else if (fullContent.includes('camara dos deputados') || fullContent.includes('camara') || fullContent.includes('deputados') || fullContent.includes('plenario') || fullContent.includes('bancada')) {
+    detectedSubject = 'Câmara dos Deputados';
+    institutionalImage = '/assets/themes/camara.jpg';
+  } else if (fullContent.includes('planalto') || fullContent.includes('palacio do planalto') || fullContent.includes('presidencia da republica') || fullContent.includes('governo federal') || fullContent.includes('decreto presidencial') || fullContent.includes('ministerio')) {
+    detectedSubject = 'Poder Executivo & Planalto';
+    institutionalImage = '/assets/themes/planalto.jpg';
+  } else if (fullContent.includes('fazenda') || fullContent.includes('economia') || fullContent.includes('tributaria') || fullContent.includes('inflacao') || fullContent.includes('dolar') || fullContent.includes('imposto') || fullContent.includes('orcamento') || fullContent.includes('arrecadacao') || fullContent.includes('ipca')) {
+    detectedSubject = 'Economia & Fazenda';
+    institutionalImage = '/assets/themes/fazenda.jpg';
+  } else if (fullContent.includes('eleicao') || fullContent.includes('eleicoes') || fullContent.includes('urna') || fullContent.includes('tse') || fullContent.includes('voto') || fullContent.includes('pesquisa eleitoral') || fullContent.includes('segundo turno') || fullContent.includes('primeiro turno')) {
+    detectedSubject = 'Eleições & Pesquisas';
+    institutionalImage = '/assets/themes/eleicoes.jpg';
+  }
+
+  // Decisão da Imagem de Capa Real:
+  // Se há um político citado como protagonista da notícia, a foto dele é a capa verdadeira!
+  let finalImageUrl = '/assets/themes/brasilia.jpg';
+  let finalPoliticianName = queryPolitico ? queryPolitico.trim() : 'Cenário Político';
+
+  if (matchedPolitician && matchedPolitician.avatar) {
+    finalImageUrl = matchedPolitician.avatar;
+    finalPoliticianName = matchedPolitician.popularName;
+  } else if (institutionalImage) {
+    finalImageUrl = institutionalImage;
+  }
+
+  return {
+    imageUrl: finalImageUrl,
+    politician: finalPoliticianName,
+    subject: detectedSubject
+  };
 }
 
 // Helper: encontrar ou registrar site no banco
@@ -249,19 +330,22 @@ app.get('/api/search', async (req, res) => {
           // Identificar site no banco para possibilitar rastreio
           const site = findOrCreateSite(db, itemSource, item.link);
           const sourceLogo = getLogoForSource(itemSource);
-          const imageUrl = getImageForArticle(db, rawTitle, politico);
+          const rawSnippet = item.contentSnippet || item.content || 'Acesse a matéria completa para ler os detalhes da cobertura jornalística.';
+
+          // Resolução ultra-precisa e verídica da Imagem de Capa Real, Político e Tema
+          const resolved = resolveArticleDetails(db, rawTitle, rawSnippet, politico, assunto);
 
           return {
             id: `live-${idx}-${Date.now()}`,
             title: rawTitle,
-            snippet: item.contentSnippet || item.content || 'Acesse a matéria completa para ler os detalhes da cobertura jornalística.',
+            snippet: rawSnippet,
             source: itemSource,
             sourceLogo: sourceLogo,
-            imageUrl: imageUrl,
+            imageUrl: resolved.imageUrl,
             siteId: site.id,
             url: item.link,
-            politician: politico.trim() || 'Política Geral',
-            subject: assunto.trim() || 'Noticiário Político',
+            politician: resolved.politician,
+            subject: resolved.subject,
             publishedDate: pubDate,
             isSponsored: false,
             isLive: true

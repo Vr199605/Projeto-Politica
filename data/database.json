@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4827,
+      "searchCount": 4828,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -37,7 +37,7 @@
       "party": "PL",
       "office": "Ex-Presidente da República",
       "avatar": "/assets/politicians/bolsonaro.jpg",
-      "searchCount": 4210,
+      "searchCount": 4213,
       "trend": "+12%",
       "trendDirection": "up",
       "bio": "38º Presidente do Brasil, líder da oposição conservadora.",
@@ -67,7 +67,7 @@
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3546,
+      "searchCount": 3553,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -328,7 +328,7 @@
       "party": "PSDB",
       "office": "Governador do Rio Grande do Sul",
       "avatar": "/assets/politicians/leite.jpg",
-      "searchCount": 1150,
+      "searchCount": 1153,
       "trend": "+7%",
       "trendDirection": "up",
       "bio": "Governador reeleito do Estado do Rio Grande do Sul.",
@@ -370,6 +370,210 @@
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg/330px-Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg"
+    },
+    {
+      "id": "eduardo-paes",
+      "name": "Eduardo Paes",
+      "popularName": "Eduardo Paes",
+      "party": "Independente",
+      "office": "Figura Pública / Político",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
+      "searchCount": 2,
+      "trend": "+100%",
+      "trendDirection": "up",
+      "bio": "Político pesquisado pelos usuários da plataforma."
+    },
+    {
+      "id": "moraes",
+      "name": "Alexandre de Moraes",
+      "popularName": "Alexandre de Moraes",
+      "party": "STF",
+      "office": "Ministro do Supremo Tribunal Federal",
+      "avatar": "/assets/politicians/moraes.jpg",
+      "searchCount": 3891,
+      "trend": "+20%",
+      "trendDirection": "up",
+      "bio": "Ministro do Supremo Tribunal Federal (STF) e relator de inquéritos de grande repercussão nacional."
+    },
+    {
+      "id": "barroso",
+      "name": "Luís Roberto Barroso",
+      "popularName": "Luís Roberto Barroso",
+      "party": "STF",
+      "office": "Presidente do Supremo Tribunal Federal",
+      "avatar": "/assets/politicians/barroso.jpg",
+      "searchCount": 2450,
+      "trend": "+8%",
+      "trendDirection": "up",
+      "bio": "Presidente do Supremo Tribunal Federal (STF) e do Conselho Nacional de Justiça (CNJ)."
+    },
+    {
+      "id": "dino",
+      "name": "Flávio Dino de Castro e Costa",
+      "popularName": "Flávio Dino",
+      "party": "STF",
+      "office": "Ministro do Supremo Tribunal Federal",
+      "avatar": "/assets/politicians/dino.jpg",
+      "searchCount": 2680,
+      "trend": "+12%",
+      "trendDirection": "up",
+      "bio": "Ministro do STF, ex-Ministro da Justiça e Segurança Pública e ex-Governador do Maranhão."
+    },
+    {
+      "id": "gilmar",
+      "name": "Gilmar Ferreira Mendes",
+      "popularName": "Gilmar Mendes",
+      "party": "STF",
+      "office": "Ministro do Supremo Tribunal Federal",
+      "avatar": "/assets/politicians/gilmar.jpg",
+      "searchCount": 2120,
+      "trend": "+5%",
+      "trendDirection": "up",
+      "bio": "Decano e ministro mais antigo em atividade no Supremo Tribunal Federal."
+    },
+    {
+      "id": "alckmin",
+      "name": "Geraldo José Rodrigues Alckmin Filho",
+      "popularName": "Geraldo Alckmin",
+      "party": "PSB",
+      "office": "Vice-Presidente da República e Ministro do MDIC",
+      "avatar": "/assets/politicians/alckmin.jpg",
+      "searchCount": 2890,
+      "trend": "+9%",
+      "trendDirection": "up",
+      "bio": "Vice-Presidente da República e Ministro do Desenvolvimento, Indústria, Comércio e Serviços."
+    },
+    {
+      "id": "nunes",
+      "name": "Ricardo Luís Reis Nunes",
+      "popularName": "Ricardo Nunes",
+      "party": "MDB",
+      "office": "Prefeito de São Paulo",
+      "avatar": "/assets/politicians/nunes.jpg",
+      "searchCount": 2750,
+      "trend": "+30%",
+      "trendDirection": "up",
+      "bio": "Prefeito da cidade de São Paulo, maior colégio eleitoral municipal do Brasil."
+    },
+    {
+      "id": "marcal",
+      "name": "Pablo Henrique Costa Marçal",
+      "popularName": "Pablo Marçal",
+      "party": "PRTB",
+      "office": "Empresário e Figura Política",
+      "avatar": "/assets/politicians/marcal.jpg",
+      "searchCount": 3410,
+      "trend": "+45%",
+      "trendDirection": "up",
+      "bio": "Empresário, influenciador digital e candidato nas eleições municipais de São Paulo."
+    },
+    {
+      "id": "zema",
+      "name": "Romeu Zema Neto",
+      "popularName": "Romeu Zema",
+      "party": "NOVO",
+      "office": "Governador do Estado de Minas Gerais",
+      "avatar": "/assets/politicians/zema.jpg",
+      "searchCount": 2190,
+      "trend": "+7%",
+      "trendDirection": "up",
+      "bio": "Governador reeleito de Minas Gerais, segundo maior colégio eleitoral do país."
+    },
+    {
+      "id": "alcolumbre",
+      "name": "Davi Samuel Alcolumbre Tobelem",
+      "popularName": "Davi Alcolumbre",
+      "party": "União Brasil",
+      "office": "Senador pelo Amapá e Presidente da CCJ",
+      "avatar": "/assets/politicians/alcolumbre.jpg",
+      "searchCount": 1980,
+      "trend": "+15%",
+      "trendDirection": "up",
+      "bio": "Senador pelo Amapá, presidente da Comissão de Constituição e Justiça do Senado."
+    },
+    {
+      "id": "michelle",
+      "name": "Michelle de Paula Firmo Reinaldo Bolsonaro",
+      "popularName": "Michelle Bolsonaro",
+      "party": "PL",
+      "office": "Presidente do PL Mulher",
+      "avatar": "/assets/politicians/michelle.jpg",
+      "searchCount": 2540,
+      "trend": "+18%",
+      "trendDirection": "up",
+      "bio": "Ex-primeira-dama do Brasil e presidente nacional do movimento PL Mulher."
+    },
+    {
+      "id": "tabata",
+      "name": "Tabata Claudia Amaral de Pontes",
+      "popularName": "Tabata Amaral",
+      "party": "PSB",
+      "office": "Deputada Federal por São Paulo",
+      "avatar": "/assets/politicians/tabata.jpg",
+      "searchCount": 1870,
+      "trend": "+10%",
+      "trendDirection": "up",
+      "bio": "Cientista política, ativista pela educação e deputada federal por São Paulo."
+    },
+    {
+      "id": "joaocampos",
+      "name": "João Henrique de Andrade Lima Campos",
+      "popularName": "João Campos",
+      "party": "PSB",
+      "office": "Prefeito do Recife",
+      "avatar": "/assets/politicians/joaocampos.jpg",
+      "searchCount": 2280,
+      "trend": "+25%",
+      "trendDirection": "up",
+      "bio": "Prefeito do Recife reeleito com votação histórica em Pernambuco."
+    },
+    {
+      "id": "gleisi",
+      "name": "Gleisi Helena Hoffmann",
+      "popularName": "Gleisi Hoffmann",
+      "party": "PT",
+      "office": "Deputada Federal e Presidente Nacional do PT",
+      "avatar": "/assets/politicians/gleisi.jpg",
+      "searchCount": 1780,
+      "trend": "+6%",
+      "trendDirection": "up",
+      "bio": "Presidente nacional do Partido dos Trabalhadores e deputada federal pelo Paraná."
+    },
+    {
+      "id": "renan",
+      "name": "José Renan Vasconcelos Calheiros",
+      "popularName": "Renan Calheiros",
+      "party": "MDB",
+      "office": "Senador por Alagoas",
+      "avatar": "/assets/politicians/renan.jpg",
+      "searchCount": 1650,
+      "trend": "+4%",
+      "trendDirection": "up",
+      "bio": "Senador por Alagoas e ex-presidente do Senado Federal e do Congresso Nacional."
+    },
+    {
+      "id": "castro",
+      "name": "Cláudio Bonfim de Castro e Silva",
+      "popularName": "Cláudio Castro",
+      "party": "PL",
+      "office": "Governador do Estado do Rio de Janeiro",
+      "avatar": "/assets/politicians/castro.jpg",
+      "searchCount": 1590,
+      "trend": "+5%",
+      "trendDirection": "up",
+      "bio": "Governador reeleito do Estado do Rio de Janeiro."
+    },
+    {
+      "id": "ratinho",
+      "name": "Carlos Roberto Massa Júnior",
+      "popularName": "Ratinho Júnior",
+      "party": "PSD",
+      "office": "Governador do Estado do Paraná",
+      "avatar": "/assets/politicians/ratinho.jpg",
+      "searchCount": 1720,
+      "trend": "+8%",
+      "trendDirection": "up",
+      "bio": "Governador reeleito do Paraná e liderança do PSD no Sul do país."
     }
   ],
   "sites": [
@@ -379,7 +583,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5427,
+      "clicks": 5429,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -418,7 +622,7 @@
       "domain": "poder360.com.br",
       "url": "https://www.poder360.com.br",
       "category": "Análise de Dados & Pesquisas",
-      "clicks": 3890,
+      "clicks": 3892,
       "badge": "Crescimento Rápido",
       "verified": true,
       "isMonetizedPartner": true,
@@ -593,6 +797,18 @@
       "isMonetizedPartner": false,
       "logo": "📰",
       "logoSvg": "/assets/logos/g1.svg"
+    },
+    {
+      "id": "g1",
+      "name": "G1",
+      "domain": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPU280YllWZmI3WFpqM2N0dERPYThlZmlpTlMtMHgwVEJqSDVkYmxpaEZvN2NGYkZBeEt4X3BuUlNlY0tyMWQ3eGtCaFhzSnNIVWctbGk2d19DMkV4NXR5STdJT1RMUzFDLUdBLUc3WnBXVDJDUTRmQURiT0E2NVlxNXhSODJCZDhZU0J6azN3Nm41UnlrZ0FzdElCb2lHWG16amNJdkpNTGcxNHFVa1VCRmNGUkY2X3BwQjRObmVIUHlKQUdIeDFKTzI3cXIzbVdrYkUwaDdpNmtzczZ1ZmVLM1JRZEQybnZZWmgxYdIB-wFBVV95cUxONVVfY3Y4ZmhxdU14c3ZtbWNXZU5iRWJVWm1pUUZJZ1REelFyYy1RMDZUelVjQ1V6UkhzcjEwUzFZRkxzQXZzc1Vtczg4UXM2UDJSR1lqRnVDcVRyT3NTN3FncFVWRjRRN1puLUZETktsUlRfdGF3MFhtT3puZWdaVGJIN0VkOVI2X2RNd1lYNmtIVVB1ejZCaFpKV3o5UkJXbFJodGtPck5tY1BaQ2I1TkZIdjBGSFdhQ2JQX3NPbUVnWGZjb1ZqV1RLaFNNSThoM1dlT2hEZmVUazhmbC1hUW9YN2dJVVFTdlA4RzBSallzQUFxZzJuZ2RFNA?oc=5",
+      "category": "Portal de Notícias",
+      "clicks": 2,
+      "badge": "Novo Portal",
+      "verified": false,
+      "isMonetizedPartner": false,
+      "logo": "📰"
     }
   ],
   "blogs": [
@@ -796,11 +1012,11 @@
       "url": "https://congressoemfoco.uol.com.br/judiciario/stf-conclui-julgamento-senado-pacheco",
       "politician": "Rodrigo Pacheco",
       "politicianId": "pacheco",
-      "subject": "STF",
+      "subject": "STF & Judiciário",
       "publishedDate": "2026-09-18T16:20:00Z",
       "isSponsored": true,
       "sourceLogo": "/assets/logos/congresso.svg",
-      "imageUrl": "/assets/politicians/pacheco.jpg"
+      "imageUrl": "/assets/themes/stf.jpg"
     },
     {
       "id": "art-5",
@@ -914,14 +1130,119 @@
       "source": "Congresso em Foco Insider",
       "siteId": "congresso-em-foco",
       "url": "https://congressoemfoco.uol.com.br/relatorios-vip",
-      "politician": "Luiz Inácio Lula da Silva",
+      "politician": "Congresso Nacional",
       "politicianId": "lula",
-      "subject": "STF",
+      "subject": "Inteligência Legislativa",
       "publishedDate": "2026-10-01T08:00:00Z",
       "isSponsored": true,
       "sponsorName": "Análise Estratégica Brasília",
       "sourceLogo": "/assets/logos/congresso.svg",
-      "imageUrl": "/assets/politicians/lula.jpg"
+      "imageUrl": "/assets/themes/congresso.jpg"
+    },
+    {
+      "id": "art-13",
+      "title": "Alexandre de Moraes determina abertura de inquérito e intima plataformas digitais no STF",
+      "snippet": "Ministro do Supremo Tribunal Federal estabeleceu prazo de 48 horas para envio de relatórios sobre contas suspensas e cumprimento de ordens judiciais.",
+      "source": "G1 Política",
+      "siteId": "g1-politica",
+      "url": "https://g1.globo.com/politica/noticia/2026/10/alexandre-de-moraes-stf-inquerito-plataformas.ghtml",
+      "politician": "Alexandre de Moraes",
+      "politicianId": "moraes",
+      "subject": "STF & Judiciário",
+      "publishedDate": "2026-10-07T16:00:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/g1.svg",
+      "imageUrl": "/assets/politicians/moraes.jpg"
+    },
+    {
+      "id": "art-14",
+      "title": "Geraldo Alckmin apresenta plano de neoindustrialização e incentivo à inovação automotiva",
+      "snippet": "Vice-presidente e ministro do MDIC anunciou linha de crédito especial do BNDES voltada para descarbonização industrial e produção de biocombustíveis.",
+      "source": "Folha de S.Paulo - Poder",
+      "siteId": "folha-poder",
+      "url": "https://www1.folha.uol.com.br/poder/2026/10/alckmin-plano-neoindustrializacao-bndes.shtml",
+      "politician": "Geraldo Alckmin",
+      "politicianId": "alckmin",
+      "subject": "Economia & Indústria",
+      "publishedDate": "2026-10-06T11:20:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/folha.svg",
+      "imageUrl": "/assets/politicians/alckmin.jpg"
+    },
+    {
+      "id": "art-15",
+      "title": "Flávio Dino profere voto de desempate em julgamento de repercussão geral na 1ª Turma do STF",
+      "snippet": "Decisão do ministro consolidou entendimento jurisprudencial sobre limites de destinação de recursos e transparência em emendas parlamentares.",
+      "source": "Poder360",
+      "siteId": "poder360",
+      "url": "https://www.poder360.com.br/stf/flavio-dino-voto-desempate-emendas-parlamentares",
+      "politician": "Flávio Dino",
+      "politicianId": "dino",
+      "subject": "STF & Judiciário",
+      "publishedDate": "2026-10-05T14:45:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/poder360.svg",
+      "imageUrl": "/assets/politicians/dino.jpg"
+    },
+    {
+      "id": "art-16",
+      "title": "Ricardo Nunes e Guilherme Boulos polarizam debate na reta final e apresentam propostas para transporte em SP",
+      "snippet": "Candidatos à Prefeitura de São Paulo discutiram tarifa zero nos ônibus municipais, segurança urbana e concessões de serviços cemiteriais.",
+      "source": "Metrópoles - Coluna Política",
+      "siteId": "metropoles-politica",
+      "url": "https://www.metropoles.com/brasil/nunes-boulos-debate-prefeitura-sp",
+      "politician": "Ricardo Nunes",
+      "politicianId": "nunes",
+      "subject": "Eleições",
+      "publishedDate": "2026-10-04T20:15:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/metropoles.svg",
+      "imageUrl": "/assets/politicians/nunes.jpg"
+    },
+    {
+      "id": "art-17",
+      "title": "Polícia Federal deflagra operação contra desvio de recursos públicos em contratos de tecnologia",
+      "snippet": "Agentes federais cumpriram 18 mandados de busca e apreensão autorizados pela Justiça Federal em Brasília, São Paulo e Minas Gerais.",
+      "source": "CNN Brasil Política",
+      "siteId": "cnn-brasil-politica",
+      "url": "https://www.cnnbrasil.com.br/politica/policia-federal-operacao-contratos-tecnologia",
+      "politician": "Polícia Federal",
+      "politicianId": "pf",
+      "subject": "Polícia Federal & Segurança",
+      "publishedDate": "2026-10-03T09:30:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/cnn.svg",
+      "imageUrl": "/assets/themes/policia-federal.jpg"
+    },
+    {
+      "id": "art-18",
+      "title": "Banco Central mantém taxa Selic a 10,50% ao ano e alerta para pressões fiscais e mercado de trabalho",
+      "snippet": "Ata do Comitê de Política Monetária (Copom) reforçou postura de cautela com expectativas de inflação e dinâmica econômica internacional.",
+      "source": "Estadão Política",
+      "siteId": "estadao-politica",
+      "url": "https://www.estadao.com.br/politica/banco-central-copom-selic-comunicado",
+      "politician": "Banco Central",
+      "politicianId": "bc",
+      "subject": "Economia & Finanças",
+      "publishedDate": "2026-10-02T18:00:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/estadao.svg",
+      "imageUrl": "/assets/themes/banco-central.jpg"
+    },
+    {
+      "id": "art-19",
+      "title": "Romeu Zema sanciona plano de incentivos tributários para o setor de energia solar em Minas Gerais",
+      "snippet": "Governador destacou atração de R$ 4 bilhões em novos empreendimentos privados no norte do estado e expansão de empregos verdes.",
+      "source": "Gazeta do Povo - Política",
+      "siteId": "gazeta-do-povo",
+      "url": "https://www.gazetadopovo.com.br/politica/zema-incentivos-tributarios-energia-minas",
+      "politician": "Romeu Zema",
+      "politicianId": "zema",
+      "subject": "Economia",
+      "publishedDate": "2026-10-01T15:10:00Z",
+      "isSponsored": false,
+      "sourceLogo": "/assets/logos/gazetadopovo.svg",
+      "imageUrl": "/assets/politicians/zema.jpg"
     }
   ],
   "monetization": {
@@ -1024,11 +1345,25 @@
         "blog-congresso-foco"
       ],
       "createdAt": "2026-10-08T16:33:12.397Z"
+    },
+    {
+      "id": "usr-1791478784472",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791478784466@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-08T16:59:44.472Z"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 7600,
+    "currentTotal": 8350,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1058,6 +1393,15 @@
       },
       {
         "id": "don-1791477193357",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-08",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
+        "id": "don-1791478785231",
         "name": "Instituto Teste Automatizado",
         "email": "teste@transparencia.org",
         "amount": 750,
@@ -1104,14 +1448,6 @@
         "date": "2026-10-02",
         "badge": "Apoiador Bronze",
         "message": "Material de estudo excelente para alunos."
-      },
-      {
-        "id": "don-9",
-        "name": "Lucas Nogueira Santos",
-        "amount": 300,
-        "date": "2026-10-01",
-        "badge": "Apoiador Bronze",
-        "message": "Viva a transparência política!"
       }
     ]
   }
