@@ -87,11 +87,15 @@ function getLogoForSource(sourceName) {
   if (norm.includes('gazeta')) return '/assets/logos/gazetadopovo.svg';
   if (norm.includes('conjur')) return '/assets/logos/conjur.svg';
   if (norm.includes('brasil 247') || norm.includes('brasil247')) return '/assets/logos/brasil247.svg';
+  if (norm.includes('uol')) return '/assets/logos/uol.svg';
+  if (norm.includes('agencia brasil') || norm.includes('ebc')) return '/assets/logos/agenciabrasil.svg';
   return '/assets/logos/g1.svg';
 }
 
 function getImageForArticle(db, title, politicianTerm) {
   const fullText = normalizeStr(title + ' ' + (politicianTerm || ''));
+  
+  // 1. Verificar se menciona diretamente algum político cadastrado
   const pol = (db.politicians || []).find(p => 
     fullText.includes(normalizeStr(p.popularName)) || 
     fullText.includes(normalizeStr(p.name))
@@ -99,13 +103,26 @@ function getImageForArticle(db, title, politicianTerm) {
   if (pol && pol.avatar) {
     return pol.avatar;
   }
-  const defaultImages = [
-    'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80'
-  ];
-  return defaultImages[Math.floor(Math.random() * defaultImages.length)];
+
+  // 2. Mapeamento preciso para fotos institucionais oficiais brasileiras reais
+  if (fullText.includes('stf') || fullText.includes('supremo') || fullText.includes('moraes') || fullText.includes('barroso') || fullText.includes('tribunal') || fullText.includes('judiciario') || fullText.includes('justica')) {
+    return '/assets/themes/stf.jpg';
+  }
+  if (fullText.includes('congresso') || fullText.includes('senado') || fullText.includes('camara') || fullText.includes('deputado') || fullText.includes('parlamento') || fullText.includes('plenario') || fullText.includes('lira') || fullText.includes('pacheco')) {
+    return '/assets/themes/congresso.jpg';
+  }
+  if (fullText.includes('planalto') || fullText.includes('governo') || fullText.includes('presidencia') || fullText.includes('ministerio') || fullText.includes('decreto') || fullText.includes('palacio')) {
+    return '/assets/themes/planalto.jpg';
+  }
+  if (fullText.includes('economia') || fullText.includes('fazenda') || fullText.includes('tributaria') || fullText.includes('inflacao') || fullText.includes('dolar') || fullText.includes('imposto') || fullText.includes('juros') || fullText.includes('banco central')) {
+    return '/assets/themes/fazenda.jpg';
+  }
+  if (fullText.includes('eleicao') || fullText.includes('eleicoes') || fullText.includes('urna') || fullText.includes('tse') || fullText.includes('voto') || fullText.includes('pesquisa') || fullText.includes('partido')) {
+    return '/assets/themes/eleicoes.jpg';
+  }
+
+  // 3. Imagem institucional padrão de alta autoridade: Brasília / Três Poderes
+  return '/assets/themes/brasilia.jpg';
 }
 
 // Helper: encontrar ou registrar site no banco
@@ -568,6 +585,90 @@ app.post('/api/monetization/advertiser-request', (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Erro ao registrar contato comercial.' });
+  }
+});
+
+// 5.1 SISTEMA DE DOAÇÃO / TOP 10 DONATE
+app.get('/api/donations', (req, res) => {
+  try {
+    const db = readDb();
+    const donations = db.donations || {
+      goal: 10000,
+      currentTotal: 0,
+      currency: 'BRL',
+      pixKey: 'pix@radarpolitico.com.br',
+      topDonators: []
+    };
+    // Ordenar doadores pelo valor decrescente
+    donations.topDonators = [...(donations.topDonators || [])]
+      .sort((a, b) => b.amount - a.amount)
+      .slice(0, 10)
+      .map((d, idx) => ({ ...d, rank: idx + 1 }));
+
+    res.json({
+      success: true,
+      donations
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao carregar dados de doação.' });
+  }
+});
+
+app.post('/api/donations', (req, res) => {
+  try {
+    const { name, email, amount, message } = req.body;
+    const numAmount = parseFloat(amount);
+    if (!name || isNaN(numAmount) || numAmount <= 0) {
+      return res.status(400).json({ success: false, error: 'Nome e valor válido são obrigatórios.' });
+    }
+
+    const db = readDb();
+    if (!db.donations) {
+      db.donations = {
+        goal: 10000,
+        currentTotal: 0,
+        currency: 'BRL',
+        pixKey: 'pix@radarpolitico.com.br',
+        topDonators: []
+      };
+    }
+
+    let badge = 'Apoiador Cidadão';
+    if (numAmount >= 1000) badge = 'Patrocinador Diamante';
+    else if (numAmount >= 500) badge = 'Patrocinador Ouro';
+    else if (numAmount >= 250) badge = 'Apoiador Prata';
+    else if (numAmount >= 100) badge = 'Apoiador Bronze';
+
+    const newDonation = {
+      id: `don-${Date.now()}`,
+      name: name.trim(),
+      email: email ? email.trim() : '',
+      amount: numAmount,
+      date: new Date().toISOString().split('T')[0],
+      badge,
+      message: message ? message.trim() : 'Apoiador da transparência pública.'
+    };
+
+    db.donations.topDonators.push(newDonation);
+    db.donations.topDonators.sort((a, b) => b.amount - a.amount);
+    db.donations.topDonators = db.donations.topDonators.slice(0, 10);
+    db.donations.currentTotal = (db.donations.currentTotal || 0) + numAmount;
+
+    writeDb(db);
+
+    const pixPayload = `00020126360014BR.GOV.BCB.PIX0114+5511999999999520400005303986540${numAmount.toFixed(2)}5802BR5920RADAR POLITICO PRO6009SAO PAULO62070503***6304`;
+
+    res.status(201).json({
+      success: true,
+      message: 'Doação registrada com sucesso!',
+      donation: newDonation,
+      currentTotal: db.donations.currentTotal,
+      pixKey: db.donations.pixKey,
+      pixCode: pixPayload,
+      topDonators: db.donations.topDonators
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao processar doação.' });
   }
 });
 

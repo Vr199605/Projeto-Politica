@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radar Político - Notícias, Monitoramento Social & Inteligência Pública</title>
-  <meta name="description" content="Busca avançada de notícias políticas com raio temporal, rankings dos políticos e portais mais acessados, acompanhamento de redes sociais ao vivo e favoritos.">
+  <title>Radar Político - Monitoramento de Notícias & Redes Sociais em Tempo Real</title>
+  <meta name="description" content="Portal de monitoramento político com busca de notícias em tempo real, raio temporal, detecção de transmissões ao vivo, top políticos e portais mais acessados.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -27,10 +27,9 @@
             brand: {
               50: '#f0f7ff',
               100: '#e0effe',
-              500: '#2563eb',
-              600: '#1d4ed8',
-              700: '#1e40af',
-              800: '#1e3a8a',
+              500: '#1d4ed8',
+              600: '#1e40af',
+              700: '#1e3a8a',
               900: '#0f172a',
             }
           }
@@ -41,834 +40,610 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-slate-50/70 text-slate-900 min-h-screen flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-100/70 text-slate-900 min-h-screen flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
 
   <!-- ======================================================== -->
-  <!-- TOPO: FAIXA DE ANÚNCIO VIP / STATUS AO VIVO             -->
+  <!-- TOPO: LINHA 1 -> DOAÇÃO / TOP 10 DONATE  +  LOGIN        -->
   <!-- ======================================================== -->
-  <div class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 text-white border-b border-indigo-900/60 py-2 px-4 text-xs">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5">
-        <span class="inline-flex items-center gap-1.5 bg-rose-500/20 text-rose-300 font-extrabold px-2.5 py-0.5 rounded-full text-[10px] border border-rose-500/30 uppercase tracking-wider animate-pulse">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> Radar Social Ativo
-        </span>
-        <span class="text-slate-300 font-medium hidden md:inline">
-          Monitorando transmissões ao vivo no YouTube, Instagram, X e TikTok em tempo real.
-        </span>
-      </div>
-      <div class="flex items-center gap-3">
-        <button onclick="switchTab('social')" class="text-indigo-300 hover:text-white font-bold transition flex items-center gap-1 cursor-pointer text-[11px]">
-          <i class="fa-solid fa-satellite"></i> Políticos Online
-        </button>
-        <span class="text-slate-700">|</span>
-        <button onclick="openAdvertiserModal('Banner Topo Leaderboard')" class="text-amber-400 hover:text-amber-300 font-bold underline transition flex items-center gap-1 cursor-pointer text-[11px]">
-          <i class="fa-solid fa-crown text-[10px]"></i> Anuncie Aqui
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
-  <!-- CABEÇALHO PRINCIPAL COM AUTENTICAÇÃO E NAVEGAÇÃO        -->
-  <!-- ======================================================== -->
-  <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-xs transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 gap-3">
+  <header class="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+      <div class="flex items-center justify-between h-14 sm:h-16 gap-2 sm:gap-4">
         
-        <!-- Logo e Slogan -->
-        <div class="flex items-center gap-3 cursor-pointer select-none" onclick="switchTab('search')">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-600/25 ring-2 ring-white">
-            <i class="fa-solid fa-satellite-dish text-lg"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-xl font-extrabold tracking-tight text-slate-900">RADAR<span class="text-blue-600">POLÍTICO</span></span>
-              <span class="bg-blue-100 text-blue-700 text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider">PRO</span>
+        <!-- Bloco Esquerdo/Central: Doação / TOP 10 DONATE -->
+        <div class="flex-1 flex items-center gap-2 sm:gap-3 overflow-hidden">
+          <div class="flex items-center gap-2 cursor-pointer select-none" onclick="switchTab('search')">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-extrabold text-sm shadow-sm ring-1 ring-white/20">
+              <i class="fa-solid fa-satellite-dish"></i>
             </div>
-            <p class="text-[11px] text-slate-500 hidden sm:block -mt-1 font-medium">Inteligência Noticiosa & Redes Sociais</p>
+            <div class="hidden md:block">
+              <span class="text-sm font-black tracking-tight text-white">RADAR<span class="text-blue-400">POLÍTICO</span></span>
+            </div>
+          </div>
+
+          <div class="h-6 w-px bg-slate-800 hidden md:block"></div>
+
+          <!-- Ticker & Chamada de Doação -->
+          <div class="flex-1 flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1.5 overflow-hidden">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="inline-flex items-center gap-1 bg-emerald-500/20 text-emerald-400 font-extrabold px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wider border border-emerald-500/30 whitespace-nowrap">
+                <i class="fa-solid fa-hand-holding-dollar text-[9px]"></i> DOAÇÃO
+              </span>
+              <div class="text-[11px] text-slate-300 truncate">
+                <span class="font-bold text-white mr-1 hidden sm:inline">TOP 10 DONATE:</span>
+                <span id="ticker-top-donators" class="text-slate-400 font-medium">Carregando maiores apoiadores...</span>
+              </div>
+            </div>
+
+            <button onclick="openDonationModal()" class="ml-2 whitespace-nowrap bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-lg transition flex items-center gap-1 shadow-sm">
+              <i class="fa-brands fa-pix text-[10px]"></i>
+              <span>Apoiar / Top 10</span>
+            </button>
           </div>
         </div>
 
-        <!-- Navegação Desktop -->
-        <nav class="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/90 text-xs font-bold">
-          <button onclick="switchTab('search')" id="nav-search" class="nav-tab-btn active px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-blue-700 bg-white shadow-xs">
-            <i class="fa-solid fa-house text-xs"></i> Início & Busca
-          </button>
-          <button onclick="switchTab('social')" id="nav-social" class="nav-tab-btn px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-wifi text-emerald-600 text-xs"></i> Políticos Online
-            <span id="badge-live-count" class="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full hidden">0</span>
-          </button>
-          <button onclick="switchTab('politicians')" id="nav-politicians" class="nav-tab-btn px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-users text-xs"></i> Top 10 Políticos
-          </button>
-          <button onclick="switchTab('sites')" id="nav-sites" class="nav-tab-btn px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-chart-line text-xs"></i> Top 10 Portais
-          </button>
-          <button onclick="switchTab('blogs')" id="nav-blogs" class="nav-tab-btn px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-newspaper text-xs"></i> Blogs Patrocinados
-          </button>
-          <button onclick="switchTab('monetization')" id="nav-monetization" class="nav-tab-btn px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-coins text-amber-500 text-xs"></i> Monetização
-          </button>
-        </nav>
-
-        <!-- ÁREA DO USUÁRIO & AÇÕES (LOGIN / CADASTRO / FAVORITOS) -->
-        <div class="flex items-center gap-2">
-          
-          <!-- Botão Meus Favoritos (Sempre visível) -->
-          <button onclick="openFavoritesModal()" class="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-rose-600 bg-slate-100 hover:bg-rose-50 px-3 py-2 rounded-xl border border-slate-200 transition" title="Meus Políticos e Blogs Favoritos">
-            <i class="fa-solid fa-heart text-rose-500"></i>
-            <span class="hidden sm:inline">Favoritos</span>
-            <span id="fav-counter-badge" class="bg-rose-500 text-white text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
+        <!-- Bloco Direito: LOGIN / PERFIL DO USUÁRIO -->
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Botão Meus Favoritos -->
+          <button onclick="openFavoritesModal()" class="flex items-center gap-1 text-[11px] font-bold text-slate-300 hover:text-rose-400 bg-slate-900 px-2.5 py-1.5 rounded-xl border border-slate-800 transition" title="Meus Favoritos">
+            <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
+            <span class="hidden lg:inline">Favoritos</span>
+            <span id="fav-counter-badge" class="bg-rose-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
           </button>
 
-          <!-- Estado de Login do Usuário -->
-          <div id="auth-header-container" class="flex items-center gap-2">
-            <!-- Deslogado -->
-            <button onclick="openAuthModal('login')" id="btn-header-login" class="flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3.5 py-2 rounded-xl shadow-xs shadow-blue-600/30 transition">
-              <i class="fa-regular fa-user"></i>
-              <span>Entrar</span>
+          <!-- Estado Deslogado -->
+          <button onclick="openAuthModal('login')" id="btn-header-login" class="flex items-center gap-1.5 text-xs font-black text-white bg-blue-600 hover:bg-blue-500 px-3 py-1.5 rounded-xl shadow-xs transition">
+            <i class="fa-regular fa-user text-xs"></i>
+            <span>LOGIN</span>
+          </button>
+
+          <!-- Estado Logado (Oculto Inicialmente) -->
+          <div id="user-profile-menu" class="hidden items-center gap-2 bg-slate-900 py-1 pl-1.5 pr-2 rounded-xl border border-slate-800">
+            <img id="user-header-avatar" src="" alt="Avatar" class="w-6 h-6 rounded-lg object-cover border border-slate-700">
+            <span id="user-header-name" class="text-xs font-bold text-slate-200 max-w-[80px] truncate">Usuário</span>
+            <button onclick="handleLogout()" class="text-slate-400 hover:text-rose-400 text-xs ml-1" title="Sair da Conta">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </button>
-            
-            <!-- Logado (Inicialmente Oculto) -->
-            <div id="user-profile-menu" class="hidden items-center gap-2 bg-slate-100/90 py-1 pl-1.5 pr-2.5 rounded-xl border border-slate-200">
-              <img id="user-header-avatar" src="" alt="Avatar" class="w-7 h-7 rounded-lg object-cover border border-white">
-              <span id="user-header-name" class="text-xs font-bold text-slate-800 max-w-[100px] truncate">Usuário</span>
-              <button onclick="handleLogout()" class="text-slate-400 hover:text-rose-600 ml-1" title="Sair da Conta">
-                <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
-              </button>
-            </div>
           </div>
-
         </div>
 
       </div>
-    </div>
-
-    <!-- Navegação Mobile (Scroll Horizontal) -->
-    <div class="lg:hidden border-t border-slate-200 px-3 py-2 bg-slate-50 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-xs font-bold">
-      <button onclick="switchTab('search')" id="mob-search" class="mob-tab-btn active whitespace-nowrap px-3 py-1.5 rounded-lg bg-blue-600 text-white flex items-center gap-1.5">
-        <i class="fa-solid fa-house"></i> Início
-      </button>
-      <button onclick="switchTab('social')" id="mob-social" class="mob-tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 flex items-center gap-1.5">
-        <i class="fa-solid fa-wifi text-emerald-600"></i> Online & Lives
-      </button>
-      <button onclick="switchTab('politicians')" id="mob-politicians" class="mob-tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 flex items-center gap-1.5">
-        <i class="fa-solid fa-users"></i> Top Políticos
-      </button>
-      <button onclick="switchTab('sites')" id="mob-sites" class="mob-tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 flex items-center gap-1.5">
-        <i class="fa-solid fa-chart-line"></i> Top Sites
-      </button>
-      <button onclick="switchTab('blogs')" id="mob-blogs" class="mob-tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 flex items-center gap-1.5">
-        <i class="fa-solid fa-newspaper"></i> Blogs VIP
-      </button>
-      <button onclick="switchTab('monetization')" id="mob-monetization" class="mob-tab-btn whitespace-nowrap px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 flex items-center gap-1.5">
-        <i class="fa-solid fa-coins text-amber-500"></i> Monetização
-      </button>
     </div>
   </header>
 
   <!-- ======================================================== -->
-  <!-- CONTEÚDO PRINCIPAL                                       -->
+  <!-- CONTAINER PRINCIPAL                                      -->
   <!-- ======================================================== -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 lg:px-6 py-4 space-y-4">
 
     <!-- ======================================================== -->
-    <!-- ABA 1: PÁGINA INICIAL (BUSCA + TOP 3 + PATROCINADORES)   -->
+    <!-- LINHA 2: TOP 5 POLITICOS MAIS BUSCADOS                  -->
     <!-- ======================================================== -->
-    <section id="section-search" class="space-y-8 animate-fadeIn">
-      
-      <!-- HERO & FORMULÁRIO DE PESQUISA AVANÇADA COM RAIO DE DATA -->
-      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 relative overflow-hidden">
-        <div class="absolute -right-20 -top-20 w-72 h-72 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-        <div class="absolute -left-20 -bottom-20 w-72 h-72 bg-gradient-to-tr from-emerald-100 to-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-
-        <div class="relative z-10 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <div class="inline-flex items-center gap-2 text-xs font-extrabold text-blue-700 bg-blue-50/90 px-3 py-1 rounded-full border border-blue-200/80 mb-2.5">
-                <i class="fa-solid fa-magnifying-glass-location text-blue-600"></i> Agregador Inteligente com Raio Temporal
-              </div>
-              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                Busca de Notícias Políticas do Brasil
-              </h1>
-              <p class="text-slate-600 text-sm mt-1 max-w-2xl">
-                Cruze pesquisas por <strong>Político</strong>, <strong>Assunto</strong> e <strong>Raio da Notícia</strong> (datas inicial e final) em fontes ao vivo e bancos de dados verificados.
-              </p>
-            </div>
-            
-            <!-- Botão de Login Rápido / Status -->
-            <div id="home-login-prompt" class="p-3 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl text-xs max-w-xs shadow-md hidden sm:block">
-              <div class="flex items-center gap-2 font-bold mb-1">
-                <i class="fa-solid fa-heart text-rose-400"></i> Salve seus Favoritos
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                Faça login para favoritar políticos e blogs e receber novidades personalizadas.
-              </p>
-              <button onclick="openAuthModal('login')" class="mt-2 w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] rounded-lg transition">
-                Entrar ou Criar Conta Grátis
-              </button>
-            </div>
-          </div>
-
-          <!-- FORMULÁRIO DE PESQUISA -->
-          <form id="search-form" onsubmit="handleSearch(event)" class="space-y-4 pt-2">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5">
-              
-              <!-- 1. Nome do Político -->
-              <div class="md:col-span-4 space-y-1.5">
-                <label for="input-politico" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  <i class="fa-solid fa-user-tie text-blue-600 mr-1"></i> Nome do Político
-                </label>
-                <div class="relative">
-                  <input 
-                    type="text" 
-                    id="input-politico" 
-                    placeholder="Ex: Lula, Bolsonaro, Tarcísio, Haddad..." 
-                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
-                    autocomplete="off"
-                  >
-                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 2. Assunto / Pauta -->
-              <div class="md:col-span-4 space-y-1.5">
-                <label for="input-assunto" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  <i class="fa-solid fa-tag text-indigo-600 mr-1"></i> Assunto / Pauta
-                </label>
-                <div class="relative">
-                  <input 
-                    type="text" 
-                    id="input-assunto" 
-                    placeholder="Ex: Reforma Tributária, STF, Eleições, Economia..." 
-                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition"
-                  >
-                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <i class="fa-solid fa-newspaper text-xs"></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 3. Raio da Notícia (Data Início e Término) -->
-              <div class="md:col-span-4 space-y-1.5">
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  <i class="fa-regular fa-calendar-days text-emerald-600 mr-1"></i> Raio da Notícia (Período)
-                </label>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="relative">
-                    <input 
-                      type="date" 
-                      id="input-data-inicio" 
-                      title="Data de Início"
-                      class="w-full px-2.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
-                    >
-                    <span class="absolute -top-2 left-2 bg-white px-1 text-[10px] font-bold text-slate-500">De</span>
-                  </div>
-                  <div class="relative">
-                    <input 
-                      type="date" 
-                      id="input-data-fim" 
-                      title="Data de Término"
-                      class="w-full px-2.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
-                    >
-                    <span class="absolute -top-2 left-2 bg-white px-1 text-[10px] font-bold text-slate-500">Até</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Sugestões Rápidas & Presets -->
-            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
-              <div class="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
-                <span class="font-bold text-slate-600 text-[11px]"><i class="fa-solid fa-fire text-amber-500"></i> Em Alta:</span>
-                <button type="button" onclick="quickSearchPolitico('Lula')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Lula</button>
-                <button type="button" onclick="quickSearchPolitico('Bolsonaro')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Bolsonaro</button>
-                <button type="button" onclick="quickSearchPolitico('Tarcísio de Freitas')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Tarcísio</button>
-                <button type="button" onclick="quickSearchPolitico('Fernando Haddad')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Haddad</button>
-                <button type="button" onclick="quickSearchPolitico('Arthur Lira')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Lira</button>
-                <button type="button" onclick="quickSearchPolitico('Nikolas Ferreira')" class="px-2 py-0.5 rounded-full bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-semibold transition">Nikolas</button>
-              </div>
-
-              <!-- Presets Rápidos de Data -->
-              <div class="flex items-center gap-1 text-[11px] text-slate-500">
-                <span class="font-bold text-slate-600">Raio:</span>
-                <button type="button" onclick="setDatePreset('today')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">Hoje</button>
-                <button type="button" onclick="setDatePreset('7d')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">7 dias</button>
-                <button type="button" onclick="setDatePreset('30d')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">30 dias</button>
-                <button type="button" onclick="setDatePreset('all')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">Tudo</button>
-              </div>
-            </div>
-
-            <!-- Botões de Ação -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-              <div class="text-xs text-slate-500 flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-info text-blue-500"></i>
-                <span>Toda pesquisa incrementa o <strong>Top Políticos</strong> e cliques computam o <strong>Top Portais</strong>.</span>
-              </div>
-              <div class="flex items-center gap-2 w-full sm:w-auto">
-                <button type="button" onclick="resetSearchFilters()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition flex-1 sm:flex-initial">
-                  <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Limpar
-                </button>
-                <button type="submit" id="btn-search-submit" class="px-6 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-xl shadow-md shadow-blue-500/25 transition flex items-center justify-center gap-2 flex-1 sm:flex-initial">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <span>Buscar Notícias</span>
-                </button>
-              </div>
-            </div>
-
-          </form>
+    <section class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3 sm:p-4">
+      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black">
+            🏆
+          </span>
+          <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
+            TOP 5 POLÍTICOS MAIS BUSCADOS
+          </h2>
+          <span class="text-[10px] text-slate-500 font-medium hidden sm:inline">• Atualizado em tempo real</span>
         </div>
+        <button onclick="openAllPoliticiansModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
+          <span>Ver Ranking Geral (Top 10)</span>
+          <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        </button>
       </div>
 
-      <!-- ======================================================== -->
-      <!-- NOVO NA HOME: VITRINE TOP 3 POLÍTICOS & TOP 3 PORTAIS    -->
-      <!-- ======================================================== -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- CARD TOP 3 POLÍTICOS NA PÁGINA INICIAL -->
-        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold shadow-xs">
-                  🏆
-                </span>
-                <div>
-                  <h2 class="text-base font-extrabold text-slate-900 leading-tight">Top 3 Políticos Mais Buscados</h2>
-                  <p class="text-xs text-slate-500">Líderes de interesse público hoje no aplicativo</p>
-                </div>
-              </div>
-              <button onclick="switchTab('politicians')" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
-                Ver Top 10 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-              </button>
-            </div>
+      <!-- Grid com os Top 5 Políticos -->
+      <div id="top5-politicians-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <!-- Renderizado dinamicamente com fotos reais e badges de Live -->
+      </div>
+    </section>
 
-            <!-- Mini Podio Top 3 Políticos -->
-            <div id="home-top3-politicians" class="space-y-3">
-              <!-- Renderizado dinamicamente -->
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span><i class="fa-solid fa-heart text-rose-500"></i> Clique no coração para salvar aos seus favoritos</span>
-            <span class="font-bold text-slate-700" id="home-politicians-total-searches">-- buscas</span>
-          </div>
+    <!-- ======================================================== -->
+    <!-- LINHA 3: TOP 5 SITES DE NOTICIAS MAIS ACESSADOS         -->
+    <!-- ======================================================== -->
+    <section class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3 sm:p-4">
+      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-slate-900 text-white flex items-center justify-center text-xs font-black">
+            🌐
+          </span>
+          <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
+            TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS
+          </h2>
+          <span class="text-[10px] text-slate-500 font-medium hidden sm:inline">• Fontes jornalísticas oficiais com logos</span>
         </div>
-
-        <!-- CARD TOP 3 PORTAIS MAIS ACESSADOS NA PÁGINA INICIAL -->
-        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold shadow-xs">
-                  🌐
-                </span>
-                <div>
-                  <h2 class="text-base font-extrabold text-slate-900 leading-tight">Top 3 Portais Mais Acessados</h2>
-                  <p class="text-xs text-slate-500">Veículos de jornalismo com maior audiência no app</p>
-                </div>
-              </div>
-              <button onclick="switchTab('sites')" class="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
-                Ver Top 10 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-              </button>
-            </div>
-
-            <!-- Mini Podio Top 3 Sites -->
-            <div id="home-top3-sites" class="space-y-3">
-              <!-- Renderizado dinamicamente -->
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span><i class="fa-solid fa-star text-amber-500"></i> Salve seus portais favoritos no perfil</span>
-            <span class="font-bold text-slate-700" id="home-sites-total-clicks">-- acessos</span>
-          </div>
-        </div>
-
+        <button onclick="openAllSitesModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
+          <span>Ver Ranking Geral (Top 10)</span>
+          <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        </button>
       </div>
 
-      <!-- ======================================================== -->
-      <!-- NOVO NA HOME: BLOGS E FONTES PATROCINADORAS VIP          -->
-      <!-- ======================================================== -->
-      <div class="bg-gradient-to-r from-amber-50/80 via-white to-amber-50/80 rounded-3xl border border-amber-200/90 p-6 shadow-sm relative overflow-hidden">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-extrabold text-sm shadow-xs">
-              <i class="fa-solid fa-crown"></i>
-            </span>
-            <div>
+      <!-- Grid com os Top 5 Sites com Logos SVG -->
+      <div id="top5-sites-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <!-- Renderizado dinamicamente via app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- LINHA 4: ABAS PRINCIPAIS: [ BUSCA ] | [ POLITICO ONLINE ]-->
+    <!-- ======================================================== -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-2 sm:p-2.5 rounded-2xl border border-slate-200/90 shadow-xs">
+      <!-- Segmented Buttons -->
+      <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
+        <button 
+          id="tab-btn-busca" 
+          onclick="switchTab('search')" 
+          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 bg-slate-900 text-white shadow-xs"
+        >
+          <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          <span>BUSCA</span>
+        </button>
+        <button 
+          id="tab-btn-online" 
+          onclick="switchTab('social')" 
+          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
+        >
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+          <span>POLÍTICO ONLINE</span>
+          <span id="badge-live-total-pill" class="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full">3 AO VIVO</span>
+        </button>
+      </div>
+
+      <!-- Links secundários discretos -->
+      <div class="flex items-center gap-3 px-2 text-xs font-bold text-slate-600 justify-end">
+        <button onclick="openBlogRegisterModal()" class="hover:text-blue-600 transition flex items-center gap-1">
+          <i class="fa-solid fa-plus text-blue-600"></i> Cadastrar Meu Blog
+        </button>
+        <span class="text-slate-300">|</span>
+        <button onclick="openAdvertiserModal('Sidebar Anunciantes')" class="hover:text-amber-600 transition flex items-center gap-1 text-amber-600">
+          <i class="fa-solid fa-crown text-[10px]"></i> Anuncie Aqui
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- LINHA 5: GRID DE 2 COLUNAS                               -->
+    <!-- COLUNA ESQUERDA: BUSCA / RESULTADO                       -->
+    <!-- COLUNA DIREITA: ANUNCIANTES                              -->
+    <!-- ======================================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+
+      <!-- ====================================================== -->
+      <!-- COLUNA PRINCIPAL (ESQUERDA - 8 ou 9 COLUNAS)          -->
+      <!-- ====================================================== -->
+      <div class="lg:col-span-8 xl:col-span-9 space-y-4">
+
+        <!-- ==================================================== -->
+        <!-- VIEW 1: BUSCA E RESULTADOS                           -->
+        <!-- ==================================================== -->
+        <div id="view-busca" class="space-y-4">
+          
+          <!-- FORMULÁRIO DE BUSCA AVANÇADA COM BUSCA EM TEMPO REAL -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-2 mb-3">
               <div class="flex items-center gap-2">
-                <h2 class="text-base font-extrabold text-slate-900">Blogs e Fontes Patrocinadoras VIP</h2>
-                <span class="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded border border-amber-300 uppercase tracking-wider">
-                  Destaques Monetizados
+                <span class="w-6 h-6 rounded-md bg-blue-600 text-white flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-sliders"></i>
                 </span>
-              </div>
-              <p class="text-xs text-slate-600">Portais de bastidores, colunas independentes e mídias parceiras em destaque</p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <button onclick="openBlogRegisterModal()" class="text-xs font-bold text-slate-800 hover:text-blue-600 bg-white border border-slate-200 px-3 py-1.5 rounded-xl transition shadow-xs">
-              <i class="fa-solid fa-plus text-blue-600"></i> Cadastrar Meu Blog
-            </button>
-            <button onclick="switchTab('blogs')" class="text-xs font-bold text-amber-800 hover:text-amber-900 bg-amber-200/70 px-3 py-1.5 rounded-xl transition">
-              Ver Todos os Blogs &rarr;
-            </button>
-          </div>
-        </div>
-
-        <!-- Grade de Blogs Patrocinados na Página Inicial -->
-        <div id="home-sponsored-blogs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <!-- Renderizado dinamicamente via app.js -->
-        </div>
-      </div>
-
-      <!-- ======================================================== -->
-      <!-- NOVO NA HOME: RADAR SOCIAL - POLÍTICOS AO VIVO & STATUS  -->
-      <!-- ======================================================== -->
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold text-sm shadow-xs">
-              <i class="fa-solid fa-tower-broadcast"></i>
-            </span>
-            <div>
-              <div class="flex items-center gap-2">
-                <h2 class="text-base font-extrabold text-slate-900">Radar Social: Políticos Ao Vivo & Redes Sociais</h2>
-                <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-emerald-200">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Monitoramento 24h
-                </span>
-              </div>
-              <p class="text-xs text-slate-500">Veja quem está transmitindo lives agora ou postou recentemente nas plataformas</p>
-            </div>
-          </div>
-
-          <button onclick="switchTab('social')" class="text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 self-start sm:self-center">
-            <span>Explorar Radar Social Completo</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-        </div>
-
-        <!-- Carrossel / Grid de Status Social na Home -->
-        <div id="home-social-status-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-          <!-- Renderizado dinamicamente via app.js -->
-        </div>
-      </div>
-
-      <!-- ======================================================== -->
-      <!-- RESULTADOS DA BUSCA DE NOTÍCIAS                          -->
-      <!-- ======================================================== -->
-      <div class="space-y-4 pt-4 border-t border-slate-200">
-        
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200 text-xs shadow-xs">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-extrabold text-slate-900 text-sm" id="results-count-label">Carregando notícias...</span>
-            <div id="active-tags-container" class="flex flex-wrap items-center gap-1.5"></div>
-          </div>
-          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-            <label for="select-sort" class="text-slate-500 font-bold whitespace-nowrap">Ordenar:</label>
-            <select id="select-sort" onchange="sortNewsResults()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1 text-xs font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500">
-              <option value="recent">Mais Recentes</option>
-              <option value="relevant">Mais Relevantes</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Anúncio Nativo Patrocinado no Feed com Foto em Destaque e Logo -->
-        <div id="sponsored-feed-card" class="bg-gradient-to-r from-amber-50/90 via-white to-amber-50/90 border-2 border-amber-300 rounded-3xl p-5 sm:p-6 relative shadow-xs hover:shadow-md transition overflow-hidden">
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-            
-            <!-- Foto do Anúncio em Alto Destaque -->
-            <div class="md:col-span-4 relative rounded-2xl overflow-hidden h-48 md:h-36 bg-slate-900 group">
-              <img 
-                src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80" 
-                alt="Brasília Intelligence Report" 
-                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              >
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-              
-              <!-- Selo Patrocinado Flutuante na Foto -->
-              <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-md uppercase tracking-wider flex items-center gap-1 shadow-sm">
-                <i class="fa-solid fa-crown text-[9px]"></i> Anúncio VIP
-              </span>
-
-              <!-- Logo do Parceiro sobreposto -->
-              <div class="absolute bottom-2.5 left-2.5 bg-slate-950/80 backdrop-blur-md px-2 py-1 rounded-lg border border-white/20">
-                <img src="/assets/logos/congresso.svg" alt="Congresso em Foco" class="h-4 object-contain">
-              </div>
-            </div>
-
-            <!-- Conteúdo e CTA do Anúncio -->
-            <div class="md:col-span-8 flex flex-col justify-between h-full space-y-2">
-              <div class="flex items-center justify-between gap-2">
-                <div class="flex items-center gap-2">
-                  <span class="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider">
-                    Destaque Patrocinado Oficial
-                  </span>
-                  <span class="text-xs text-slate-500 font-bold">Relatório Executivo 2026</span>
-                </div>
-                <span class="text-xs font-bold text-amber-600 flex items-center gap-1">
-                  <i class="fa-solid fa-star text-[11px]"></i> 4.9 Parceiro VIP
-                </span>
-              </div>
-
-              <div>
-                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">
-                  Termômetro de Risco Político & Votações Estratégicas em Brasília
+                <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide">
+                  Filtros de Pesquisa em Tempo Real
                 </h3>
-                <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                  Antecipe as tendências do Congresso e decisões do STF com a newsletter de inteligência mais lida por diretores de relações institucionais, escritórios e lideranças.
-                </p>
               </div>
+              <span id="search-realtime-status" class="text-[11px] font-semibold text-emerald-600 flex items-center gap-1">
+                <i class="fa-solid fa-bolt text-emerald-500"></i> Busca ao vivo ativa
+              </span>
+            </div>
 
-              <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2 text-[11px] text-slate-500 font-medium">
-                  <i class="fa-solid fa-check text-emerald-600"></i> Atualizado diariamente às 06h
+            <form id="search-form" onsubmit="handleSearch(event)" class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                
+                <!-- 1. Nome do Político -->
+                <div class="sm:col-span-4 space-y-1">
+                  <label for="input-politico" class="block text-[11px] font-bold uppercase tracking-wider text-slate-700">
+                    <i class="fa-solid fa-user-tie text-blue-600 mr-1"></i> Nome do Político
+                  </label>
+                  <div class="relative">
+                    <input 
+                      type="text" 
+                      id="input-politico" 
+                      placeholder="Ex: Lula, Bolsonaro, Tarcísio..." 
+                      class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition"
+                      autocomplete="off"
+                    >
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                  </div>
                 </div>
-                <button onclick="logAdClick('sponsored-feed-card', 'https://congressoemfoco.uol.com.br')" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-xs transition flex items-center gap-1.5">
-                  <span>Acessar Relatório Completo</span>
-                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                </button>
+
+                <!-- 2. Assunto / Pauta -->
+                <div class="sm:col-span-4 space-y-1">
+                  <label for="input-assunto" class="block text-[11px] font-bold uppercase tracking-wider text-slate-700">
+                    <i class="fa-solid fa-tag text-indigo-600 mr-1"></i> Assunto / Pauta
+                  </label>
+                  <div class="relative">
+                    <input 
+                      type="text" 
+                      id="input-assunto" 
+                      placeholder="Ex: Economia, STF, Eleições..." 
+                      class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:bg-white transition"
+                    >
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
+                      <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Raio da Notícia (Data Início e Fim) -->
+                <div class="sm:col-span-4 space-y-1">
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700">
+                    <i class="fa-regular fa-calendar text-emerald-600 mr-1"></i> Raio da Notícia (Período)
+                  </label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="relative">
+                      <input 
+                        type="date" 
+                        id="input-data-inicio" 
+                        title="Data Início"
+                        class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-xl text-[11px] font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition"
+                      >
+                    </div>
+                    <div class="relative">
+                      <input 
+                        type="date" 
+                        id="input-data-fim" 
+                        title="Data Fim"
+                        class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-xl text-[11px] font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition"
+                      >
+                    </div>
+                  </div>
+                </div>
+
               </div>
+
+              <!-- Atalhos Rápidos e Presets -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs">
+                <div class="flex flex-wrap items-center gap-1.5 text-slate-500">
+                  <span class="font-bold text-slate-700 text-[11px]"><i class="fa-solid fa-fire text-amber-500"></i> Sugestões:</span>
+                  <button type="button" onclick="quickSearchPolitico('Lula')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-bold transition text-[11px]">Lula</button>
+                  <button type="button" onclick="quickSearchPolitico('Bolsonaro')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-bold transition text-[11px]">Bolsonaro</button>
+                  <button type="button" onclick="quickSearchPolitico('Tarcísio de Freitas')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-bold transition text-[11px]">Tarcísio</button>
+                  <button type="button" onclick="quickSearchPolitico('Fernando Haddad')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-bold transition text-[11px]">Haddad</button>
+                  <button type="button" onclick="quickSearchPolitico('Arthur Lira')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-100 hover:text-blue-700 text-slate-700 font-bold transition text-[11px]">Lira</button>
+                </div>
+
+                <div class="flex items-center gap-1 text-[11px]">
+                  <span class="font-bold text-slate-600">Raio:</span>
+                  <button type="button" onclick="setDatePreset('today')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">Hoje</button>
+                  <button type="button" onclick="setDatePreset('7d')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">7d</button>
+                  <button type="button" onclick="setDatePreset('30d')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">30d</button>
+                  <button type="button" onclick="setDatePreset('all')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">Tudo</button>
+                  <button type="button" onclick="resetSearchFilters()" class="ml-2 text-slate-500 hover:text-slate-800 underline font-semibold">Limpar</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- BARRA DE STATUS DOS RESULTADOS -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white px-4 py-2.5 rounded-xl border border-slate-200/90 text-xs shadow-xs">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-black text-slate-900 text-xs sm:text-sm" id="results-count-label">Buscando notícias em tempo real...</span>
+              <div id="active-tags-container" class="flex flex-wrap items-center gap-1.5"></div>
+            </div>
+            <div class="flex items-center gap-2 justify-end">
+              <label for="select-sort" class="text-slate-500 font-bold">Ordenar:</label>
+              <select id="select-sort" onchange="sortNewsResults()" class="bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-xs font-bold text-slate-700 focus:outline-none">
+                <option value="recent">Mais Recentes</option>
+                <option value="relevant">Mais Relevantes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- GRID DE RESULTADOS DE NOTÍCIAS (EDITORIAL E NÍTIDO) -->
+          <div id="news-results-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
+            <!-- Renderizado dinamicamente via app.js com fotos reais e logos oficiais SVG -->
+          </div>
+
+          <!-- Estado Vazio -->
+          <div id="news-empty-state" class="hidden text-center py-10 bg-white rounded-2xl border border-dashed border-slate-300 p-6">
+            <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400 text-xl mb-2">
+              <i class="fa-regular fa-folder-open"></i>
+            </div>
+            <h3 class="text-sm font-bold text-slate-800">Nenhuma matéria encontrada no raio selecionado</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+              Experimente ajustar o raio de data ou buscar por outro político.
+            </p>
+            <button onclick="resetSearchFilters(); runDefaultSearch();" class="mt-3 px-4 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition">
+              Ver Notícias Mais Recentes
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- VIEW 2: POLÍTICO ONLINE & LIVES                      -->
+        <!-- ==================================================== -->
+        <div id="view-online" class="hidden space-y-4">
+          
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200 mb-1.5">
+                <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> RADAR DE TRANSMISSÕES EM TEMPO REAL
+              </div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Políticos Ao Vivo nas Plataformas</h2>
+              <p class="text-xs text-slate-600 mt-0.5">
+                Monitorando canais oficiais do YouTube, Instagram, TikTok e X dos políticos brasileiros.
+              </p>
             </div>
 
+            <div class="flex items-center gap-2 self-start sm:self-center">
+              <div class="bg-rose-50 border border-rose-200 px-3.5 py-1.5 rounded-xl text-center">
+                <span class="block text-[9px] uppercase font-bold text-rose-700">Lives Detectadas</span>
+                <span id="social-live-count-stat" class="text-lg font-black text-rose-800">0</span>
+              </div>
+              <button onclick="loadSocialStatus(true)" class="p-2.5 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-700 transition" title="Atualizar agora">
+                <i class="fa-solid fa-rotate-right text-xs"></i>
+              </button>
+            </div>
           </div>
+
+          <!-- Filtros de Status -->
+          <div class="flex items-center justify-between bg-white px-3.5 py-2 rounded-xl border border-slate-200/90 text-xs font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>Filtrar:</span>
+              <button onclick="filterSocialList('all')" id="social-filter-all" class="social-tab-btn active px-2.5 py-1 rounded-lg bg-slate-900 text-white">Todos</button>
+              <button onclick="filterSocialList('live')" id="social-filter-live" class="social-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <span class="text-rose-500 font-black">🔴</span> Ao Vivo
+              </button>
+              <button onclick="filterSocialList('online')" id="social-filter-online" class="social-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <span class="text-emerald-500 font-black">🟢</span> Ativos Hoje
+              </button>
+            </div>
+            <span class="text-[11px] text-slate-500 hidden sm:inline">Clique no link para assistir à transmissão</span>
+          </div>
+
+          <!-- Grid dos Políticos em Live e Online -->
+          <div id="social-status-detailed-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
+            <!-- Renderizado dinamicamente via app.js -->
+          </div>
+
         </div>
 
-        <!-- Grid de Notícias -->
-        <div id="news-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Renderizado via app.js -->
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- COLUNA DIREITA: ANUNCIANTES (SKYSCRAPER VERTICAL)     -->
+      <!-- ====================================================== -->
+      <aside class="lg:col-span-4 xl:col-span-3 space-y-3.5 sticky top-20">
+        
+        <!-- Header da Coluna de Anunciantes -->
+        <div class="bg-slate-900 text-white rounded-2xl p-3 border border-slate-800 shadow-xs flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black">
+              📢
+            </span>
+            <div>
+              <h3 class="text-xs font-black uppercase tracking-wider text-white">ANUNCIANTES</h3>
+              <p class="text-[10px] text-slate-400">Parceiros & Mídia Patrocinada</p>
+            </div>
+          </div>
+          <button onclick="openAdvertiserModal('Sidebar Anunciantes')" class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 rounded hover:bg-amber-500/30 transition">
+            Anuncie Aqui
+          </button>
         </div>
 
-        <!-- Estado Vazio -->
-        <div id="news-empty-state" class="hidden text-center py-12 bg-white rounded-3xl border border-dashed border-slate-300 p-8">
-          <div class="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400 text-2xl mb-3">
-            <i class="fa-regular fa-folder-open"></i>
+        <!-- Card de Anunciante VIP #1: Congresso em Foco Insider -->
+        <div class="bg-white rounded-2xl border border-amber-300 shadow-xs p-3.5 space-y-2 relative overflow-hidden group">
+          <div class="flex items-center justify-between">
+            <span class="bg-amber-100 text-amber-900 text-[9px] font-black px-2 py-0.5 rounded border border-amber-200 uppercase tracking-wider">
+              ⭐ PARCEIRO VIP
+            </span>
+            <span class="text-[10px] text-slate-500 font-bold">R$ 650/sem</span>
           </div>
-          <h3 class="text-base font-bold text-slate-800">Nenhuma notícia encontrada no período</h3>
-          <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
-            Tente ampliar o raio temporal ou buscar por outro assunto.
+          
+          <div class="flex items-center gap-2 pt-1">
+            <div class="w-10 h-10 rounded-lg bg-slate-950 p-1.5 flex items-center justify-center shrink-0 border border-slate-200">
+              <img src="/assets/logos/congresso.svg" alt="Congresso em Foco" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Congresso em Foco Insider</h4>
+              <p class="text-[10px] text-slate-500">Inteligência legislativa e bastidores de Brasília</p>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-600 leading-snug">
+            Relatórios diários para tomadores de decisão, advogados e lideranças públicas.
           </p>
-          <button onclick="resetSearchFilters(); runDefaultSearch();" class="mt-4 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition">
-            Ver Notícias Recentes
-          </button>
+
+          <a 
+            href="/api/sites/click?siteName=Congresso+em+Foco&targetUrl=https://congressoemfoco.uol.com.br" 
+            target="_blank" 
+            class="block w-full text-center py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] rounded-lg transition shadow-xs"
+          >
+            Acessar Conteúdo VIP ↗
+          </a>
         </div>
 
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ABA 2: RADAR SOCIAL (POLÍTICOS ONLINE & LIVES)           -->
-    <!-- ======================================================== -->
-    <section id="section-social" class="hidden space-y-6">
-      
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 mb-2">
-            <i class="fa-solid fa-tower-broadcast text-emerald-600"></i> Monitoramento Social em Tempo Real
+        <!-- Card de Anunciante VIP #2: Poder & Bastidores -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="bg-blue-100 text-blue-900 text-[9px] font-black px-2 py-0.5 rounded border border-blue-200 uppercase tracking-wider">
+              ⭐ PATROCINADO
+            </span>
+            <span class="text-[10px] text-slate-500 font-bold">R$ 480/sem</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Status dos Políticos nas Redes Sociais</h2>
-          <p class="text-slate-600 text-sm mt-1">
-            Descubra quem está <strong>ao vivo transmitindo lives</strong> (YouTube, Instagram, TikTok, X) ou publicando novidades oficiais no momento.
+          
+          <div class="flex items-center gap-2 pt-1">
+            <div class="w-10 h-10 rounded-lg bg-slate-950 p-1.5 flex items-center justify-center shrink-0 border border-slate-200">
+              <img src="/assets/logos/poder360.svg" alt="Poder360" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Poder & Bastidores</h4>
+              <p class="text-[10px] text-slate-500">Pesquisas eleitorais e dados abertos</p>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-600 leading-snug">
+            Acompanhamento de votações nominais, tendências ministeriais e plenário.
           </p>
+
+          <a 
+            href="/api/sites/click?siteName=Poder360&targetUrl=https://www.poder360.com.br" 
+            target="_blank" 
+            class="block w-full text-center py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] rounded-lg transition"
+          >
+            Conferir Coluna ↗
+          </a>
         </div>
 
-        <div class="flex items-center gap-3">
-          <div class="bg-emerald-50 border border-emerald-200 px-4 py-2.5 rounded-2xl text-center">
-            <span class="block text-[10px] uppercase font-bold text-emerald-700">Lives Ativas Agora</span>
-            <span id="social-live-count-stat" class="text-2xl font-extrabold text-emerald-800">0</span>
+        <!-- Banner Skyscraper Comercial (Espaço Publicitário) -->
+        <div class="bg-gradient-to-b from-slate-900 to-indigo-950 text-white rounded-2xl p-4 border border-indigo-900/50 shadow-sm space-y-3 text-center">
+          <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center mx-auto text-sm font-black">
+            <i class="fa-solid fa-bullhorn"></i>
           </div>
-          <button onclick="loadSocialStatus(true)" class="p-3 bg-slate-100 hover:bg-slate-200 rounded-2xl text-slate-700 transition" title="Recarregar Status">
-            <i class="fa-solid fa-rotate-right"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Filtros do Radar Social -->
-      <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200 text-xs font-bold">
-        <div class="flex flex-wrap items-center gap-2">
-          <span>Filtrar por Status:</span>
-          <button onclick="filterSocialList('all')" id="social-filter-all" class="social-tab-btn active px-3 py-1 rounded-lg bg-slate-900 text-white">Todos os Políticos</button>
-          <button onclick="filterSocialList('live')" id="social-filter-live" class="social-tab-btn px-3 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
-            <span class="text-rose-500">🔴</span> Apenas Ao Vivo
-          </button>
-          <button onclick="filterSocialList('online')" id="social-filter-online" class="social-tab-btn px-3 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
-            <span class="text-emerald-500">🟢</span> Ativos Hoje
-          </button>
-        </div>
-
-        <span class="text-slate-500 font-medium text-[11px]">Clique em um perfil para abrir o canal oficial</span>
-      </div>
-
-      <!-- Grid Detalhada de Status dos Políticos -->
-      <div id="social-status-detailed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Renderizado dinamicamente via app.js -->
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ABA 3: TOP 10 POLÍTICOS MAIS BUSCADOS                    -->
-    <!-- ======================================================== -->
-    <section id="section-politicians" class="hidden space-y-6">
-      
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200 mb-2">
-            <i class="fa-solid fa-fire text-amber-500"></i> Monitoramento de Atenção Pública
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Top 10 Políticos Mais Buscados</h2>
-          <p class="text-slate-600 text-sm mt-1">
-            Ranking auditado em tempo real com base no volume de buscas dos usuários.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <div class="bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-2xl text-center">
-            <span class="block text-[11px] uppercase font-bold text-slate-500">Total de Buscas</span>
-            <span id="total-searches-counter" class="text-2xl font-extrabold text-blue-600">--</span>
-          </div>
-          <button onclick="loadPoliticiansRanking(true)" class="p-3 bg-slate-100 hover:bg-slate-200 rounded-2xl text-slate-700 transition" title="Atualizar Ranking">
-            <i class="fa-solid fa-rotate-right"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PÓDIO TOP 3 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1" id="politicians-podium">
-        <!-- Renderizado dinamicamente -->
-      </div>
-
-      <!-- TABELA / LISTA TOP 4 A 10 -->
-      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
-          <h3 class="font-bold text-slate-800 text-sm">Classificação Geral (Posições 4 a 10)</h3>
-          <span class="text-xs text-slate-500">Clique no coração para favoritar ou na lupa para ver matérias</span>
-        </div>
-        <div id="politicians-list-table" class="divide-y divide-slate-100">
-          <!-- Renderizado dinamicamente -->
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ABA 4: TOP 10 SITES MAIS ACESSADOS                       -->
-    <!-- ======================================================== -->
-    <section id="section-sites" class="hidden space-y-6">
-      
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200 mb-2">
-            <i class="fa-solid fa-ranking-star text-amber-500"></i> Tráfego & Relevância
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Top 10 Sites Mais Acessados no Aplicativo</h2>
-          <p class="text-slate-600 text-sm mt-1">
-            Cliques e redirecionamentos computados a partir das matérias lidas pelos usuários.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <div class="bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-2xl text-center">
-            <span class="block text-[11px] uppercase font-bold text-slate-500">Cliques Rastreados</span>
-            <span id="total-clicks-counter" class="text-2xl font-extrabold text-indigo-600">--</span>
-          </div>
-          <button onclick="loadSitesRanking(true)" class="p-3 bg-slate-100 hover:bg-slate-200 rounded-2xl text-slate-700 transition" title="Atualizar Ranking">
-            <i class="fa-solid fa-rotate-right"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- GRID TOP SITES -->
-      <div id="sites-ranking-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Renderizado dinamicamente via app.js -->
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ABA 5: LISTA DE BLOGS E NOTÍCIAS (MONETIZADO)            -->
-    <!-- ======================================================== -->
-    <section id="section-blogs" class="hidden space-y-6">
-      
-      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <div class="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 mb-2">
-              <i class="fa-solid fa-sack-dollar text-emerald-600"></i> Rede Monetizada de Criadores & Mídia
-            </div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Lista de Blogs e Notícias Políticas</h2>
-            <p class="text-slate-600 text-sm mt-1">
-              Diretório qualificado com planos comerciais, selo VIP patrocinado e oportunidades de anúncio.
+            <span class="text-[10px] font-black uppercase tracking-wider text-amber-400">ESPAÇO PUBLICITÁRIO</span>
+            <h4 class="text-xs sm:text-sm font-black text-white mt-0.5">Anuncie sua Marca Aqui</h4>
+            <p class="text-[10px] text-slate-300 mt-1 leading-normal">
+              Mais de 120 mil impressões qualificadas mensais com leitores de todo o Brasil.
             </p>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openBlogRegisterModal()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-xs transition flex items-center gap-2">
-              <i class="fa-solid fa-plus"></i> Cadastrar Meu Blog
-            </button>
-            <button onclick="openAdvertiserModal('Anúncio em Blogs')" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs rounded-xl transition flex items-center gap-2">
-              <i class="fa-solid fa-crown text-amber-400"></i> Patrocinar Espaço
-            </button>
+          <div class="bg-white/10 rounded-xl p-2 text-[10px] flex items-center justify-around border border-white/10">
+            <div>
+              <span class="block text-slate-400">CPM Médio</span>
+              <span class="font-bold text-white">R$ 18,00</span>
+            </div>
+            <div class="w-px h-6 bg-white/20"></div>
+            <div>
+              <span class="block text-slate-400">Engajamento</span>
+              <span class="font-bold text-emerald-400">Alto</span>
+            </div>
           </div>
+
+          <button onclick="openAdvertiserModal('Banner Skyscraper')" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl transition shadow-xs">
+            Solicitar Mídia Kit
+          </button>
         </div>
 
-        <!-- Filtros de Blogs -->
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-5 mt-5 border-t border-slate-100">
-          <div class="flex flex-wrap items-center gap-2 text-xs">
-            <span class="font-bold text-slate-600">Categorias:</span>
-            <button onclick="filterBlogsByCategory('')" class="blog-cat-btn active px-3 py-1 rounded-lg bg-slate-900 text-white font-bold">Todas</button>
-            <button onclick="filterBlogsByCategory('Bastidores')" class="blog-cat-btn px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">Bastidores</button>
-            <button onclick="filterBlogsByCategory('Judiciário')" class="blog-cat-btn px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">Judiciário & STF</button>
-            <button onclick="filterBlogsByCategory('Economia')" class="blog-cat-btn px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">Economia</button>
-            <button onclick="filterBlogsByCategory('Eleições')" class="blog-cat-btn px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">Eleições</button>
+        <!-- Card de Anunciante VIP #3: Diário do Planalto -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="bg-emerald-100 text-emerald-900 text-[9px] font-black px-2 py-0.5 rounded border border-emerald-200 uppercase tracking-wider">
+              ⭐ PARCEIRO
+            </span>
+            <span class="text-[10px] text-slate-500 font-bold">R$ 390/sem</span>
+          </div>
+          
+          <div class="flex items-center gap-2 pt-1">
+            <div class="w-10 h-10 rounded-lg bg-blue-900 p-1.5 flex items-center justify-center shrink-0 text-white font-black text-xs">
+              DP
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Diário do Planalto</h4>
+              <p class="text-[10px] text-slate-500">Boletins diários do executivo federal</p>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2 text-xs">
-            <label class="flex items-center gap-1.5 cursor-pointer select-none">
-              <input type="checkbox" id="checkbox-sponsored-only" onchange="loadBlogsList()" class="rounded text-blue-600 focus:ring-blue-500">
-              <span class="font-bold text-slate-700">Apenas Parceiros Patrocinados VIP</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARDS DE BLOGS -->
-      <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Renderizado dinamicamente via app.js -->
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ABA 6: PAINEL DE MONETIZAÇÃO & ANÚNCIOS                  -->
-    <!-- ======================================================== -->
-    <section id="section-monetization" class="hidden space-y-6">
-      
-      <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-        <div class="relative z-10 max-w-3xl space-y-3">
-          <div class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30">
-            <i class="fa-solid fa-coins"></i> Ecossistema de Receita & Anúncios
-          </div>
-          <h2 class="text-3xl font-extrabold tracking-tight">Painel Comercial do Radar Político</h2>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Formatos de publicidade programática, conteúdos patrocinados no feed e listagem prioritária para veículos de imprensa.
+          <p class="text-[11px] text-slate-600 leading-snug">
+            Cobertura analítica de decretos, portarias e agendas presidenciais.
           </p>
-          <div class="pt-2 flex flex-wrap items-center gap-3">
-            <button onclick="openAdvertiserModal('Plano Anual de Parceria')" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
-              <i class="fa-solid fa-envelope-open-text"></i> Solicitar Mídia Kit Oficial
-            </button>
-            <button onclick="simulateAdImpression()" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/20 transition flex items-center gap-2">
-              <i class="fa-solid fa-play"></i> Simular +1 Impressão
-            </button>
-          </div>
-        </div>
-      </div>
 
-      <!-- KPIs DE MONETIZAÇÃO -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-            <span>Impressões de Ads</span>
-            <i class="fa-solid fa-eye text-blue-500"></i>
-          </div>
-          <div id="monet-impressions" class="text-2xl font-extrabold text-slate-900 mt-2">--</div>
-          <span class="text-[11px] text-emerald-600 font-semibold mt-1 inline-block">▲ +14% semana</span>
+          <a 
+            href="/api/sites/click?siteName=Diario+do+Planalto&targetUrl=https://g1.globo.com/politica" 
+            target="_blank" 
+            class="block w-full text-center py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] rounded-lg transition"
+          >
+            Ver Análise ↗
+          </a>
         </div>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-            <span>Cliques em Banners</span>
-            <i class="fa-solid fa-arrow-pointer text-indigo-500"></i>
-          </div>
-          <div id="monet-clicks" class="text-2xl font-extrabold text-slate-900 mt-2">--</div>
-          <span class="text-[11px] text-emerald-600 font-semibold mt-1 inline-block">▲ Alta taxa</span>
-        </div>
+      </aside>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-            <span>CTR Médio</span>
-            <i class="fa-solid fa-percent text-amber-500"></i>
-          </div>
-          <div id="monet-ctr" class="text-2xl font-extrabold text-slate-900 mt-2">--</div>
-          <span class="text-[11px] text-slate-500 font-semibold mt-1 inline-block">Média: 2.5%</span>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-            <span>Receita Estimada (R$)</span>
-            <i class="fa-solid fa-brazilian-real-sign text-emerald-500"></i>
-          </div>
-          <div id="monet-revenue" class="text-2xl font-extrabold text-emerald-600 mt-2">--</div>
-          <span class="text-[11px] text-slate-500 font-semibold mt-1 inline-block">Simulação CPC + Ads</span>
-        </div>
-      </div>
-
-    </section>
+    </div>
 
   </main>
 
   <!-- ======================================================== -->
-  <!-- MODAL: LOGIN / CADASTRO DE USUÁRIO                       -->
+  <!-- MODAL: DOAÇÃO / TOP 10 DONATE                           -->
   <!-- ======================================================== -->
-  <div id="modal-auth" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full border border-slate-200 shadow-2xl p-6 sm:p-7 relative animate-fadeIn">
-      <button onclick="closeModal('modal-auth')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <!-- Abas de Login vs Cadastro -->
-      <div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-3">
-        <button onclick="switchAuthTab('login')" id="auth-tab-btn-login" class="text-base font-extrabold pb-1 border-b-2 border-blue-600 text-blue-600 transition">
-          Entrar no Portal
-        </button>
-        <span class="text-slate-300">|</span>
-        <button onclick="switchAuthTab('register')" id="auth-tab-btn-register" class="text-base font-bold pb-1 text-slate-400 hover:text-slate-700 transition">
-          Criar Nova Conta
+  <div id="modal-donation" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-sm">
+            <i class="fa-brands fa-pix"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-slate-900">Apoie o Radar & Top 10 Doações</h3>
+            <p class="text-xs text-slate-500">Transparência pública e jornalismo político independente</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-donation')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- FORMULÁRIO DE LOGIN -->
-      <form id="form-auth-login" onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">E-mail *</label>
-          <input type="email" id="login-input-email" required placeholder="demo@radarpolitico.com" value="demo@radarpolitico.com" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+      <!-- Ranking Top 10 Donators -->
+      <div class="bg-slate-50 rounded-2xl p-3 border border-slate-200 space-y-2">
+        <div class="flex items-center justify-between text-xs font-black text-slate-800 px-1">
+          <span>🏆 Ranking dos 10 Maiores Apoiadores</span>
+          <span class="text-emerald-700 font-bold" id="donation-current-total">Total: R$ 0,00</span>
+        </div>
+        <div id="modal-donators-list" class="divide-y divide-slate-200 max-h-48 overflow-y-auto pr-1 text-xs">
+          <!-- Renderizado via app.js -->
+        </div>
+      </div>
+
+      <!-- Formulário de Nova Doação PIX -->
+      <form id="form-donate" onsubmit="handleDonationSubmit(event)" class="space-y-3 pt-1">
+        <h4 class="text-xs font-black uppercase text-slate-800">Faça sua Doação Instantânea via PIX</h4>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700">Seu Nome / Razão Social</label>
+            <input type="text" id="donate-input-name" required placeholder="Ex: Dr. Roberto Silva" class="w-full px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-semibold mt-1">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700">E-mail (Opcional)</label>
+            <input type="email" id="donate-input-email" placeholder="roberto@email.com" class="w-full px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-semibold mt-1">
+          </div>
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Senha *</label>
-          <input type="password" id="login-input-password" required placeholder="Senha" value="123" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-          <span class="text-[11px] text-slate-500 mt-1 inline-block">Dica: Usuário demo pré-preenchido (Senha: 123)</span>
-        </div>
-
-        <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-xs transition">
-          Entrar na Conta
-        </button>
-      </form>
-
-      <!-- FORMULÁRIO DE CADASTRO -->
-      <form id="form-auth-register" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3.5 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">Nome Completo *</label>
-          <input type="text" id="reg-input-name" required placeholder="Seu nome" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+          <label class="block text-[11px] font-bold text-slate-700">Valor da Doação (R$)</label>
+          <div class="flex items-center gap-1.5 mt-1">
+            <button type="button" onclick="setDonateAmount(50)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 font-bold text-xs">R$ 50</button>
+            <button type="button" onclick="setDonateAmount(100)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 font-bold text-xs">R$ 100</button>
+            <button type="button" onclick="setDonateAmount(250)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 font-bold text-xs">R$ 250</button>
+            <button type="button" onclick="setDonateAmount(500)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 font-bold text-xs">R$ 500</button>
+            <input type="number" id="donate-input-amount" min="5" step="5" required placeholder="Outro valor..." class="w-28 px-2 py-1 border border-slate-300 rounded-lg text-xs font-bold text-slate-900">
+          </div>
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">E-mail *</label>
-          <input type="email" id="reg-input-email" required placeholder="seu@email.com" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+          <label class="block text-[11px] font-bold text-slate-700">Mensagem Pública de Apoio</label>
+          <input type="text" id="donate-input-msg" placeholder="Ex: Pela transparência e informação limpa." class="w-full px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-semibold mt-1">
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">Criar Senha *</label>
-          <input type="password" id="reg-input-password" required placeholder="Mínimo 3 caracteres" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+        <!-- Chave PIX e QR Code Visual -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between gap-3 text-xs">
+          <div>
+            <span class="block font-black text-emerald-950">Chave PIX Oficial:</span>
+            <span class="text-emerald-700 font-mono font-bold select-all">pix@radarpolitico.com.br</span>
+          </div>
+          <button type="button" onclick="copyPixKey()" class="px-2.5 py-1 bg-emerald-600 text-white rounded-lg font-bold text-[11px] hover:bg-emerald-700 transition">
+            Copiar Chave
+          </button>
         </div>
 
-        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl shadow-xs transition">
-          Criar Minha Conta Grátis
+        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-xs transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check"></i> Confirmar Doação e Entrar no Ranking
         </button>
       </form>
 
@@ -876,179 +651,165 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- MODAL: MEUS FAVORITOS (POLÍTICOS E BLOGS SALVOS)         -->
+  <!-- MODAL: LOGIN / CADASTRO DE USUÁRIO                       -->
   <!-- ======================================================== -->
-  <div id="modal-favorites" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-2xl w-full border border-slate-200 shadow-2xl p-6 sm:p-7 relative animate-fadeIn max-h-[85vh] flex flex-col">
-      <button onclick="closeModal('modal-favorites')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
+  <div id="modal-auth" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-4">
+          <button onclick="switchAuthTab('login')" id="auth-tab-btn-login" class="text-base font-black pb-1 border-b-2 border-blue-600 text-blue-600">
+            Entrar
+          </button>
+          <button onclick="switchAuthTab('register')" id="auth-tab-btn-register" class="text-base font-bold pb-1 text-slate-400 hover:text-slate-700">
+            Criar Conta
+          </button>
+        </div>
+        <button onclick="closeModal('modal-auth')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">
-          <i class="fa-solid fa-heart"></i>
+      <!-- Formulário de Login -->
+      <form id="form-auth-login" onsubmit="handleLoginSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700">E-mail</label>
+          <input type="email" id="login-input-email" required placeholder="seu@email.com" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
         <div>
-          <h3 class="text-lg font-extrabold text-slate-900">Meus Políticos e Portais Favoritos</h3>
-          <p class="text-xs text-slate-500">Personalize seu feed e acompanhe quem você segue com prioridade</p>
+          <label class="block text-xs font-bold text-slate-700">Senha</label>
+          <input type="password" id="login-input-password" required placeholder="••••••••" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
+        <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition">
+          Entrar no Portal
+        </button>
+      </form>
+
+      <!-- Formulário de Cadastro -->
+      <form id="form-auth-register" onsubmit="handleRegisterSubmit(event)" class="space-y-3 hidden">
+        <div>
+          <label class="block text-xs font-bold text-slate-700">Nome Completo</label>
+          <input type="text" id="reg-input-name" required placeholder="Seu Nome" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700">E-mail</label>
+          <input type="email" id="reg-input-email" required placeholder="seu@email.com" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700">Senha</label>
+          <input type="password" id="reg-input-password" required placeholder="Crie uma senha" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition">
+          Cadastrar Gratuitamente
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: MEUS FAVORITOS (POLÍTICOS E BLOGS)                -->
+  <!-- ======================================================== -->
+  <div id="modal-favorites" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-heart text-rose-500 text-lg"></i>
+          <h3 class="text-base font-black text-slate-900">Meus Favoritos Salvos</h3>
+        </div>
+        <button onclick="closeModal('modal-favorites')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <!-- Abas de Favoritos -->
-      <div class="flex items-center gap-2 border-b border-slate-100 pb-2 mb-4 text-xs font-bold">
-        <button onclick="switchFavTab('politicians')" id="fav-tab-politicians" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white">
-          Políticos Favoritados (<span id="fav-count-politicians">0</span>)
-        </button>
-        <button onclick="switchFavTab('blogs')" id="fav-tab-blogs" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
-          Blogs & Portais (<span id="fav-count-blogs">0</span>)
-        </button>
+      <div class="flex items-center gap-2 border-b border-slate-200 pb-2 text-xs font-bold">
+        <button onclick="switchFavTab('politicians')" id="fav-tab-pol" class="px-3 py-1 rounded-lg bg-slate-900 text-white">Políticos</button>
+        <button onclick="switchFavTab('blogs')" id="fav-tab-blog" class="px-3 py-1 rounded-lg bg-slate-100 text-slate-700">Portais & Blogs</button>
       </div>
 
-      <!-- Conteúdo com Scroll -->
-      <div class="flex-1 overflow-y-auto space-y-3 pr-1" id="favorites-content-list">
+      <div id="favorites-list-container" class="space-y-2 text-xs">
         <!-- Renderizado dinamicamente -->
       </div>
     </div>
   </div>
 
-  <!-- MODAL: CADASTRAR BLOG OU FONTE -->
-  <div id="modal-blog" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full border border-slate-200 shadow-2xl p-6 relative animate-fadeIn">
-      <button onclick="closeModal('modal-blog')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-          <i class="fa-solid fa-newspaper"></i>
+  <!-- ======================================================== -->
+  <!-- MODAL: SOLICITAÇÃO DE ANÚNCIO & MÍDIA KIT               -->
+  <!-- ======================================================== -->
+  <div id="modal-advertiser" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-crown text-amber-500 text-lg"></i>
+          <h3 class="text-base font-black text-slate-900">Anunciar no Radar Político</h3>
         </div>
-        <div>
-          <h3 class="text-lg font-bold text-slate-900">Cadastrar Blog Político</h3>
-          <p class="text-xs text-slate-500">Adicione seu portal para receber tráfego e monetizar espaços.</p>
-        </div>
+        <button onclick="closeModal('modal-advertiser')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <form id="form-register-blog" onsubmit="handleRegisterBlog(event)" class="space-y-3.5 text-xs">
+      <form id="form-advertiser" onsubmit="handleAdvertiserSubmit(event)" class="space-y-3">
+        <input type="hidden" id="ad-target-plan" value="Sidebar Anunciantes">
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Nome do Blog / Portal *</label>
-          <input type="text" id="blog-input-name" required placeholder="Ex: Diário do Congresso" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none">
+          <label class="block text-xs font-bold text-slate-700">Nome do Contato</label>
+          <input type="text" id="ad-input-name" required placeholder="Seu nome" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Autor / Responsável</label>
-            <input type="text" id="blog-input-author" placeholder="Ex: Redação de Bastidores" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Categoria Principal</label>
-            <select id="blog-input-category" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none">
-              <option value="Bastidores do Congresso">Bastidores do Congresso</option>
-              <option value="Judiciário & STF">Judiciário & STF</option>
-              <option value="Economia & Mercados">Economia & Mercados</option>
-              <option value="Eleições & Pesquisas">Eleições & Pesquisas</option>
-              <option value="Opinião Independente">Opinião Independente</option>
-            </select>
-          </div>
-        </div>
-
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Link do Site / URL Completa *</label>
-          <input type="url" id="blog-input-url" required placeholder="https://seublog.com.br" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none">
+          <label class="block text-xs font-bold text-slate-700">E-mail Corporativo</label>
+          <input type="email" id="ad-input-email" required placeholder="empresa@contato.com.br" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Breve Descrição Editorial</label>
-          <textarea id="blog-input-desc" rows="2" placeholder="Descreva os temas abordados e linha editorial do blog..." class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none"></textarea>
+          <label class="block text-xs font-bold text-slate-700">Empresa / Portal / Agência</label>
+          <input type="text" id="ad-input-company" placeholder="Nome da empresa" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
-        <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
-          <label class="flex items-center gap-2 cursor-pointer font-bold text-slate-800">
-            <input type="checkbox" id="blog-input-sponsored" class="rounded text-emerald-600 focus:ring-emerald-500">
-            <span>Desejo ativar o Selo VIP Patrocinado (Maior Destaque na Home)</span>
-          </label>
-          <p class="text-[11px] text-slate-500 pl-6">Blogs patrocinados ganham prioridade nas buscas e no Top 10 Sites.</p>
+        <div>
+          <label class="block text-xs font-bold text-slate-700">Objetivo do Anúncio</label>
+          <textarea id="ad-input-notes" rows="2" placeholder="Descreva brevemente o formato de interesse..." class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1"></textarea>
         </div>
-
-        <div class="flex items-center justify-end gap-2 pt-2">
-          <button type="button" onclick="closeModal('modal-blog')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition">Cancelar</button>
-          <button type="submit" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl shadow-xs transition">Finalizar Cadastro</button>
-        </div>
+        <button type="submit" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl transition">
+          Receber Mídia Kit e Proposta
+        </button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: ANUNCIAR NO RADAR / CONTATO COMERCIAL -->
-  <div id="modal-advertiser" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full border border-slate-200 shadow-2xl p-6 relative animate-fadeIn">
-      <button onclick="closeModal('modal-advertiser')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
-          <i class="fa-solid fa-bullhorn"></i>
+  <!-- ======================================================== -->
+  <!-- MODAL: CADASTRO DE BLOG INDEPENDENTE                    -->
+  <!-- ======================================================== -->
+  <div id="modal-blog-register" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-plus text-blue-600 text-lg"></i>
+          <h3 class="text-base font-black text-slate-900">Cadastrar Meu Blog</h3>
         </div>
-        <div>
-          <h3 class="text-lg font-bold text-slate-900">Anunciar no Radar Político</h3>
-          <p class="text-xs text-slate-500">Conecte sua marca a tomadores de decisão, advogados e eleitores.</p>
-        </div>
+        <button onclick="closeModal('modal-blog-register')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <form id="form-advertiser" onsubmit="handleAdvertiserLead(event)" class="space-y-3.5 text-xs">
+      <form id="form-blog-register" onsubmit="handleBlogRegisterSubmit(event)" class="space-y-3">
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Seu Nome / Contato *</label>
-          <input type="text" id="adv-input-name" required placeholder="Ex: Roberto Silveira" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-amber-500 focus:bg-white outline-none">
+          <label class="block text-xs font-bold text-slate-700">Nome do Blog ou Portal</label>
+          <input type="text" id="blog-input-name" required placeholder="Ex: Análise Política DF" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">E-mail Corporativo *</label>
-            <input type="email" id="adv-input-email" required placeholder="roberto@empresa.com.br" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-amber-500 focus:bg-white outline-none">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Empresa / Assessoria</label>
-            <input type="text" id="adv-input-company" placeholder="Ex: Consultoria Brasil" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-amber-500 focus:bg-white outline-none">
-          </div>
-        </div>
-
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Formato de Interesse</label>
-          <input type="text" id="adv-input-plan" readonly class="w-full p-2.5 bg-slate-100 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none">
+          <label class="block text-xs font-bold text-slate-700">URL Completa</label>
+          <input type="url" id="blog-input-url" required placeholder="https://meublog.com.br" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Objetivo da Campanha</label>
-          <textarea id="adv-input-notes" rows="2" placeholder="Conte o tipo de campanha que deseja veicular..." class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-amber-500 focus:bg-white outline-none"></textarea>
+          <label class="block text-xs font-bold text-slate-700">Autor / Editor Responsável</label>
+          <input type="text" id="blog-input-author" placeholder="Ex: Carlos Vieira" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs mt-1">
         </div>
-
-        <div class="flex items-center justify-end gap-2 pt-2">
-          <button type="button" onclick="closeModal('modal-advertiser')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition">Cancelar</button>
-          <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-xl shadow-xs transition">Solicitar Proposta</button>
-        </div>
+        <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl transition">
+          Cadastrar no Diretório
+        </button>
       </form>
     </div>
   </div>
 
-  <!-- TOAST CONTAINER -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none"></div>
 
-  <!-- FOOTER -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <span class="font-extrabold text-slate-800">RADAR POLÍTICO</span>
-        <span>&bull;</span>
-        <span>Monitoramento, Redes Sociais & Agregação Noticiosa</span>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="javascript:void(0)" onclick="switchTab('social')" class="hover:text-blue-600 transition">Políticos Online</a>
-        <a href="javascript:void(0)" onclick="switchTab('monetization')" class="hover:text-blue-600 transition">Mídia Kit</a>
-        <a href="javascript:void(0)" onclick="openBlogRegisterModal()" class="hover:text-blue-600 transition">Parceria de Conteúdo</a>
-        <span class="text-slate-400">&copy; 2026 Radar Político.</span>
-      </div>
-    </div>
-  </footer>
-
+  <!-- Application Logic -->
   <script src="/js/app.js"></script>
 </body>
 </html>

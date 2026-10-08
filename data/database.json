@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4825,
+      "searchCount": 4827,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -67,7 +67,7 @@
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3545,
+      "searchCount": 3546,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -379,7 +379,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5426,
+      "clicks": 5427,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -1010,6 +1010,109 @@
         "blog-congresso-foco"
       ],
       "createdAt": "2026-10-06T18:59:33.218Z"
+    },
+    {
+      "id": "usr-1791477192397",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1791477192392@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-08T16:33:12.397Z"
     }
-  ]
+  ],
+  "donations": {
+    "goal": 10000,
+    "currentTotal": 7600,
+    "currency": "BRL",
+    "pixKey": "pix@radarpolitico.com.br",
+    "topDonators": [
+      {
+        "id": "don-1",
+        "name": "Observatório Cidadão",
+        "amount": 1500,
+        "date": "2026-10-07",
+        "badge": "Patrocinador Diamante",
+        "message": "Pelo jornalismo ético e livre."
+      },
+      {
+        "id": "don-2",
+        "name": "Dr. Marcelo Fagundes",
+        "amount": 1000,
+        "date": "2026-10-06",
+        "badge": "Patrocinador Ouro",
+        "message": "Excelente ferramenta de consulta."
+      },
+      {
+        "id": "don-3",
+        "name": "Associação Transparência Já",
+        "amount": 850,
+        "date": "2026-10-05",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoiando o monitoramento público."
+      },
+      {
+        "id": "don-1791477193357",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-08",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
+        "id": "don-4",
+        "name": "Dra. Beatriz Albuquerque",
+        "amount": 600,
+        "date": "2026-10-05",
+        "badge": "Apoiador Prata",
+        "message": "Vital para o controle social."
+      },
+      {
+        "id": "don-5",
+        "name": "Instituto Liberdade & Dados",
+        "amount": 500,
+        "date": "2026-10-04",
+        "badge": "Apoiador Prata",
+        "message": "Parabéns pela tecnologia aberta."
+      },
+      {
+        "id": "don-6",
+        "name": "Renato Silveira Pinto",
+        "amount": 450,
+        "date": "2026-10-03",
+        "badge": "Apoiador Bronze",
+        "message": "Apoio mensal à equipe."
+      },
+      {
+        "id": "don-7",
+        "name": "Cláudia Ramos de Souza",
+        "amount": 400,
+        "date": "2026-10-03",
+        "badge": "Apoiador Bronze",
+        "message": "Uso todo dia para minhas pesquisas."
+      },
+      {
+        "id": "don-8",
+        "name": "Prof. Eduardo Meirelles",
+        "amount": 350,
+        "date": "2026-10-02",
+        "badge": "Apoiador Bronze",
+        "message": "Material de estudo excelente para alunos."
+      },
+      {
+        "id": "don-9",
+        "name": "Lucas Nogueira Santos",
+        "amount": 300,
+        "date": "2026-10-01",
+        "badge": "Apoiador Bronze",
+        "message": "Viva a transparência política!"
+      }
+    ]
+  }
 }

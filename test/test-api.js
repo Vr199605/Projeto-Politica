@@ -216,6 +216,45 @@ async function runTests() {
     console.log(`   -> Origem enfatizada: ${sample.source} com Logo Oficial: ${sample.sourceLogo} e Foto: ${sample.imageUrl.substring(0, 45)}...`);
   });
 
+  // 12. NOVA VALIDAÇÃO: Sistema de Doação e Ranking Top 10 Donate
+  await test('Doação & TOP 10 DONATE: Consulta de ranking e nova doação via PIX', async () => {
+    const res = await fetch(`${BASE_URL}/api/donations`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    assert.ok(data.donations.topDonators.length > 0, 'Deve conter lista de doadores');
+    assert.ok(data.donations.topDonators.length <= 10, 'Top 10 deve ter no máximo 10 itens');
+    
+    // Testar nova doação
+    const postRes = await fetch(`${BASE_URL}/api/donations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Instituto Teste Automatizado',
+        email: 'teste@transparencia.org',
+        amount: 750,
+        message: 'Apoio à transparência em tempo real.'
+      })
+    });
+    const postData = await postRes.json();
+    assert.strictEqual(postData.success, true);
+    assert.ok(postData.donation.id, 'Deve gerar ID da doação');
+    assert.ok(postData.pixCode, 'Deve retornar código PIX copia e cola');
+    console.log(`   -> Doação registrada com sucesso: ${postData.donation.name} (R$ ${postData.donation.amount})`);
+  });
+
+  // 13. NOVA VALIDAÇÃO: Fotos Institucionais de Apoio (Congresso, STF, Planalto, Fazenda, Eleições)
+  await test('Fotos Institucionais: Verificação física de fotos de apoio sem imagens fictícias', async () => {
+    const fs = require('fs');
+    const path = require('path');
+    const themes = ['congresso.jpg', 'planalto.jpg', 'stf.jpg', 'fazenda.jpg', 'eleicoes.jpg', 'brasilia.jpg'];
+    for (const t of themes) {
+      const p = path.join(__dirname, '..', 'public', 'assets', 'themes', t);
+      assert.ok(fs.existsSync(p), `Arquivo de tema deve existir: ${t}`);
+      assert.ok(fs.statSync(p).size > 10000, `Arquivo de tema deve ser válido e maior que 10KB: ${t}`);
+    }
+    console.log(`   -> 6 fotos institucionais oficiais verificadas localmente em /assets/themes/`);
+  });
+
   console.log(`\n======================================================`);
   console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
   console.log(`======================================================\n`);
