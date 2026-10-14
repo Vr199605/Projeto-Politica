@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4833,
+      "searchCount": 4834,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -69,7 +69,7 @@
       "party": "REPUBLICANOS",
       "office": "Governador de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3557,
+      "searchCount": 3558,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -884,7 +884,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5433,
+      "clicks": 5434,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -1676,11 +1676,30 @@
       ],
       "createdAt": "2026-10-14T21:29:40.845Z",
       "favoriteParty": "PL"
+    },
+    {
+      "id": "usr-1792014582176",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792014582172@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-14T21:49:42.176Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 11350,
+    "currentTotal": 12100,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1763,12 +1782,13 @@
         "message": "Apoio à transparência em tempo real."
       },
       {
-        "id": "don-4",
-        "name": "Dra. Beatriz Albuquerque",
-        "amount": 600,
-        "date": "2026-10-05",
-        "badge": "Apoiador Prata",
-        "message": "Vital para o controle social."
+        "id": "don-1792014583761",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-14",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
       }
     ]
   },
