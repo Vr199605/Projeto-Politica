@@ -7,16 +7,16 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4832,
+      "searchCount": 4833,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
       "socialStatus": {
-        "isLive": true,
         "status": "online",
+        "isLive": true,
         "statusLabel": "AO VIVO",
-        "lastActivity": "Ativo em tempo real",
-        "liveUrl": "https://youtube.com/@lulaoficial",
+        "lastActivity": "Ativo agora",
+        "liveUrl": "https://www.youtube.com/@LulaOficial",
         "liveTitle": "Pronunciamento Oficial à Nação e Coletiva Internacional",
         "onlineNetworks": [
           "instagram",
@@ -24,9 +24,9 @@
           "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/lulaoficial",
-          "youtube": "https://youtube.com/@lulaoficial",
-          "tiktok": "https://tiktok.com/@lulaoficial"
+          "instagram": "https://www.instagram.com/lulaoficial/",
+          "youtube": "https://www.youtube.com/@LulaOficial",
+          "tiktok": "https://www.tiktok.com/@lulaoficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28ombros%29_denoise.jpg/330px-Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%28ombros%29_denoise.jpg"
@@ -43,10 +43,10 @@
       "trendDirection": "up",
       "bio": "38º Presidente do Brasil, líder da oposição conservadora.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -55,9 +55,9 @@
           "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/jairmessiasbolsonaro",
-          "youtube": "https://youtube.com/@bolsonarojr",
-          "tiktok": "https://tiktok.com/@jairbolsonaro"
+          "instagram": "https://www.instagram.com/jairmessiasbolsonaro/",
+          "youtube": "https://www.youtube.com/@jbolsonaro",
+          "tiktok": "https://www.tiktok.com/@bolsonaromessiasjair"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Jair_Bolsonaro_2019_Portrait_%283x4_cropped_center%29.jpg/330px-Jair_Bolsonaro_2019_Portrait_%283x4_cropped_center%29.jpg"
@@ -69,13 +69,13 @@
       "party": "REPUBLICANOS",
       "office": "Governador de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3556,
+      "searchCount": 3557,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE",
         "lastActivity": "Atualizado agora",
         "liveUrl": "https://youtube.com/@tarcisiogdf/live",
@@ -85,9 +85,9 @@
           "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/tarcisiogdf",
-          "youtube": "https://youtube.com/@tarcisiogdf",
-          "tiktok": "https://tiktok.com/@tarcisiogdf"
+          "instagram": "https://www.instagram.com/tarcisiogdf/",
+          "youtube": "https://www.youtube.com/@tarcisiogdf",
+          "tiktok": null
         },
         "livePlatform": "YouTube"
       },
@@ -105,10 +105,10 @@
       "trendDirection": "up",
       "bio": "Ministro da Fazenda e articulador da Reforma Tributária.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -116,9 +116,9 @@
           "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/fernandohaddadoficial",
-          "youtube": "https://youtube.com/@fernandohaddad",
-          "tiktok": "https://tiktok.com/@fernandohaddad"
+          "instagram": "https://www.instagram.com/fernandohaddadoficial/",
+          "youtube": "https://www.youtube.com/@fernandohaddad",
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Fernando_Haddad_posse_min._da_Fazenda.jpg/330px-Fernando_Haddad_posse_min._da_Fazenda.jpg"
@@ -135,10 +135,10 @@
       "trendDirection": "up",
       "bio": "Presidente da Câmara dos Deputados e liderança do Centrão.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -146,9 +146,9 @@
           "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/oficialarthurlira",
-          "youtube": "https://youtube.com/@CamaradosDeputadosoficial",
-          "tiktok": "https://tiktok.com/@arthurliraoficial"
+          "instagram": "https://www.instagram.com/oficialarthurlira/",
+          "youtube": "https://www.youtube.com/@CamaradosDeputadosoficial",
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Lula_e_Lira_2022_%28cropped2%29.jpg/330px-Lula_e_Lira_2022_%28cropped2%29.jpg"
@@ -165,10 +165,10 @@
       "trendDirection": "up",
       "bio": "Presidente do Senado Federal e do Congresso Nacional.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -176,9 +176,9 @@
           "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/rodrigopacheco",
-          "youtube": "https://youtube.com/@senadofederal",
-          "tiktok": "https://tiktok.com/@rodrigopacheco"
+          "instagram": "https://www.instagram.com/rodrigopacheco/",
+          "youtube": "https://www.youtube.com/@senadofederal",
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg/330px-Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg"
@@ -195,19 +195,17 @@
       "trendDirection": "up",
       "bio": "Ministra do Planejamento e ex-senadora por Mato Grosso do Sul.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/simonetebet",
-          "youtube": "https://youtube.com/@simonetebet",
-          "tiktok": "https://tiktok.com/@simonetebetoficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg/330px-2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg"
@@ -224,21 +222,21 @@
       "trendDirection": "up",
       "bio": "Deputado federal mais votado do Brasil nas eleições de 2022.",
       "socialStatus": {
-        "isLive": true,
         "status": "online",
+        "isLive": true,
         "statusLabel": "AO VIVO",
-        "lastActivity": "Ativo em tempo real",
-        "liveUrl": "https://youtube.com/@nikolasferreira",
-        "liveTitle": "Transmissão Ao Vivo com Eleitores e Notícias do Congresso",
+        "lastActivity": "Ativo agora",
+        "liveUrl": "https://www.youtube.com/@nikolasferreira",
+        "liveTitle": "Transmissão Ao Vivo com Eleitores",
         "onlineNetworks": [
           "instagram",
           "youtube",
           "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/nikolasferreiradm",
-          "youtube": "https://youtube.com/@nikolasferreira",
-          "tiktok": "https://tiktok.com/@nikolasferreiradm"
+          "instagram": "https://www.instagram.com/nikolasferreiradm/",
+          "youtube": "https://www.youtube.com/@nikolasferreira",
+          "tiktok": "https://www.tiktok.com/@nikolasferreiradm"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Nikolas_Ferreira_in_2023_%28cropped%29.jpg/330px-Nikolas_Ferreira_in_2023_%28cropped%29.jpg"
@@ -255,10 +253,10 @@
       "trendDirection": "up",
       "bio": "Deputado Federal e líder de movimentos sociais urbanos.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -267,9 +265,9 @@
           "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/guilhermeboulos.oficial",
-          "youtube": "https://youtube.com/@guilhermeboulos",
-          "tiktok": "https://tiktok.com/@guilhermeboulos"
+          "instagram": "https://www.instagram.com/guilhermeboulos.oficial/",
+          "youtube": "https://www.youtube.com/@guilhermeboulos",
+          "tiktok": "https://www.tiktok.com/@guilhermeboulos"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg/330px-Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg"
@@ -286,20 +284,20 @@
       "trendDirection": "down",
       "bio": "Advogado, professor e ex-candidato à Presidência da República.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
-          "youtube",
-          "instagram"
+          "instagram",
+          "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/cirogomes",
-          "youtube": "https://youtube.com/@cirogomesoficial",
-          "tiktok": "https://tiktok.com/@cirogomesoficial"
+          "instagram": "https://www.instagram.com/cirogomes/",
+          "youtube": "https://www.youtube.com/@cirogomesoficial",
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Presidente_Ciro_Gomes.png/330px-Presidente_Ciro_Gomes.png"
@@ -316,20 +314,17 @@
       "trendDirection": "up",
       "bio": "Ambientalista, historiadora e Ministra do Meio Ambiente.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/marinasilvaoficial",
-          "youtube": "https://youtube.com/@marinasilvaoficial",
-          "tiktok": "https://tiktok.com/@marinasilvaoficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Marina_Silva_crop.jpg/330px-Marina_Silva_crop.jpg"
@@ -346,10 +341,10 @@
       "trendDirection": "up",
       "bio": "Senador pelo Paraná e ex-juiz federal da Operação Lava Jato.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -357,9 +352,9 @@
           "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/sergiomorooficial",
-          "youtube": "https://youtube.com/@sergiomoro",
-          "tiktok": "https://tiktok.com/@sergiomoroficial"
+          "instagram": "https://www.instagram.com/sergiomorooficial/",
+          "youtube": "https://www.youtube.com/@sergiomoro",
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg/330px-Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg"
@@ -376,10 +371,10 @@
       "trendDirection": "up",
       "bio": "Governador reeleito do Estado do Rio Grande do Sul.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
@@ -387,9 +382,9 @@
           "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/leite",
-          "youtube": "https://youtube.com/@eduardoleite_rs",
-          "tiktok": "https://tiktok.com/@eduardoleite"
+          "instagram": "https://www.instagram.com/leite/",
+          "tiktok": "https://www.tiktok.com/@eduardoleite",
+          "youtube": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg/330px-09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg"
@@ -406,20 +401,17 @@
       "trendDirection": "up",
       "bio": "Médico, produtor rural e Governador reeleito de Goiás.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/caiado",
-          "youtube": "https://youtube.com/@ronaldocaiado",
-          "tiktok": "https://tiktok.com/@ronaldocaiado"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg/330px-Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg"
@@ -436,20 +428,21 @@
       "trendDirection": "up",
       "bio": "Político pesquisado pelos usuários da plataforma.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
           "instagram",
-          "tiktok"
+          "tiktok",
+          "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/eduardopaes",
-          "youtube": "https://youtube.com/@eduardopaesrio",
-          "tiktok": "https://tiktok.com/@eduardopaes"
+          "instagram": "https://www.instagram.com/eduardopaes/",
+          "tiktok": "https://www.tiktok.com/@eduardopaes",
+          "youtube": "https://www.youtube.com/@eduardopaesrio"
         }
       }
     },
@@ -465,19 +458,17 @@
       "trendDirection": "up",
       "bio": "Ministro do Supremo Tribunal Federal (STF) e relator de inquéritos de grande repercussão nacional.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/stfoficial",
-          "youtube": "https://youtube.com/@stfoficial",
-          "tiktok": "https://tiktok.com/@stf_oficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -493,20 +484,17 @@
       "trendDirection": "up",
       "bio": "Presidente do Supremo Tribunal Federal (STF) e do Conselho Nacional de Justiça (CNJ).",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "youtube",
-          "instagram"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/lrobertobarroso",
-          "youtube": "https://youtube.com/@stfoficial",
-          "tiktok": "https://tiktok.com/@stf_oficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -522,20 +510,17 @@
       "trendDirection": "up",
       "bio": "Ministro do STF, ex-Ministro da Justiça e Segurança Pública e ex-Governador do Maranhão.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/flaviodino",
-          "youtube": "https://youtube.com/@stfoficial",
-          "tiktok": "https://tiktok.com/@stf_oficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -551,19 +536,17 @@
       "trendDirection": "up",
       "bio": "Decano e ministro mais antigo em atividade no Supremo Tribunal Federal.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/stfoficial",
-          "youtube": "https://youtube.com/@stfoficial",
-          "tiktok": "https://tiktok.com/@stf_oficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -579,20 +562,17 @@
       "trendDirection": "up",
       "bio": "Vice-Presidente da República e Ministro do Desenvolvimento, Indústria, Comércio e Serviços.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/geraldoalckmin_",
-          "youtube": "https://youtube.com/@geraldoalckmin",
-          "tiktok": "https://tiktok.com/@geraldoalckmin_"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -608,20 +588,17 @@
       "trendDirection": "up",
       "bio": "Prefeito da cidade de São Paulo, maior colégio eleitoral municipal do Brasil.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "tiktok"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/ricardonunessp",
-          "youtube": "https://youtube.com/@ricardonunessp",
-          "tiktok": "https://tiktok.com/@ricardonunesprefeito"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -637,21 +614,20 @@
       "trendDirection": "up",
       "bio": "Empresário, influenciador digital e candidato nas eleições municipais de São Paulo.",
       "socialStatus": {
-        "isLive": true,
         "status": "online",
+        "isLive": true,
         "statusLabel": "AO VIVO",
-        "lastActivity": "Ativo em tempo real",
-        "liveUrl": "https://youtube.com/@pablomarcal",
-        "liveTitle": "Live de Mentoria e Análise do Cenário Político Nacional",
+        "lastActivity": "Ativo agora",
+        "liveUrl": "https://www.youtube.com/@pablomarcal",
+        "liveTitle": "Transmissão e Análise de Cenário",
         "onlineNetworks": [
           "instagram",
-          "youtube",
-          "tiktok"
+          "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/pablomarcalpdt",
-          "youtube": "https://youtube.com/@pablomarcal",
-          "tiktok": "https://tiktok.com/@pablomarcalpdt"
+          "instagram": "https://www.instagram.com/pablomarcalpdt/",
+          "youtube": "https://www.youtube.com/@pablomarcal",
+          "tiktok": null
         }
       }
     },
@@ -667,20 +643,20 @@
       "trendDirection": "up",
       "bio": "Governador reeleito de Minas Gerais, segundo maior colégio eleitoral do país.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
           "instagram",
-          "youtube"
+          "tiktok"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/romeuzemaoficial",
-          "youtube": "https://youtube.com/@governadordeminas",
-          "tiktok": "https://tiktok.com/@romeuzema"
+          "instagram": "https://www.instagram.com/romeuzemaoficial/",
+          "tiktok": "https://www.tiktok.com/@romeuzema",
+          "youtube": null
         }
       }
     },
@@ -696,20 +672,17 @@
       "trendDirection": "up",
       "bio": "Senador pelo Amapá, presidente da Comissão de Constituição e Justiça do Senado.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/davialcolumbre",
-          "youtube": "https://youtube.com/@senadofederal",
-          "tiktok": "https://tiktok.com/@davialcolumbre"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -725,20 +698,17 @@
       "trendDirection": "up",
       "bio": "Ex-primeira-dama do Brasil e presidente nacional do movimento PL Mulher.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/michellebolsonaro",
-          "youtube": "https://youtube.com/@michellebolsonarooficial",
-          "tiktok": "https://tiktok.com/@michellebolsonarooficial"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -754,21 +724,21 @@
       "trendDirection": "up",
       "bio": "Cientista política, ativista pela educação e deputada federal por São Paulo.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
           "instagram",
-          "youtube",
-          "tiktok"
+          "tiktok",
+          "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/tabataamaralsp",
-          "youtube": "https://youtube.com/@tabataamaral",
-          "tiktok": "https://tiktok.com/@tabataamaralsp"
+          "instagram": "https://www.instagram.com/tabataamaralsp/",
+          "tiktok": "https://www.tiktok.com/@tabataamaralsp",
+          "youtube": "https://www.youtube.com/@tabataamaral"
         }
       }
     },
@@ -784,20 +754,21 @@
       "trendDirection": "up",
       "bio": "Prefeito do Recife reeleito com votação histórica em Pernambuco.",
       "socialStatus": {
-        "isLive": false,
         "status": "online",
+        "isLive": false,
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "lastActivity": "Ativo agora",
         "liveUrl": null,
         "liveTitle": null,
         "onlineNetworks": [
           "instagram",
-          "tiktok"
+          "tiktok",
+          "youtube"
         ],
         "profiles": {
-          "instagram": "https://instagram.com/joaocampos",
-          "youtube": "https://youtube.com/@joaocampospe",
-          "tiktok": "https://tiktok.com/@joaocampos"
+          "instagram": "https://www.instagram.com/joaocampos/",
+          "tiktok": "https://www.tiktok.com/@joaocampos",
+          "youtube": "https://www.youtube.com/@joaocampospe"
         }
       }
     },
@@ -813,20 +784,17 @@
       "trendDirection": "up",
       "bio": "Presidente nacional do Partido dos Trabalhadores e deputada federal pelo Paraná.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/gleisihoffmann",
-          "youtube": "https://youtube.com/@gleisihoffmann",
-          "tiktok": "https://tiktok.com/@gleisopt"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -842,20 +810,17 @@
       "trendDirection": "up",
       "bio": "Senador por Alagoas e ex-presidente do Senado Federal e do Congresso Nacional.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/renancalheiros",
-          "youtube": "https://youtube.com/@senadofederal",
-          "tiktok": "https://tiktok.com/@renancalheiros"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -871,20 +836,17 @@
       "trendDirection": "up",
       "bio": "Governador reeleito do Estado do Rio de Janeiro.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/claudiocastrorj",
-          "youtube": "https://youtube.com/@claudiocastrorj",
-          "tiktok": "https://tiktok.com/@claudiocastrorj"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     },
@@ -900,20 +862,17 @@
       "trendDirection": "up",
       "bio": "Governador reeleito do Paraná e liderança do PSD no Sul do país.",
       "socialStatus": {
+        "status": "offline",
         "isLive": false,
-        "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo em tempo real",
+        "statusLabel": "OFFLINE",
+        "lastActivity": "Inativo no momento",
         "liveUrl": null,
         "liveTitle": null,
-        "onlineNetworks": [
-          "instagram",
-          "youtube"
-        ],
+        "onlineNetworks": [],
         "profiles": {
-          "instagram": "https://instagram.com/ratinho_junior",
-          "youtube": "https://youtube.com/@ratinhojunior",
-          "tiktok": "https://tiktok.com/@ratinhojunior_pr"
+          "instagram": null,
+          "youtube": null,
+          "tiktok": null
         }
       }
     }
@@ -925,7 +884,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5432,
+      "clicks": 5433,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -1698,11 +1657,30 @@
       ],
       "createdAt": "2026-10-14T21:13:48.779Z",
       "favoriteParty": "PL"
+    },
+    {
+      "id": "usr-1792013380845",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792013380840@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-14T21:29:40.845Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 10600,
+    "currentTotal": 11350,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1776,20 +1754,21 @@
         "message": "Apoio à transparência em tempo real."
       },
       {
+        "id": "don-1792013382319",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-14",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
         "id": "don-4",
         "name": "Dra. Beatriz Albuquerque",
         "amount": 600,
         "date": "2026-10-05",
         "badge": "Apoiador Prata",
         "message": "Vital para o controle social."
-      },
-      {
-        "id": "don-5",
-        "name": "Instituto Liberdade & Dados",
-        "amount": 500,
-        "date": "2026-10-04",
-        "badge": "Apoiador Prata",
-        "message": "Parabéns pela tecnologia aberta."
       }
     ]
   },

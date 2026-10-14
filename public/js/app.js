@@ -1225,13 +1225,12 @@ async function loadSocialStatus(force = false) {
 
       const totalLive = (state.verifiedStreams.length || 0) + (state.socialPoliticians.length || 0);
 
-      // Atualiza badges globais com a contagem verdadeira
-      const liveStat = document.getElementById('social-live-count-stat');
+      // Atualiza badges globais com a contagem verdadeira de líderes online
+      const onlineBadge = document.getElementById('politicians-online-count-badge');
       const badgeLive = document.getElementById('badge-live-total-pill');
-      if (liveStat) liveStat.textContent = totalLive;
-      if (badgeLive) badgeLive.textContent = `${totalLive} AO VIVO`;
+      if (onlineBadge) onlineBadge.textContent = state.onlinePoliticians.length;
+      if (badgeLive) badgeLive.textContent = `${state.socialPoliticians.length || 0} AO VIVO`;
 
-      renderSocialGrid();
       renderOnlinePoliticiansGrid();
     }
   } catch (err) {
@@ -1382,14 +1381,14 @@ function renderOnlinePoliticiansGrid() {
   if (!container) return;
 
   const rawList = state.onlinePoliticians || [];
-  // Exibir líderes com presença ativa no radar
+  // Exibir ESTRITAMENTE líderes com presença online verificada
   const list = rawList.filter(pol => {
     const hasOnlineNet = Array.isArray(pol.socialStatus?.onlineNetworks) && pol.socialStatus.onlineNetworks.length > 0;
-    return hasOnlineNet || pol.socialStatus?.isLive || pol.socialStatus?.status === 'online';
+    return (pol.socialStatus?.status === 'online' || pol.socialStatus?.isLive) && hasOnlineNet;
   });
 
   if (countLabel) {
-    countLabel.textContent = `${list.length} Líderes Ativos no Radar`;
+    countLabel.textContent = `${list.length} Líderes Online Agora`;
   }
 
   if (list.length === 0) {
@@ -1405,7 +1404,7 @@ function renderOnlinePoliticiansGrid() {
   container.innerHTML = list.map(pol => {
     const isLive = Boolean(pol.socialStatus?.isLive);
     const profiles = pol.socialStatus?.profiles || {};
-    const onlineNetworks = Array.isArray(pol.socialStatus?.onlineNetworks) ? pol.socialStatus.onlineNetworks : ['instagram', 'youtube'];
+    const onlineNetworks = Array.isArray(pol.socialStatus?.onlineNetworks) ? pol.socialStatus.onlineNetworks : [];
     const isFav = state.favoritePoliticianIds.has(pol.id);
 
     const popularName = pol.popularName || pol.name || 'Líder Político';
@@ -1413,14 +1412,14 @@ function renderOnlinePoliticiansGrid() {
     const office = pol.office || 'Líder Político';
     const avatar = pol.avatar || '/assets/themes/brasilia.jpg';
 
-    // 3 Redes Oficiais Solicitadas
-    const instagramUrl = profiles.instagram || `https://instagram.com/${pol.id}`;
-    const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || `https://youtube.com/@${pol.id}`);
-    const tiktokUrl = profiles.tiktok || `https://tiktok.com/@${pol.id}`;
+    // 3 Redes Oficiais Verificadas (SEM fallbacks falsos para evitar páginas aleatórias)
+    const instagramUrl = profiles.instagram || null;
+    const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || null);
+    const tiktokUrl = profiles.tiktok || null;
 
-    const isInstagramOnline = onlineNetworks.includes('instagram');
-    const isYoutubeOnline = onlineNetworks.includes('youtube');
-    const isTiktokOnline = onlineNetworks.includes('tiktok');
+    const isInstagramOnline = Boolean(instagramUrl && onlineNetworks.includes('instagram'));
+    const isYoutubeOnline = Boolean(youtubeUrl && onlineNetworks.includes('youtube'));
+    const isTiktokOnline = Boolean(tiktokUrl && onlineNetworks.includes('tiktok'));
 
     return `
       <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/90 group flex flex-col justify-between aspect-[3/4] sm:aspect-[4/5]">

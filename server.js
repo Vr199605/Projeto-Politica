@@ -1131,7 +1131,7 @@ app.get('/api/politicians/social-status', (req, res) => {
     const db = readDb();
     const verifiedStreams = db.verifiedBroadcasts || [];
 
-    // Mapeia todos os políticos cadastrados garantindo consistência total do nome, foto e perfis
+    // Mapeia todos os políticos cadastrados garantindo dados oficiais sem URLs fictícias
     const allPoliticians = (db.politicians || []).map(p => ({
       id: p.id,
       name: p.name || 'Político',
@@ -1141,16 +1141,16 @@ app.get('/api/politicians/social-status', (req, res) => {
       avatar: p.avatar || '/assets/themes/brasilia.jpg',
       socialStatus: {
         isLive: Boolean(p.socialStatus?.isLive),
-        status: p.socialStatus?.status || 'online',
-        statusLabel: p.socialStatus?.statusLabel || (p.socialStatus?.isLive ? 'AO VIVO' : 'ONLINE NAS REDES'),
+        status: p.socialStatus?.status || 'offline',
+        statusLabel: p.socialStatus?.isLive ? 'AO VIVO' : (p.socialStatus?.status === 'online' ? 'ONLINE NAS REDES' : 'OFFLINE'),
         lastActivity: p.socialStatus?.lastActivity || 'Ativo agora',
         liveUrl: p.socialStatus?.liveUrl || null,
         liveTitle: p.socialStatus?.liveTitle || null,
-        onlineNetworks: Array.isArray(p.socialStatus?.onlineNetworks) ? p.socialStatus.onlineNetworks : ['instagram', 'youtube'],
+        onlineNetworks: Array.isArray(p.socialStatus?.onlineNetworks) ? p.socialStatus.onlineNetworks : [],
         profiles: {
-          instagram: p.socialStatus?.profiles?.instagram || `https://instagram.com/${p.id}`,
-          youtube: p.socialStatus?.profiles?.youtube || `https://youtube.com/@${p.id}`,
-          tiktok: p.socialStatus?.profiles?.tiktok || `https://tiktok.com/@${p.id}`
+          instagram: p.socialStatus?.profiles?.instagram || null,
+          youtube: p.socialStatus?.profiles?.youtube || null,
+          tiktok: p.socialStatus?.profiles?.tiktok || null
         }
       }
     }));
@@ -1158,8 +1158,13 @@ app.get('/api/politicians/social-status', (req, res) => {
     // Políticos que estão em live
     const livePoliticians = allPoliticians.filter(p => p.socialStatus && p.socialStatus.isLive);
 
-    // Políticos com presença online verificada
-    const onlinePoliticians = allPoliticians.filter(p => p.socialStatus && (p.socialStatus.status === 'online' || p.socialStatus.isLive));
+    // Políticos que estão EFETIVAMENTE online com redes verificadas ativas
+    const onlinePoliticians = allPoliticians.filter(p => 
+      p.socialStatus && 
+      (p.socialStatus.status === 'online' || p.socialStatus.isLive) &&
+      Array.isArray(p.socialStatus.onlineNetworks) && 
+      p.socialStatus.onlineNetworks.length > 0
+    );
 
     const totalLive = verifiedStreams.length + livePoliticians.length;
 
