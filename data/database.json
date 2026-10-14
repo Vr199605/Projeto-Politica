@@ -7,19 +7,23 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4831,
+      "searchCount": 4832,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
       "socialStatus": {
-        "isLive": false,
+        "isLive": true,
         "status": "online",
-        "statusLabel": "ATIVO NO INSTAGRAM / YOUTUBE",
-        "lastActivity": "Há 1h",
-        "recentPost": "Pronunciamento sobre relações internacionais e novos acordos bilaterais.",
-        "followersTotal": "31.4M",
+        "statusLabel": "AO VIVO",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": "https://youtube.com/@lulaoficial",
+        "liveTitle": "Pronunciamento Oficial à Nação e Coletiva Internacional",
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/LulaOficial",
           "instagram": "https://instagram.com/lulaoficial",
           "youtube": "https://youtube.com/@lulaoficial",
           "tiktok": "https://tiktok.com/@lulaoficial"
@@ -41,12 +45,16 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO INSTAGRAM",
-        "lastActivity": "Há 2h",
-        "recentPost": "Conversa com apoiadores sobre as diretrizes eleitorais e agenda partidária.",
-        "followersTotal": "28.9M",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/jairbolsonaro",
           "instagram": "https://instagram.com/jairmessiasbolsonaro",
           "youtube": "https://youtube.com/@bolsonarojr",
           "tiktok": "https://tiktok.com/@jairbolsonaro"
@@ -58,10 +66,10 @@
       "id": "tarcisio",
       "name": "Tarcísio Gomes de Freitas",
       "popularName": "Tarcísio de Freitas",
-      "party": "Republicanos",
-      "office": "Governador do Estado de São Paulo",
+      "party": "REPUBLICANOS",
+      "office": "Governador de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3555,
+      "searchCount": 3556,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -70,16 +78,18 @@
         "status": "online",
         "statusLabel": "ONLINE",
         "lastActivity": "Atualizado agora",
-        "recentPost": "Vistoria técnica nas obras do Rodoanel Norte e novos leilões rodoviários.",
-        "followersTotal": "4.2M",
-        "profiles": {
-          "twitter": "https://x.com/tarcisiogdf",
-          "instagram": "https://instagram.com/tarcisiogdf",
-          "youtube": "https://youtube.com/@tarcisiogdf"
-        },
-        "livePlatform": "YouTube",
+        "liveUrl": "https://youtube.com/@tarcisiogdf/live",
         "liveTitle": "Transmissão Especial de SP: Entrevista Coletiva",
-        "liveUrl": "https://youtube.com/@tarcisiogdf/live"
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
+        "profiles": {
+          "instagram": "https://instagram.com/tarcisiogdf",
+          "youtube": "https://youtube.com/@tarcisiogdf",
+          "tiktok": "https://tiktok.com/@tarcisiogdf"
+        },
+        "livePlatform": "YouTube"
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg/330px-Governador_do_Estado_de_S%C3%A3o_Paulo%2C_Tarc%C3%ADsio_de_Freitas_-_Foto_Oficial_%28cropped%29.jpg"
     },
@@ -97,14 +107,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "PUBLICOU NO INSTAGRAM",
-        "lastActivity": "Há 28 min",
-        "recentPost": "Apresentação dos dados de arrecadação e regulamentação da Reforma Tributária.",
-        "followersTotal": "3.8M",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/Haddad_Fernando",
           "instagram": "https://instagram.com/fernandohaddadoficial",
-          "youtube": "https://youtube.com/@fernandohaddad"
+          "youtube": "https://youtube.com/@fernandohaddad",
+          "tiktok": "https://tiktok.com/@fernandohaddad"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Fernando_Haddad_posse_min._da_Fazenda.jpg/330px-Fernando_Haddad_posse_min._da_Fazenda.jpg"
@@ -114,7 +128,7 @@
       "name": "Arthur César Pereira de Lira",
       "popularName": "Arthur Lira",
       "party": "PP",
-      "office": "Presidente da Câmara dos Deputados",
+      "office": "Deputado Federal",
       "avatar": "/assets/politicians/lira.jpg",
       "searchCount": 2640,
       "trend": "+8%",
@@ -123,13 +137,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO X (TWITTER)",
-        "lastActivity": "Há 45 min",
-        "recentPost": "Reunião do Colégio de Líderes para pautar votações de urgência no plenário.",
-        "followersTotal": "890K",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/ArthurLira_",
-          "instagram": "https://instagram.com/oficialarthurlira"
+          "instagram": "https://instagram.com/oficialarthurlira",
+          "youtube": "https://youtube.com/@CamaradosDeputadosoficial",
+          "tiktok": "https://tiktok.com/@arthurliraoficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Lula_e_Lira_2022_%28cropped2%29.jpg/330px-Lula_e_Lira_2022_%28cropped2%29.jpg"
@@ -139,7 +158,7 @@
       "name": "Rodrigo Otavio Soares Pacheco",
       "popularName": "Rodrigo Pacheco",
       "party": "PSD",
-      "office": "Presidente do Senado Federal",
+      "office": "Presidente do Senado",
       "avatar": "/assets/politicians/pacheco.jpg",
       "searchCount": 2310,
       "trend": "+5%",
@@ -148,13 +167,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO INSTAGRAM",
-        "lastActivity": "Há 1h",
-        "recentPost": "Sessão solene do Congresso Nacional e balanço de projetos aprovados.",
-        "followersTotal": "760K",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/rodrigopacheco",
-          "instagram": "https://instagram.com/rodrigopacheco"
+          "instagram": "https://instagram.com/rodrigopacheco",
+          "youtube": "https://youtube.com/@senadofederal",
+          "tiktok": "https://tiktok.com/@rodrigopacheco"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg/330px-Foto_oficial_2_Senador_Rodrigo_Pacheco.jpg"
@@ -164,7 +188,7 @@
       "name": "Simone Nassar Tebet",
       "popularName": "Simone Tebet",
       "party": "MDB",
-      "office": "Ministra do Planejamento e Orçamento",
+      "office": "Ministra do Planejamento",
       "avatar": "/assets/politicians/tebet.jpg",
       "searchCount": 1940,
       "trend": "+9%",
@@ -172,14 +196,18 @@
       "bio": "Ministra do Planejamento e ex-senadora por Mato Grosso do Sul.",
       "socialStatus": {
         "isLive": false,
-        "status": "recent",
-        "statusLabel": "RECENTE NO LINKEDIN / X",
-        "lastActivity": "Há 2h",
-        "recentPost": "Relatório de monitoramento dos gastos públicos e eficiência orçamentária.",
-        "followersTotal": "2.1M",
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram"
+        ],
         "profiles": {
-          "twitter": "https://x.com/simonetebetms",
-          "instagram": "https://instagram.com/simonetebet"
+          "instagram": "https://instagram.com/simonetebet",
+          "youtube": "https://youtube.com/@simonetebet",
+          "tiktok": "https://tiktok.com/@simonetebetoficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg/330px-2024-08-28_Audi%C3%AAncia_entre_as_Ministras_Simone_Tebet_e_Luciana_Santos%2C_10_%28cropped%29.jpg"
@@ -189,21 +217,25 @@
       "name": "Nikolas Ferreira de Oliveira",
       "popularName": "Nikolas Ferreira",
       "party": "PL",
-      "office": "Deputado Federal por Minas Gerais",
+      "office": "Deputado Federal",
       "avatar": "/assets/politicians/nikolas.jpg",
       "searchCount": 1820,
       "trend": "+22%",
       "trendDirection": "up",
       "bio": "Deputado federal mais votado do Brasil nas eleições de 2022.",
       "socialStatus": {
-        "isLive": false,
+        "isLive": true,
         "status": "online",
-        "statusLabel": "ATIVO NO TIKTOK / INSTAGRAM",
-        "lastActivity": "Há 40 min",
-        "recentPost": "Pronunciamento na comissão temática e destaques parlamentares.",
-        "followersTotal": "11.2M",
+        "statusLabel": "AO VIVO",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": "https://youtube.com/@nikolasferreira",
+        "liveTitle": "Transmissão Ao Vivo com Eleitores e Notícias do Congresso",
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/nikolas_dm",
           "instagram": "https://instagram.com/nikolasferreiradm",
           "youtube": "https://youtube.com/@nikolasferreira",
           "tiktok": "https://tiktok.com/@nikolasferreiradm"
@@ -216,7 +248,7 @@
       "name": "Guilherme Castro Boulos",
       "popularName": "Guilherme Boulos",
       "party": "PSOL",
-      "office": "Deputado Federal por São Paulo",
+      "office": "Deputado Federal",
       "avatar": "/assets/politicians/boulos.jpg",
       "searchCount": 1690,
       "trend": "+11%",
@@ -225,14 +257,19 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO INSTAGRAM",
-        "lastActivity": "Há 35 min",
-        "recentPost": "Debate com movimentos sociais sobre moradia digna e serviços públicos.",
-        "followersTotal": "5.4M",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/GuilhermeBoulos",
           "instagram": "https://instagram.com/guilhermeboulos.oficial",
-          "youtube": "https://youtube.com/@guilhermeboulos"
+          "youtube": "https://youtube.com/@guilhermeboulos",
+          "tiktok": "https://tiktok.com/@guilhermeboulos"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg/330px-Audi%C3%AAncia_P%C3%BAblica_-_Guilherme_Boulos_%28cropped%29.jpg"
@@ -242,7 +279,7 @@
       "name": "Ciro Ferreira Gomes",
       "popularName": "Ciro Gomes",
       "party": "PDT",
-      "office": "Ex-Ministro e Ex-Governador do Ceará",
+      "office": "Líder Político & Ex-Ministro",
       "avatar": "/assets/politicians/ciro.png",
       "searchCount": 1530,
       "trend": "-3%",
@@ -250,15 +287,19 @@
       "bio": "Advogado, professor e ex-candidato à Presidência da República.",
       "socialStatus": {
         "isLive": false,
-        "status": "recent",
-        "statusLabel": "RECENTE NO YOUTUBE",
-        "lastActivity": "Há 3h",
-        "recentPost": "Nova aula/análise sobre a taxa de juros e o endividamento das famílias.",
-        "followersTotal": "3.5M",
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "youtube",
+          "instagram"
+        ],
         "profiles": {
-          "twitter": "https://x.com/cirogomes",
           "instagram": "https://instagram.com/cirogomes",
-          "youtube": "https://youtube.com/@cirogomesoficial"
+          "youtube": "https://youtube.com/@cirogomesoficial",
+          "tiktok": "https://tiktok.com/@cirogomesoficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Presidente_Ciro_Gomes.png/330px-Presidente_Ciro_Gomes.png"
@@ -268,7 +309,7 @@
       "name": "Maria Osmarina Marina Silva Vaz de Lima",
       "popularName": "Marina Silva",
       "party": "REDE",
-      "office": "Ministra do Meio Ambiente e Mudança do Clima",
+      "office": "Ministra do Meio Ambiente",
       "avatar": "/assets/politicians/marina.jpg",
       "searchCount": 1390,
       "trend": "+14%",
@@ -277,13 +318,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO X (TWITTER)",
-        "lastActivity": "Há 50 min",
-        "recentPost": "Balanço das ações de combate aos incêndios e preservação dos biomas.",
-        "followersTotal": "2.9M",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/MarinaSilva",
-          "instagram": "https://instagram.com/marinasilvaoficial"
+          "instagram": "https://instagram.com/marinasilvaoficial",
+          "youtube": "https://youtube.com/@marinasilvaoficial",
+          "tiktok": "https://tiktok.com/@marinasilvaoficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Marina_Silva_crop.jpg/330px-Marina_Silva_crop.jpg"
@@ -292,8 +338,8 @@
       "id": "moro",
       "name": "Sergio Fernando Moro",
       "popularName": "Sergio Moro",
-      "party": "União Brasil",
-      "office": "Senador pelo Paraná",
+      "party": "UNIÃO",
+      "office": "Senador da República",
       "avatar": "/assets/politicians/moro.jpg",
       "searchCount": 1280,
       "trend": "+4%",
@@ -302,13 +348,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO NO X (TWITTER)",
-        "lastActivity": "Há 1h",
-        "recentPost": "Pronunciamento na Comissão de Constituição e Justiça do Senado.",
-        "followersTotal": "4.1M",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/SF_Moro",
-          "instagram": "https://instagram.com/sergiomorooficial"
+          "instagram": "https://instagram.com/sergiomorooficial",
+          "youtube": "https://youtube.com/@sergiomoro",
+          "tiktok": "https://tiktok.com/@sergiomoroficial"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg/330px-Senador_da_Rep%C3%BAblica_S%C3%A9rgio_Moro.jpg"
@@ -318,7 +369,7 @@
       "name": "Eduardo Figueiredo Cavalheiro Leite",
       "popularName": "Eduardo Leite",
       "party": "PSDB",
-      "office": "Governador do Rio Grande do Sul",
+      "office": "Governador do RS",
       "avatar": "/assets/politicians/leite.jpg",
       "searchCount": 1153,
       "trend": "+7%",
@@ -327,13 +378,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO RECENTEMENTE",
-        "lastActivity": "Há 2h",
-        "recentPost": "Atividades parlamentares e agenda pública.",
-        "followersTotal": "500K+",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/leite",
-          "instagram": "https://instagram.com/leite"
+          "instagram": "https://instagram.com/leite",
+          "youtube": "https://youtube.com/@eduardoleite_rs",
+          "tiktok": "https://tiktok.com/@eduardoleite"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg/330px-09.02.2026_%E2%80%93_Eduardo_Leite_in_February_2026_-_55087496770_%283x4%29.jpg"
@@ -342,7 +398,7 @@
       "id": "caiado",
       "name": "Ronaldo Ramos Caiado",
       "popularName": "Ronaldo Caiado",
-      "party": "União Brasil",
+      "party": "UNIÃO",
       "office": "Governador de Goiás",
       "avatar": "/assets/politicians/caiado.jpg",
       "searchCount": 980,
@@ -352,13 +408,18 @@
       "socialStatus": {
         "isLive": false,
         "status": "online",
-        "statusLabel": "ATIVO RECENTEMENTE",
-        "lastActivity": "Há 2h",
-        "recentPost": "Atividades parlamentares e agenda pública.",
-        "followersTotal": "500K+",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/caiado",
-          "instagram": "https://instagram.com/caiado"
+          "instagram": "https://instagram.com/caiado",
+          "youtube": "https://youtube.com/@ronaldocaiado",
+          "tiktok": "https://tiktok.com/@ronaldocaiado"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg/330px-Foto_oficial_do_governador_de_Goi%C3%A1s%2C_Ronaldo_Caiado_em_2023_%28ombros%29.jpg"
@@ -367,8 +428,8 @@
       "id": "eduardo-paes",
       "name": "Eduardo Paes",
       "popularName": "Eduardo Paes",
-      "party": "Independente",
-      "office": "Figura Pública / Político",
+      "party": "PSD",
+      "office": "Prefeito do Rio de Janeiro",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
       "searchCount": 2,
       "trend": "+100%",
@@ -378,10 +439,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/eduardopaes",
-          "instagram": "https://instagram.com/eduardopaes"
+          "instagram": "https://instagram.com/eduardopaes",
+          "youtube": "https://youtube.com/@eduardopaesrio",
+          "tiktok": "https://tiktok.com/@eduardopaes"
         }
       }
     },
@@ -390,7 +458,7 @@
       "name": "Alexandre de Moraes",
       "popularName": "Alexandre de Moraes",
       "party": "STF",
-      "office": "Ministro do Supremo Tribunal Federal",
+      "office": "Ministro do STF",
       "avatar": "/assets/politicians/moraes.jpg",
       "searchCount": 3891,
       "trend": "+20%",
@@ -400,9 +468,16 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/alexandre"
+          "instagram": "https://instagram.com/stfoficial",
+          "youtube": "https://youtube.com/@stfoficial",
+          "tiktok": "https://tiktok.com/@stf_oficial"
         }
       }
     },
@@ -411,7 +486,7 @@
       "name": "Luís Roberto Barroso",
       "popularName": "Luís Roberto Barroso",
       "party": "STF",
-      "office": "Presidente do Supremo Tribunal Federal",
+      "office": "Presidente do STF",
       "avatar": "/assets/politicians/barroso.jpg",
       "searchCount": 2450,
       "trend": "+8%",
@@ -421,10 +496,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "youtube",
+          "instagram"
+        ],
         "profiles": {
-          "twitter": "https://x.com/LRobertoBarroso",
-          "instagram": "https://instagram.com/lrobertobarroso"
+          "instagram": "https://instagram.com/lrobertobarroso",
+          "youtube": "https://youtube.com/@stfoficial",
+          "tiktok": "https://tiktok.com/@stf_oficial"
         }
       }
     },
@@ -433,7 +515,7 @@
       "name": "Flávio Dino de Castro e Costa",
       "popularName": "Flávio Dino",
       "party": "STF",
-      "office": "Ministro do Supremo Tribunal Federal",
+      "office": "Ministro do STF",
       "avatar": "/assets/politicians/dino.jpg",
       "searchCount": 2680,
       "trend": "+12%",
@@ -443,10 +525,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/FlavioDino",
-          "instagram": "https://instagram.com/flaviodino"
+          "instagram": "https://instagram.com/flaviodino",
+          "youtube": "https://youtube.com/@stfoficial",
+          "tiktok": "https://tiktok.com/@stf_oficial"
         }
       }
     },
@@ -455,7 +544,7 @@
       "name": "Gilmar Ferreira Mendes",
       "popularName": "Gilmar Mendes",
       "party": "STF",
-      "office": "Ministro do Supremo Tribunal Federal",
+      "office": "Decano do STF",
       "avatar": "/assets/politicians/gilmar.jpg",
       "searchCount": 2120,
       "trend": "+5%",
@@ -465,9 +554,16 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/gilmarmendes"
+          "instagram": "https://instagram.com/stfoficial",
+          "youtube": "https://youtube.com/@stfoficial",
+          "tiktok": "https://tiktok.com/@stf_oficial"
         }
       }
     },
@@ -476,7 +572,7 @@
       "name": "Geraldo José Rodrigues Alckmin Filho",
       "popularName": "Geraldo Alckmin",
       "party": "PSB",
-      "office": "Vice-Presidente da República e Ministro do MDIC",
+      "office": "Vice-Presidente da República",
       "avatar": "/assets/politicians/alckmin.jpg",
       "searchCount": 2890,
       "trend": "+9%",
@@ -486,10 +582,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/geraldoalckmin",
-          "instagram": "https://instagram.com/geraldoalckmin_"
+          "instagram": "https://instagram.com/geraldoalckmin_",
+          "youtube": "https://youtube.com/@geraldoalckmin",
+          "tiktok": "https://tiktok.com/@geraldoalckmin_"
         }
       }
     },
@@ -508,10 +611,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/ricardonunes",
-          "instagram": "https://instagram.com/ricardonunessp"
+          "instagram": "https://instagram.com/ricardonunessp",
+          "youtube": "https://youtube.com/@ricardonunessp",
+          "tiktok": "https://tiktok.com/@ricardonunesprefeito"
         }
       }
     },
@@ -520,20 +630,28 @@
       "name": "Pablo Henrique Costa Marçal",
       "popularName": "Pablo Marçal",
       "party": "PRTB",
-      "office": "Empresário e Figura Política",
+      "office": "Líder Político & Empresário",
       "avatar": "/assets/politicians/marcal.jpg",
       "searchCount": 3410,
       "trend": "+45%",
       "trendDirection": "up",
       "bio": "Empresário, influenciador digital e candidato nas eleições municipais de São Paulo.",
       "socialStatus": {
-        "isLive": false,
+        "isLive": true,
         "status": "online",
-        "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "statusLabel": "AO VIVO",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": "https://youtube.com/@pablomarcal",
+        "liveTitle": "Live de Mentoria e Análise do Cenário Político Nacional",
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
           "instagram": "https://instagram.com/pablomarcalpdt",
-          "youtube": "https://youtube.com/@pablomarcal"
+          "youtube": "https://youtube.com/@pablomarcal",
+          "tiktok": "https://tiktok.com/@pablomarcalpdt"
         }
       }
     },
@@ -542,7 +660,7 @@
       "name": "Romeu Zema Neto",
       "popularName": "Romeu Zema",
       "party": "NOVO",
-      "office": "Governador do Estado de Minas Gerais",
+      "office": "Governador de Minas Gerais",
       "avatar": "/assets/politicians/zema.jpg",
       "searchCount": 2190,
       "trend": "+7%",
@@ -552,10 +670,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/RomeuZema",
-          "instagram": "https://instagram.com/romeuzemaoficial"
+          "instagram": "https://instagram.com/romeuzemaoficial",
+          "youtube": "https://youtube.com/@governadordeminas",
+          "tiktok": "https://tiktok.com/@romeuzema"
         }
       }
     },
@@ -563,8 +688,8 @@
       "id": "alcolumbre",
       "name": "Davi Samuel Alcolumbre Tobelem",
       "popularName": "Davi Alcolumbre",
-      "party": "União Brasil",
-      "office": "Senador pelo Amapá e Presidente da CCJ",
+      "party": "UNIÃO",
+      "office": "Senador da República",
       "avatar": "/assets/politicians/alcolumbre.jpg",
       "searchCount": 1980,
       "trend": "+15%",
@@ -574,10 +699,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/davialcolumbre",
-          "instagram": "https://instagram.com/davialcolumbre"
+          "instagram": "https://instagram.com/davialcolumbre",
+          "youtube": "https://youtube.com/@senadofederal",
+          "tiktok": "https://tiktok.com/@davialcolumbre"
         }
       }
     },
@@ -596,9 +728,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "instagram": "https://instagram.com/michellebolsonaro"
+          "instagram": "https://instagram.com/michellebolsonaro",
+          "youtube": "https://youtube.com/@michellebolsonarooficial",
+          "tiktok": "https://tiktok.com/@michellebolsonarooficial"
         }
       }
     },
@@ -607,7 +747,7 @@
       "name": "Tabata Claudia Amaral de Pontes",
       "popularName": "Tabata Amaral",
       "party": "PSB",
-      "office": "Deputada Federal por São Paulo",
+      "office": "Deputada Federal",
       "avatar": "/assets/politicians/tabata.jpg",
       "searchCount": 1870,
       "trend": "+10%",
@@ -617,10 +757,18 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube",
+          "tiktok"
+        ],
         "profiles": {
-          "twitter": "https://x.com/tabataamaralsp",
-          "instagram": "https://instagram.com/tabataamaralsp"
+          "instagram": "https://instagram.com/tabataamaralsp",
+          "youtube": "https://youtube.com/@tabataamaral",
+          "tiktok": "https://tiktok.com/@tabataamaralsp"
         }
       }
     },
@@ -629,7 +777,7 @@
       "name": "João Henrique de Andrade Lima Campos",
       "popularName": "João Campos",
       "party": "PSB",
-      "office": "Prefeito do Recife",
+      "office": "Prefeito de Recife",
       "avatar": "/assets/politicians/joaocampos.jpg",
       "searchCount": 2280,
       "trend": "+25%",
@@ -639,9 +787,16 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "tiktok"
+        ],
         "profiles": {
           "instagram": "https://instagram.com/joaocampos",
+          "youtube": "https://youtube.com/@joaocampospe",
           "tiktok": "https://tiktok.com/@joaocampos"
         }
       }
@@ -651,7 +806,7 @@
       "name": "Gleisi Helena Hoffmann",
       "popularName": "Gleisi Hoffmann",
       "party": "PT",
-      "office": "Deputada Federal e Presidente Nacional do PT",
+      "office": "Deputada Federal & Pres. PT",
       "avatar": "/assets/politicians/gleisi.jpg",
       "searchCount": 1780,
       "trend": "+6%",
@@ -661,10 +816,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/gleisi",
-          "instagram": "https://instagram.com/gleisihoffmann"
+          "instagram": "https://instagram.com/gleisihoffmann",
+          "youtube": "https://youtube.com/@gleisihoffmann",
+          "tiktok": "https://tiktok.com/@gleisopt"
         }
       }
     },
@@ -673,7 +835,7 @@
       "name": "José Renan Vasconcelos Calheiros",
       "popularName": "Renan Calheiros",
       "party": "MDB",
-      "office": "Senador por Alagoas",
+      "office": "Senador da República",
       "avatar": "/assets/politicians/renan.jpg",
       "searchCount": 1650,
       "trend": "+4%",
@@ -683,9 +845,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/renancalheiros"
+          "instagram": "https://instagram.com/renancalheiros",
+          "youtube": "https://youtube.com/@senadofederal",
+          "tiktok": "https://tiktok.com/@renancalheiros"
         }
       }
     },
@@ -694,7 +864,7 @@
       "name": "Cláudio Bonfim de Castro e Silva",
       "popularName": "Cláudio Castro",
       "party": "PL",
-      "office": "Governador do Estado do Rio de Janeiro",
+      "office": "Governador do Rio de Janeiro",
       "avatar": "/assets/politicians/castro.jpg",
       "searchCount": 1590,
       "trend": "+5%",
@@ -704,10 +874,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
-          "twitter": "https://x.com/claudiocastroRJ",
-          "instagram": "https://instagram.com/claudiocastrorj"
+          "instagram": "https://instagram.com/claudiocastrorj",
+          "youtube": "https://youtube.com/@claudiocastrorj",
+          "tiktok": "https://tiktok.com/@claudiocastrorj"
         }
       }
     },
@@ -716,7 +893,7 @@
       "name": "Carlos Roberto Massa Júnior",
       "popularName": "Ratinho Júnior",
       "party": "PSD",
-      "office": "Governador do Estado do Paraná",
+      "office": "Governador do Paraná",
       "avatar": "/assets/politicians/ratinho.jpg",
       "searchCount": 1720,
       "trend": "+8%",
@@ -726,10 +903,17 @@
         "isLive": false,
         "status": "online",
         "statusLabel": "ONLINE NAS REDES",
-        "lastActivity": "Ativo hoje",
+        "lastActivity": "Ativo em tempo real",
+        "liveUrl": null,
+        "liveTitle": null,
+        "onlineNetworks": [
+          "instagram",
+          "youtube"
+        ],
         "profiles": {
           "instagram": "https://instagram.com/ratinho_junior",
-          "twitter": "https://x.com/ratinho_jr"
+          "youtube": "https://youtube.com/@ratinhojunior",
+          "tiktok": "https://tiktok.com/@ratinhojunior_pr"
         }
       }
     }
@@ -741,7 +925,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5431,
+      "clicks": 5432,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -958,15 +1142,16 @@
     },
     {
       "id": "g1",
-      "name": "G1",
-      "domain": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPU280YllWZmI3WFpqM2N0dERPYThlZmlpTlMtMHgwVEJqSDVkYmxpaEZvN2NGYkZBeEt4X3BuUlNlY0tyMWQ3eGtCaFhzSnNIVWctbGk2d19DMkV4NXR5STdJT1RMUzFDLUdBLUc3WnBXVDJDUTRmQURiT0E2NVlxNXhSODJCZDhZU0J6azN3Nm41UnlrZ0FzdElCb2lHWG16amNJdkpNTGcxNHFVa1VCRmNGUkY2X3BwQjRObmVIUHlKQUdIeDFKTzI3cXIzbVdrYkUwaDdpNmtzczZ1ZmVLM1JRZEQybnZZWmgxYdIB-wFBVV95cUxONVVfY3Y4ZmhxdU14c3ZtbWNXZU5iRWJVWm1pUUZJZ1REelFyYy1RMDZUelVjQ1V6UkhzcjEwUzFZRkxzQXZzc1Vtczg4UXM2UDJSR1lqRnVDcVRyT3NTN3FncFVWRjRRN1puLUZETktsUlRfdGF3MFhtT3puZWdaVGJIN0VkOVI2X2RNd1lYNmtIVVB1ejZCaFpKV3o5UkJXbFJodGtPck5tY1BaQ2I1TkZIdjBGSFdhQ2JQX3NPbUVnWGZjb1ZqV1RLaFNNSThoM1dlT2hEZmVUazhmbC1hUW9YN2dJVVFTdlA4RzBSallzQUFxZzJuZ2RFNA?oc=5",
+      "name": "G1 Política",
+      "domain": "g1.globo.com",
+      "url": "https://g1.globo.com/politica/",
       "category": "Portal de Notícias",
       "clicks": 2,
       "badge": "Novo Portal",
       "verified": false,
       "isMonetizedPartner": false,
-      "logo": "📰"
+      "logo": "📰",
+      "logoSvg": "/assets/logos/g1.svg"
     }
   ],
   "blogs": [
@@ -977,6 +1162,7 @@
       "domain": "congressoemfoco.uol.com.br",
       "url": "https://congressoemfoco.uol.com.br",
       "category": "Bastidores do Congresso",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/congresso.svg"
     },
@@ -987,6 +1173,7 @@
       "domain": "metropoles.com",
       "url": "https://www.metropoles.com/colunas/guilherme-amado",
       "category": "Investigação e Bastidores",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/metropoles.svg"
     },
@@ -997,6 +1184,7 @@
       "domain": "poder360.com.br",
       "url": "https://www.poder360.com.br/poder-economia/",
       "category": "Economia e Poder",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/poder360.svg"
     },
@@ -1007,6 +1195,7 @@
       "domain": "oantagonista.com.br",
       "url": "https://oantagonista.com.br",
       "category": "Análise e Opinião",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/antagonista.svg"
     },
@@ -1017,6 +1206,7 @@
       "domain": "conjur.com.br",
       "url": "https://www.conjur.com.br",
       "category": "STF e Judiciário",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/conjur.svg"
     },
@@ -1027,6 +1217,7 @@
       "domain": "folha.uol.com.br",
       "url": "https://www1.folha.uol.com.br/colunas/painel/",
       "category": "Bastidores Políticos",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/folha.svg"
     },
@@ -1037,6 +1228,7 @@
       "domain": "gazetadopovo.com.br",
       "url": "https://www.gazetadopovo.com.br/vozes/",
       "category": "Opinião e Política",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/gazetadopovo.svg"
     },
@@ -1047,6 +1239,7 @@
       "domain": "brasil247.com",
       "url": "https://www.brasil247.com",
       "category": "Política Nacional",
+      "adSpotPrice": "R$ 490,00 / semana",
       "isSponsored": true,
       "logoSvg": "/assets/logos/brasil247.svg"
     }
@@ -1486,11 +1679,30 @@
       ],
       "createdAt": "2026-10-14T20:51:13.613Z",
       "favoriteParty": "PL"
+    },
+    {
+      "id": "usr-1792012428779",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792012428773@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-14T21:13:48.779Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 9850,
+    "currentTotal": 10600,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1555,6 +1767,15 @@
         "message": "Apoio à transparência em tempo real."
       },
       {
+        "id": "don-1792012429849",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-14",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
         "id": "don-4",
         "name": "Dra. Beatriz Albuquerque",
         "amount": 600,
@@ -1569,14 +1790,6 @@
         "date": "2026-10-04",
         "badge": "Apoiador Prata",
         "message": "Parabéns pela tecnologia aberta."
-      },
-      {
-        "id": "don-6",
-        "name": "Renato Silveira Pinto",
-        "amount": 450,
-        "date": "2026-10-03",
-        "badge": "Apoiador Bronze",
-        "message": "Apoio mensal à equipe."
       }
     ]
   },

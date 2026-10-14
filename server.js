@@ -1131,20 +1131,27 @@ app.get('/api/politicians/social-status', (req, res) => {
     const db = readDb();
     const verifiedStreams = db.verifiedBroadcasts || [];
 
-    // Mapeia todos os políticos cadastrados garantindo consistência total do nome e foto
+    // Mapeia todos os políticos cadastrados garantindo consistência total do nome, foto e perfis
     const allPoliticians = (db.politicians || []).map(p => ({
       id: p.id,
-      name: p.name,
-      popularName: p.popularName || p.name,
-      party: p.party,
-      office: p.office,
-      avatar: p.avatar,
-      socialStatus: p.socialStatus || {
-        isLive: false,
-        status: 'online',
-        statusLabel: 'ONLINE NAS REDES',
-        lastActivity: 'Ativo hoje',
-        profiles: {}
+      name: p.name || 'Político',
+      popularName: p.popularName || p.name || 'Líder Político',
+      party: p.party || 'POL',
+      office: p.office || 'Líder Político',
+      avatar: p.avatar || '/assets/themes/brasilia.jpg',
+      socialStatus: {
+        isLive: Boolean(p.socialStatus?.isLive),
+        status: p.socialStatus?.status || 'online',
+        statusLabel: p.socialStatus?.statusLabel || (p.socialStatus?.isLive ? 'AO VIVO' : 'ONLINE NAS REDES'),
+        lastActivity: p.socialStatus?.lastActivity || 'Ativo agora',
+        liveUrl: p.socialStatus?.liveUrl || null,
+        liveTitle: p.socialStatus?.liveTitle || null,
+        onlineNetworks: Array.isArray(p.socialStatus?.onlineNetworks) ? p.socialStatus.onlineNetworks : ['instagram', 'youtube'],
+        profiles: {
+          instagram: p.socialStatus?.profiles?.instagram || `https://instagram.com/${p.id}`,
+          youtube: p.socialStatus?.profiles?.youtube || `https://youtube.com/@${p.id}`,
+          tiktok: p.socialStatus?.profiles?.tiktok || `https://tiktok.com/@${p.id}`
+        }
       }
     }));
 

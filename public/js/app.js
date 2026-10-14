@@ -94,7 +94,7 @@ function updateHeaderAuthUI() {
     if (btnLogin) btnLogin.classList.add('hidden');
     if (userMenu) userMenu.classList.remove('hidden');
     if (avatar) avatar.src = state.currentUser.avatar || '/assets/politicians/lula.jpg';
-    if (name) name.textContent = state.currentUser.name.split(' ')[0];
+    if (name) name.textContent = (state.currentUser.name || 'Usuário').split(' ')[0];
   } else {
     if (btnLogin) btnLogin.classList.remove('hidden');
     if (userMenu) userMenu.classList.add('hidden');
@@ -630,10 +630,10 @@ function renderTop5Politicians() {
           >
           <div class="truncate">
             <h4 class="text-xs font-black text-slate-900 group-hover:text-blue-700 transition leading-tight truncate">
-              ${pol.popularName}
+              ${pol.popularName || pol.name || 'Líder Político'}
             </h4>
             <span class="text-[10px] text-slate-500 font-bold block truncate">
-              ${pol.party} • ${pol.office ? pol.office.split(' ')[0] : 'Líder'}
+              ${pol.party || 'POL'} • ${(pol.office || 'Líder').split(' ')[0]}
             </span>
           </div>
         </div>
@@ -1183,11 +1183,11 @@ function renderNewsGrid() {
               </button>
 
               <a 
-                href="/api/sites/click?siteName=${encodeURIComponent(art.source)}&targetUrl=${encodeURIComponent(art.url)}" 
+                href="/api/sites/click?siteName=${encodeURIComponent(art.source || 'Portal')}&targetUrl=${encodeURIComponent(art.url || '#')}" 
                 target="_blank"
                 class="inline-flex items-center gap-1 bg-slate-900 hover:bg-blue-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition"
               >
-                <span>Ler no ${art.source.split(' ')[0]}</span>
+                <span>Ler no ${(art.source || 'Portal').split(' ')[0]}</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
               </a>
             </div>
@@ -1359,13 +1359,6 @@ function renderSocialButtons(profiles, isLive, liveUrl) {
       </a>
     `);
   }
-  if (profiles.twitter) {
-    btns.push(`
-      <a href="${profiles.twitter}" target="_blank" class="w-7 h-7 rounded-lg bg-slate-900 hover:bg-black text-white flex items-center justify-center transition shadow-2xs shrink-0" title="X / Twitter Oficial">
-        <i class="fa-brands fa-x-twitter text-xs"></i>
-      </a>
-    `);
-  }
   if (profiles.youtube) {
     btns.push(`
       <a href="${profiles.youtube}" target="_blank" class="w-7 h-7 rounded-lg bg-red-600 hover:bg-red-500 text-white flex items-center justify-center transition shadow-2xs shrink-0" title="Canal YouTube">
@@ -1388,59 +1381,157 @@ function renderOnlinePoliticiansGrid() {
   const countLabel = document.getElementById('politicians-online-count');
   if (!container) return;
 
-  const list = state.onlinePoliticians || [];
+  const rawList = state.onlinePoliticians || [];
+  // Exibir líderes com presença ativa no radar
+  const list = rawList.filter(pol => {
+    const hasOnlineNet = Array.isArray(pol.socialStatus?.onlineNetworks) && pol.socialStatus.onlineNetworks.length > 0;
+    return hasOnlineNet || pol.socialStatus?.isLive || pol.socialStatus?.status === 'online';
+  });
+
   if (countLabel) {
-    countLabel.textContent = `${list.length} Líderes Ativos`;
+    countLabel.textContent = `${list.length} Líderes Ativos no Radar`;
   }
 
   if (list.length === 0) {
-    container.innerHTML = '<p class="text-xs text-slate-500 col-span-full py-4 text-center font-bold">Nenhum político online no momento.</p>';
+    container.innerHTML = '<p class="text-xs text-slate-500 col-span-full py-6 text-center font-bold">Nenhum político online no momento.</p>';
     return;
   }
 
-  // "reduzir a quantidade de informações demonstrada colocar a foto do político que está online e as redes que ele está online."
+  // Demonstrativo do Político Online:
+  // - Foto do político como fundo do card
+  // - Pequeno quadrado no canto superior esquerdo em vermelho "Ao Vivo"
+  // - Três quadrados com as logos na base da imagem representando as 3 redes (Instagram, YouTube, TikTok)
+  // - Logo da rede online ILUMINADA e rede offline APAGADA
   container.innerHTML = list.map(pol => {
-    const isLive = pol.socialStatus?.isLive;
+    const isLive = Boolean(pol.socialStatus?.isLive);
     const profiles = pol.socialStatus?.profiles || {};
-    const hasLiveUrl = pol.socialStatus?.liveUrl;
+    const onlineNetworks = Array.isArray(pol.socialStatus?.onlineNetworks) ? pol.socialStatus.onlineNetworks : ['instagram', 'youtube'];
     const isFav = state.favoritePoliticianIds.has(pol.id);
 
-    return `
-      <div class="bg-white rounded-2xl border border-slate-200/90 hover:border-slate-300 p-3 shadow-xs hover:shadow-md transition flex items-center justify-between gap-2.5 group">
-        <!-- Foto + Nome Nítido + Cargo -->
-        <div class="flex items-center gap-2.5 overflow-hidden flex-1">
-          <div class="relative shrink-0">
-            <img 
-              src="${pol.avatar || '/assets/themes/brasilia.jpg'}" 
-              alt="${pol.popularName || pol.name}"
-              class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-xs ${isLive ? 'ring-2 ring-rose-500' : 'ring-2 ring-emerald-500'}"
-              onerror="this.src='/assets/themes/brasilia.jpg'"
-            >
-            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full ${isLive ? 'bg-rose-500 animate-ping' : 'bg-emerald-500'} border-2 border-white" title="${isLive ? 'Ao Vivo' : 'Online'}"></span>
-          </div>
-          <div class="truncate flex-1">
-            <div class="flex items-center gap-1.5">
-              <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-700 transition leading-tight truncate">
-                ${pol.popularName || pol.name}
-              </h4>
-              ${isLive ? '<span class="text-[9px] bg-rose-100 text-rose-800 font-black px-1.5 rounded uppercase shrink-0">LIVE</span>' : ''}
-            </div>
-            <span class="text-[10px] text-slate-500 font-bold block truncate">
-              ${pol.party} • ${pol.office ? pol.office.split(' ')[0] : 'Líder'}
-            </span>
-          </div>
-        </div>
+    const popularName = pol.popularName || pol.name || 'Líder Político';
+    const party = pol.party || 'POL';
+    const office = pol.office || 'Líder Político';
+    const avatar = pol.avatar || '/assets/themes/brasilia.jpg';
 
-        <!-- Redes Sociais que ele está online + Botão Favorito -->
-        <div class="flex items-center gap-1 shrink-0">
-          ${renderSocialButtons(profiles, isLive, hasLiveUrl)}
+    // 3 Redes Oficiais Solicitadas
+    const instagramUrl = profiles.instagram || `https://instagram.com/${pol.id}`;
+    const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || `https://youtube.com/@${pol.id}`);
+    const tiktokUrl = profiles.tiktok || `https://tiktok.com/@${pol.id}`;
+
+    const isInstagramOnline = onlineNetworks.includes('instagram');
+    const isYoutubeOnline = onlineNetworks.includes('youtube');
+    const isTiktokOnline = onlineNetworks.includes('tiktok');
+
+    return `
+      <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/90 group flex flex-col justify-between aspect-[3/4] sm:aspect-[4/5]">
+        <!-- Foto Oficial do Político em Alta Definição -->
+        <img 
+          src="${avatar}" 
+          alt="${popularName}" 
+          class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          onerror="this.src='/assets/themes/brasilia.jpg'"
+        />
+        
+        <!-- Gradientes para Máxima Legibilidade dos Elementos -->
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-slate-950/20 pointer-events-none"></div>
+
+        <!-- Canto Superior: Pequeno Quadrado Vermelho 'Ao Vivo' no Canto Superior Esquerdo -->
+        <div class="relative z-10 p-2.5 sm:p-3 flex items-start justify-between">
+          <div class="bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md flex items-center gap-1.5 border border-red-500/50">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <span>Ao Vivo</span>
+          </div>
+
+          <!-- Botão Favoritar Discreto no Canto Superior Direito -->
           <button 
             onclick="toggleFavoritePolitician('${pol.id}')" 
-            class="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition ml-0.5"
-            title="Favoritar ${pol.popularName || pol.name}"
+            class="w-7 h-7 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-xs text-white/90 hover:text-rose-400 flex items-center justify-center transition border border-white/20 shadow-xs"
+            title="Favoritar ${popularName}"
           >
-            <i class="${isFav ? 'fa-solid text-rose-600' : 'fa-regular'} fa-heart text-xs"></i>
+            <i class="${isFav ? 'fa-solid text-rose-500' : 'fa-regular'} fa-heart text-xs"></i>
           </button>
+        </div>
+
+        <!-- Base da Imagem: Identificação + Três Quadrados com as Logos (Instagram, YouTube, TikTok) -->
+        <div class="relative z-10 p-2.5 sm:p-3 space-y-2 mt-auto">
+          <!-- Nome Nítido e Cargo -->
+          <div>
+            <h4 class="text-sm sm:text-base font-black text-white leading-tight drop-shadow-md truncate">
+              ${popularName}
+            </h4>
+            <p class="text-[11px] font-bold text-slate-300 drop-shadow-xs truncate mt-0.5">
+              <span class="text-amber-400 font-extrabold">${party}</span> • ${(office).split(' ')[0]}
+            </p>
+          </div>
+
+          <!-- Três Quadrados das Redes Sociais: Online = ILUMINADA | Offline = APAGADA -->
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-1.5 border-t border-white/15">
+            <!-- 1. Instagram -->
+            ${isInstagramOnline ? `
+              <a 
+                href="${instagramUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="h-11 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="Instagram de ${popularName} (Online - Clique para acessar)"
+              >
+                <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-black uppercase tracking-tight text-white/95 mt-0.5">Online</span>
+              </a>
+            ` : `
+              <div 
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="Instagram (Offline no momento)"
+              >
+                <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
+              </div>
+            `}
+
+            <!-- 2. YouTube -->
+            ${isYoutubeOnline ? `
+              <a 
+                href="${youtubeUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="YouTube de ${popularName} (Online - Clique para acessar)"
+              >
+                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-black uppercase tracking-tight text-white/95 mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
+              </a>
+            ` : `
+              <div 
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="YouTube (Offline no momento)"
+              >
+                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
+              </div>
+            `}
+
+            <!-- 3. TikTok -->
+            ${isTiktokOnline ? `
+              <a 
+                href="${tiktokUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="h-11 sm:h-12 rounded-xl bg-black text-cyan-300 border border-cyan-400/80 flex flex-col items-center justify-center shadow-lg shadow-cyan-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="TikTok de ${popularName} (Online - Clique para acessar)"
+              >
+                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none text-white drop-shadow-[0_0_3px_#06b6d4]"></i>
+                <span class="text-[8px] font-black uppercase tracking-tight text-cyan-300 mt-0.5">Online</span>
+              </a>
+            ` : `
+              <div 
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="TikTok (Offline no momento)"
+              >
+                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
+              </div>
+            `}
+          </div>
         </div>
       </div>
     `;

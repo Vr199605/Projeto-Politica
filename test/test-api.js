@@ -332,7 +332,11 @@ async function runTests() {
     assert.ok(sample.popularName && sample.popularName.trim().length > 0, 'Nome do político deve estar 100% preenchido');
     assert.ok(sample.avatar, 'Político deve possuir foto real');
     assert.ok(sample.socialStatus && sample.socialStatus.profiles, 'Político deve possuir perfis de redes sociais');
-    console.log(`   -> Político online verificado: ${sample.popularName} (${sample.party}) com redes: ${Object.keys(sample.socialStatus.profiles).join(', ')}`);
+    assert.ok(sample.socialStatus.profiles.instagram, 'Instagram deve estar configurado');
+    assert.ok(sample.socialStatus.profiles.youtube, 'YouTube deve estar configurado');
+    assert.ok(sample.socialStatus.profiles.tiktok, 'TikTok deve estar configurado');
+    assert.ok(Array.isArray(sample.socialStatus.onlineNetworks), 'Deve conter onlineNetworks para iluminar/apagar');
+    console.log(`   -> Político verificado: ${sample.popularName} (${sample.party}) com as 3 redes: Instagram, YouTube, TikTok [Online: ${sample.socialStatus.onlineNetworks.join(', ')}]`);
   });
 
   console.log(`\n======================================================`);
