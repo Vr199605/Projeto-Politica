@@ -19,6 +19,17 @@ const state = {
   politicians: [],
   sites: [],
   socialPoliticians: [],
+  onlinePoliticians: [],
+  verifiedStreams: [],
+  sponsoredBlogs: [],
+  themeSettings: {
+    tabBuscaBg: '#0f172a',
+    tabBuscaText: '#ffffff',
+    tabOnlineBg: '#e11d48',
+    tabOnlineText: '#ffffff'
+  },
+  onboardingSelectedParty: null,
+  onboardingSelectedPoliticians: new Set(),
   donations: {
     topDonators: [],
     currentTotal: 0,
@@ -40,11 +51,13 @@ const state = {
 
 // Inicialização ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
+  loadThemeSettings();
   initAuth();
   initRealtimeSearch();
   loadDonations();
   loadPoliticiansRanking();
   loadSitesRanking();
+  loadSponsoredBlogs();
   loadSocialStatus();
   runDefaultSearch(false);
 });
@@ -193,11 +206,166 @@ async function handleRegisterSubmit(e) {
       updateHeaderAuthUI();
       closeModal('modal-auth');
       showToast(`Conta criada com sucesso! Olá, ${data.user.name}.`, 'success');
+      
+      // "Assim que a pessoa se cadastrar solicitar que seja informado um partido favorito e 5 políticos"
+      setTimeout(() => {
+        openOnboardingModal(data.user);
+      }, 400);
     } else {
       showToast(data.error || 'Erro ao cadastrar.', 'error');
     }
   } catch (err) {
     showToast('Falha no cadastro.', 'error');
+  }
+}
+
+// ========================================================
+// 1.1 ONBOARDING PÓS-CADASTRO (PARTIDO E 5 POLÍTICOS)
+// ========================================================
+const BRAZILIAN_PARTIES = ['PL', 'PT', 'Republicanos', 'PSD', 'MDB', 'União Brasil', 'PP', 'PSOL', 'Novo', 'PSB', 'PDT', 'Podemos', 'Solidariedade', 'Avante', 'Rede'];
+
+function openOnboardingModal(user = null) {
+  if (user) state.currentUser = user;
+  state.onboardingSelectedParty = state.currentUser?.favoriteParty || null;
+  state.onboardingSelectedPoliticians = new Set(state.currentUser?.favoritePoliticians || []);
+
+  renderOnboardingParties();
+  renderOnboardingPoliticians();
+  updateOnboardingCounter();
+
+  document.getElementById('modal-onboarding')?.classList.remove('hidden');
+}
+
+function renderOnboardingParties() {
+  const container = document.getElementById('onboarding-parties-list');
+  if (!container) return;
+
+  container.innerHTML = BRAZILIAN_PARTIES.map(party => {
+    const isSelected = state.onboardingSelectedParty === party;
+    const activeClass = isSelected 
+      ? 'bg-blue-600 text-white border-blue-600 shadow-xs' 
+      : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-blue-50 hover:border-blue-300';
+    return `
+      <button 
+        type="button" 
+        onclick="selectOnboardingParty('${party}')"
+        class="px-3 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1.5 ${activeClass}"
+      >
+        <span>${party}</span>
+        ${isSelected ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+      </button>
+    `;
+  }).join('');
+}
+
+function selectOnboardingParty(party) {
+  state.onboardingSelectedParty = party;
+  renderOnboardingParties();
+}
+
+function renderOnboardingPoliticians() {
+  const container = document.getElementById('onboarding-politicians-grid');
+  if (!container) return;
+
+  const list = state.politicians.length > 0 ? state.politicians : [];
+
+  container.innerHTML = list.map(pol => {
+    const isSelected = state.onboardingSelectedPoliticians.has(pol.id);
+    const borderClass = isSelected 
+      ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-300' 
+      : 'border-slate-200 bg-slate-50 hover:bg-slate-100';
+
+    return `
+      <div 
+        onclick="toggleOnboardingPolitician('${pol.id}')"
+        class="p-2 rounded-xl border cursor-pointer transition flex items-center gap-2 select-none ${borderClass}"
+      >
+        <img 
+          src="${pol.avatar || '/assets/themes/brasilia.jpg'}" 
+          alt="${pol.popularName}" 
+          class="w-8 h-8 rounded-full object-cover shrink-0 border border-white shadow-2xs"
+          onerror="this.src='/assets/themes/brasilia.jpg'"
+        >
+        <div class="truncate flex-1">
+          <h5 class="text-xs font-black text-slate-900 leading-tight truncate">${pol.popularName}</h5>
+          <span class="text-[10px] text-slate-500 font-bold block truncate">${pol.party}</span>
+        </div>
+        ${isSelected ? '<i class="fa-solid fa-circle-check text-blue-600 text-xs shrink-0"></i>' : '<i class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>'}
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleOnboardingPolitician(polId) {
+  if (state.onboardingSelectedPoliticians.has(polId)) {
+    state.onboardingSelectedPoliticians.delete(polId);
+  } else {
+    if (state.onboardingSelectedPoliticians.size >= 5) {
+      showToast('Você já selecionou 5 políticos! Desmarque um para selecionar outro.', 'info');
+      return;
+    }
+    state.onboardingSelectedPoliticians.add(polId);
+  }
+  renderOnboardingPoliticians();
+  updateOnboardingCounter();
+}
+
+function updateOnboardingCounter() {
+  const badge = document.getElementById('onboarding-counter-badge');
+  const count = state.onboardingSelectedPoliticians.size;
+  if (badge) {
+    badge.textContent = `${count} de 5 selecionados`;
+    if (count === 5) {
+      badge.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300';
+    } else {
+      badge.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700';
+    }
+  }
+}
+
+async function submitOnboardingPreferences() {
+  if (!state.currentUser) {
+    closeModal('modal-onboarding');
+    return;
+  }
+
+  if (!state.onboardingSelectedParty) {
+    showToast('Por favor, selecione seu partido favorito.', 'error');
+    return;
+  }
+
+  if (state.onboardingSelectedPoliticians.size < 5) {
+    showToast(`Por favor, selecione 5 políticos (faltam ${5 - state.onboardingSelectedPoliticians.size}).`, 'info');
+    return;
+  }
+
+  const payload = {
+    userId: state.currentUser.id,
+    favoriteParty: state.onboardingSelectedParty,
+    favoritePoliticianIds: Array.from(state.onboardingSelectedPoliticians)
+  };
+
+  try {
+    const res = await fetch('/api/users/preferences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      state.currentUser = data.user;
+      localStorage.setItem('rp_user', JSON.stringify(data.user));
+      payload.favoritePoliticianIds.forEach(id => state.favoritePoliticianIds.add(id));
+      updateFavBadge();
+      updateFavoriteButtonsUI();
+      closeModal('modal-onboarding');
+      showToast('Preferências salvas com sucesso! Seu feed foi personalizado.', 'success');
+      runDefaultSearch(false);
+    } else {
+      showToast(data.error || 'Erro ao salvar preferências.', 'error');
+    }
+  } catch (err) {
+    showToast('Falha na comunicação com o servidor.', 'error');
   }
 }
 
@@ -329,6 +497,9 @@ async function handleDonationSubmit(e) {
 // ========================================================
 // 3. LINHA 2: TOP 5 POLÍTICOS MAIS BUSCADOS
 // ========================================================
+// ========================================================
+// 3. LINHA 2: TOP 5 POLÍTICOS MAIS BUSCADOS (EXPOSTOS NA HOME)
+// ========================================================
 async function loadPoliticiansRanking() {
   try {
     const res = await fetch('/api/rankings/politicians');
@@ -342,73 +513,67 @@ async function loadPoliticiansRanking() {
   }
 }
 
-// ========================================================
-// 3. LINHA 2: TOP 5 POLÍTICOS MAIS BUSCADOS (RETRÁTIL COM AUDITORIA)
-// ========================================================
-let isTop5ManuallyOpened = false;
-
-function expandTop5Section() {
-  const content = document.getElementById('top5-expandable-content');
-  const chevron = document.getElementById('top5-chevron-icon');
-  const hint = document.getElementById('top5-hover-hint');
-  if (!content) return;
-  content.style.maxHeight = '700px';
-  content.classList.remove('opacity-0');
-  content.classList.add('opacity-100');
-  if (chevron) chevron.style.transform = 'rotate(180deg)';
-  if (hint) {
-    const span = hint.querySelector('span');
-    if (span) span.textContent = 'Auditoria aberta';
-  }
-}
-
-function retractTop5Section() {
-  if (isTop5ManuallyOpened) return;
-  const content = document.getElementById('top5-expandable-content');
-  const chevron = document.getElementById('top5-chevron-icon');
-  const hint = document.getElementById('top5-hover-hint');
-  if (!content) return;
-  content.style.maxHeight = '0px';
-  content.classList.remove('opacity-100');
-  content.classList.add('opacity-0');
-  if (chevron) chevron.style.transform = 'rotate(0deg)';
-  if (hint) {
-    const span = hint.querySelector('span');
-    if (span) span.textContent = 'Passe o mouse para abrir auditoria';
-  }
-}
-
-function toggleTop5SectionManual() {
-  isTop5ManuallyOpened = !isTop5ManuallyOpened;
-  if (isTop5ManuallyOpened) {
-    expandTop5Section();
+function toggleTop5Disclaimer() {
+  const panel = document.getElementById('top5-disclaimer-panel');
+  const chevron = document.getElementById('top5-disclaimer-chevron');
+  if (!panel) return;
+  const isHidden = panel.classList.contains('hidden');
+  if (isHidden) {
+    panel.classList.remove('hidden');
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
   } else {
-    const content = document.getElementById('top5-expandable-content');
-    const chevron = document.getElementById('top5-chevron-icon');
-    const hint = document.getElementById('top5-hover-hint');
-    if (!content) return;
-    content.style.maxHeight = '0px';
-    content.classList.remove('opacity-100');
-    content.classList.add('opacity-0');
+    panel.classList.add('hidden');
     if (chevron) chevron.style.transform = 'rotate(0deg)';
-    if (hint) {
-      const span = hint.querySelector('span');
-      if (span) span.textContent = 'Passe o mouse para abrir auditoria';
-    }
   }
 }
 
-async function loadPoliticiansRanking() {
+// ========================================================
+// 3.5 BLOGS E FONTES PATROCINADAS (EXPOSTOS NA HOME)
+// SOMENTE O NOME E A LOGO COM O LINK SOBRE A LOGO
+// ========================================================
+async function loadSponsoredBlogs() {
   try {
-    const res = await fetch('/api/rankings/politicians');
+    const res = await fetch('/api/blogs?sponsoredOnly=true');
     const data = await res.json();
     if (data.success) {
-      state.politicians = data.top10 || [];
-      renderTop5Politicians();
+      state.sponsoredBlogs = data.blogs || [];
+      renderSponsoredBlogs();
     }
   } catch (err) {
-    console.error('Erro ao buscar ranking de políticos:', err);
+    console.error('Erro ao carregar blogs patrocinados:', err);
   }
+}
+
+function renderSponsoredBlogs() {
+  const container = document.getElementById('sponsored-blogs-grid');
+  if (!container) return;
+
+  const blogs = state.sponsoredBlogs || [];
+  if (blogs.length === 0) {
+    container.innerHTML = '<p class="text-xs text-slate-500 col-span-full py-2">Carregando parceiros oficiais...</p>';
+    return;
+  }
+
+  // "Colocar a lista dos blogs patrocinados / Colocar somente o nome e a logo dos blogs onde o hiperlink do blog fique sobre a logo."
+  container.innerHTML = blogs.map(blog => {
+    const logoSvg = blog.logoSvg || getOfficialLogoForSite(blog.name);
+    return `
+      <div class="flex flex-col items-center justify-center text-center p-2.5 bg-slate-50 hover:bg-amber-50/50 border border-slate-200 hover:border-amber-300 rounded-xl transition group shadow-2xs">
+        <a 
+          href="${blog.url}" 
+          target="_blank" 
+          onclick="trackSiteClickOnly('${blog.id || blog.domain}')"
+          class="w-12 h-12 rounded-xl bg-slate-950 p-2 flex items-center justify-center shadow-xs border border-slate-700 group-hover:scale-105 group-hover:border-amber-400 transition"
+          title="Acessar ${blog.name} (abre em nova guia)"
+        >
+          <img src="${logoSvg}" alt="${blog.name}" class="max-w-full max-h-full object-contain">
+        </a>
+        <span class="text-[11px] font-bold text-slate-800 mt-2 truncate w-full" title="${blog.name}">
+          ${blog.name}
+        </span>
+      </div>
+    `;
+  }).join('');
 }
 
 function renderTop5Politicians() {
@@ -555,38 +720,217 @@ function trackSiteClickOnly(siteId) {
 }
 
 // ========================================================
-// 5. ABAS PRINCIPAIS: [ BUSCA ] | [ POLÍTICO ONLINE ]
+// 5. ABAS PRINCIPAIS & PERSONALIZAÇÃO DE CORES (ADMINISTRADOR)
 // ========================================================
+async function loadThemeSettings() {
+  try {
+    const saved = localStorage.getItem('rp_tab_theme');
+    if (saved) {
+      state.themeSettings = JSON.parse(saved);
+      applyTheme(state.themeSettings);
+    }
+    const res = await fetch('/api/admin/theme');
+    const data = await res.json();
+    if (data.success && data.theme) {
+      state.themeSettings = data.theme;
+      localStorage.setItem('rp_tab_theme', JSON.stringify(data.theme));
+      applyTheme(state.themeSettings);
+    }
+  } catch (err) {
+    console.warn('Usando tema padrão local:', err);
+    applyTheme(state.themeSettings);
+  }
+}
+
+function applyTheme(theme) {
+  if (!theme) return;
+  state.themeSettings = theme;
+
+  document.documentElement.style.setProperty('--tab-busca-bg', theme.tabBuscaBg || '#0f172a');
+  document.documentElement.style.setProperty('--tab-busca-text', theme.tabBuscaText || '#ffffff');
+  document.documentElement.style.setProperty('--tab-online-bg', theme.tabOnlineBg || '#e11d48');
+  document.documentElement.style.setProperty('--tab-online-text', theme.tabOnlineText || '#ffffff');
+
+  updateTabStyles();
+}
+
+function updateTabStyles() {
+  const btnBusca = document.getElementById('tab-btn-busca');
+  const btnOnline = document.getElementById('tab-btn-online');
+  const theme = state.themeSettings || {
+    tabBuscaBg: '#0f172a',
+    tabBuscaText: '#ffffff',
+    tabOnlineBg: '#e11d48',
+    tabOnlineText: '#ffffff'
+  };
+
+  if (!btnBusca || !btnOnline) return;
+
+  if (state.currentTab === 'search') {
+    btnBusca.style.backgroundColor = theme.tabBuscaBg;
+    btnBusca.style.color = theme.tabBuscaText;
+    btnBusca.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs';
+
+    btnOnline.style.backgroundColor = 'transparent';
+    btnOnline.style.color = '#334155';
+    btnOnline.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 hover:bg-slate-200';
+  } else {
+    btnOnline.style.backgroundColor = theme.tabOnlineBg;
+    btnOnline.style.color = theme.tabOnlineText;
+    btnOnline.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs';
+
+    btnBusca.style.backgroundColor = 'transparent';
+    btnBusca.style.color = '#334155';
+    btnBusca.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 hover:bg-slate-200';
+  }
+}
+
 function switchTab(tab) {
   state.currentTab = tab;
   const viewBusca = document.getElementById('view-busca');
   const viewOnline = document.getElementById('view-online');
-  const btnBusca = document.getElementById('tab-btn-busca');
-  const btnOnline = document.getElementById('tab-btn-online');
 
   if (tab === 'search') {
     viewBusca?.classList.remove('hidden');
     viewOnline?.classList.add('hidden');
-
-    if (btnBusca) {
-      btnBusca.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 bg-slate-900 text-white shadow-xs';
-    }
-    if (btnOnline) {
-      btnOnline.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-slate-700 hover:text-slate-950 hover:bg-slate-200';
-    }
   } else if (tab === 'social') {
     viewBusca?.classList.add('hidden');
     viewOnline?.classList.remove('hidden');
-
-    if (btnBusca) {
-      btnBusca.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-slate-700 hover:text-slate-950 hover:bg-slate-200';
-    }
-    if (btnOnline) {
-      btnOnline.className = 'flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 bg-rose-600 text-white shadow-xs';
-    }
-
     loadSocialStatus(true);
   }
+
+  updateTabStyles();
+}
+
+function openTabColorCustomizer() {
+  const theme = state.themeSettings || {
+    tabBuscaBg: '#0f172a',
+    tabBuscaText: '#ffffff',
+    tabOnlineBg: '#e11d48',
+    tabOnlineText: '#ffffff'
+  };
+
+  const bBg = document.getElementById('input-color-busca-bg');
+  const bBgHex = document.getElementById('input-color-busca-bg-hex');
+  const bTxt = document.getElementById('input-color-busca-text');
+  const bTxtHex = document.getElementById('input-color-busca-text-hex');
+  const oBg = document.getElementById('input-color-online-bg');
+  const oBgHex = document.getElementById('input-color-online-bg-hex');
+  const oTxt = document.getElementById('input-color-online-text');
+  const oTxtHex = document.getElementById('input-color-online-text-hex');
+
+  if (bBg) bBg.value = theme.tabBuscaBg;
+  if (bBgHex) bBgHex.value = theme.tabBuscaBg;
+  if (bTxt) bTxt.value = theme.tabBuscaText;
+  if (bTxtHex) bTxtHex.value = theme.tabBuscaText;
+  if (oBg) oBg.value = theme.tabOnlineBg;
+  if (oBgHex) oBgHex.value = theme.tabOnlineBg;
+  if (oTxt) oTxt.value = theme.tabOnlineText;
+  if (oTxtHex) oTxtHex.value = theme.tabOnlineText;
+
+  updateTabColorPreview();
+  document.getElementById('modal-tab-colors')?.classList.remove('hidden');
+}
+
+function updateTabColorPreview() {
+  const buscaBg = document.getElementById('input-color-busca-bg')?.value || '#0f172a';
+  const buscaText = document.getElementById('input-color-busca-text')?.value || '#ffffff';
+  const onlineBg = document.getElementById('input-color-online-bg')?.value || '#e11d48';
+  const onlineText = document.getElementById('input-color-online-text')?.value || '#ffffff';
+
+  const bHex = document.getElementById('input-color-busca-bg-hex');
+  const btHex = document.getElementById('input-color-busca-text-hex');
+  const oHex = document.getElementById('input-color-online-bg-hex');
+  const otHex = document.getElementById('input-color-online-text-hex');
+
+  if (bHex) bHex.value = buscaBg;
+  if (btHex) btHex.value = buscaText;
+  if (oHex) oHex.value = onlineBg;
+  if (otHex) otHex.value = onlineText;
+
+  const prevBusca = document.getElementById('preview-tab-busca');
+  const prevOnline = document.getElementById('preview-tab-online');
+
+  if (prevBusca) {
+    prevBusca.style.backgroundColor = buscaBg;
+    prevBusca.style.color = buscaText;
+  }
+  if (prevOnline) {
+    prevOnline.style.backgroundColor = onlineBg;
+    prevOnline.style.color = onlineText;
+  }
+}
+
+function syncHexToPicker(field) {
+  const hexInput = document.getElementById(`input-color-${field}-hex`);
+  const picker = document.getElementById(`input-color-${field}`);
+  if (!hexInput || !picker) return;
+
+  const val = hexInput.value.trim();
+  if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+    picker.value = val;
+    updateTabColorPreview();
+  }
+}
+
+function applyPresetTheme(buscaBg, buscaText, onlineBg, onlineText) {
+  const bBg = document.getElementById('input-color-busca-bg');
+  const bTxt = document.getElementById('input-color-busca-text');
+  const oBg = document.getElementById('input-color-online-bg');
+  const oTxt = document.getElementById('input-color-online-text');
+
+  if (bBg) bBg.value = buscaBg;
+  if (bTxt) bTxt.value = buscaText;
+  if (oBg) oBg.value = onlineBg;
+  if (oTxt) oTxt.value = onlineText;
+
+  updateTabColorPreview();
+}
+
+async function saveAdminTabColors() {
+  const buscaBg = document.getElementById('input-color-busca-bg')?.value || '#0f172a';
+  const buscaText = document.getElementById('input-color-busca-text')?.value || '#ffffff';
+  const onlineBg = document.getElementById('input-color-online-bg')?.value || '#e11d48';
+  const onlineText = document.getElementById('input-color-online-text')?.value || '#ffffff';
+
+  const theme = {
+    tabBuscaBg: buscaBg,
+    tabBuscaText: buscaText,
+    tabOnlineBg: onlineBg,
+    tabOnlineText: onlineText
+  };
+
+  try {
+    const res = await fetch('/api/admin/theme', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(theme)
+    });
+    const data = await res.json();
+    if (data.success) {
+      applyTheme(data.theme || theme);
+      localStorage.setItem('rp_tab_theme', JSON.stringify(data.theme || theme));
+      closeModal('modal-tab-colors');
+      showToast('Cores das abas salvas com sucesso pelo administrador!', 'success');
+    } else {
+      showToast('Erro ao salvar tema no servidor.', 'error');
+    }
+  } catch (err) {
+    applyTheme(theme);
+    localStorage.setItem('rp_tab_theme', JSON.stringify(theme));
+    closeModal('modal-tab-colors');
+    showToast('Cores das abas salvas localmente!', 'info');
+  }
+}
+
+function restoreDefaultTabColors() {
+  const defaultTheme = {
+    tabBuscaBg: '#0f172a',
+    tabBuscaText: '#ffffff',
+    tabOnlineBg: '#e11d48',
+    tabOnlineText: '#ffffff'
+  };
+  applyPresetTheme(defaultTheme.tabBuscaBg, defaultTheme.tabBuscaText, defaultTheme.tabOnlineBg, defaultTheme.tabOnlineText);
 }
 
 // ========================================================
@@ -763,6 +1107,15 @@ function renderNewsGrid() {
     const logoSvg = art.sourceLogo || getOfficialLogoForSite(art.source);
     const imageUrl = art.imageUrl || '/assets/themes/brasilia.jpg';
     const isG1 = (art.source || '').toLowerCase().includes('g1');
+    const isMetropoles = (art.source || '').toLowerCase().includes('metropoles');
+    const isPoder360 = (art.source || '').toLowerCase().includes('poder360');
+    const isFolha = (art.source || '').toLowerCase().includes('folha');
+
+    const badgeBg = isG1 ? 'bg-[#c4170c] ring-2 ring-white/50 text-white' :
+                    isMetropoles ? 'bg-[#0f172a] ring-2 ring-amber-400 text-amber-300' :
+                    isPoder360 ? 'bg-blue-900 ring-2 ring-blue-300 text-white' :
+                    isFolha ? 'bg-slate-950 ring-2 ring-slate-300 text-white' :
+                    'bg-slate-950/90 text-white';
 
     return `
       <article class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
@@ -777,10 +1130,10 @@ function renderNewsGrid() {
           >
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
 
-          <!-- Logo do Veículo com Efeito Vidro Fosco em Alto Destaque (G1, Folha, etc.) -->
-          <div class="absolute top-2.5 left-2.5 ${isG1 ? 'bg-[#c4170c]' : 'bg-slate-950/85'} backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/30 shadow-md flex items-center gap-1.5">
-            <img src="${logoSvg}" alt="${art.source}" class="h-3.5 object-contain">
-            <span class="text-white text-[10px] font-black uppercase tracking-wider">${art.source}</span>
+          <!-- Logo do Veículo em Alto Destaque (G1, Folha, Metrópoles, etc.) -->
+          <div class="absolute top-2.5 left-2.5 ${badgeBg} backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/40 shadow-lg flex items-center gap-2">
+            <img src="${logoSvg}" alt="${art.source}" class="h-4 sm:h-5 max-w-[75px] object-contain">
+            <span class="text-xs font-black uppercase tracking-wider">${art.source}</span>
           </div>
 
           <!-- Pílula de Tempo -->
@@ -858,8 +1211,8 @@ function sortNewsResults() {
   renderNewsGrid();
 }
 
-/// ========================================================
-// 7. ABA 2: RADAR SOCIAL (TRANSMISSÕES AO VIVO VERIFICADAS EM TEMPO REAL)
+// ========================================================
+// 7. ABA 2: RADAR SOCIAL & POLÍTICOS ONLINE
 // ========================================================
 async function loadSocialStatus(force = false) {
   try {
@@ -867,7 +1220,8 @@ async function loadSocialStatus(force = false) {
     const data = await res.json();
     if (data.success) {
       state.verifiedStreams = data.verifiedStreams || [];
-      state.socialPoliticians = data.politicians || []; // Apenas políticos em Live real!
+      state.socialPoliticians = data.livePoliticians || (data.politicians || []).filter(p => p.socialStatus?.isLive);
+      state.onlinePoliticians = data.onlinePoliticians || data.politicians || [];
 
       const totalLive = (state.verifiedStreams.length || 0) + (state.socialPoliticians.length || 0);
 
@@ -878,6 +1232,7 @@ async function loadSocialStatus(force = false) {
       if (badgeLive) badgeLive.textContent = `${totalLive} AO VIVO`;
 
       renderSocialGrid();
+      renderOnlinePoliticiansGrid();
     }
   } catch (err) {
     console.error('Erro ao buscar status social:', err);
@@ -911,7 +1266,7 @@ function renderSocialGrid() {
           </div>
         </div>
 
-        <!-- Em politicos online colocar somente a logo da transmissão online, a pessoa clicando vai direto pra lá -->
+        <!-- Clicando na logo vai direto para o canal oficial -->
         <a 
           href="${stream.liveUrl}" 
           target="_blank" 
@@ -974,16 +1329,122 @@ function renderSocialGrid() {
 
   if (cards.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full py-10 text-center bg-white rounded-2xl border border-slate-200 p-6">
+      <div class="col-span-full py-6 text-center bg-white rounded-2xl border border-slate-200 p-6">
         <span class="text-2xl">📡</span>
-        <h4 class="text-sm font-black text-slate-800 mt-2">Nenhuma transmissão ao vivo ativa no momento</h4>
-        <p class="text-xs text-slate-500 mt-1">Conforme novas transmissões forem iniciadas nos canais oficiais, elas surgirão instantaneamente aqui.</p>
+        <h4 class="text-sm font-black text-slate-800 mt-2">Nenhuma transmissão oficial ao vivo no momento</h4>
+        <p class="text-xs text-slate-500 mt-1">Conforme novas sessões forem iniciadas nos canais oficiais, elas surgirão instantaneamente aqui.</p>
       </div>
     `;
     return;
   }
 
   container.innerHTML = cards.join('');
+}
+
+function renderSocialButtons(profiles, isLive, liveUrl) {
+  if (!profiles) return '';
+  const btns = [];
+  if (isLive && liveUrl) {
+    btns.push(`
+      <a href="${liveUrl}" target="_blank" class="px-2 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-black text-[10px] flex items-center gap-1 transition animate-pulse shrink-0" title="Assistir Ao Vivo Agora">
+        <i class="fa-solid fa-play text-[8px]"></i>
+        <span>AO VIVO</span>
+      </a>
+    `);
+  }
+  if (profiles.instagram) {
+    btns.push(`
+      <a href="${profiles.instagram}" target="_blank" class="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 hover:opacity-90 text-white flex items-center justify-center transition shadow-2xs shrink-0" title="Instagram Oficial">
+        <i class="fa-brands fa-instagram text-xs"></i>
+      </a>
+    `);
+  }
+  if (profiles.twitter) {
+    btns.push(`
+      <a href="${profiles.twitter}" target="_blank" class="w-7 h-7 rounded-lg bg-slate-900 hover:bg-black text-white flex items-center justify-center transition shadow-2xs shrink-0" title="X / Twitter Oficial">
+        <i class="fa-brands fa-x-twitter text-xs"></i>
+      </a>
+    `);
+  }
+  if (profiles.youtube) {
+    btns.push(`
+      <a href="${profiles.youtube}" target="_blank" class="w-7 h-7 rounded-lg bg-red-600 hover:bg-red-500 text-white flex items-center justify-center transition shadow-2xs shrink-0" title="Canal YouTube">
+        <i class="fa-brands fa-youtube text-xs"></i>
+      </a>
+    `);
+  }
+  if (profiles.tiktok) {
+    btns.push(`
+      <a href="${profiles.tiktok}" target="_blank" class="w-7 h-7 rounded-lg bg-slate-950 hover:bg-slate-800 text-white flex items-center justify-center transition shadow-2xs shrink-0" title="TikTok Oficial">
+        <i class="fa-brands fa-tiktok text-xs"></i>
+      </a>
+    `);
+  }
+  return btns.join(' ');
+}
+
+function renderOnlinePoliticiansGrid() {
+  const container = document.getElementById('politicians-online-grid');
+  const countLabel = document.getElementById('politicians-online-count');
+  if (!container) return;
+
+  const list = state.onlinePoliticians || [];
+  if (countLabel) {
+    countLabel.textContent = `${list.length} Líderes Ativos`;
+  }
+
+  if (list.length === 0) {
+    container.innerHTML = '<p class="text-xs text-slate-500 col-span-full py-4 text-center font-bold">Nenhum político online no momento.</p>';
+    return;
+  }
+
+  // "reduzir a quantidade de informações demonstrada colocar a foto do político que está online e as redes que ele está online."
+  container.innerHTML = list.map(pol => {
+    const isLive = pol.socialStatus?.isLive;
+    const profiles = pol.socialStatus?.profiles || {};
+    const hasLiveUrl = pol.socialStatus?.liveUrl;
+    const isFav = state.favoritePoliticianIds.has(pol.id);
+
+    return `
+      <div class="bg-white rounded-2xl border border-slate-200/90 hover:border-slate-300 p-3 shadow-xs hover:shadow-md transition flex items-center justify-between gap-2.5 group">
+        <!-- Foto + Nome Nítido + Cargo -->
+        <div class="flex items-center gap-2.5 overflow-hidden flex-1">
+          <div class="relative shrink-0">
+            <img 
+              src="${pol.avatar || '/assets/themes/brasilia.jpg'}" 
+              alt="${pol.popularName || pol.name}"
+              class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-xs ${isLive ? 'ring-2 ring-rose-500' : 'ring-2 ring-emerald-500'}"
+              onerror="this.src='/assets/themes/brasilia.jpg'"
+            >
+            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full ${isLive ? 'bg-rose-500 animate-ping' : 'bg-emerald-500'} border-2 border-white" title="${isLive ? 'Ao Vivo' : 'Online'}"></span>
+          </div>
+          <div class="truncate flex-1">
+            <div class="flex items-center gap-1.5">
+              <h4 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-blue-700 transition leading-tight truncate">
+                ${pol.popularName || pol.name}
+              </h4>
+              ${isLive ? '<span class="text-[9px] bg-rose-100 text-rose-800 font-black px-1.5 rounded uppercase shrink-0">LIVE</span>' : ''}
+            </div>
+            <span class="text-[10px] text-slate-500 font-bold block truncate">
+              ${pol.party} • ${pol.office ? pol.office.split(' ')[0] : 'Líder'}
+            </span>
+          </div>
+        </div>
+
+        <!-- Redes Sociais que ele está online + Botão Favorito -->
+        <div class="flex items-center gap-1 shrink-0">
+          ${renderSocialButtons(profiles, isLive, hasLiveUrl)}
+          <button 
+            onclick="toggleFavoritePolitician('${pol.id}')" 
+            class="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition ml-0.5"
+            title="Favoritar ${pol.popularName || pol.name}"
+          >
+            <i class="${isFav ? 'fa-solid text-rose-600' : 'fa-regular'} fa-heart text-xs"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 // ========================================================

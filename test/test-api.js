@@ -262,6 +262,79 @@ async function runTests() {
     console.log(`   -> 6 fotos institucionais oficiais verificadas localmente em /assets/themes/`);
   });
 
+  // 14. NOVA VALIDAÇÃO: Personalização de Cores das Abas pelo Administrador
+  await test('Melhoria 1: Personalização de Cores das Abas pelo Administrador', async () => {
+    // 1. Consultar tema atual
+    const getRes = await fetch(`${BASE_URL}/api/admin/theme`);
+    const getData = await getRes.json();
+    assert.strictEqual(getData.success, true);
+    assert.ok(getData.theme.tabBuscaBg, 'Deve conter cor de fundo da aba Busca');
+    assert.ok(getData.theme.tabOnlineBg, 'Deve conter cor de fundo da aba Online');
+
+    // 2. Salvar novas cores selecionadas pelo administrador
+    const postRes = await fetch(`${BASE_URL}/api/admin/theme`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tabBuscaBg: '#1e3a8a',
+        tabBuscaText: '#ffffff',
+        tabOnlineBg: '#059669',
+        tabOnlineText: '#ffffff'
+      })
+    });
+    const postData = await postRes.json();
+    assert.strictEqual(postData.success, true);
+    assert.strictEqual(postData.theme.tabBuscaBg, '#1e3a8a');
+    assert.strictEqual(postData.theme.tabOnlineBg, '#059669');
+
+    // 3. Restaurar padrão para manter consistência
+    await fetch(`${BASE_URL}/api/admin/theme`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tabBuscaBg: '#0f172a',
+        tabBuscaText: '#ffffff',
+        tabOnlineBg: '#e11d48',
+        tabOnlineText: '#ffffff'
+      })
+    });
+    console.log(`   -> Customização de cores das abas pelo administrador validada com sucesso!`);
+  });
+
+  // 15. NOVA VALIDAÇÃO: Onboarding Pós-Cadastro (Partido Favorito e 5 Políticos)
+  await test('Melhoria 5: Onboarding pós-cadastro - Solicitar Partido Favorito e 5 Políticos', async () => {
+    assert.ok(testUserId, 'ID do usuário de teste deve estar disponível');
+    const prefRes = await fetch(`${BASE_URL}/api/users/preferences`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: testUserId,
+        favoriteParty: 'PL',
+        favoritePoliticianIds: ['lula', 'bolsonaro', 'tarcisio', 'haddad', 'lira']
+      })
+    });
+    const prefData = await prefRes.json();
+    assert.strictEqual(prefData.success, true);
+    assert.strictEqual(prefData.user.favoriteParty, 'PL');
+    assert.strictEqual(prefData.user.favoritePoliticians.length, 5);
+    console.log(`   -> Preferências salvas: Partido ${prefData.user.favoriteParty} e 5 políticos: ${prefData.user.favoritePoliticians.join(', ')}`);
+  });
+
+  // 16. NOVA VALIDAÇÃO: Políticos Online com Nome Nítido, Foto e Redes Sociais
+  await test('Melhoria 5: Políticos Online com Nome, Foto e Redes Sociais Ativas', async () => {
+    const res = await fetch(`${BASE_URL}/api/politicians/social-status`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    assert.ok(Array.isArray(data.politicians), 'Deve retornar lista de políticos online');
+    assert.ok(data.politicians.length > 0, 'Deve haver políticos monitorados online');
+
+    const sample = data.politicians[0];
+    assert.ok(sample.popularName && sample.popularName.trim().length > 0, 'Nome do político deve estar 100% preenchido');
+    assert.ok(sample.avatar, 'Político deve possuir foto real');
+    assert.ok(sample.socialStatus && sample.socialStatus.profiles, 'Político deve possuir perfis de redes sociais');
+    console.log(`   -> Político online verificado: ${sample.popularName} (${sample.party}) com redes: ${Object.keys(sample.socialStatus.profiles).join(', ')}`);
+  });
+
   console.log(`\n======================================================`);
   console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
   console.log(`======================================================\n`);

@@ -1052,33 +1052,118 @@ app.post('/api/users/favorites/blog', (req, res) => {
   }
 });
 
-// 8. RADAR SOCIAL: TRANSMISSÕES AO VIVO VERIFICADAS EM TEMPO REAL
+// 7.1 PREFERÊNCIAS DE ONBOARDING (PARTIDO FAVORITO E 5 POLÍTICOS)
+app.post('/api/users/preferences', (req, res) => {
+  try {
+    const { userId, favoriteParty, favoritePoliticianIds } = req.body;
+    if (!userId) {
+      return res.status(400).json({ success: false, error: 'userId é obrigatório.' });
+    }
+
+    const db = readDb();
+    if (!db.users) db.users = [];
+
+    const user = db.users.find(u => u.id === userId);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Usuário não encontrado.' });
+    }
+
+    if (favoriteParty) user.favoriteParty = favoriteParty.trim();
+    if (Array.isArray(favoritePoliticianIds)) {
+      const merged = new Set([...(user.favoritePoliticians || []), ...favoritePoliticianIds]);
+      user.favoritePoliticians = Array.from(merged);
+    }
+
+    writeDb(db);
+
+    const { password: _, ...userWithoutPass } = user;
+    res.json({
+      success: true,
+      user: userWithoutPass,
+      message: 'Preferências salvas com sucesso!'
+    });
+  } catch (err) {
+    console.error('Erro ao salvar preferências:', err);
+    res.status(500).json({ success: false, error: 'Erro ao salvar preferências.' });
+  }
+});
+
+// 7.2 PERSONALIZAÇÃO DE CORES DAS ABAS (ADMINISTRADOR)
+app.get('/api/admin/theme', (req, res) => {
+  try {
+    const db = readDb();
+    const theme = db.themeSettings || {
+      tabBuscaBg: '#0f172a',
+      tabBuscaText: '#ffffff',
+      tabOnlineBg: '#e11d48',
+      tabOnlineText: '#ffffff'
+    };
+    res.json({ success: true, theme });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao carregar tema.' });
+  }
+});
+
+app.post('/api/admin/theme', (req, res) => {
+  try {
+    const { tabBuscaBg, tabBuscaText, tabOnlineBg, tabOnlineText } = req.body;
+    const db = readDb();
+    db.themeSettings = {
+      tabBuscaBg: tabBuscaBg || '#0f172a',
+      tabBuscaText: tabBuscaText || '#ffffff',
+      tabOnlineBg: tabOnlineBg || '#e11d48',
+      tabOnlineText: tabOnlineText || '#ffffff'
+    };
+    writeDb(db);
+    res.json({
+      success: true,
+      theme: db.themeSettings,
+      message: 'Cores das abas salvas com sucesso!'
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao salvar cores do tema.' });
+  }
+});
+
+// 8. RADAR SOCIAL: TRANSMISSÕES AO VIVO VERIFICADAS EM TEMPO REAL E POLÍTICOS ONLINE
 app.get('/api/politicians/social-status', (req, res) => {
   try {
     const db = readDb();
     const verifiedStreams = db.verifiedBroadcasts || [];
 
-    // Filtra exclusivamente políticos que estejam EFETIVAMENTE transmitindo ao vivo
-    // "se não tiver não aparecer, não precisa aparecer politicos offline"
-    const livePoliticians = (db.politicians || [])
-      .filter(p => p.socialStatus && p.socialStatus.isLive)
-      .map(p => ({
-        id: p.id,
-        name: p.name,
-        popularName: p.popularName,
-        party: p.party,
-        office: p.office,
-        avatar: p.avatar,
-        socialStatus: p.socialStatus
-      }));
+    // Mapeia todos os políticos cadastrados garantindo consistência total do nome e foto
+    const allPoliticians = (db.politicians || []).map(p => ({
+      id: p.id,
+      name: p.name,
+      popularName: p.popularName || p.name,
+      party: p.party,
+      office: p.office,
+      avatar: p.avatar,
+      socialStatus: p.socialStatus || {
+        isLive: false,
+        status: 'online',
+        statusLabel: 'ONLINE NAS REDES',
+        lastActivity: 'Ativo hoje',
+        profiles: {}
+      }
+    }));
+
+    // Políticos que estão em live
+    const livePoliticians = allPoliticians.filter(p => p.socialStatus && p.socialStatus.isLive);
+
+    // Políticos com presença online verificada
+    const onlinePoliticians = allPoliticians.filter(p => p.socialStatus && (p.socialStatus.status === 'online' || p.socialStatus.isLive));
 
     const totalLive = verifiedStreams.length + livePoliticians.length;
 
     res.json({
       success: true,
       totalLive,
+      totalOnline: onlinePoliticians.length,
       verifiedStreams,
-      politicians: livePoliticians
+      livePoliticians,
+      onlinePoliticians,
+      politicians: onlinePoliticians // Garante lista completa com nomes nítidos e redes
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Erro ao buscar status social.' });

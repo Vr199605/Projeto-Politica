@@ -116,82 +116,53 @@
   <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 lg:px-6 py-4 space-y-4">
 
     <!-- ======================================================== -->
-    <!-- LINHA 2: TOP 5 POLITICOS MAIS BUSCADOS (RETRÁTIL COM DISCLAIMER NO HOVER) -->
+    <!-- LINHA 2: TOP 5 POLÍTICOS MAIS BUSCADOS (EXPOSTOS NA HOME)-->
     <!-- ======================================================== -->
-    <section 
-      id="top5-politicians-section" 
-      class="bg-white rounded-2xl border border-slate-200/90 shadow-xs transition-all duration-300 overflow-hidden"
-      onmouseenter="expandTop5Section()"
-      onmouseleave="retractTop5Section()"
-    >
-      <!-- BARRA DE SUMÁRIO / CABEÇALHO COMPACTO (Sempre Visível) -->
-      <div 
-        id="top5-header-summary"
-        onclick="toggleTop5SectionManual()"
-        class="px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-50/70 hover:bg-slate-50 transition border-b border-transparent"
-        title="Passe o mouse ou clique para abrir a auditoria e ver os Top 5 políticos"
-      >
-        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+    <section id="top5-politicians-section" class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 sm:p-4 space-y-3">
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
           <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black shadow-xs">
             🏆
           </span>
           <h2 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
             <span>TOP 5 POLÍTICOS MAIS BUSCADOS</span>
-            <span class="text-[9px] bg-amber-100 text-amber-900 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wider hidden sm:inline">Auditado</span>
+            <span class="text-[9px] bg-amber-100 text-amber-900 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wider hidden sm:inline">Auditado em Tempo Real</span>
           </h2>
-
-          <!-- Mini-resumo compacto quando retrátil -->
-          <div id="top5-compact-pills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <!-- Renderizado dinamicamente via app.js (#1 Lula, #2 Bolsonaro, etc.) -->
-          </div>
         </div>
 
-        <div class="flex items-center gap-2 shrink-0">
-          <span id="top5-hover-hint" class="text-[11px] font-bold text-slate-500 flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-info text-blue-600"></i>
-            <span class="hidden md:inline">Passe o mouse para abrir auditoria</span>
-            <i id="top5-chevron-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
-          </span>
-          <button onclick="event.stopPropagation(); openAllPoliticiansModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 ml-1 hidden sm:inline">
+        <div class="flex items-center gap-2">
+          <button onclick="toggleTop5Disclaimer()" class="text-[11px] font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 transition">
+            <i class="fa-solid fa-shield-halved text-amber-600"></i>
+            <span class="hidden md:inline">Auditoria & Metodologia</span>
+            <i id="top5-disclaimer-chevron" class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+          </button>
+          <button onclick="openAllPoliticiansModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 ml-1">
             Top 10 ↗
           </button>
         </div>
       </div>
 
-      <!-- ÁREA RETRÁTIL EXPANSÍVEL (DISCLAIMER + CARDS DOS CANDIDATOS) -->
-      <div 
-        id="top5-expandable-content" 
-        class="max-h-0 opacity-0 overflow-hidden transition-all duration-400 ease-in-out px-3 sm:px-4 pb-0"
-      >
-        <!-- DISCLAIMER AUDITADO NO TOPO -->
-        <div class="pt-3 pb-2.5">
-          <div class="bg-linear-to-r from-amber-50 via-orange-50 to-amber-50 border border-amber-200/90 rounded-xl p-3 flex items-start gap-3 shadow-xs">
-            <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-700 flex items-center justify-center shrink-0 mt-0.5 font-black text-sm">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <div class="text-xs space-y-0.5">
-              <div class="flex items-center gap-2">
-                <h4 class="font-black text-slate-900 uppercase tracking-wide text-[11px]">
-                  DISCLAIMER & AUDITORIA DE RELEVÂNCIA POLÍTICA
-                </h4>
-                <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.2 rounded">100% Orgânico</span>
-              </div>
-              <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
-                Este ranking reflete exclusivamente o volume consolidado de buscas e consultas em tempo real realizadas pelos usuários do portal, cruzado com menções na imprensa oficial e indexação diária. O Radar Político não comercializa posições nem aceita interferência editorial neste ranking.
-              </p>
-            </div>
-          </div>
+      <!-- Disclaimer expansível de Auditoria (100% Orgânico) -->
+      <div id="top5-disclaimer-panel" class="hidden bg-linear-to-r from-amber-50 via-orange-50 to-amber-50 border border-amber-200/90 rounded-xl p-3 text-xs space-y-1">
+        <div class="flex items-center gap-2">
+          <h4 class="font-black text-slate-900 uppercase tracking-wide text-[11px]">
+            DISCLAIMER & AUDITORIA DE RELEVÂNCIA POLÍTICA
+          </h4>
+          <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.2 rounded">100% Orgânico</span>
         </div>
+        <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+          Este ranking reflete exclusivamente o volume consolidado de buscas e consultas em tempo real realizadas pelos usuários do portal, cruzado com menções na imprensa oficial e indexação diária. O Radar Político não comercializa posições nem aceita interferência editorial neste ranking.
+        </p>
+      </div>
 
-        <!-- Grid com os Top 5 Políticos com fotos reais -->
-        <div id="top5-politicians-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 pb-3.5">
-          <!-- Renderizado dinamicamente via app.js -->
-        </div>
+      <!-- Grid com os Top 5 Políticos EXPOSTOS na home com fotos reais -->
+      <div id="top5-politicians-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <!-- Renderizado dinamicamente via app.js -->
       </div>
     </section>
 
     <!-- ======================================================== -->
-    <!-- LINHA 3: TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS (FILETINHO DE AÇÕES) -->
+    <!-- LINHA 3: TOP 5 SITES DE NOTÍCIAS MAIS ACESSADOS (PORTAIS) -->
     <!-- ======================================================== -->
     <section class="bg-white rounded-xl border border-slate-200/90 shadow-xs px-3 py-2">
       <div class="flex items-center justify-between gap-3 overflow-hidden">
@@ -201,7 +172,7 @@
             <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i>
           </span>
           <h2 class="text-[11px] font-black text-slate-900 uppercase tracking-wider hidden sm:inline">
-            TOP SITES
+            TOP PORTAIS
           </h2>
           <span class="text-[9px] bg-slate-100 text-slate-700 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wide">
             LÍDERES
@@ -222,15 +193,43 @@
     </section>
 
     <!-- ======================================================== -->
-    <!-- LINHA 4: ABAS PRINCIPAIS: [ BUSCA ] | [ POLITICO ONLINE ]-->
+    <!-- LINHA 3.5: BLOGS E FONTES PATROCINADAS (EXPOSTOS NA HOME)-->
+    <!-- SOMENTE O NOME E A LOGO COM O LINK SOBRE A LOGO          -->
+    <!-- ======================================================== -->
+    <section id="sponsored-blogs-section" class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-3.5 sm:p-4 space-y-2.5">
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black shadow-xs">
+            <i class="fa-solid fa-crown text-[10px]"></i>
+          </span>
+          <h3 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
+            BLOGS E FONTES PATROCINADAS
+          </h3>
+          <span class="text-[9px] bg-amber-100 text-amber-900 font-extrabold px-1.5 py-0.2 rounded uppercase tracking-wider hidden sm:inline">
+            Parceiros Oficiais
+          </span>
+        </div>
+        <button onclick="openBlogRegisterModal()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition">
+          + Divulgar Meu Blog
+        </button>
+      </div>
+
+      <!-- Grid com a lista de blogs patrocinados: somente nome e logo (link sobre a logo) -->
+      <div id="sponsored-blogs-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
+        <!-- Renderizado dinamicamente via app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- LINHA 4: ABAS PRINCIPAIS + PERSONALIZAÇÃO DO ADMIN       -->
     <!-- ======================================================== -->
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-2 sm:p-2.5 rounded-2xl border border-slate-200/90 shadow-xs">
       <!-- Segmented Buttons -->
-      <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
+      <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl" id="tabs-bar-container">
         <button 
           id="tab-btn-busca" 
           onclick="switchTab('search')" 
-          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 bg-slate-900 text-white shadow-xs"
+          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs"
         >
           <i class="fa-solid fa-magnifying-glass text-xs"></i>
           <span>BUSCA</span>
@@ -238,22 +237,34 @@
         <button 
           id="tab-btn-online" 
           onclick="switchTab('social')" 
-          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
+          class="flex-1 sm:flex-initial px-4 sm:px-6 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2"
         >
           <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
           <span>POLÍTICO ONLINE</span>
-          <span id="badge-live-total-pill" class="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full">3 AO VIVO</span>
+          <span id="badge-live-total-pill" class="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full">AO VIVO</span>
         </button>
       </div>
 
-      <!-- Links secundários discretos -->
-      <div class="flex items-center gap-3 px-2 text-xs font-bold text-slate-600 justify-end">
+      <!-- Controles do Administrador e Links Secundários -->
+      <div class="flex items-center gap-2.5 px-2 text-xs font-bold text-slate-600 justify-end flex-wrap">
+        <!-- Botão de Personalização de Cores das Abas pelo Administrador -->
+        <button 
+          onclick="openTabColorCustomizer()" 
+          class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition flex items-center gap-1.5 text-xs font-bold shadow-2xs"
+          title="Personalizar Cores das Abas (Painel do Administrador)"
+        >
+          <i class="fa-solid fa-palette text-indigo-600"></i>
+          <span>Cores das Abas (Admin)</span>
+        </button>
+
+        <span class="text-slate-300 hidden sm:inline">|</span>
+
         <button onclick="openBlogRegisterModal()" class="hover:text-blue-600 transition flex items-center gap-1">
-          <i class="fa-solid fa-plus text-blue-600"></i> Cadastrar Meu Blog
+          <i class="fa-solid fa-plus text-blue-600"></i> <span class="hidden sm:inline">Cadastrar Meu Blog</span>
         </button>
         <span class="text-slate-300">|</span>
         <button onclick="openAdvertiserModal('Sidebar Anunciantes')" class="hover:text-amber-600 transition flex items-center gap-1 text-amber-600">
-          <i class="fa-solid fa-crown text-[10px]"></i> Anuncie Aqui
+          <i class="fa-solid fa-crown text-[10px]"></i> Anuncie
         </button>
       </div>
     </div>
@@ -462,6 +473,29 @@
           <!-- Grid das Transmissões Ao Vivo Verificadas -->
           <div id="social-status-detailed-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
             <!-- Renderizado dinamicamente via app.js -->
+          </div>
+
+          <!-- SEÇÃO: POLÍTICOS ONLINE NAS REDES SOCIAIS (FOTO, NOME NÍTIDO E REDES ATIVAS) -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-4 sm:p-5 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-black text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> PRESENÇA DIGITAL VERIFICADA EM TEMPO REAL
+                </span>
+                <h3 class="text-base font-black text-slate-900 tracking-tight">Políticos Online nas Redes Sociais</h3>
+                <p class="text-xs text-slate-500">Acesso direto às redes sociais e canais oficiais de cada líder político.</p>
+              </div>
+              <div class="text-left sm:text-right">
+                <span id="politicians-online-count" class="text-xs font-black bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200">
+                  Carregando líderes...
+                </span>
+              </div>
+            </div>
+
+            <!-- Grid dos Políticos Online com Foto, Nome em Destaque e Redes Sociais -->
+            <div id="politicians-online-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+              <!-- Renderizado dinamicamente via app.js -->
+            </div>
           </div>
 
         </div>
@@ -856,6 +890,182 @@
           Cadastrar no Diretório
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: PERSONALIZAÇÃO DE CORES DAS ABAS (ADMINISTRADOR)  -->
+  <!-- ======================================================== -->
+  <div id="modal-tab-colors" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-xs">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-slate-900">Personalizar Cores das Abas</h3>
+            <p class="text-xs text-slate-500">Painel do Administrador • Identidade Visual das Abas</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-tab-colors')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Preview em Tempo Real -->
+      <div class="bg-slate-100 rounded-2xl p-3 border border-slate-200 space-y-1.5">
+        <span class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Preview em Tempo Real</span>
+        <div class="flex items-center gap-2 p-1.5 bg-slate-200/70 rounded-xl">
+          <button id="preview-tab-busca" class="flex-1 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+            <span>BUSCA</span>
+          </button>
+          <button id="preview-tab-online" class="flex-1 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+            <span>POLÍTICO ONLINE</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Paletas Rápidas (1-Clique) -->
+      <div class="space-y-1.5">
+        <span class="text-[11px] font-bold text-slate-700">Paletas Predefinidas:</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <button type="button" onclick="applyPresetTheme('#0f172a', '#ffffff', '#e11d48', '#ffffff')" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-400 bg-slate-50 text-[11px] font-bold text-slate-800 text-left transition flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-[#0f172a] border border-white"></span>
+            <span class="w-3 h-3 rounded-full bg-[#e11d48] border border-white"></span>
+            <span>Padrão Dark</span>
+          </button>
+          <button type="button" onclick="applyPresetTheme('#1e3a8a', '#ffffff', '#059669', '#ffffff')" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-400 bg-slate-50 text-[11px] font-bold text-slate-800 text-left transition flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-[#1e3a8a] border border-white"></span>
+            <span class="w-3 h-3 rounded-full bg-[#059669] border border-white"></span>
+            <span>Brasil Oficial</span>
+          </button>
+          <button type="button" onclick="applyPresetTheme('#c4170c', '#ffffff', '#2563eb', '#ffffff')" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-400 bg-slate-50 text-[11px] font-bold text-slate-800 text-left transition flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-[#c4170c] border border-white"></span>
+            <span class="w-3 h-3 rounded-full bg-[#2563eb] border border-white"></span>
+            <span>Notícias G1</span>
+          </button>
+          <button type="button" onclick="applyPresetTheme('#4c1d95', '#ffffff', '#d97706', '#ffffff')" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:border-slate-400 bg-slate-50 text-[11px] font-bold text-slate-800 text-left transition flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-[#4c1d95] border border-white"></span>
+            <span class="w-3 h-3 rounded-full bg-[#d97706] border border-white"></span>
+            <span>Nobre & Ouro</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Seletores Personalizados -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+        <!-- Aba BUSCA -->
+        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-2.5">
+          <h4 class="text-xs font-black uppercase text-slate-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-magnifying-glass text-blue-600"></i> Aba BUSCA
+          </h4>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600">Cor de Fundo Ativa</label>
+            <div class="flex items-center gap-2 mt-1">
+              <input type="color" id="input-color-busca-bg" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 p-0.5" oninput="updateTabColorPreview()">
+              <input type="text" id="input-color-busca-bg-hex" class="w-24 px-2 py-1 text-xs font-mono font-bold border border-slate-300 rounded-lg bg-white" oninput="syncHexToPicker('busca-bg')">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600">Cor do Texto Ativo</label>
+            <div class="flex items-center gap-2 mt-1">
+              <input type="color" id="input-color-busca-text" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 p-0.5" oninput="updateTabColorPreview()">
+              <input type="text" id="input-color-busca-text-hex" class="w-24 px-2 py-1 text-xs font-mono font-bold border border-slate-300 rounded-lg bg-white" oninput="syncHexToPicker('busca-text')">
+            </div>
+          </div>
+        </div>
+
+        <!-- Aba POLÍTICO ONLINE -->
+        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-2.5">
+          <h4 class="text-xs font-black uppercase text-slate-800 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Aba POLÍTICO ONLINE
+          </h4>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600">Cor de Fundo Ativa</label>
+            <div class="flex items-center gap-2 mt-1">
+              <input type="color" id="input-color-online-bg" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 p-0.5" oninput="updateTabColorPreview()">
+              <input type="text" id="input-color-online-bg-hex" class="w-24 px-2 py-1 text-xs font-mono font-bold border border-slate-300 rounded-lg bg-white" oninput="syncHexToPicker('online-bg')">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600">Cor do Texto Ativo</label>
+            <div class="flex items-center gap-2 mt-1">
+              <input type="color" id="input-color-online-text" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-300 p-0.5" oninput="updateTabColorPreview()">
+              <input type="text" id="input-color-online-text-hex" class="w-24 px-2 py-1 text-xs font-mono font-bold border border-slate-300 rounded-lg bg-white" oninput="syncHexToPicker('online-text')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-3 pt-2 border-t border-slate-100">
+        <button type="button" onclick="restoreDefaultTabColors()" class="px-3 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 underline transition">
+          Restaurar Padrão
+        </button>
+        <button type="button" onclick="saveAdminTabColors()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl shadow-xs transition flex items-center gap-1.5">
+          <i class="fa-solid fa-check"></i> Salvar e Aplicar Cores
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ONBOARDING PÓS-CADASTRO (PARTIDO E 5 POLÍTICOS)   -->
+  <!-- ======================================================== -->
+  <div id="modal-onboarding" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[92vh] overflow-y-auto">
+      <div class="border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-sm shadow-xs">
+            ⭐
+          </span>
+          <h3 class="text-base sm:text-lg font-black text-slate-900">Personalize seu Feed Político</h3>
+        </div>
+        <p class="text-xs text-slate-600 mt-1 font-medium">
+          Para entregarmos alertas precisos e prioridade nas notícias, informe seu partido favorito e selecione 5 políticos de destaque.
+        </p>
+      </div>
+
+      <!-- PASSO 1: Partido Favorito -->
+      <div class="space-y-2">
+        <label class="block text-xs font-black uppercase tracking-wider text-slate-800">
+          1. Selecione seu Partido Favorito:
+        </label>
+        <div id="onboarding-parties-list" class="flex flex-wrap gap-1.5">
+          <!-- Chips gerados dinamicamente via app.js -->
+        </div>
+      </div>
+
+      <!-- PASSO 2: Selecione 5 Políticos -->
+      <div class="space-y-2 pt-1">
+        <div class="flex items-center justify-between">
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-800">
+            2. Selecione 5 Políticos para Acompanhar:
+          </label>
+          <span id="onboarding-counter-badge" class="text-xs font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            0 de 5 selecionados
+          </span>
+        </div>
+        <div id="onboarding-politicians-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 max-h-56 overflow-y-auto pr-1">
+          <!-- Renderizado dinamicamente via app.js com foto real e nome do político -->
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+        <button type="button" onclick="closeModal('modal-onboarding')" class="text-xs font-bold text-slate-400 hover:text-slate-600 underline">
+          Pular por enquanto
+        </button>
+        <button 
+          id="btn-onboarding-submit" 
+          type="button" 
+          onclick="submitOnboardingPreferences()" 
+          class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl shadow-xs transition flex items-center gap-1.5"
+        >
+          <i class="fa-solid fa-check"></i> Salvar Minhas Preferências
+        </button>
+      </div>
     </div>
   </div>
 

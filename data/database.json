@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4830,
+      "searchCount": 4831,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -61,7 +61,7 @@
       "party": "Republicanos",
       "office": "Governador do Estado de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3554,
+      "searchCount": 3555,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -103,7 +103,8 @@
         "followersTotal": "3.8M",
         "profiles": {
           "twitter": "https://x.com/Haddad_Fernando",
-          "instagram": "https://instagram.com/fernandohaddadoficial"
+          "instagram": "https://instagram.com/fernandohaddadoficial",
+          "youtube": "https://youtube.com/@fernandohaddad"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Fernando_Haddad_posse_min._da_Fazenda.jpg/330px-Fernando_Haddad_posse_min._da_Fazenda.jpg"
@@ -204,8 +205,8 @@
         "profiles": {
           "twitter": "https://x.com/nikolas_dm",
           "instagram": "https://instagram.com/nikolasferreiradm",
-          "tiktok": "https://tiktok.com/@nikolasferreiradm",
-          "youtube": "https://youtube.com/@nikolasferreira"
+          "youtube": "https://youtube.com/@nikolasferreira",
+          "tiktok": "https://tiktok.com/@nikolasferreiradm"
         }
       },
       "realPhotoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Nikolas_Ferreira_in_2023_%28cropped%29.jpg/330px-Nikolas_Ferreira_in_2023_%28cropped%29.jpg"
@@ -372,7 +373,17 @@
       "searchCount": 2,
       "trend": "+100%",
       "trendDirection": "up",
-      "bio": "Político pesquisado pelos usuários da plataforma."
+      "bio": "Político pesquisado pelos usuários da plataforma.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/eduardopaes",
+          "instagram": "https://instagram.com/eduardopaes"
+        }
+      }
     },
     {
       "id": "moraes",
@@ -384,7 +395,16 @@
       "searchCount": 3891,
       "trend": "+20%",
       "trendDirection": "up",
-      "bio": "Ministro do Supremo Tribunal Federal (STF) e relator de inquéritos de grande repercussão nacional."
+      "bio": "Ministro do Supremo Tribunal Federal (STF) e relator de inquéritos de grande repercussão nacional.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/alexandre"
+        }
+      }
     },
     {
       "id": "barroso",
@@ -396,7 +416,17 @@
       "searchCount": 2450,
       "trend": "+8%",
       "trendDirection": "up",
-      "bio": "Presidente do Supremo Tribunal Federal (STF) e do Conselho Nacional de Justiça (CNJ)."
+      "bio": "Presidente do Supremo Tribunal Federal (STF) e do Conselho Nacional de Justiça (CNJ).",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/LRobertoBarroso",
+          "instagram": "https://instagram.com/lrobertobarroso"
+        }
+      }
     },
     {
       "id": "dino",
@@ -408,7 +438,17 @@
       "searchCount": 2680,
       "trend": "+12%",
       "trendDirection": "up",
-      "bio": "Ministro do STF, ex-Ministro da Justiça e Segurança Pública e ex-Governador do Maranhão."
+      "bio": "Ministro do STF, ex-Ministro da Justiça e Segurança Pública e ex-Governador do Maranhão.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/FlavioDino",
+          "instagram": "https://instagram.com/flaviodino"
+        }
+      }
     },
     {
       "id": "gilmar",
@@ -420,7 +460,16 @@
       "searchCount": 2120,
       "trend": "+5%",
       "trendDirection": "up",
-      "bio": "Decano e ministro mais antigo em atividade no Supremo Tribunal Federal."
+      "bio": "Decano e ministro mais antigo em atividade no Supremo Tribunal Federal.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/gilmarmendes"
+        }
+      }
     },
     {
       "id": "alckmin",
@@ -432,7 +481,17 @@
       "searchCount": 2890,
       "trend": "+9%",
       "trendDirection": "up",
-      "bio": "Vice-Presidente da República e Ministro do Desenvolvimento, Indústria, Comércio e Serviços."
+      "bio": "Vice-Presidente da República e Ministro do Desenvolvimento, Indústria, Comércio e Serviços.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/geraldoalckmin",
+          "instagram": "https://instagram.com/geraldoalckmin_"
+        }
+      }
     },
     {
       "id": "nunes",
@@ -444,7 +503,17 @@
       "searchCount": 2750,
       "trend": "+30%",
       "trendDirection": "up",
-      "bio": "Prefeito da cidade de São Paulo, maior colégio eleitoral municipal do Brasil."
+      "bio": "Prefeito da cidade de São Paulo, maior colégio eleitoral municipal do Brasil.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/ricardonunes",
+          "instagram": "https://instagram.com/ricardonunessp"
+        }
+      }
     },
     {
       "id": "marcal",
@@ -456,7 +525,17 @@
       "searchCount": 3410,
       "trend": "+45%",
       "trendDirection": "up",
-      "bio": "Empresário, influenciador digital e candidato nas eleições municipais de São Paulo."
+      "bio": "Empresário, influenciador digital e candidato nas eleições municipais de São Paulo.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "instagram": "https://instagram.com/pablomarcalpdt",
+          "youtube": "https://youtube.com/@pablomarcal"
+        }
+      }
     },
     {
       "id": "zema",
@@ -468,7 +547,17 @@
       "searchCount": 2190,
       "trend": "+7%",
       "trendDirection": "up",
-      "bio": "Governador reeleito de Minas Gerais, segundo maior colégio eleitoral do país."
+      "bio": "Governador reeleito de Minas Gerais, segundo maior colégio eleitoral do país.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/RomeuZema",
+          "instagram": "https://instagram.com/romeuzemaoficial"
+        }
+      }
     },
     {
       "id": "alcolumbre",
@@ -480,7 +569,17 @@
       "searchCount": 1980,
       "trend": "+15%",
       "trendDirection": "up",
-      "bio": "Senador pelo Amapá, presidente da Comissão de Constituição e Justiça do Senado."
+      "bio": "Senador pelo Amapá, presidente da Comissão de Constituição e Justiça do Senado.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/davialcolumbre",
+          "instagram": "https://instagram.com/davialcolumbre"
+        }
+      }
     },
     {
       "id": "michelle",
@@ -492,7 +591,16 @@
       "searchCount": 2540,
       "trend": "+18%",
       "trendDirection": "up",
-      "bio": "Ex-primeira-dama do Brasil e presidente nacional do movimento PL Mulher."
+      "bio": "Ex-primeira-dama do Brasil e presidente nacional do movimento PL Mulher.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "instagram": "https://instagram.com/michellebolsonaro"
+        }
+      }
     },
     {
       "id": "tabata",
@@ -504,7 +612,17 @@
       "searchCount": 1870,
       "trend": "+10%",
       "trendDirection": "up",
-      "bio": "Cientista política, ativista pela educação e deputada federal por São Paulo."
+      "bio": "Cientista política, ativista pela educação e deputada federal por São Paulo.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/tabataamaralsp",
+          "instagram": "https://instagram.com/tabataamaralsp"
+        }
+      }
     },
     {
       "id": "joaocampos",
@@ -516,7 +634,17 @@
       "searchCount": 2280,
       "trend": "+25%",
       "trendDirection": "up",
-      "bio": "Prefeito do Recife reeleito com votação histórica em Pernambuco."
+      "bio": "Prefeito do Recife reeleito com votação histórica em Pernambuco.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "instagram": "https://instagram.com/joaocampos",
+          "tiktok": "https://tiktok.com/@joaocampos"
+        }
+      }
     },
     {
       "id": "gleisi",
@@ -528,7 +656,17 @@
       "searchCount": 1780,
       "trend": "+6%",
       "trendDirection": "up",
-      "bio": "Presidente nacional do Partido dos Trabalhadores e deputada federal pelo Paraná."
+      "bio": "Presidente nacional do Partido dos Trabalhadores e deputada federal pelo Paraná.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/gleisi",
+          "instagram": "https://instagram.com/gleisihoffmann"
+        }
+      }
     },
     {
       "id": "renan",
@@ -540,7 +678,16 @@
       "searchCount": 1650,
       "trend": "+4%",
       "trendDirection": "up",
-      "bio": "Senador por Alagoas e ex-presidente do Senado Federal e do Congresso Nacional."
+      "bio": "Senador por Alagoas e ex-presidente do Senado Federal e do Congresso Nacional.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/renancalheiros"
+        }
+      }
     },
     {
       "id": "castro",
@@ -552,7 +699,17 @@
       "searchCount": 1590,
       "trend": "+5%",
       "trendDirection": "up",
-      "bio": "Governador reeleito do Estado do Rio de Janeiro."
+      "bio": "Governador reeleito do Estado do Rio de Janeiro.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "twitter": "https://x.com/claudiocastroRJ",
+          "instagram": "https://instagram.com/claudiocastrorj"
+        }
+      }
     },
     {
       "id": "ratinho",
@@ -564,7 +721,17 @@
       "searchCount": 1720,
       "trend": "+8%",
       "trendDirection": "up",
-      "bio": "Governador reeleito do Paraná e liderança do PSD no Sul do país."
+      "bio": "Governador reeleito do Paraná e liderança do PSD no Sul do país.",
+      "socialStatus": {
+        "isLive": false,
+        "status": "online",
+        "statusLabel": "ONLINE NAS REDES",
+        "lastActivity": "Ativo hoje",
+        "profiles": {
+          "instagram": "https://instagram.com/ratinho_junior",
+          "twitter": "https://x.com/ratinho_jr"
+        }
+      }
     }
   ],
   "sites": [
@@ -574,7 +741,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5430,
+      "clicks": 5431,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -804,57 +971,13 @@
   ],
   "blogs": [
     {
-      "id": "blog-1791222161223",
-      "name": "Observatório Político Nacional",
-      "author": "Redação Independente",
-      "domain": "observatoriopolitico.org.br",
-      "url": "https://observatoriopolitico.org.br",
-      "category": "Investigação",
-      "description": "Análises detalhadas do orçamento secreto e emendas parlamentares.",
-      "tier": "Criador Independente",
-      "isSponsored": true,
-      "monthlyAudience": "Em avaliação",
-      "monetizationModel": "Banners e Links Patrocinados",
-      "adSpotPrice": "R$ 290,00 / semana",
-      "clicks": 1,
-      "rating": 5,
-      "badgeText": "⭐ Parceiro Patrocinado",
-      "logoSvg": "/assets/logos/congresso.svg"
-    },
-    {
-      "id": "blog-1791222098704",
-      "name": "Observatório Político Nacional",
-      "author": "Redação Independente",
-      "domain": "observatoriopolitico.org.br",
-      "url": "https://observatoriopolitico.org.br",
-      "category": "Investigação",
-      "description": "Análises detalhadas do orçamento secreto e emendas parlamentares.",
-      "tier": "Criador Independente",
-      "isSponsored": true,
-      "monthlyAudience": "Em avaliação",
-      "monetizationModel": "Banners e Links Patrocinados",
-      "adSpotPrice": "R$ 290,00 / semana",
-      "clicks": 1,
-      "rating": 5,
-      "badgeText": "⭐ Parceiro Patrocinado",
-      "logoSvg": "/assets/logos/congresso.svg"
-    },
-    {
       "id": "blog-congresso-foco",
       "name": "Congresso em Foco Insider",
       "author": "Equipe Congresso em Foco",
       "domain": "congressoemfoco.uol.com.br",
       "url": "https://congressoemfoco.uol.com.br",
       "category": "Bastidores do Congresso",
-      "description": "Furos e apurações exclusivas sobre votações no plenário, CPIs e articulações da Câmara e Senado.",
-      "tier": "VIP Patrocinado",
       "isSponsored": true,
-      "monthlyAudience": "3.8M acessos/mês",
-      "monetizationModel": "Publieditoriais, Banners CPM e Relatórios Exclusivos",
-      "adSpotPrice": "R$ 650,00 / semana",
-      "clicks": 4150,
-      "rating": 4.9,
-      "badgeText": "⭐ Parceiro Destaque VIP",
       "logoSvg": "/assets/logos/congresso.svg"
     },
     {
@@ -863,89 +986,69 @@
       "author": "Guilherme Amado",
       "domain": "metropoles.com",
       "url": "https://www.metropoles.com/colunas/guilherme-amado",
-      "category": "Investigação & Bastidores",
-      "description": "Notas quentes e apurações exclusivas sobre os poderes Executivo e Judiciário em Brasília.",
-      "tier": "Destaque Patrocinado",
+      "category": "Investigação e Bastidores",
       "isSponsored": true,
-      "monthlyAudience": "4.2M acessos/mês",
-      "monetizationModel": "Patrocínio Máster e Branded Content",
-      "adSpotPrice": "R$ 800,00 / semana",
-      "clicks": 3450,
-      "rating": 4.8,
-      "badgeText": "🔥 Alta Audiência",
       "logoSvg": "/assets/logos/metropoles.svg"
     },
     {
-      "id": "blog-conjur-bastidores",
-      "name": "Anuário da Justiça & STF",
-      "author": "Consultor Jurídico",
-      "domain": "conjur.com.br",
-      "url": "https://www.conjur.com.br",
-      "category": "Judiciário & STF",
-      "description": "Acompanhamento minucioso de votos no STF, STJ e o impacto das decisões jurídicas na política nacional.",
-      "tier": "Parceiro Ouro",
-      "isSponsored": true,
-      "monthlyAudience": "1.9M acessos/mês",
-      "monetizationModel": "Assinaturas e Espaços Banners Segmentados",
-      "adSpotPrice": "R$ 490,00 / semana",
-      "clicks": 1670,
-      "rating": 4.9,
-      "badgeText": "⚖️ Especialista Jurídico",
-      "logoSvg": "/assets/logos/congresso.svg"
-    },
-    {
-      "id": "blog-o-antagonista-feed",
-      "name": "Cláudio Dantas & Redação Antagonista",
-      "author": "O Antagonista",
-      "domain": "oantagonista.com.br",
-      "url": "https://oantagonista.com.br",
-      "category": "Análise Direta & Opinião",
-      "description": "Atualizações a cada minuto, denúncias e o pulso de Brasília sem rodeios.",
-      "tier": "Monetizado Premium",
-      "isSponsored": false,
-      "monthlyAudience": "2.8M acessos/mês",
-      "monetizationModel": "Clube de Membros e Publicidade Programática",
-      "adSpotPrice": "R$ 380,00 / semana",
-      "clicks": 3120,
-      "rating": 4.6,
-      "badgeText": "⚡ Notícias Rápidas",
-      "logoSvg": "/assets/logos/antagonista.svg"
-    },
-    {
       "id": "blog-radar-economico",
-      "name": "Radar da Economia & Poder",
-      "author": "Instituto Política & Mercados",
-      "domain": "radareconomico.com.br",
+      "name": "Radar Poder360",
+      "author": "Redação Poder360",
+      "domain": "poder360.com.br",
       "url": "https://www.poder360.com.br/poder-economia/",
-      "category": "Economia & Fazenda",
-      "description": "Como as decisões de Brasília impactam juros, inflação, reformas fiscais e o mercado financeiro.",
-      "tier": "VIP Patrocinado",
+      "category": "Economia e Poder",
       "isSponsored": true,
-      "monthlyAudience": "1.2M acessos/mês",
-      "monetizationModel": "Parcerias Corporativas e Newsletters Fechadas",
-      "adSpotPrice": "R$ 550,00 / semana",
-      "clicks": 2300,
-      "rating": 4.7,
-      "badgeText": "📈 Finanças & Política",
       "logoSvg": "/assets/logos/poder360.svg"
     },
     {
-      "id": "blog-observatorio-eleicoes",
-      "name": "Observatório Eleitoral Brasileiro",
-      "author": "Prof. Carlos Eduardo Martins",
-      "domain": "observatorioeleitoral.org",
-      "url": "https://www.tse.jus.br",
-      "category": "Eleições & Pesquisas",
-      "description": "Análise estatística de intenções de voto, mapas eleitorais dos estados e projeções para 2026.",
-      "tier": "Criador Independente",
-      "isSponsored": false,
-      "monthlyAudience": "620K acessos/mês",
-      "monetizationModel": "Apoio Coletivo e Consultoria de Pesquisa",
-      "adSpotPrice": "R$ 250,00 / semana",
-      "clicks": 1420,
-      "rating": 4.8,
-      "badgeText": "📊 Análise de Dados",
-      "logoSvg": "/assets/logos/congresso.svg"
+      "id": "blog-o-antagonista",
+      "name": "O Antagonista Insider",
+      "author": "Cláudio Dantas",
+      "domain": "oantagonista.com.br",
+      "url": "https://oantagonista.com.br",
+      "category": "Análise e Opinião",
+      "isSponsored": true,
+      "logoSvg": "/assets/logos/antagonista.svg"
+    },
+    {
+      "id": "blog-conjur-justica",
+      "name": "Anuário da Justiça & ConJur",
+      "author": "Consultor Jurídico",
+      "domain": "conjur.com.br",
+      "url": "https://www.conjur.com.br",
+      "category": "STF e Judiciário",
+      "isSponsored": true,
+      "logoSvg": "/assets/logos/conjur.svg"
+    },
+    {
+      "id": "blog-folha-painel",
+      "name": "Painel Folha de S.Paulo",
+      "author": "Redação Folha",
+      "domain": "folha.uol.com.br",
+      "url": "https://www1.folha.uol.com.br/colunas/painel/",
+      "category": "Bastidores Políticos",
+      "isSponsored": true,
+      "logoSvg": "/assets/logos/folha.svg"
+    },
+    {
+      "id": "blog-gazeta-vozes",
+      "name": "Vozes da Gazeta do Povo",
+      "author": "Gazeta do Povo",
+      "domain": "gazetadopovo.com.br",
+      "url": "https://www.gazetadopovo.com.br/vozes/",
+      "category": "Opinião e Política",
+      "isSponsored": true,
+      "logoSvg": "/assets/logos/gazetadopovo.svg"
+    },
+    {
+      "id": "blog-brasil247",
+      "name": "Brasil 247 Análise",
+      "author": "Redação Brasil 247",
+      "domain": "brasil247.com",
+      "url": "https://www.brasil247.com",
+      "category": "Política Nacional",
+      "isSponsored": true,
+      "logoSvg": "/assets/logos/brasil247.svg"
     }
   ],
   "articles": [
@@ -1364,11 +1467,30 @@
         "blog-congresso-foco"
       ],
       "createdAt": "2026-10-08T20:57:03.248Z"
+    },
+    {
+      "id": "usr-1792011073613",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792011073608@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-14T20:51:13.613Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 9100,
+    "currentTotal": 9850,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
@@ -1424,6 +1546,15 @@
         "message": "Apoio à transparência em tempo real."
       },
       {
+        "id": "don-1792011074479",
+        "name": "Instituto Teste Automatizado",
+        "email": "teste@transparencia.org",
+        "amount": 750,
+        "date": "2026-10-14",
+        "badge": "Patrocinador Ouro",
+        "message": "Apoio à transparência em tempo real."
+      },
+      {
         "id": "don-4",
         "name": "Dra. Beatriz Albuquerque",
         "amount": 600,
@@ -1446,14 +1577,6 @@
         "date": "2026-10-03",
         "badge": "Apoiador Bronze",
         "message": "Apoio mensal à equipe."
-      },
-      {
-        "id": "don-7",
-        "name": "Cláudia Ramos de Souza",
-        "amount": 400,
-        "date": "2026-10-03",
-        "badge": "Apoiador Bronze",
-        "message": "Uso todo dia para minhas pesquisas."
       }
     ]
   },
@@ -1518,5 +1641,11 @@
       "badge": "EBC 24 Horas",
       "isLive": true
     }
-  ]
+  ],
+  "themeSettings": {
+    "tabBuscaBg": "#0f172a",
+    "tabBuscaText": "#ffffff",
+    "tabOnlineBg": "#e11d48",
+    "tabOnlineText": "#ffffff"
+  }
 }
