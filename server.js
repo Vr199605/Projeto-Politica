@@ -1181,8 +1181,8 @@ app.get('/api/politicians/social-status', (req, res) => {
       totalOnline: onlinePoliticians.length,
       verifiedStreams,
       livePoliticians,
-      onlinePoliticians,
-      politicians: onlinePoliticians // Garante lista completa com nomes nítidos e redes
+      onlinePoliticians: allPoliticians, // Permite exibir quem está online e quem está com tudo apagado
+      politicians: allPoliticians
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Erro ao buscar status social.' });

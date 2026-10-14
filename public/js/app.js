@@ -1239,33 +1239,113 @@ async function loadSocialStatus(force = false) {
 }
 
 
+// Modo de visualização do Radar: 'all' (mostra acesos e apagados) ou 'live_only' (somente ao vivo)
+state.onlineFilterMode = state.onlineFilterMode || 'all';
+
+function setOnlineFilterMode(mode) {
+  state.onlineFilterMode = mode;
+  // Atualiza botões de filtro no UI
+  const btnAll = document.getElementById('filter-btn-all');
+  const btnLive = document.getElementById('filter-btn-live');
+  if (btnAll && btnLive) {
+    if (mode === 'live_only') {
+      btnLive.className = 'px-3 py-1 rounded-lg text-xs font-black bg-rose-600 text-white shadow-xs transition';
+      btnAll.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition';
+    } else {
+      btnAll.className = 'px-3 py-1 rounded-lg text-xs font-black bg-slate-900 text-white shadow-xs transition';
+      btnLive.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition';
+    }
+  }
+  renderOnlinePoliticiansGrid();
+}
+
+// Função para o usuário/admin testar a alternância imediata de um político (Ao Vivo <-> Tudo Apagado)
+async function toggleSimulateLive(polId = 'lula') {
+  try {
+    const rawList = state.onlinePoliticians || [];
+    const pol = rawList.find(p => p.id === polId) || rawList[0];
+    if (!pol) return;
+
+    const currentLive = Boolean(pol.socialStatus?.isLive);
+    const newLive = !currentLive;
+
+    const res = await fetch(`/api/politicians/${pol.id}/social-status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        isLive: newLive,
+        livePlatform: 'YouTube',
+        liveTitle: newLive ? 'Transmissão Ao Vivo Oficial e Verificada' : null,
+        liveUrl: newLive ? (pol.socialStatus?.profiles?.youtube || 'https://www.youtube.com/@LulaOficial') : null
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast(newLive ? `🔴 ${pol.popularName} entrou AO VIVO! Card iluminado.` : `⚪ ${pol.popularName} encerrou a transmissão. Tudo apagado.`, newLive ? 'success' : 'info');
+      await loadSocialStatus(true);
+    }
+  } catch (err) {
+    console.error('Erro ao alternar live simulada:', err);
+  }
+}
+
 function renderOnlinePoliticiansGrid() {
   const container = document.getElementById('politicians-online-grid');
   const countLabel = document.getElementById('politicians-online-count');
   if (!container) return;
 
   const rawList = state.onlinePoliticians || [];
-  // Exibir ESTRITAMENTE líderes com presença online verificada
-  const list = rawList.filter(pol => {
-    const hasOnlineNet = Array.isArray(pol.socialStatus?.onlineNetworks) && pol.socialStatus.onlineNetworks.length > 0;
-    return (pol.socialStatus?.status === 'online' || pol.socialStatus?.isLive) && hasOnlineNet;
-  });
+
+  // Contagem estritamente verídica de quem está ao vivo ou ativo
+  const liveCount = rawList.filter(p => Boolean(p.socialStatus?.isLive)).length;
+  const activeCount = rawList.filter(p => {
+    const isLive = Boolean(p.socialStatus?.isLive);
+    const hasOnlineNet = Array.isArray(p.socialStatus?.onlineNetworks) && p.socialStatus.onlineNetworks.length > 0;
+    return isLive || (hasOnlineNet && p.socialStatus?.status === 'online');
+  }).length;
+  const offlineCount = rawList.length - activeCount;
 
   if (countLabel) {
-    countLabel.textContent = `${list.length} Líderes Online Agora`;
+    countLabel.innerHTML = `
+      <span class="inline-flex items-center gap-1.5 text-rose-700 font-extrabold mr-1.5">
+        <span class="w-2 h-2 rounded-full ${liveCount > 0 ? 'bg-rose-600 animate-pulse' : 'bg-slate-400'}"></span>
+        ${liveCount} Ao Vivo
+      </span>
+      <span class="text-slate-500 font-bold">| ${activeCount} Ativos • ${offlineCount} Apagados</span>
+    `;
   }
 
-  if (list.length === 0) {
-    container.innerHTML = '<p class="text-xs text-slate-500 col-span-full py-6 text-center font-bold">Nenhum político online no momento.</p>';
+  // Filtragem estrita
+  let displayList = [...rawList];
+  if (state.onlineFilterMode === 'live_only') {
+    displayList = rawList.filter(p => Boolean(p.socialStatus?.isLive));
+  }
+
+  if (displayList.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-10 px-4 text-center bg-slate-900/60 rounded-2xl border border-slate-700/60 p-6 space-y-2.5">
+        <span class="text-3xl">📡</span>
+        <h4 class="text-sm font-black text-white">Nenhum líder transmitindo ao vivo neste exato momento</h4>
+        <p class="text-xs text-slate-400 max-w-md mx-auto">
+          As transmissões são monitoradas em tempo real. Se não estiver online, fica tudo apagado. Quando uma transmissão for iniciada, o card acenderá automaticamente.
+        </p>
+        <div class="pt-2 flex items-center justify-center gap-2">
+          <button onclick="setOnlineFilterMode('all')" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-bold transition">
+            Ver todos os líderes (com status apagado)
+          </button>
+          <button onclick="toggleSimulateLive('lula')" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-xs text-white font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-play text-[10px]"></i> Testar Live (Simular Entrada)
+          </button>
+        </div>
+      </div>
+    `;
     return;
   }
 
-  // Demonstrativo do Político Online:
-  // - Foto do político como fundo do card
-  // - Pequeno quadrado no canto superior esquerdo em vermelho "Ao Vivo"
-  // - Três quadrados com as logos na base da imagem representando as 3 redes (Instagram, YouTube, TikTok)
-  // - Logo da rede online ILUMINADA e rede offline APAGADA
-  container.innerHTML = list.map(pol => {
+  // Demonstrativo do Político:
+  // - Se estiver online/ao vivo naquele momento: quadrado vermelho "Ao Vivo" aceso e rede online ILUMINADA
+  // - Se NÃO estiver online naquele momento: TUDO APAGADO (quadrado offline apagado, foto em grayscale e as 3 redes apagadas)
+  container.innerHTML = displayList.map(pol => {
     const isLive = Boolean(pol.socialStatus?.isLive);
     const profiles = pol.socialStatus?.profiles || {};
     const onlineNetworks = Array.isArray(pol.socialStatus?.onlineNetworks) ? pol.socialStatus.onlineNetworks : [];
@@ -1276,34 +1356,53 @@ function renderOnlinePoliticiansGrid() {
     const office = pol.office || 'Líder Político';
     const avatar = pol.avatar || '/assets/themes/brasilia.jpg';
 
-    // 3 Redes Oficiais Verificadas (SEM fallbacks falsos para evitar páginas aleatórias)
+    // 3 Redes Oficiais Verificadas (Apenas links oficiais reais)
     const instagramUrl = profiles.instagram || null;
     const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || null);
     const tiktokUrl = profiles.tiktok || null;
 
+    // Uma rede só fica online se for oficial E estiver ativa naquele momento
     const isInstagramOnline = Boolean(instagramUrl && onlineNetworks.includes('instagram'));
-    const isYoutubeOnline = Boolean(youtubeUrl && onlineNetworks.includes('youtube'));
+    const isYoutubeOnline = Boolean(youtubeUrl && (isLive || onlineNetworks.includes('youtube')));
     const isTiktokOnline = Boolean(tiktokUrl && onlineNetworks.includes('tiktok'));
 
+    // Status geral de presença no momento:
+    const isPoliticianOnline = isLive || isInstagramOnline || isYoutubeOnline || isTiktokOnline;
+
     return `
-      <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/90 group flex flex-col justify-between aspect-[3/4] sm:aspect-[4/5]">
-        <!-- Foto Oficial do Político em Alta Definição -->
+      <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border ${isPoliticianOnline ? 'border-slate-700/80 ring-1 ring-slate-700/50' : 'border-slate-800/80 opacity-65 hover:opacity-100'} group flex flex-col justify-between aspect-[3/4] sm:aspect-[4/5]">
+        <!-- Foto Oficial do Político: Colorida se online, TUDO APAGADO (grayscale/dessaturado) se offline -->
         <img 
           src="${avatar}" 
           alt="${popularName}" 
-          class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 ${isPoliticianOnline ? 'group-hover:scale-105' : 'filter grayscale contrast-80 opacity-40'}"
           onerror="this.src='/assets/themes/brasilia.jpg'"
         />
         
         <!-- Gradientes para Máxima Legibilidade dos Elementos -->
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-slate-950/20 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/30 pointer-events-none"></div>
 
-        <!-- Canto Superior: Pequeno Quadrado Vermelho 'Ao Vivo' no Canto Superior Esquerdo -->
+        <!-- Canto Superior: Quadrado no Canto Superior Esquerdo -->
         <div class="relative z-10 p-2.5 sm:p-3 flex items-start justify-between">
-          <div class="bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md flex items-center gap-1.5 border border-red-500/50">
-            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-            <span>Ao Vivo</span>
-          </div>
+          ${isLive ? `
+            <!-- Quadrado Vermelho "Ao Vivo" (Apenas se estiver transmitindo ao vivo de verdade naquele momento) -->
+            <div class="bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-lg flex items-center gap-1.5 border border-red-500/50 animate-pulse">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+              <span>Ao Vivo</span>
+            </div>
+          ` : (isPoliticianOnline ? `
+            <!-- Quadrado Verde "Online" se ativo em rede social -->
+            <div class="bg-emerald-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md flex items-center gap-1.5 border border-emerald-500/50">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              <span>Online</span>
+            </div>
+          ` : `
+            <!-- Quadrado Apagado "Offline" se NÃO estiver online naquele momento -->
+            <div class="bg-slate-950/85 text-slate-500 border border-slate-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-xs flex items-center gap-1.5 select-none">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+              <span>Offline</span>
+            </div>
+          `)}
 
           <!-- Botão Favoritar Discreto no Canto Superior Direito -->
           <button 
@@ -1319,32 +1418,41 @@ function renderOnlinePoliticiansGrid() {
         <div class="relative z-10 p-2.5 sm:p-3 space-y-2 mt-auto">
           <!-- Nome Nítido e Cargo -->
           <div>
-            <h4 class="text-sm sm:text-base font-black text-white leading-tight drop-shadow-md truncate">
+            <h4 class="text-sm sm:text-base font-black ${isPoliticianOnline ? 'text-white' : 'text-slate-300'} leading-tight drop-shadow-md truncate">
               ${popularName}
             </h4>
-            <p class="text-[11px] font-bold text-slate-300 drop-shadow-xs truncate mt-0.5">
-              <span class="text-amber-400 font-extrabold">${party}</span> • ${(office).split(' ')[0]}
-            </p>
+            <div class="flex items-center justify-between text-[11px] font-bold text-slate-300 drop-shadow-xs truncate mt-0.5">
+              <span><span class="text-amber-400 font-extrabold">${party}</span> • ${(office).split(' ')[0]}</span>
+              ${isLive ? `
+                <span class="text-[9px] font-black text-rose-400 flex items-center gap-1 shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> AO VIVO
+                </span>
+              ` : (isPoliticianOnline ? `
+                <span class="text-[9px] font-extrabold text-emerald-400 shrink-0">ATIVO</span>
+              ` : `
+                <span class="text-[9px] font-bold text-slate-500 shrink-0">FORA DO AR</span>
+              `)}
+            </div>
           </div>
 
           <!-- Três Quadrados das Redes Sociais: Online = ILUMINADA | Offline = APAGADA -->
-          <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-1.5 border-t border-white/15">
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-1.5 border-t border-white/10">
             <!-- 1. Instagram -->
             ${isInstagramOnline ? `
               <a 
                 href="${instagramUrl}" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="Instagram de ${popularName} (Online - Clique para acessar)"
+                class="h-11 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="Instagram Oficial de ${popularName} (Online - Acessar Perfil Verificado)"
               >
                 <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-black uppercase tracking-tight text-white/95 mt-0.5">Online</span>
+                <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">Online</span>
               </a>
             ` : `
               <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="Instagram (Offline no momento)"
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="Instagram Oficial (Offline no momento)"
               >
                 <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
@@ -1357,16 +1465,16 @@ function renderOnlinePoliticiansGrid() {
                 href="${youtubeUrl}" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="YouTube de ${popularName} (Online - Clique para acessar)"
+                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="YouTube Oficial de ${popularName} (${isLive ? 'Ao Vivo no Canal' : 'Canal Oficial'})"
               >
                 <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-black uppercase tracking-tight text-white/95 mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
+                <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
               </a>
             ` : `
               <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="YouTube (Offline no momento)"
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="YouTube Oficial (Offline no momento)"
               >
                 <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
@@ -1379,16 +1487,16 @@ function renderOnlinePoliticiansGrid() {
                 href="${tiktokUrl}" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-black text-cyan-300 border border-cyan-400/80 flex flex-col items-center justify-center shadow-lg shadow-cyan-950/60 ring-2 ring-white/90 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="TikTok de ${popularName} (Online - Clique para acessar)"
+                class="h-11 sm:h-12 rounded-xl bg-black text-cyan-300 border border-cyan-400/80 flex flex-col items-center justify-center shadow-lg shadow-cyan-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="TikTok Oficial de ${popularName} (Online - Acessar Perfil Verificado)"
               >
                 <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none text-white drop-shadow-[0_0_3px_#06b6d4]"></i>
                 <span class="text-[8px] font-black uppercase tracking-tight text-cyan-300 mt-0.5">Online</span>
               </a>
             ` : `
               <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-500 opacity-25 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="TikTok (Offline no momento)"
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="TikTok Oficial (Sem perfil / Offline no momento)"
               >
                 <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
