@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4839,
+      "searchCount": 4840,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -81,7 +81,7 @@
       "party": "REPUBLICANOS",
       "office": "Governador de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3563,
+      "searchCount": 3564,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -1011,7 +1011,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5439,
+      "clicks": 5440,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -1917,11 +1917,30 @@
       ],
       "createdAt": "2026-10-15T14:21:20.025Z",
       "favoriteParty": "PL"
+    },
+    {
+      "id": "usr-1792074364384",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792074364375@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-15T14:26:04.384Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 15850,
+    "currentTotal": 16600,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [
