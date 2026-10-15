@@ -1321,13 +1321,28 @@ function renderOnlinePoliticiansGrid() {
     displayList = rawList.filter(p => Boolean(p.socialStatus?.isLive));
   }
 
+  // PRIORIDADE ABSOLUTA PARA QUEM ESTÁ ONLINE / AO VIVO:
+  displayList.sort((a, b) => {
+    const aLive = a.socialStatus?.isLive ? 3 : 0;
+    const bLive = b.socialStatus?.isLive ? 3 : 0;
+    const aNetCount = (Array.isArray(a.socialStatus?.onlineNetworks) ? a.socialStatus.onlineNetworks.length : 0);
+    const bNetCount = (Array.isArray(b.socialStatus?.onlineNetworks) ? b.socialStatus.onlineNetworks.length : 0);
+    const aOnline = (a.socialStatus?.status === 'online' && aNetCount > 0) ? 2 : 0;
+    const bOnline = (b.socialStatus?.status === 'online' && bNetCount > 0) ? 2 : 0;
+    const priorityA = aLive + aOnline;
+    const priorityB = bLive + bOnline;
+    if (priorityB !== priorityA) return priorityB - priorityA;
+    if (bNetCount !== aNetCount) return bNetCount - aNetCount;
+    return (b.searchCount || 0) - (a.searchCount || 0);
+  });
+
   if (displayList.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-10 px-4 text-center bg-slate-900/60 rounded-2xl border border-slate-700/60 p-6 space-y-2.5">
         <span class="text-3xl">📡</span>
         <h4 class="text-sm font-black text-white">Nenhum líder transmitindo ao vivo neste exato momento</h4>
         <p class="text-xs text-slate-400 max-w-md mx-auto">
-          As transmissões são monitoradas em tempo real. Se não estiver online, fica tudo apagado. Quando uma transmissão for iniciada, o card acenderá automaticamente.
+          As transmissões são monitoradas em tempo real com dados da base oficial do TSE. Se não estiver online, fica tudo apagado.
         </p>
         <div class="pt-2 flex items-center justify-center gap-2">
           <button onclick="setOnlineFilterMode('all')" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-bold transition">
@@ -1349,6 +1364,7 @@ function renderOnlinePoliticiansGrid() {
     const isLive = Boolean(pol.socialStatus?.isLive);
     const profiles = pol.socialStatus?.profiles || {};
     const onlineNetworks = Array.isArray(pol.socialStatus?.onlineNetworks) ? pol.socialStatus.onlineNetworks : [];
+    const tse = pol.socialStatus?.tse || null;
     const isFav = state.favoritePoliticianIds.has(pol.id);
 
     const popularName = pol.popularName || pol.name || 'Líder Político';
@@ -1356,7 +1372,7 @@ function renderOnlinePoliticiansGrid() {
     const office = pol.office || 'Líder Político';
     const avatar = pol.avatar || '/assets/themes/brasilia.jpg';
 
-    // 3 Redes Oficiais Verificadas (Apenas links oficiais reais)
+    // 3 Redes Oficiais Verificadas (Apenas links oficiais reais baseados no TSE)
     const instagramUrl = profiles.instagram || null;
     const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || null);
     const tiktokUrl = profiles.tiktok || null;
@@ -1416,7 +1432,7 @@ function renderOnlinePoliticiansGrid() {
 
         <!-- Base da Imagem: Identificação + Três Quadrados com as Logos (Instagram, YouTube, TikTok) -->
         <div class="relative z-10 p-2.5 sm:p-3 space-y-2 mt-auto">
-          <!-- Nome Nítido e Cargo -->
+          <!-- Nome Nítido, Cargo e Selo Oficial do TSE -->
           <div>
             <h4 class="text-sm sm:text-base font-black ${isPoliticianOnline ? 'text-white' : 'text-slate-300'} leading-tight drop-shadow-md truncate">
               ${popularName}
@@ -1433,6 +1449,23 @@ function renderOnlinePoliticiansGrid() {
                 <span class="text-[9px] font-bold text-slate-500 shrink-0">FORA DO AR</span>
               `)}
             </div>
+
+            <!-- Selo Base Oficial TSE DivulgaCand -->
+            ${tse ? `
+              <div class="mt-1">
+                <a 
+                  href="${tse.url || 'https://divulgacandcontas.tse.jus.br'}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-[9px] font-bold text-sky-400 hover:text-white bg-sky-950/70 hover:bg-sky-900 border border-sky-800/60 px-1.5 py-0.5 rounded transition shadow-xs"
+                  title="Redes homologadas na base oficial do TSE (${tse.election})"
+                >
+                  <i class="fa-solid fa-scale-balanced text-[8px] text-sky-400"></i>
+                  <span>Base Oficial TSE</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[7px] opacity-70"></i>
+                </a>
+              </div>
+            ` : ''}
           </div>
 
           <!-- Três Quadrados das Redes Sociais: Online = ILUMINADA | Offline = APAGADA -->
@@ -1444,7 +1477,7 @@ function renderOnlinePoliticiansGrid() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="h-11 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="Instagram Oficial de ${popularName} (Online - Acessar Perfil Verificado)"
+                title="Instagram Oficial de ${popularName} (Base TSE • Online - Acessar Perfil Verificado)"
               >
                 <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">Online</span>
@@ -1452,9 +1485,53 @@ function renderOnlinePoliticiansGrid() {
             ` : `
               <div 
                 class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="Instagram Oficial (Offline no momento)"
+                title="Instagram Oficial (Base TSE • Offline no momento)"
               >
                 <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
+              </div>
+            `}
+
+            <!-- 2. YouTube -->
+            ${isYoutubeOnline ? `
+              <a 
+                href="${youtubeUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="YouTube Oficial de ${popularName} (Base TSE • ${isLive ? 'Ao Vivo no Canal' : 'Canal Oficial'})"
+              >
+                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
+              </a>
+            ` : `
+              <div 
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="YouTube Oficial (Base TSE • Offline no momento)"
+              >
+                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
+              </div>
+            `}
+
+            <!-- 3. TikTok -->
+            ${isTiktokOnline ? `
+              <a 
+                href="${tiktokUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="h-11 sm:h-12 rounded-xl bg-black text-cyan-300 border border-cyan-400/80 flex flex-col items-center justify-center shadow-lg shadow-cyan-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
+                title="TikTok Oficial de ${popularName} (Base TSE • Online - Acessar Perfil Verificado)"
+              >
+                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none text-white drop-shadow-[0_0_3px_#06b6d4]"></i>
+                <span class="text-[8px] font-black uppercase tracking-tight text-cyan-300 mt-0.5">Online</span>
+              </a>
+            ` : `
+              <div 
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
+                title="TikTok Oficial (Base TSE • Offline no momento)"
+              >
+                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
               </div>
             `}

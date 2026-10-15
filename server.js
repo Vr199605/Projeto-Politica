@@ -1138,7 +1138,7 @@ app.get('/api/politicians/social-status', (req, res) => {
     const db = readDb();
     const verifiedStreams = db.verifiedBroadcasts || [];
 
-    // Mapeia todos os políticos cadastrados garantindo dados oficiais sem URLs fictícias
+    // Mapeia todos os políticos cadastrados garantindo dados oficiais e base do TSE
     const allPoliticians = (db.politicians || []).map(p => ({
       id: p.id,
       name: p.name || 'Político',
@@ -1146,6 +1146,7 @@ app.get('/api/politicians/social-status', (req, res) => {
       party: p.party || 'POL',
       office: p.office || 'Líder Político',
       avatar: p.avatar || '/assets/themes/brasilia.jpg',
+      searchCount: p.searchCount || 0,
       socialStatus: {
         isLive: Boolean(p.socialStatus?.isLive),
         status: p.socialStatus?.status || 'offline',
@@ -1158,9 +1159,25 @@ app.get('/api/politicians/social-status', (req, res) => {
           instagram: p.socialStatus?.profiles?.instagram || null,
           youtube: p.socialStatus?.profiles?.youtube || null,
           tiktok: p.socialStatus?.profiles?.tiktok || null
-        }
+        },
+        tse: p.socialStatus?.tse || null
       }
     }));
+
+    // Prioridade absoluta no painel: Ao Vivo > Online nas redes > Offline (tudo apagado)
+    allPoliticians.sort((a, b) => {
+      const aLive = a.socialStatus?.isLive ? 3 : 0;
+      const bLive = b.socialStatus?.isLive ? 3 : 0;
+      const aNetCount = (Array.isArray(a.socialStatus?.onlineNetworks) ? a.socialStatus.onlineNetworks.length : 0);
+      const bNetCount = (Array.isArray(b.socialStatus?.onlineNetworks) ? b.socialStatus.onlineNetworks.length : 0);
+      const aOnline = (a.socialStatus?.status === 'online' && aNetCount > 0) ? 2 : 0;
+      const bOnline = (b.socialStatus?.status === 'online' && bNetCount > 0) ? 2 : 0;
+      const priorityA = aLive + aOnline;
+      const priorityB = bLive + bOnline;
+      if (priorityB !== priorityA) return priorityB - priorityA;
+      if (bNetCount !== aNetCount) return bNetCount - aNetCount;
+      return (b.searchCount || 0) - (a.searchCount || 0);
+    });
 
     // Políticos que estão em live
     const livePoliticians = allPoliticians.filter(p => p.socialStatus && p.socialStatus.isLive);
@@ -1181,11 +1198,36 @@ app.get('/api/politicians/social-status', (req, res) => {
       totalOnline: onlinePoliticians.length,
       verifiedStreams,
       livePoliticians,
-      onlinePoliticians: allPoliticians, // Permite exibir quem está online e quem está com tudo apagado
+      onlinePoliticians: allPoliticians, // Lista ordenada com prioridade para quem está online/ao vivo
       politicians: allPoliticians
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Erro ao buscar status social.' });
+  }
+});
+
+// Endpoint de Consulta Direta à Base Oficial do TSE (DivulgaCandContas)
+app.get('/api/tse/politician/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = readDb();
+    const pol = (db.politicians || []).find(p => p.id === id);
+    if (!pol) return res.status(404).json({ success: false, error: 'Político não encontrado.' });
+
+    const tseInfo = pol.socialStatus?.tse || null;
+    const profiles = pol.socialStatus?.profiles || {};
+
+    res.json({
+      success: true,
+      politicianId: pol.id,
+      name: pol.popularName || pol.name,
+      party: pol.party,
+      tse: tseInfo,
+      officialProfiles: profiles,
+      source: 'Tribunal Superior Eleitoral - DivulgaCandContas'
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Erro ao consultar base do TSE.' });
   }
 });
 

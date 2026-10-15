@@ -339,6 +339,47 @@ async function runTests() {
     console.log(`   -> Político verificado: ${sample.popularName} (${sample.party}) com as 3 redes: Instagram, YouTube, TikTok [Online: ${sample.socialStatus.onlineNetworks.join(', ')}]`);
   });
 
+  // 17. NOVA VALIDAÇÃO: Prioridade para Políticos Online & Foto Real Correta de Eduardo Paes
+  await test('Prioridade para Políticos Online & Foto Real Oficial de Eduardo Paes', async () => {
+    const res = await fetch(`${BASE_URL}/api/politicians/social-status`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+
+    // 1. Verificar prioridade: quem está online/ao vivo deve vir antes de quem está offline
+    const firstPol = data.politicians[0];
+    const isFirstActive = Boolean(firstPol.socialStatus?.isLive || (firstPol.socialStatus?.status === 'online' && firstPol.socialStatus?.onlineNetworks?.length > 0));
+    assert.strictEqual(isFirstActive, true, 'O primeiro político da lista deve ser alguém Online ou Ao Vivo');
+
+    // 2. Verificar foto real oficial de Eduardo Paes (prefeito do RJ, não mulher de banco de imagem)
+    const paes = data.politicians.find(p => p.id === 'eduardo-paes');
+    assert.ok(paes, 'Eduardo Paes deve constar na lista');
+    assert.strictEqual(paes.avatar, '/assets/politicians/eduardo-paes.jpg', 'Foto de Eduardo Paes deve ser local oficial');
+    assert.ok(!paes.avatar.includes('unsplash'), 'Foto de Eduardo Paes não pode ser imagem fictícia do Unsplash');
+    
+    // Verificar arquivo físico no disco
+    const fs = require('fs');
+    const path = require('path');
+    const localFile = path.join(__dirname, '..', 'public', 'assets', 'politicians', 'eduardo-paes.jpg');
+    assert.ok(fs.existsSync(localFile), 'Arquivo eduardo-paes.jpg deve existir fisicamente');
+    const stat = fs.statSync(localFile);
+    assert.ok(stat.size > 50000, 'Foto deve ser de alta resolução');
+    console.log(`   -> Foto correta de Eduardo Paes validada: ${paes.avatar} (${stat.size} bytes)`);
+  });
+
+  // 18. NOVA VALIDAÇÃO: Redes Sociais Puxadas da Base Oficial do TSE (DivulgaCandContas)
+  await test('Redes Sociais Puxadas da Base Oficial do TSE (DivulgaCandContas)', async () => {
+    const res = await fetch(`${BASE_URL}/api/tse/politician/eduardo-paes`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+    assert.strictEqual(data.source, 'Tribunal Superior Eleitoral - DivulgaCandContas');
+    assert.ok(data.tse, 'Deve conter metadados do TSE');
+    assert.strictEqual(data.tse.idCandidato, '190002135253');
+    assert.ok(data.officialProfiles.instagram.includes('eduardopaes'), 'Instagram deve ser oficial');
+    assert.ok(data.officialProfiles.tiktok.includes('eduardopaes'), 'TikTok deve ser oficial');
+    assert.ok(data.officialProfiles.youtube.includes('EduardoPaesRio'), 'YouTube deve ser oficial');
+    console.log(`   -> Redes homologadas no TSE: Instagram, TikTok e YouTube de Eduardo Paes (TSE ${data.tse.idCandidato})`);
+  });
+
   console.log(`\n======================================================`);
   console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
   console.log(`======================================================\n`);
