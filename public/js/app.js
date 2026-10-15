@@ -1386,90 +1386,92 @@ function renderOnlinePoliticiansGrid() {
     const isPoliticianOnline = isLive || isInstagramOnline || isYoutubeOnline || isTiktokOnline;
 
     return `
-      <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border ${isPoliticianOnline ? 'border-slate-700/80 ring-1 ring-slate-700/50' : 'border-slate-800/80 opacity-65 hover:opacity-100'} group flex flex-col justify-between aspect-[3/4] sm:aspect-[4/5]">
-        <!-- Foto Oficial do Político: Colorida se online, TUDO APAGADO (grayscale/dessaturado) se offline -->
+      <div class="relative bg-slate-950 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border ${isPoliticianOnline ? (isLive ? 'border-red-500/90 ring-2 ring-red-500/50 shadow-red-950/50' : 'border-emerald-500/90 ring-2 ring-emerald-500/40 shadow-emerald-950/40') : 'border-slate-800/80 hover:border-slate-700'} group flex flex-col justify-between aspect-[3/4.2] sm:aspect-[3/4.3]">
+        <!-- Foto Oficial do Candidato: 100% Visível, Nítida e Sem Máscara Escura sobre o Rosto -->
         <img 
           src="${avatar}" 
           alt="${popularName}" 
-          class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 ${isPoliticianOnline ? 'group-hover:scale-105' : 'filter grayscale contrast-80 opacity-40'}"
+          class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 ${isPoliticianOnline ? 'contrast-105 brightness-105 saturate-105 group-hover:scale-105' : 'filter grayscale contrast-110 brightness-95 opacity-85 group-hover:opacity-100'}"
           onerror="this.src='/assets/themes/brasilia.jpg'"
         />
         
-        <!-- Gradientes para Máxima Legibilidade dos Elementos -->
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/30 pointer-events-none"></div>
+        <!-- Vinheta Superior Sutil (Apenas no topo para os badges) -->
+        <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/75 to-transparent pointer-events-none"></div>
 
-        <!-- Canto Superior: Quadrado no Canto Superior Esquerdo -->
+        <!-- Gradiente Exclusivo na Base (Últimos 45% apenas - Deixa o rosto do candidato 100% desobstruído e espetacular) -->
+        <div class="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent pointer-events-none"></div>
+
+        <!-- Canto Superior: Badges e Favorito -->
         <div class="relative z-10 p-2.5 sm:p-3 flex items-start justify-between">
           ${isLive ? `
-            <!-- Quadrado Vermelho "Ao Vivo" (Apenas se estiver transmitindo ao vivo de verdade naquele momento) -->
-            <div class="bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-lg flex items-center gap-1.5 border border-red-500/50 animate-pulse">
-              <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-              <span>Ao Vivo</span>
+            <!-- Quadrado Vermelho "AO VIVO" Radiante -->
+            <div class="bg-gradient-to-r from-red-600 to-rose-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-lg shadow-red-950/90 flex items-center gap-1.5 border border-red-400/80 animate-pulse backdrop-blur-xs">
+              <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+              <span>AO VIVO</span>
             </div>
           ` : (isPoliticianOnline ? `
-            <!-- Quadrado Verde "Online" se ativo em rede social -->
-            <div class="bg-emerald-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md flex items-center gap-1.5 border border-emerald-500/50">
-              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-              <span>Online</span>
+            <!-- Quadrado Verde "ONLINE" Radiante -->
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-md flex items-center gap-1.5 border border-emerald-400/80 backdrop-blur-xs">
+              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span>ONLINE</span>
             </div>
           ` : `
-            <!-- Quadrado Apagado "Offline" se NÃO estiver online naquele momento -->
-            <div class="bg-slate-950/85 text-slate-500 border border-slate-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-xs flex items-center gap-1.5 select-none">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
-              <span>Offline</span>
+            <!-- Quadrado "OFFLINE" Discreto e Elegante -->
+            <div class="bg-slate-950/90 text-slate-300 border border-slate-700/80 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-lg shadow-xs flex items-center gap-1.5 select-none backdrop-blur-xs">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>OFFLINE</span>
             </div>
           `)}
 
-          <!-- Botão Favoritar Discreto no Canto Superior Direito -->
+          <!-- Botão Favoritar Discreto com Efeito Vidro -->
           <button 
             onclick="toggleFavoritePolitician('${pol.id}')" 
-            class="w-7 h-7 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-xs text-white/90 hover:text-rose-400 flex items-center justify-center transition border border-white/20 shadow-xs"
+            class="w-7 h-7 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-xs text-white/90 hover:text-rose-400 flex items-center justify-center transition border border-white/25 shadow-xs"
             title="Favoritar ${popularName}"
           >
             <i class="${isFav ? 'fa-solid text-rose-500' : 'fa-regular'} fa-heart text-xs"></i>
           </button>
         </div>
 
-        <!-- Base da Imagem: Identificação + Três Quadrados com as Logos (Instagram, YouTube, TikTok) -->
+        <!-- Base do Card: Painel Translúcido + Três Quadrados das Redes Sociais -->
         <div class="relative z-10 p-2.5 sm:p-3 space-y-2 mt-auto">
-          <!-- Nome Nítido, Cargo e Selo Oficial do TSE -->
-          <div>
-            <h4 class="text-sm sm:text-base font-black ${isPoliticianOnline ? 'text-white' : 'text-slate-300'} leading-tight drop-shadow-md truncate">
-              ${popularName}
-            </h4>
-            <div class="flex items-center justify-between text-[11px] font-bold text-slate-300 drop-shadow-xs truncate mt-0.5">
-              <span><span class="text-amber-400 font-extrabold">${party}</span> • ${(office).split(' ')[0]}</span>
+          <!-- Bloco Translúcido com Nome, Cargo e Selo TSE -->
+          <div class="bg-slate-950/80 backdrop-blur-md rounded-xl p-2.5 border border-white/10 shadow-sm">
+            <div class="flex items-center justify-between gap-1">
+              <h4 class="text-sm sm:text-base font-black text-white leading-tight drop-shadow-md truncate">
+                ${popularName}
+              </h4>
               ${isLive ? `
-                <span class="text-[9px] font-black text-rose-400 flex items-center gap-1 shrink-0">
-                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> AO VIVO
+                <span class="text-[9px] font-black text-rose-300 bg-rose-950/80 border border-rose-700/60 px-1.5 py-0.5 rounded flex items-center gap-1 shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span> TRANSMITINDO
                 </span>
               ` : (isPoliticianOnline ? `
-                <span class="text-[9px] font-extrabold text-emerald-400 shrink-0">ATIVO</span>
+                <span class="text-[9px] font-black text-emerald-300 bg-emerald-950/80 border border-emerald-700/60 px-1.5 py-0.5 rounded shrink-0">ATIVO AGORA</span>
               ` : `
-                <span class="text-[9px] font-bold text-slate-500 shrink-0">FORA DO AR</span>
+                <span class="text-[9px] font-bold text-slate-400 bg-slate-900/90 border border-slate-800 px-1.5 py-0.5 rounded shrink-0">FORA DO AR</span>
               `)}
             </div>
 
-            <!-- Selo Base Oficial TSE DivulgaCand -->
-            ${tse ? `
-              <div class="mt-1">
+            <div class="flex items-center justify-between text-[11px] font-bold text-slate-300 mt-1">
+              <span class="truncate"><span class="text-amber-400 font-extrabold">${party}</span> • ${(office).split(' ')[0]}</span>
+              ${tse ? `
                 <a 
                   href="${tse.url || 'https://divulgacandcontas.tse.jus.br'}" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 text-[9px] font-bold text-sky-400 hover:text-white bg-sky-950/70 hover:bg-sky-900 border border-sky-800/60 px-1.5 py-0.5 rounded transition shadow-xs"
-                  title="Redes homologadas na base oficial do TSE (${tse.election})"
+                  class="inline-flex items-center gap-1 text-[8px] font-extrabold text-sky-300 hover:text-white bg-sky-950/90 hover:bg-sky-900 border border-sky-800/80 px-1.5 py-0.5 rounded transition shadow-xs shrink-0"
+                  title="Dados oficiais homologados no TSE (${tse.election})"
                 >
-                  <i class="fa-solid fa-scale-balanced text-[8px] text-sky-400"></i>
-                  <span>Base Oficial TSE</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-[7px] opacity-70"></i>
+                  <i class="fa-solid fa-scale-balanced text-[7px] text-sky-400"></i>
+                  <span>Base TSE</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[6px] opacity-70"></i>
                 </a>
-              </div>
-            ` : ''}
+              ` : ''}
+            </div>
           </div>
 
-          <!-- Três Quadrados das Redes Sociais: Online = ILUMINADA | Offline = APAGADA -->
-          <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-1.5 border-t border-white/10">
+          <!-- Três Quadrados das Redes Sociais: Instagram, YouTube, TikTok -->
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2 pt-0.5">
             <!-- 1. Instagram -->
             ${isInstagramOnline ? `
               <a 
@@ -1477,85 +1479,45 @@ function renderOnlinePoliticiansGrid() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="h-11 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex flex-col items-center justify-center shadow-lg shadow-rose-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="Instagram Oficial de ${popularName} (Base TSE • Online - Acessar Perfil Verificado)"
+                title="Instagram Oficial de ${popularName} (Online - Acessar Perfil Verificado)"
               >
                 <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">Online</span>
               </a>
             ` : `
-              <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="Instagram Oficial (Base TSE • Offline no momento)"
+              <a 
+                href="${instagramUrl || '#'}" 
+                ${instagramUrl ? 'target="_blank" rel="noopener noreferrer"' : ''}
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/90 border border-slate-800/80 text-slate-400 hover:text-white hover:border-slate-700 flex flex-col items-center justify-center transition-all ${instagramUrl ? 'hover:scale-105 cursor-pointer' : 'cursor-not-allowed opacity-30'}" 
+                title="${instagramUrl ? `Instagram Oficial de ${popularName} (Offline no momento - Clique para acessar)` : 'Sem perfil oficial no Instagram'}"
               >
-                <i class="fa-brands fa-instagram text-base sm:text-lg leading-none"></i>
+                <i class="fa-brands fa-instagram text-base sm:text-lg leading-none ${instagramUrl ? 'text-slate-400 group-hover:text-pink-400' : 'text-slate-600'}"></i>
                 <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
-              </div>
+              </a>
             `}
 
-            <!-- 2. YouTube -->
+            <!-- 2. YouTube (Puxando canal oficial verificado com 100% de precisão) -->
             ${isYoutubeOnline ? `
               <a 
                 href="${youtubeUrl}" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="YouTube Oficial de ${popularName} (Base TSE • ${isLive ? 'Ao Vivo no Canal' : 'Canal Oficial'})"
+                class="h-11 sm:h-12 rounded-xl bg-gradient-to-b from-red-600 to-red-700 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/80 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net animate-pulse" 
+                title="YouTube Oficial de ${popularName} (${isLive ? 'Ao Vivo no Canal Oficial' : 'Online no Canal'})"
               >
                 <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
                 <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
               </a>
             ` : `
-              <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="YouTube Oficial (Base TSE • Offline no momento)"
-              >
-                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
-              </div>
-            `}
-
-            <!-- 3. TikTok -->
-            ${isTiktokOnline ? `
               <a 
-                href="${tiktokUrl}" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-black text-cyan-300 border border-cyan-400/80 flex flex-col items-center justify-center shadow-lg shadow-cyan-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="TikTok Oficial de ${popularName} (Base TSE • Online - Acessar Perfil Verificado)"
+                href="${youtubeUrl || '#'}" 
+                ${youtubeUrl ? 'target="_blank" rel="noopener noreferrer"' : ''}
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/90 border border-slate-800/80 text-slate-400 hover:text-white hover:border-slate-700 flex flex-col items-center justify-center transition-all ${youtubeUrl ? 'hover:scale-105 cursor-pointer' : 'cursor-not-allowed opacity-30'}" 
+                title="${youtubeUrl ? `YouTube Oficial de ${popularName} (Offline no momento - Clique para acessar o canal oficial)` : 'Sem canal cadastrado'}"
               >
-                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none text-white drop-shadow-[0_0_3px_#06b6d4]"></i>
-                <span class="text-[8px] font-black uppercase tracking-tight text-cyan-300 mt-0.5">Online</span>
+                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none ${youtubeUrl ? 'text-slate-400 group-hover:text-red-400' : 'text-slate-600'}"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Canal</span>
               </a>
-            ` : `
-              <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="TikTok Oficial (Base TSE • Offline no momento)"
-              >
-                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
-              </div>
-            `}
-
-            <!-- 2. YouTube -->
-            ${isYoutubeOnline ? `
-              <a 
-                href="${youtubeUrl}" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="h-11 sm:h-12 rounded-xl bg-red-600 text-white flex flex-col items-center justify-center shadow-lg shadow-red-950/60 ring-2 ring-white/95 hover:scale-105 active:scale-95 transition-all group/net" 
-                title="YouTube Oficial de ${popularName} (${isLive ? 'Ao Vivo no Canal' : 'Canal Oficial'})"
-              >
-                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-black uppercase tracking-tight text-white mt-0.5">${isLive ? 'Ao Vivo' : 'Online'}</span>
-              </a>
-            ` : `
-              <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="YouTube Oficial (Offline no momento)"
-              >
-                <i class="fa-brands fa-youtube text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
-              </div>
             `}
 
             <!-- 3. TikTok -->
@@ -1571,13 +1533,15 @@ function renderOnlinePoliticiansGrid() {
                 <span class="text-[8px] font-black uppercase tracking-tight text-cyan-300 mt-0.5">Online</span>
               </a>
             ` : `
-              <div 
-                class="h-11 sm:h-12 rounded-xl bg-slate-950/80 border border-slate-800/60 text-slate-600 opacity-20 filter grayscale flex flex-col items-center justify-center select-none cursor-not-allowed" 
-                title="TikTok Oficial (Sem perfil / Offline no momento)"
+              <a 
+                href="${tiktokUrl || '#'}" 
+                ${tiktokUrl ? 'target="_blank" rel="noopener noreferrer"' : ''}
+                class="h-11 sm:h-12 rounded-xl bg-slate-950/90 border border-slate-800/80 text-slate-400 hover:text-white hover:border-slate-700 flex flex-col items-center justify-center transition-all ${tiktokUrl ? 'hover:scale-105 cursor-pointer' : 'cursor-not-allowed opacity-30'}" 
+                title="${tiktokUrl ? `TikTok Oficial de ${popularName} (Offline no momento - Clique para acessar)` : 'Sem perfil oficial no TikTok'}"
               >
-                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none"></i>
-                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Offline</span>
-              </div>
+                <i class="fa-brands fa-tiktok text-base sm:text-lg leading-none ${tiktokUrl ? 'text-slate-400 group-hover:text-cyan-400' : 'text-slate-600'}"></i>
+                <span class="text-[8px] font-bold uppercase tracking-tight text-slate-500 mt-0.5">Perfil</span>
+              </a>
             `}
           </div>
         </div>
