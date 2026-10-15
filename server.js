@@ -1152,12 +1152,16 @@ app.get('/api/politicians/social-status', (req, res) => {
         status: p.socialStatus?.status || 'offline',
         statusLabel: p.socialStatus?.isLive ? 'AO VIVO' : (p.socialStatus?.status === 'online' ? 'ONLINE NAS REDES' : 'OFFLINE'),
         lastActivity: p.socialStatus?.lastActivity || 'Ativo agora',
-        liveUrl: p.socialStatus?.liveUrl || null,
+        liveUrl: (p.id === 'marcal') 
+          ? (p.socialStatus?.isLive ? 'https://www.youtube.com/@pablomarcall/live' : 'https://www.youtube.com/@pablomarcall')
+          : ((p.id === 'nikolas')
+            ? (p.socialStatus?.isLive ? 'https://www.youtube.com/@NikolasFerreiraO/live' : 'https://www.youtube.com/@NikolasFerreiraO')
+            : (p.socialStatus?.liveUrl || null)),
         liveTitle: p.socialStatus?.liveTitle || null,
         onlineNetworks: Array.isArray(p.socialStatus?.onlineNetworks) ? p.socialStatus.onlineNetworks : [],
         profiles: {
           instagram: p.socialStatus?.profiles?.instagram || null,
-          youtube: p.socialStatus?.profiles?.youtube || null,
+          youtube: (p.id === 'marcal') ? 'https://www.youtube.com/@pablomarcall' : ((p.id === 'nikolas') ? 'https://www.youtube.com/@NikolasFerreiraO' : (p.socialStatus?.profiles?.youtube || null)),
           tiktok: p.socialStatus?.profiles?.tiktok || null
         },
         tse: p.socialStatus?.tse || null

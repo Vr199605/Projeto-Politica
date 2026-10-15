@@ -7,7 +7,7 @@
       "party": "PT",
       "office": "Presidente da República",
       "avatar": "/assets/politicians/lula.jpg",
-      "searchCount": 4838,
+      "searchCount": 4839,
       "trend": "+18%",
       "trendDirection": "up",
       "bio": "39º Presidente do Brasil, exercendo seu terceiro mandato presidencial.",
@@ -16,7 +16,7 @@
         "isLive": true,
         "statusLabel": "AO VIVO",
         "lastActivity": "Ativo agora",
-        "liveUrl": "https://www.youtube.com/@LulaOficial",
+        "liveUrl": "https://www.youtube.com/lulaoficial/live",
         "liveTitle": "Pronunciamento Oficial à Nação e Coletiva Internacional",
         "onlineNetworks": [
           "instagram",
@@ -81,7 +81,7 @@
       "party": "REPUBLICANOS",
       "office": "Governador de São Paulo",
       "avatar": "/assets/politicians/tarcisio.jpg",
-      "searchCount": 3562,
+      "searchCount": 3563,
       "trend": "+25%",
       "trendDirection": "up",
       "bio": "Governador de São Paulo e ex-ministro da Infraestrutura.",
@@ -256,7 +256,7 @@
         "isLive": true,
         "statusLabel": "AO VIVO",
         "lastActivity": "Ativo agora",
-        "liveUrl": "https://www.youtube.com/@nikolasferreira",
+        "liveUrl": "https://www.youtube.com/@NikolasFerreiraO/live",
         "liveTitle": "Transmissão Ao Vivo com Eleitores",
         "onlineNetworks": [
           "instagram",
@@ -265,7 +265,7 @@
         ],
         "profiles": {
           "instagram": "https://www.instagram.com/nikolasferreiradm/",
-          "youtube": "https://www.youtube.com/@nikolasferreira",
+          "youtube": "https://www.youtube.com/@NikolasFerreiraO",
           "tiktok": "https://www.tiktok.com/@nikolasferreiradm"
         },
         "tse": {
@@ -703,7 +703,7 @@
         "isLive": true,
         "statusLabel": "AO VIVO",
         "lastActivity": "Ativo agora",
-        "liveUrl": "https://www.youtube.com/@pablomarcal",
+        "liveUrl": "https://www.youtube.com/@pablomarcall/live",
         "liveTitle": "Transmissão e Análise de Cenário",
         "onlineNetworks": [
           "instagram",
@@ -1011,7 +1011,7 @@
       "domain": "g1.globo.com/politica",
       "url": "https://g1.globo.com/politica/",
       "category": "Portal Geral & Tempo Real",
-      "clicks": 5438,
+      "clicks": 5439,
       "badge": "Líder de Acessos",
       "verified": true,
       "isMonetizedPartner": true,
@@ -1898,11 +1898,30 @@
       ],
       "createdAt": "2026-10-15T14:00:51.292Z",
       "favoriteParty": "PL"
+    },
+    {
+      "id": "usr-1792074080025",
+      "name": "Ana Maria Eleitora",
+      "email": "test_1792074080013@radarpolitico.com",
+      "password": "senha123",
+      "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=Ana%20Maria%20Eleitora&backgroundColor=2563eb&textColor=ffffff",
+      "favoritePoliticians": [
+        "lula",
+        "bolsonaro",
+        "tarcisio",
+        "haddad",
+        "lira"
+      ],
+      "favoriteBlogs": [
+        "blog-congresso-foco"
+      ],
+      "createdAt": "2026-10-15T14:21:20.025Z",
+      "favoriteParty": "PL"
     }
   ],
   "donations": {
     "goal": 10000,
-    "currentTotal": 15100,
+    "currentTotal": 15850,
     "currency": "BRL",
     "pixKey": "pix@radarpolitico.com.br",
     "topDonators": [

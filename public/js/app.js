@@ -1372,10 +1372,14 @@ function renderOnlinePoliticiansGrid() {
     const office = pol.office || 'Líder Político';
     const avatar = pol.avatar || '/assets/themes/brasilia.jpg';
 
-    // 3 Redes Oficiais Verificadas (Apenas links oficiais reais baseados no TSE)
     const instagramUrl = profiles.instagram || null;
-    const youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || null);
     const tiktokUrl = profiles.tiktok || null;
+    let youtubeUrl = (isLive && pol.socialStatus?.liveUrl) ? pol.socialStatus.liveUrl : (profiles.youtube || null);
+    if (pol.id === 'marcal') {
+      youtubeUrl = isLive ? 'https://www.youtube.com/@pablomarcall/live' : 'https://www.youtube.com/@pablomarcall';
+    } else if (pol.id === 'nikolas') {
+      youtubeUrl = isLive ? 'https://www.youtube.com/@NikolasFerreiraO/live' : 'https://www.youtube.com/@NikolasFerreiraO';
+    }
 
     // Uma rede só fica online se for oficial E estiver ativa naquele momento
     const isInstagramOnline = Boolean(instagramUrl && onlineNetworks.includes('instagram'));

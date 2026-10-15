@@ -380,6 +380,25 @@ async function runTests() {
     console.log(`   -> Redes homologadas no TSE: Instagram, TikTok e YouTube de Eduardo Paes (TSE ${data.tse.idCandidato})`);
   });
 
+  // 19. NOVA VALIDAÇÃO: Canais Oficiais do YouTube de Pablo Marçal (@pablomarcall) e Nikolas Ferreira (@NikolasFerreiraO)
+  await test('Canais Oficiais do YouTube de Pablo Marçal e Nikolas Ferreira Sem Erro', async () => {
+    const res = await fetch(`${BASE_URL}/api/politicians/social-status`);
+    const data = await res.json();
+    assert.strictEqual(data.success, true);
+
+    const marcal = data.politicians.find(p => p.id === 'marcal');
+    assert.ok(marcal, 'Pablo Marçal deve estar na lista');
+    assert.strictEqual(marcal.socialStatus.profiles.youtube, 'https://www.youtube.com/@pablomarcall', 'Canal do Marçal deve ser @pablomarcall (com dois Ls)');
+    assert.ok(!marcal.socialStatus.liveUrl.endsWith('@pablomarcal'), 'liveUrl não pode apontar para @pablomarcal (com um L apenas)');
+
+    const nikolas = data.politicians.find(p => p.id === 'nikolas');
+    assert.ok(nikolas, 'Nikolas Ferreira deve estar na lista');
+    assert.strictEqual(nikolas.socialStatus.profiles.youtube, 'https://www.youtube.com/@NikolasFerreiraO', 'Canal do Nikolas deve ser @NikolasFerreiraO (com O)');
+    assert.ok(!nikolas.socialStatus.liveUrl.endsWith('@nikolasferreira'), 'liveUrl não pode apontar para @nikolasferreira (sem O)');
+
+    console.log(`   -> Canais 100% verificados: Marçal (${marcal.socialStatus.profiles.youtube}) e Nikolas (${nikolas.socialStatus.profiles.youtube})`);
+  });
+
   console.log(`\n======================================================`);
   console.log(`🎯 RESULTADO FINAL: ${passed}/${total} testes aprovados com 100% de sucesso!`);
   console.log(`======================================================\n`);
